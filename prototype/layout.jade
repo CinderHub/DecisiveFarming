@@ -23,36 +23,36 @@ template(name="header")
   .header.fixed.spanWidth
     ul.inline-list.left
       li
-        a(href="/dashboard",data-state="active")
+        a(href="/dashboard",data-active="{{equalsSession 'activeHeaderPath' 'dashboard'}}")
           .iconWrapper.left.size-16
             {{icon 'dashboard'}}
           | Dashboard
       li
-        a(href="/fields")
+        a(href="/fields",data-active="{{equalsSession 'activeHeaderPath' 'fields'}}")
           .iconWrapper.left.size-16
             {{icon 'fields'}}
           | Fields
       li
-        a(href="/equipment")
+        a(href="/equipment",data-active="{{equalsSession 'activeHeaderPath' 'equipment'}}")
           .iconWrapper.left.size-16
             {{icon 'equipment'}}
           | Equipment
       li
-        a(href="/market")
+        a(href="/market",data-active="{{equalsSession 'activeHeaderPath' 'market'}}")
           .iconWrapper.left.size-16
             {{icon 'market'}}
           | Market
       li
-        a(href="/farm-planner")
+        a(href="/farm-planner",data-active="{{equalsSession 'activeHeaderPath' 'farm-planner'}}")
           .iconWrapper.left.size-16
             {{icon 'farmPlanner'}}
           | Farm Planner
     ul.inline-list.right
       li
-        a(href="/profile")
+        a(href="/profile",data-active="{{equalsSession 'activeHeaderPath' 'profile'}}")
           .iconWrapper.left.size-16
             {{icon 'profile'}}
-          | Chris Kunz
+          | John Carpenter
       //-li
         a(href="/help")
           .iconWrapper.left.size-16
@@ -64,32 +64,32 @@ template(name="subHeader")
     ul.inline-list.left
       {{#if currentContextIs 'fields'}}
         li
-          a(href="/{{currentContext}}/field-info/370",data-state="active")
+          a(href="/{{currentContext}}/field-info/{{getSession 'activeSidebarPath'}}",data-active="{{equalsSession 'activeSubheaderPath' 'field-info'}}")
             .iconWrapper.left.size-24
               {{icon 'summary'}}
             | Field Info
         li
-          a(href="/{{currentContext}}/soil-testing/370")
+          a(href="/{{currentContext}}/soil-testing/{{getSession 'activeSidebarPath'}}",data-active="{{equalsSession 'activeSubheaderPath' 'soil-testing'}}")
             .iconWrapper.left.size-24
               {{icon 'soilTesting'}}
             | Soil Testing
         li
-          a(href="/{{currentContext}}/fertility-map/370")
+          a(href="/{{currentContext}}/fertility-map/{{getSession 'activeSidebarPath'}}",data-active="{{equalsSession 'activeSubheaderPath' 'fertility-map'}}")
             .iconWrapper.left.size-24
               {{icon 'fertilityMap'}}
             | Fertility Map
         li
-          a(href="/{{currentContext}}/rx-rates/370")
+          a(href="/{{currentContext}}/rx-rates/{{getSession 'activeSidebarPath'}}",data-active="{{equalsSession 'activeSubheaderPath' 'rx-rates'}}")
             .iconWrapper.left.size-24
               {{icon 'rxRates'}}
             | RX Rates
         li
-          a(href="/{{currentContext}}/rx-files/370")
+          a(href="/{{currentContext}}/rx-files/{{getSession 'activeSidebarPath'}}",data-active="{{equalsSession 'activeSubheaderPath' 'rx-files'}}")
             .iconWrapper.left.size-24
               {{icon 'rxFiles'}}
             | RX Files
         li
-          a(href="/{{currentContext}}/yield-report/370")
+          a(href="/{{currentContext}}/yield-report/{{getSession 'activeSidebarPath'}}",data-active="{{equalsSession 'activeSubheaderPath' 'yield-report'}}")
             .iconWrapper.left.size-24
               {{icon 'yieldReport'}}
             | Yield Report
@@ -97,27 +97,27 @@ template(name="subHeader")
 
       {{#if currentContextIs 'market'}}
         li
-          a(href="/{{currentContext}}/profit/1221")
+          a(href="/{{currentContext}}/profit/{{getSession 'activeSidebarPath'}}",data-active="{{equalsSession 'activeSubheaderPath' 'profit'}}")
             .iconWrapper.left.size-24
               {{icon 'profit'}}
             | Profit
         li
-          a(href="/{{currentContext}}/revenue-and-expenses/1221")
+          a(href="/{{currentContext}}/revenue-and-expenses/{{getSession 'activeSidebarPath'}}",data-active="{{equalsSession 'activeSubheaderPath' 'revenue-and-expenses'}}")
             .iconWrapper.left.size-24
               {{icon 'revenueAndExpenses'}}
             | Revenue & Expenses
         li
-          a(href="/{{currentContext}}/hedge-plan/1221")
+          a(href="/{{currentContext}}/hedge-plan/{{getSession 'activeSidebarPath'}}",data-active="{{equalsSession 'activeSubheaderPath' 'hedge-plan'}}")
             .iconWrapper.left.size-24
               {{icon 'hedgePlan'}}
             | Hedge Plan
         li
-          a(href="/{{currentContext}}/positions/1221")
+          a(href="/{{currentContext}}/positions/{{getSession 'activeSidebarPath'}}",data-active="{{equalsSession 'activeSubheaderPath' 'positions'}}")
             .iconWrapper.left.size-24
               {{icon 'positions'}}
             | Positions
         li
-          a(href="/{{currentContext}}/research/1221")
+          a(href="/{{currentContext}}/research/{{getSession 'activeSidebarPath'}}",data-active="{{equalsSession 'activeSubheaderPath' 'research'}}")
             .iconWrapper.left.size-24
               {{icon 'research'}}
             | Research
@@ -125,27 +125,27 @@ template(name="subHeader")
 
       {{#if currentContextIs 'farm-planner'}}
         li
-          a(href="/{{currentContext}}/crop-plans")
+          a(href="/{{currentContext}}/crop-plans",data-active="{{equalsSession 'activeSubheaderPath' 'crop-plans'}}")
             .iconWrapper.left.size-24
               {{icon 'cropPlans'}}
             | Crop Plans
         //-li
-          a(href="/{{currentContext}}/equipment")
+          a(href="/{{currentContext}}/equipment",data-active="{{equalsSession 'activeSubheaderPath' 'equipment'}}")
             .iconWrapper.left.size-24
               {{icon 'equipment'}}
             | Equipment
         li
-          a(href="/{{currentContext}}/revenue-and-expenses")
+          a(href="/{{currentContext}}/revenue-and-expenses",data-active="{{equalsSession 'activeSubheaderPath' 'revenue-and-expenses'}}")
             .iconWrapper.left.size-24
               {{icon 'revenueAndExpenses'}}
             | Revenue And Expenses
         li
-          a(href="/{{currentContext}}/market-plan/1221")
+          a(href="/{{currentContext}}/market-plan/1221",data-active="{{equalsSession 'activeSubheaderPath' 'market-plan'}}")
             .iconWrapper.left.size-24
               {{icon 'marketPlan'}}
             | Market Plan
         li
-          a(href="/{{currentContext}}/work-orders")
+          a(href="/{{currentContext}}/work-orders",data-active="{{equalsSession 'activeSubheaderPath' 'work-orders'}}")
             .iconWrapper.left.size-24
               {{icon 'workOrders'}}
             | Work Orders
@@ -273,67 +273,67 @@ template(name="leftSidebar")
     ul.list
       {{#if currentContextIs 'fields'}}
       li
-        a(data-action="addField")
+        a(data-action="addField",href="/farm-planner/crop-plans")
           span.title Add New Field
           .iconWrapper.right.size-16
             {{icon 'new'}}
       li
-        a(href="/{{currentContext}}/{{currentParam 'section'}}/370",data-action="changeField",data-field-id="370",data-state="active")
+        a(href="/{{currentContext}}/{{currentParam 'section'}}/370",data-action="changeField",data-field-id="370",data-active="{{equalsSession 'activeSidebarPath' '370'}}")
           span.title Field One
           span.subtitle E 24 28 26 W4
-      li
+      //-li
         a(href="/{{currentContext}}/{{currentParam 'section'}}/371",data-action="changeField",data-field-id="371")
           span.title Field Two
           span.subtitle NE 21 28 25 W4
-      li
+      //-li
         a(href="/{{currentContext}}/{{currentParam 'section'}}/96",data-action="changeField",data-field-id="96")
           span.title Field Three
           span.subtitle NE 32 27 25 W4
-      li
+      //-li
         a(href="/{{currentContext}}/{{currentParam 'section'}}/98",data-action="changeField",data-field-id="98")
           span.title Field Four
           span.subtitle NE 33 27 25 W4
-      li
+      //-li
         a(href="/{{currentContext}}/{{currentParam 'section'}}/92",data-action="changeField",data-field-id="92")
           span.title Field Five
           span.subtitle NE 5 28 25 W4
-      li
+      //-li
         a(href="/{{currentContext}}/{{currentParam 'section'}}/670",data-action="changeField",data-field-id="670")
           span.title Field Six
           span.subtitle NW 33 27 25 W4 
-      li
+      //-li
         a(href="/{{currentContext}}/{{currentParam 'section'}}/91",data-action="changeField",data-field-id="91")
           span.title Field Seven
           span.subtitle NW 5 28 25 W4
-      li
+      //-li
         a(href="/{{currentContext}}/{{currentParam 'section'}}/97",data-action="changeField",data-field-id="97")
           span.title Field Eight
           span.subtitle S 33 27 25 W4
-      li
+      //-li
         a(href="/{{currentContext}}/{{currentParam 'section'}}/95",data-action="changeField",data-field-id="95")
           span.title Field Nine
           span.subtitle SC 32 27 25 W4
-      li
+      //-li
         a(href="/{{currentContext}}/{{currentParam 'section'}}/89",data-action="changeField",data-field-id="89")
           span.title Field Ten
           span.subtitle SC 6 28 25 W4
-      li
+      //-li
         a(href="/{{currentContext}}/{{currentParam 'section'}}/90",data-action="changeField",data-field-id="90")
           span.title Field Eleven
           span.subtitle SC 6 28 25 W4 E
-      li
+      //-li
         a(href="/{{currentContext}}/{{currentParam 'section'}}/88",data-action="changeField",data-field-id="88")
           span.title Field Twelve
           span.subtitle SC 6 28 25 W4 W
-      li
+      //-li
         a(href="/{{currentContext}}/{{currentParam 'section'}}/476",data-action="changeField",data-field-id="476")
           span.title Field Thirteen
           span.subtitle SE 29 28 25 W4
-      li
+      //-li
         a(href="/{{currentContext}}/{{currentParam 'section'}}/94",data-action="changeField",data-field-id="94")
           span.title Field Fourteen
           span.subtitle SE 5 28 25 W4
-      li
+      //-li
         a(href="/{{currentContext}}/{{currentParam 'section'}}/93",data-action="changeField",data-field-id="93")
           span.title Field Fifteen
           span.subtitle SW 5 28 25 W4
@@ -346,26 +346,26 @@ template(name="leftSidebar")
           .iconWrapper.right.size-16
             {{icon 'new'}}
       li
-        a(href="/{{currentContext}}/{{currentParam 'section'}}/1337",data-equipment-id="1337")
+        a(href="/{{currentContext}}/{{currentParam 'section'}}/1337",data-equipment-id="1337",data-active="{{equalsSession 'activeSidebarPath' '1337'}}")
           span.title Big Red
           span.subtitle Pattison PLS 3300
-      li
+      //-li
         a(href="/{{currentContext}}/{{currentParam 'section'}}/1234",data-equipment-id="1234")
           span.title Unit Name 1
           span.subtitle Pattison PLS 3300-ST400
-      li
+      //-li
         a(href="/{{currentContext}}/{{currentParam 'section'}}/4321",data-equipment-id="4321")
           span.title New One
           span.subtitle John Deere 1910-340 Bushels
-      li
+      //-li
         a(href="/{{currentContext}}/{{currentParam 'section'}}/1111",data-equipment-id="1111")
           span.title My Truck
           span.subtitle Ford F-450
-      li
+      //-li
         a(href="/{{currentContext}}/{{currentParam 'section'}}/2222",data-equipment-id="2222")
           span.title My Combine
           span.subtitle Combine C3
-      li
+      //-li
         a(href="/{{currentContext}}/{{currentParam 'section'}}/3333",data-equipment-id="3333")
           span.title Fleet X
           span.subtitle Corvette
@@ -378,11 +378,11 @@ template(name="leftSidebar")
           .iconWrapper.right.size-16
             {{icon 'new'}}
       li
-        a(href="/{{currentContext}}/{{currentParam 'section'}}/1221",data-commodity-id="1221")
+        a(href="/{{currentContext}}/{{currentParam 'section'}}/1221",data-commodity-id="1221",data-active="{{equalsSession 'activeSidebarPath' '1221'}}")
           span.title Canola
           span.subtitle 382.4 Ac
       li
-        a(href="/{{currentContext}}/{{currentParam 'section'}}/2873",data-commodity-id="2873")
+        a(href="/{{currentContext}}/{{currentParam 'section'}}/2873",data-commodity-id="2873",data-active="{{equalsSession 'activeSidebarPath' '2873'}}")
           span.title Carrots
           span.subtitle 300 Ac
       {{/if}}
@@ -392,7 +392,7 @@ template(name="leftSidebar")
         {{!Crop Plans}}
         {{#if currentParamIs 'section' 'crop-plans'}}
         li
-          a(data-action="addField")
+          a(data-action="addField",href="/farm-planner/crop-plans")
             span.title Add New Field
             .iconWrapper.right.size-16
               {{icon 'new'}}
@@ -417,62 +417,62 @@ template(name="leftSidebar")
             span.title Farm Plan - 2017
             span.subtitle Started on..
         li
-          a(href="/{{currentContext}}/{{currentParam 'section'}}/370",data-action="changeField",data-field-id="370")
+          a(href="/{{currentContext}}/{{currentParam 'section'}}/370",data-action="changeField",data-field-id="370",data-active="{{equalsSession 'activeSidebarPath' '370'}}")
             span.title Field One
             span.subtitle E 24 28 26 W4
-        li
+        //-li
           a(href="/{{currentContext}}/{{currentParam 'section'}}/371",data-action="changeField",data-field-id="371")
             span.title Field Two
             span.subtitle NE 21 28 25 W4
-        li
+        //-li
           a(href="/{{currentContext}}/{{currentParam 'section'}}/96",data-action="changeField",data-field-id="96")
             span.title Field Three
             span.subtitle NE 32 27 25 W4
-        li
+        //-li
           a(href="/{{currentContext}}/{{currentParam 'section'}}/98",data-action="changeField",data-field-id="98")
             span.title Field Four
             span.subtitle NE 33 27 25 W4
-        li
+        //-li
           a(href="/{{currentContext}}/{{currentParam 'section'}}/92",data-action="changeField",data-field-id="92")
             span.title Field Five
             span.subtitle NE 5 28 25 W4
-        li
+        //-li
           a(href="/{{currentContext}}/{{currentParam 'section'}}/670",data-action="changeField",data-field-id="670")
             span.title Field Six
             span.subtitle NW 33 27 25 W4 
-        li
+        //-li
           a(href="/{{currentContext}}/{{currentParam 'section'}}/91",data-action="changeField",data-field-id="91")
             span.title Field Seven
             span.subtitle NW 5 28 25 W4
-        li
+        //-li
           a(href="/{{currentContext}}/{{currentParam 'section'}}/97",data-action="changeField",data-field-id="97")
             span.title Field Eight
             span.subtitle S 33 27 25 W4
-        li
+        //-li
           a(href="/{{currentContext}}/{{currentParam 'section'}}/95",data-action="changeField",data-field-id="95")
             span.title Field Nine
             span.subtitle SC 32 27 25 W4
-        li
+        //-li
           a(href="/{{currentContext}}/{{currentParam 'section'}}/89",data-action="changeField",data-field-id="89")
             span.title Field Ten
             span.subtitle SC 6 28 25 W4
-        li
+        //-li
           a(href="/{{currentContext}}/{{currentParam 'section'}}/90",data-action="changeField",data-field-id="90")
             span.title Field Eleven
             span.subtitle SC 6 28 25 W4 E
-        li
+        //-li
           a(href="/{{currentContext}}/{{currentParam 'section'}}/88",data-action="changeField",data-field-id="88")
             span.title Field Twelve
             span.subtitle SC 6 28 25 W4 W
-        li
+        //-li
           a(href="/{{currentContext}}/{{currentParam 'section'}}/476",data-action="changeField",data-field-id="476")
             span.title Field Thirteen
             span.subtitle SE 29 28 25 W4
-        li
+        //-li
           a(href="/{{currentContext}}/{{currentParam 'section'}}/94",data-action="changeField",data-field-id="94")
             span.title Field Fourteen
             span.subtitle SE 5 28 25 W4
-        li
+        //-li
           a(href="/{{currentContext}}/{{currentParam 'section'}}/93",data-action="changeField",data-field-id="93")
             span.title Field Fifteen
             span.subtitle SW 5 28 25 W4
@@ -486,22 +486,22 @@ template(name="leftSidebar")
             .iconWrapper.right.size-16
               {{icon 'new'}}
         li
-          a(href="/{{currentContext}}/{{currentParam 'section'}}/1221",data-commodity-id="1221")
+          a(href="/{{currentContext}}/{{currentParam 'section'}}/1221",data-commodity-id="1221",data-active="{{equalsSession 'activeSidebarPath' '1221'}}")
             span.title Canola
             span.subtitle 800 Ac
         li
-          a(href="/{{currentContext}}/{{currentParam 'section'}}/1010",data-commodity-id="1010")
-            span.title HR Spring Wheat
+          a(href="/{{currentContext}}/{{currentParam 'section'}}/1010",data-commodity-id="1010",data-active="{{equalsSession 'activeSidebarPath' '1010'}}")
+            span.title Carrots
             span.subtitle 540 Ac
-        li
+        //-li
           a(href="/{{currentContext}}/{{currentParam 'section'}}/1212",data-commodity-id="1212")
             span.title Barley
             span.subtitle 750 Ac
-        li
+        //-li
           a(href="/{{currentContext}}/{{currentParam 'section'}}/9191",data-commodity-id="9191")
             span.title Hard White Wheat
             span.subtitle 650 Ac
-        li
+        //-li
           a(href="/{{currentContext}}/{{currentParam 'section'}}/8181",data-commodity-id="8181")
             span.title Faba Beans
             span.subtitle 320 Ac
@@ -515,38 +515,38 @@ template(name="leftSidebar")
             .iconWrapper.right.size-16
               {{icon 'new'}}
         li
-          a(href="/{{currentContext}}/{{currentParam 'section'}}/1221",data-commodity-id="1221")
+          a(href="/{{currentContext}}/{{currentParam 'section'}}/1221",data-commodity-id="1221",data-active="{{equalsSession 'activeSidebarPath' '1221'}}")
             span.title Canola
             span.subtitle 800 Ac
         li
-          a(href="/{{currentContext}}/{{currentParam 'section'}}/8383",data-commodity-id="8383")
-            span.title Fuel
-            span.subtitle 22,000 L
-        li
+          a(href="/{{currentContext}}/{{currentParam 'section'}}/1010",data-commodity-id="1010",data-active="{{equalsSession 'activeSidebarPath' '1010'}}")
+            span.title Carrots
+            span.subtitle 540 Ac
+        //-li
           a(href="/{{currentContext}}/{{currentParam 'section'}}/1010",data-commodity-id="1010")
             span.title HR Spring Wheat
             span.subtitle 540 Ac
-        li
+        //-li
           a(href="/{{currentContext}}/{{currentParam 'section'}}/1212",data-commodity-id="1212")
             span.title Barley
             span.subtitle 750 Ac
-        li
+        //-li
           a(href="/{{currentContext}}/{{currentParam 'section'}}/9191",data-commodity-id="9191")
             span.title Hard White Wheat
             span.subtitle 650 Ac
-        li
+        //-li
           a(href="/{{currentContext}}/{{currentParam 'section'}}/8181",data-commodity-id="8181")
             span.title Faba Beans
             span.subtitle 320 Ac
-        li
+        //-li
           a(href="/{{currentContext}}/{{currentParam 'section'}}/5342",data-commodity-id="5342")
             span.title 46-0-0
             span.subtitle 125 MT
-        li
+        //-li
           a(href="/{{currentContext}}/{{currentParam 'section'}}/8320",data-commodity-id="8320")
             span.title 11-52-0-0
             span.subtitle 12 MT
-        li
+        //-li
           a(href="/{{currentContext}}/{{currentParam 'section'}}/7289",data-commodity-id="7289")
             span.title 21-0-0-24
             span.subtitle 976 MT
@@ -977,7 +977,7 @@ template(name="rightSidebar")
 
     {{#if currentContextIs 'profile'}}
     .section
-      .title Chris Kunz
+      .title John Carpenter
       form
         ul.list
           li
@@ -1025,6 +1025,7 @@ template(name="rightSidebar")
 template(name="dashboard")
   .content(data-subheaderState="{{getSession 'subHeaderState'}}",data-leftSidebarState="{{getSession 'leftSidebarState'}}",data-rightSidebarState="{{getSession 'rightSidebarState'}}")
     {{>map}}
+    a.stubImage(href="/fields/field-info",style="background-image:url('/stubImages/overview.png');")
     .tiles
       .notifications.tile
         .header Notifications
@@ -1055,7 +1056,13 @@ template(name="fields")
   .content(data-subheaderState="{{getSession 'subHeaderState'}}",data-leftSidebarState="{{getSession 'leftSidebarState'}}",data-rightSidebarState="{{getSession 'rightSidebarState'}}")
     {{#if currentParamIs 'section' 'field-info'}}
     {{>map}}
-    {{>notice}}
+    {{!Stub Screenshots for Demo}}
+    {{#if currentParamIs 'assetsInfo' undefined}}
+    a.stubImage(href="/fields/field-info/370",style="background-image:url('/stubImages/overview.png');")
+    {{else}}
+    a.stubImage(href="/fields/field-info/370",style="background-image:url('/stubImages/fieldInfo.png');")
+    {{/if}}
+    {{!>notice}}
     {{/if}}
 
     {{#if currentParamIs 'section' 'soil-testing'}}
@@ -1340,6 +1347,7 @@ template(name="fields")
 
     {{#if currentParamIs 'section' 'fertility-map'}}
     {{>map}}
+    a.stubImage(href="/fields/soil-testing/370",style="background-image:url('/stubImages/soilTesting.png');")
     {{/if}}
 
     {{#if currentParamIs 'section' 'rx-rates'}}
@@ -1610,7 +1618,7 @@ template(name="equipment")
         textarea.expanding(type="text",placeholder="Write Notes Here..")
         button.button.rounded(type="submit") Save
       {{else}}
-      .title New Equipment
+      .title Big Red
       .iconWrapper.size-16.right
         {{icon 'print'}}
       form
@@ -1752,7 +1760,7 @@ template(name="market")
               .title Per Acre
               .subtitle $188.08/ac
       .profit.tile
-        .title HR Spring Wheat 2013
+        .title Carrots 2013
         .section
           .progress.rounded
             .meter(style="width:55%")
@@ -1776,7 +1784,7 @@ template(name="market")
             a
               .title Per Acre
               .subtitle $188.08/ac
-      .profit.tile
+      //-.profit.tile
         .title Barley 2013
         .section
           .progress.rounded
@@ -1801,7 +1809,7 @@ template(name="market")
             a
               .title Per Acre
               .subtitle $188.08/ac
-      .profit.tile
+      //-.profit.tile
         .title Hard White Wheat 2013
         .section
           .progress.rounded
@@ -1826,7 +1834,7 @@ template(name="market")
             a
               .title Per Acre
               .subtitle $188.08/ac
-      .profit.tile
+      //-.profit.tile
         .title Faba Beans 2013
         .section
           .progress.rounded
@@ -2077,7 +2085,7 @@ template(name="market")
               .cell $502.86
           tr
             td
-              .cell Sask (Basis)
+              .cell Carrots (Basis)
             td
               .cell -
             td
@@ -2254,7 +2262,7 @@ template(name="market")
                   {{icon 'remove'}}
           tr
             td
-              .cell Sask
+              .cell Carrots
             td
               .cell Basis
             td
@@ -2277,7 +2285,7 @@ template(name="market")
                   {{icon 'remove'}}
           tr
             td
-              .cell Sask
+              .cell Carrots
             td
               .cell Basis
             td
@@ -2516,6 +2524,7 @@ template(name="farm-planner")
   .content(data-subheaderState="{{getSession 'subHeaderState'}}",data-leftSidebarState="{{getSession 'leftSidebarState'}}",data-rightSidebarState="{{getSession 'rightSidebarState'}}")
     {{#if currentParamIs 'section' 'crop-plans'}}
     {{>map}}
+    a.stubImage(href="/farm-planner/crop-plans/370",style="background-image:url('/stubImages/fieldInfo.png');")
     {{>notice}}
     {{/if}}
 
@@ -3284,16 +3293,16 @@ template(name="profile")
             tr
               td
                 .cell
-                  input(placeholder="Name",value="Joey Smith")
+                  input(placeholder="Name",value="John Carpenter")
               td
                 .cell
-                  input(placeholder="Position",value="Farm Hand")
+                  input(placeholder="Position",value="Principal")
               td
                 .cell
-                  input(placeholder="Email",value="joe@farmhand.com")
+                  input(placeholder="Email",value="john@decisivefarming.com")
               td
                 .cell
-                  input(placeholder="Password",value="asdf")
+                  input(placeholder="Password",value="123456")
               td
                 .cell 11/26/2013
               td
@@ -3365,16 +3374,16 @@ template(name="profile")
             tr
               td
                 .cell
-                  input(placeholder="Name",value="Joey Smith")
+                  input(placeholder="Name",value="Richard Frost")
               td
                 .cell
-                  input(placeholder="Position",value="Farm Hand")
+                  input(placeholder="Position",value="Operations Manager")
               td
                 .cell
-                  input(placeholder="Email",value="joe@farmhand.com")
+                  input(placeholder="Email",value="richard@decisivefarming.com")
               td
                 .cell
-                  input(placeholder="Password",value="asdf")
+                  input(placeholder="Password",value="123456")
               td
                 .cell 11/26/2013
               td
@@ -3446,16 +3455,259 @@ template(name="profile")
             tr
               td
                 .cell
-                  input(placeholder="Name",value="Joey Smith")
+                  input(placeholder="Name",value="Dale Frost")
               td
                 .cell
-                  input(placeholder="Position",value="Farm Hand")
+                  input(placeholder="Position",value="Operator")
               td
                 .cell
-                  input(placeholder="Email",value="joe@farmhand.com")
+                  input(placeholder="Email",value="dale@decisivefarming.com")
               td
                 .cell
-                  input(placeholder="Password",value="asdf")
+                  input(placeholder="Password",value="123456")
+              td
+                .cell 11/26/2013
+              td
+                .cell
+                  .toggle.gray.inline(data-action="toggle",data-toggle="sureCheck",data-state="no")
+                    input(type="hidden")
+                    .toggleOptions
+                      .toggleOptionsTrack
+                        .toggleOption Yes
+                        .toggleOption No
+              td
+                .cell
+                  a.button.split.rounded All
+                    .dropdown
+                      ul.list
+                        .title Advanced
+                        li
+                          ul.inline-list
+                            li
+                              .toggle.gray.large(data-action="toggle",data-toggle="shootType",data-state="no")
+                                input(type="hidden")
+                                .toggleOptions
+                                  .toggleOptionsTrack
+                                    .toggleOption Read Only
+                                    .toggleOption Read & Write
+                                .toggleLabel Dashboard
+                        li
+                          ul.inline-list
+                            li
+                              .toggle.gray.large(data-action="toggle",data-toggle="shootType",data-state="no")
+                                input(type="hidden")
+                                .toggleOptions
+                                  .toggleOptionsTrack
+                                    .toggleOption Read Only
+                                    .toggleOption Read & Write
+                                .toggleLabel Fields
+                        li
+                          ul.inline-list
+                            li
+                              .toggle.gray.large(data-action="toggle",data-toggle="shootType",data-state="no")
+                                input(type="hidden")
+                                .toggleOptions
+                                  .toggleOptionsTrack
+                                    .toggleOption Read Only
+                                    .toggleOption Read & Write
+                                .toggleLabel Equipment
+                        li
+                          ul.inline-list
+                            li
+                              .toggle.gray.large(data-action="toggle",data-toggle="shootType",data-state="no")
+                                input(type="hidden")
+                                .toggleOptions
+                                  .toggleOptionsTrack
+                                    .toggleOption Read Only
+                                    .toggleOption Read & Write
+                                .toggleLabel Market
+                        li
+                          ul.inline-list
+                            li
+                              .toggle.gray.large(data-action="toggle",data-toggle="shootType",data-state="no")
+                                input(type="hidden")
+                                .toggleOptions
+                                  .toggleOptionsTrack
+                                    .toggleOption Read Only
+                                    .toggleOption Read & Write
+                                .toggleLabel Farm Planner
+                  .iconWrapper.right.size-16
+                    {{icon 'remove'}}
+            tr
+              td
+                .cell
+                  input(placeholder="Name",value="Judy Clark")
+              td
+                .cell
+                  input(placeholder="Position",value="Accounting")
+              td
+                .cell
+                  input(placeholder="Email",value="judy@decisivefarming.com")
+              td
+                .cell
+                  input(placeholder="Password",value="123456")
+              td
+                .cell 11/26/2013
+              td
+                .cell
+                  .toggle.gray.inline(data-action="toggle",data-toggle="sureCheck",data-state="no")
+                    input(type="hidden")
+                    .toggleOptions
+                      .toggleOptionsTrack
+                        .toggleOption Yes
+                        .toggleOption No
+              td
+                .cell
+                  a.button.split.rounded All
+                    .dropdown
+                      ul.list
+                        .title Advanced
+                        li
+                          ul.inline-list
+                            li
+                              .toggle.gray.large(data-action="toggle",data-toggle="shootType",data-state="no")
+                                input(type="hidden")
+                                .toggleOptions
+                                  .toggleOptionsTrack
+                                    .toggleOption Read Only
+                                    .toggleOption Read & Write
+                                .toggleLabel Dashboard
+                        li
+                          ul.inline-list
+                            li
+                              .toggle.gray.large(data-action="toggle",data-toggle="shootType",data-state="no")
+                                input(type="hidden")
+                                .toggleOptions
+                                  .toggleOptionsTrack
+                                    .toggleOption Read Only
+                                    .toggleOption Read & Write
+                                .toggleLabel Fields
+                        li
+                          ul.inline-list
+                            li
+                              .toggle.gray.large(data-action="toggle",data-toggle="shootType",data-state="no")
+                                input(type="hidden")
+                                .toggleOptions
+                                  .toggleOptionsTrack
+                                    .toggleOption Read Only
+                                    .toggleOption Read & Write
+                                .toggleLabel Equipment
+                        li
+                          ul.inline-list
+                            li
+                              .toggle.gray.large(data-action="toggle",data-toggle="shootType",data-state="no")
+                                input(type="hidden")
+                                .toggleOptions
+                                  .toggleOptionsTrack
+                                    .toggleOption Read Only
+                                    .toggleOption Read & Write
+                                .toggleLabel Market
+                        li
+                          ul.inline-list
+                            li
+                              .toggle.gray.large(data-action="toggle",data-toggle="shootType",data-state="no")
+                                input(type="hidden")
+                                .toggleOptions
+                                  .toggleOptionsTrack
+                                    .toggleOption Read Only
+                                    .toggleOption Read & Write
+                                .toggleLabel Farm Planner
+                  .iconWrapper.right.size-16
+                    {{icon 'remove'}}
+            tr
+              td
+                .cell
+                  input(placeholder="Name",value="Rob Smith")
+              td
+                .cell
+                  input(placeholder="Position",value="Agronomist")
+              td
+                .cell
+                  input(placeholder="Email",value="rob@decisivefarming.com")
+              td
+                .cell
+                  input(placeholder="Password",value="123456")
+              td
+                .cell 11/26/2013
+              td
+                .cell
+                  .toggle.gray.inline(data-action="toggle",data-toggle="sureCheck",data-state="no")
+                    input(type="hidden")
+                    .toggleOptions
+                      .toggleOptionsTrack
+                        .toggleOption Yes
+                        .toggleOption No
+              td
+                .cell
+                  a.button.split.rounded All
+                    .dropdown
+                      ul.list
+                        .title Advanced
+                        li
+                          ul.inline-list
+                            li
+                              .toggle.gray.large(data-action="toggle",data-toggle="shootType",data-state="no")
+                                input(type="hidden")
+                                .toggleOptions
+                                  .toggleOptionsTrack
+                                    .toggleOption Read Only
+                                    .toggleOption Read & Write
+                                .toggleLabel Dashboard
+                        li
+                          ul.inline-list
+                            li
+                              .toggle.gray.large(data-action="toggle",data-toggle="shootType",data-state="no")
+                                input(type="hidden")
+                                .toggleOptions
+                                  .toggleOptionsTrack
+                                    .toggleOption Read Only
+                                    .toggleOption Read & Write
+                                .toggleLabel Fields
+                        li
+                          ul.inline-list
+                            li
+                              .toggle.gray.large(data-action="toggle",data-toggle="shootType",data-state="no")
+                                input(type="hidden")
+                                .toggleOptions
+                                  .toggleOptionsTrack
+                                    .toggleOption Read Only
+                                    .toggleOption Read & Write
+                                .toggleLabel Equipment
+                        li
+                          ul.inline-list
+                            li
+                              .toggle.gray.large(data-action="toggle",data-toggle="shootType",data-state="no")
+                                input(type="hidden")
+                                .toggleOptions
+                                  .toggleOptionsTrack
+                                    .toggleOption Read Only
+                                    .toggleOption Read & Write
+                                .toggleLabel Market
+                        li
+                          ul.inline-list
+                            li
+                              .toggle.gray.large(data-action="toggle",data-toggle="shootType",data-state="no")
+                                input(type="hidden")
+                                .toggleOptions
+                                  .toggleOptionsTrack
+                                    .toggleOption Read Only
+                                    .toggleOption Read & Write
+                                .toggleLabel Farm Planner
+                  .iconWrapper.right.size-16
+                    {{icon 'remove'}}
+            tr
+              td
+                .cell
+                  input(placeholder="Name",value="Charley Thompson")
+              td
+                .cell
+                  input(placeholder="Position",value="Operator")
+              td
+                .cell
+                  input(placeholder="Email",value="charley@decisivefarming.com")
+              td
+                .cell
+                  input(placeholder="Password",value="123456")
               td
                 .cell 11/26/2013
               td

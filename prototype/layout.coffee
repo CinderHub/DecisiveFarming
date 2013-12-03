@@ -35,6 +35,7 @@ Router.map ->
       Session.set "leftSidebarToggleState","closed"
       Session.set "rightSidebarState","closed"
       Session.set "rightSidebarToggleState","closed"
+      Session.set "activeHeaderPath","dashboard"
 
   @route "fields",
     path: "/fields/:section?/:assetsInfo?"
@@ -49,9 +50,17 @@ Router.map ->
         to: "rightSidebar"
     data: ->
       Session.set "subHeaderState","open"
+      Session.set "activeHeaderPath","fields"
       if !@params.section
         Router.go "fields",
           section: "field-info"
+      else
+        Session.set "activeSubheaderPath",@params.section
+
+      if !@params.assetsInfo
+        Session.set "activeSidebarPath",null
+      else
+        Session.set "activeSidebarPath",@params.assetsInfo
 
       #Fields Info
       if @params.section is "field-info"
@@ -116,10 +125,18 @@ Router.map ->
       Session.set "leftSidebarToggleState","open"
       Session.set "rightSidebarState","closed"
       Session.set "rightSidebarToggleState","closed"
+      Session.set "activeHeaderPath","equipment"
       if !@params.section
         Router.go "equipment",
           section: "equipment-info"
           #assetsInfo: "1337"
+      else
+        Session.set "activeSubheaderPath",@params.section
+
+      if !@params.assetsInfo
+        Session.set "activeSidebarPath",null
+      else
+        Session.set "activeSidebarPath",@params.assetsInfo
 
   @route "market",
     path: "/market/:section?/:assetsInfo?"
@@ -134,9 +151,17 @@ Router.map ->
         to: "rightSidebar"
     data: ->
       Session.set "subHeaderState","open"
+      Session.set "activeHeaderPath","market"
       if !@params.section
         Router.go "market",
           section: "profit"
+      else
+        Session.set "activeSubheaderPath",@params.section
+
+      if !@params.assetsInfo
+        Session.set "activeSidebarPath","1221"
+      else
+        Session.set "activeSidebarPath",@params.assetsInfo
 
       #Profit
       if @params.section is "profit"
@@ -186,10 +211,19 @@ Router.map ->
         to: "rightSidebar"
     data: ->
       Session.set "subHeaderState","open"
+      Session.set "activeHeaderPath","farm-planner"
       if !@params.section
         Session.set "rightSidebarState","closed"
         Router.go "farm-planner",
           section: "crop-plans"
+      else
+        Session.set "activeSubheaderPath",@params.section
+
+      if !@params.assetsInfo
+        #if Session.equals "activeSidebarPath",null
+        #Session.set "activeSidebarPath",null
+      else
+        Session.set "activeSidebarPath",@params.assetsInfo
 
       #Crop Plans
       if @params.section is "crop-plans"
@@ -240,6 +274,7 @@ Router.map ->
       Session.set "leftSidebarToggleState","closed"
       Session.set "rightSidebarState","open"
       Session.set "rightSidebarToggleState","closed"
+      Session.set "activeHeaderPath","profile"
 
   @route "help",
     path: "/help/:section?/:assetsInfo?"

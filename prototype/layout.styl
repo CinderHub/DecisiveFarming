@@ -346,7 +346,7 @@ borderRadius = 4px
       width 100%
       color midnight()
       border-bottom 1px solid gray()
-      &[data-state="active"]
+      &[data-active="true"]
       &:hover
         border-color orange(0.45)
         background orange(0.75)
@@ -873,7 +873,7 @@ table.table
       height inherit
       cursor pointer
       display block
-      &[data-state="active"]
+      &[data-active="true"]
       &:hover
         color orange(0.75)
         .iconWrapper > *
@@ -1087,7 +1087,7 @@ table.table
         border-right 1px solid gray()
         line-height subHeaderHeight
         padding-left 40px
-        &[data-state="active"]
+        &[data-active="true"]
         &:hover
           background orange(0.75)
           color white()
@@ -1481,6 +1481,7 @@ table.table
   position(absolute,0,0,0,0)
   width 100%
   height 100%
+  display none
   //transition all 0.25s ease-in-out
   &[data-state="closed"]
     transform scale3d(0,0,0)
@@ -1500,7 +1501,7 @@ table.table
 //Hiding the ESRI sign in dialog because it's fucking annoying
 .dijitDialogUnderlayWrapper
 .esriSignInDialog
-  display none!important
+  //display none!important
 .esriSimpleSliderTL
   top 10px
   left auto
@@ -1695,3 +1696,11 @@ body
     display none!important
   scrollbar[orient="vertical"]
     min-width 15px!important*/
+
+.stubImage
+  position(absolute,0,0,0,0)
+  height 100%
+  width 100%
+  background-size cover
+  background-position 50% 50%
+  background-repeat no-repeat

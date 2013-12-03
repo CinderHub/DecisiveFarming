@@ -5,7 +5,8 @@
       "iron-router": {},
       "iron-router-progress": {},
       "jade-handlebars-refactored": {},
-      "bootstrap-datepicker2": {}
+      "bootstrap-datepicker2": {},
+      "underscore-string-latest": {}
     },
     "packages": {
       "iron-router": {
@@ -27,6 +28,11 @@
         "git": "https://github.com/deepwell/meteor-bootstrap-datepicker.git",
         "tag": "v1.2.0",
         "commit": "b7de18a7cc651ea665cda75048663f90d1a11d10"
+      },
+      "underscore-string-latest": {
+        "git": "https://github.com/TimHeckel/meteor-underscore-string.git",
+        "tag": "v2.3.3",
+        "commit": "4a5d70eee48fbd90a6e6fc78747250d704a0b3bb"
       }
     }
   }
