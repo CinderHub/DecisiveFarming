@@ -1,0 +1,3765 @@
+head
+  title Decisive Farming
+
+//- Main Yield Context for Iron Router
+body
+
+//-Main Layout Template
+template(name="layout")
+  {{yield}}
+
+  {{yield "header"}}
+
+  {{yield "subHeader"}}
+
+  {{yield "leftSidebar"}}
+
+  {{yield "rightSidebar"}}
+
+  {{>cover}}
+
+//-Header Template
+template(name="header")
+  .header.fixed.spanWidth
+    ul.inline-list.left
+      li
+        a(href="/dashboard",data-state="active")
+          .iconWrapper.left.size-16
+            {{icon 'dashboard'}}
+          | Dashboard
+      li
+        a(href="/fields")
+          .iconWrapper.left.size-16
+            {{icon 'fields'}}
+          | Fields
+      li
+        a(href="/equipment")
+          .iconWrapper.left.size-16
+            {{icon 'equipment'}}
+          | Equipment
+      li
+        a(href="/market")
+          .iconWrapper.left.size-16
+            {{icon 'market'}}
+          | Market
+      li
+        a(href="/farm-planner")
+          .iconWrapper.left.size-16
+            {{icon 'farmPlanner'}}
+          | Farm Planner
+    ul.inline-list.right
+      li
+        a(href="/profile")
+          .iconWrapper.left.size-16
+            {{icon 'profile'}}
+          | Chris Kunz
+      //-li
+        a(href="/help")
+          .iconWrapper.left.size-16
+            {{icon 'help'}}
+          | Help
+
+template(name="subHeader")
+  .subHeader.fixed.spanWidth(data-state="{{getSession 'subHeaderState'}}")
+    ul.inline-list.left
+      {{#if currentContextIs 'fields'}}
+        li
+          a(href="/{{currentContext}}/field-info/370",data-state="active")
+            .iconWrapper.left.size-24
+              {{icon 'summary'}}
+            | Field Info
+        li
+          a(href="/{{currentContext}}/soil-testing/370")
+            .iconWrapper.left.size-24
+              {{icon 'soilTesting'}}
+            | Soil Testing
+        li
+          a(href="/{{currentContext}}/fertility-map/370")
+            .iconWrapper.left.size-24
+              {{icon 'fertilityMap'}}
+            | Fertility Map
+        li
+          a(href="/{{currentContext}}/rx-rates/370")
+            .iconWrapper.left.size-24
+              {{icon 'rxRates'}}
+            | RX Rates
+        li
+          a(href="/{{currentContext}}/rx-files/370")
+            .iconWrapper.left.size-24
+              {{icon 'rxFiles'}}
+            | RX Files
+        li
+          a(href="/{{currentContext}}/yield-report/370")
+            .iconWrapper.left.size-24
+              {{icon 'yieldReport'}}
+            | Yield Report
+      {{/if}}
+
+      {{#if currentContextIs 'market'}}
+        li
+          a(href="/{{currentContext}}/profit/1221")
+            .iconWrapper.left.size-24
+              {{icon 'profit'}}
+            | Profit
+        li
+          a(href="/{{currentContext}}/revenue-and-expenses/1221")
+            .iconWrapper.left.size-24
+              {{icon 'revenueAndExpenses'}}
+            | Revenue & Expenses
+        li
+          a(href="/{{currentContext}}/hedge-plan/1221")
+            .iconWrapper.left.size-24
+              {{icon 'hedgePlan'}}
+            | Hedge Plan
+        li
+          a(href="/{{currentContext}}/positions/1221")
+            .iconWrapper.left.size-24
+              {{icon 'positions'}}
+            | Positions
+        li
+          a(href="/{{currentContext}}/research/1221")
+            .iconWrapper.left.size-24
+              {{icon 'research'}}
+            | Research
+      {{/if}}
+
+      {{#if currentContextIs 'farm-planner'}}
+        li
+          a(href="/{{currentContext}}/crop-plans")
+            .iconWrapper.left.size-24
+              {{icon 'cropPlans'}}
+            | Crop Plans
+        //-li
+          a(href="/{{currentContext}}/equipment")
+            .iconWrapper.left.size-24
+              {{icon 'equipment'}}
+            | Equipment
+        li
+          a(href="/{{currentContext}}/revenue-and-expenses")
+            .iconWrapper.left.size-24
+              {{icon 'revenueAndExpenses'}}
+            | Revenue And Expenses
+        li
+          a(href="/{{currentContext}}/market-plan/1221")
+            .iconWrapper.left.size-24
+              {{icon 'marketPlan'}}
+            | Market Plan
+        li
+          a(href="/{{currentContext}}/work-orders")
+            .iconWrapper.left.size-24
+              {{icon 'workOrders'}}
+            | Work Orders
+      {{/if}}
+
+template(name="leftSidebar")
+  .sidebarToggle.left.fixed(data-state="{{getSession 'leftSidebarToggleState'}}")
+    .sidebarNotch
+      .iconWrapper.left.size-24
+        {{icon 'sidebar'}}
+    ul
+      li.has-dropdown
+        a
+          {{#if currentContextIs 'fields'}}
+          {{getSession 'fieldsFilter'}}
+          {{/if}}
+          {{#if currentContextIs 'equipment'}}
+          {{getSession 'equipmentFilter'}}
+          {{/if}}
+          {{#if currentContextIs 'market'}}
+          {{getSession 'marketFilter'}}
+          {{/if}}
+          {{#if currentContextIs 'farm-planner'}}
+          {{getSession 'farm-plannerFilter'}}
+          {{/if}}
+          .iconWrapper.right.size-8
+            {{icon 'dropdown'}}
+        ul.dropdown
+          {{#if currentContextIs 'fields'}}
+          li
+            a(data-action="changeFilter",data-filter="All Fields") All Fields
+              .subtitle 2
+          li
+            a(data-action="changeFilter",data-filter="All Fields 2012") All Fields 2012
+              .subtitle 2
+          li
+            a(data-action="changeFilter",data-filter="All Fields 2013") All Fields 2013
+              .subtitle 2
+          li
+            a(data-action="changeFilter",data-filter="All Fields 2014") All Fields 2014
+              .subtitle 2
+          li
+            a(data-action="changeFilter",data-filter="2013 WO # 407") 2013 WO # 407
+              .subtitle 2
+          li
+            a(data-action="changeFilter",data-filter="2013 WO # 408") 2013 WO # 408
+              .subtitle 2
+          li
+            a(data-action="changeFilter",data-filter="2013 WO # 410") 2013 WO # 410
+              .subtitle 2
+          li
+            a(data-action="changeFilter",data-filter="2013 WO # 411") 2013 WO # 411
+              .subtitle 2
+          li
+            a(data-action="changeFilter",data-filter="2013 WO # 413") 2013 WO # 413
+              .subtitle 2
+          li
+            a(data-action="changeFilter",data-filter="2013 WO # 431") 2013 WO # 431
+              .subtitle 2
+          li
+            a(data-action="changeFilter",data-filter="2013 WO # 557") 2013 WO # 557
+              .subtitle 2
+          {{/if}}
+
+          {{#if currentContextIs 'equipment'}}
+          li
+            a(data-action="changeFilter",data-filter="All Equipment") All Equipment
+              .subtitle 2
+          li
+            a(data-action="changeFilter",data-filter="Seeders") Seeders
+              .subtitle 2
+          li
+            a(data-action="changeFilter",data-filter="Sprayers") Sprayers
+              .subtitle 2
+          li
+            a(data-action="changeFilter",data-filter="Floaters") Floaters
+              .subtitle 2
+          li
+            a(data-action="changeFilter",data-filter="Combines") Combines
+              .subtitle 2
+          li
+            a(data-action="changeFilter",data-filter="Trucks") Trucks
+              .subtitle 2
+          li
+            a(data-action="changeFilter",data-filter="Swathers") Swathers
+              .subtitle 2
+          {{/if}}
+
+          {{#if currentContextIs 'market'}}
+          li
+            a(data-action="changeFilter",data-filter="All Commodities") All Commodities
+              .subtitle 2
+          li
+            a(data-action="changeFilter",data-filter="All Commodities 2012") All Commodities 2012
+              .subtitle 2
+          li
+            a(data-action="changeFilter",data-filter="All Commodities 2013") All Commodities 2013
+              .subtitle 2
+          li
+            a(data-action="changeFilter",data-filter="All Commodities 2014") All Commodities 2014
+              .subtitle 2
+          li
+            a(data-action="changeFilter",data-filter="All Commodities 2015") All Commodities 2015
+              .subtitle 2
+          li
+            a(data-action="changeFilter",data-filter="All Commodities 2016") All Commodities 2016
+              .subtitle 2
+          {{/if}}
+
+          {{#if currentContextIs 'farm-planner'}}
+          li
+            a(data-action="changeFilter",data-filter="Farm Planner 2013") Farm Planner 2013
+              .subtitle 2
+          li
+            a(data-action="changeFilter",data-filter="Farm Planner 2014") Farm Planner 2014
+              .subtitle 2
+          li
+            a(data-action="changeFilter",data-filter="Farm Planner 2015") Farm Planner 2015
+              .subtitle 2
+          li
+            a(data-action="changeFilter",data-filter="Farm Planner 2016") Farm Planner 2016
+              .subtitle 2
+          {{/if}}
+  .sidebar.left.fixed.spanHeight(data-state="{{getSession 'leftSidebarState'}}",data-sidebarToggleState="{{getSession 'leftSidebarToggleState'}}")
+    ul.list
+      {{#if currentContextIs 'fields'}}
+      li
+        a(data-action="addField")
+          span.title Add New Field
+          .iconWrapper.right.size-16
+            {{icon 'new'}}
+      li
+        a(href="/{{currentContext}}/{{currentParam 'section'}}/370",data-action="changeField",data-field-id="370",data-state="active")
+          span.title Field One
+          span.subtitle E 24 28 26 W4
+      li
+        a(href="/{{currentContext}}/{{currentParam 'section'}}/371",data-action="changeField",data-field-id="371")
+          span.title Field Two
+          span.subtitle NE 21 28 25 W4
+      li
+        a(href="/{{currentContext}}/{{currentParam 'section'}}/96",data-action="changeField",data-field-id="96")
+          span.title Field Three
+          span.subtitle NE 32 27 25 W4
+      li
+        a(href="/{{currentContext}}/{{currentParam 'section'}}/98",data-action="changeField",data-field-id="98")
+          span.title Field Four
+          span.subtitle NE 33 27 25 W4
+      li
+        a(href="/{{currentContext}}/{{currentParam 'section'}}/92",data-action="changeField",data-field-id="92")
+          span.title Field Five
+          span.subtitle NE 5 28 25 W4
+      li
+        a(href="/{{currentContext}}/{{currentParam 'section'}}/670",data-action="changeField",data-field-id="670")
+          span.title Field Six
+          span.subtitle NW 33 27 25 W4 
+      li
+        a(href="/{{currentContext}}/{{currentParam 'section'}}/91",data-action="changeField",data-field-id="91")
+          span.title Field Seven
+          span.subtitle NW 5 28 25 W4
+      li
+        a(href="/{{currentContext}}/{{currentParam 'section'}}/97",data-action="changeField",data-field-id="97")
+          span.title Field Eight
+          span.subtitle S 33 27 25 W4
+      li
+        a(href="/{{currentContext}}/{{currentParam 'section'}}/95",data-action="changeField",data-field-id="95")
+          span.title Field Nine
+          span.subtitle SC 32 27 25 W4
+      li
+        a(href="/{{currentContext}}/{{currentParam 'section'}}/89",data-action="changeField",data-field-id="89")
+          span.title Field Ten
+          span.subtitle SC 6 28 25 W4
+      li
+        a(href="/{{currentContext}}/{{currentParam 'section'}}/90",data-action="changeField",data-field-id="90")
+          span.title Field Eleven
+          span.subtitle SC 6 28 25 W4 E
+      li
+        a(href="/{{currentContext}}/{{currentParam 'section'}}/88",data-action="changeField",data-field-id="88")
+          span.title Field Twelve
+          span.subtitle SC 6 28 25 W4 W
+      li
+        a(href="/{{currentContext}}/{{currentParam 'section'}}/476",data-action="changeField",data-field-id="476")
+          span.title Field Thirteen
+          span.subtitle SE 29 28 25 W4
+      li
+        a(href="/{{currentContext}}/{{currentParam 'section'}}/94",data-action="changeField",data-field-id="94")
+          span.title Field Fourteen
+          span.subtitle SE 5 28 25 W4
+      li
+        a(href="/{{currentContext}}/{{currentParam 'section'}}/93",data-action="changeField",data-field-id="93")
+          span.title Field Fifteen
+          span.subtitle SW 5 28 25 W4
+      {{/if}}
+
+      {{#if currentContextIs 'equipment'}}
+      li
+        a(data-action="addEquipment")
+          span.title Add New Equipment
+          .iconWrapper.right.size-16
+            {{icon 'new'}}
+      li
+        a(href="/{{currentContext}}/{{currentParam 'section'}}/1337",data-equipment-id="1337")
+          span.title Big Red
+          span.subtitle Pattison PLS 3300
+      li
+        a(href="/{{currentContext}}/{{currentParam 'section'}}/1234",data-equipment-id="1234")
+          span.title Unit Name 1
+          span.subtitle Pattison PLS 3300-ST400
+      li
+        a(href="/{{currentContext}}/{{currentParam 'section'}}/4321",data-equipment-id="4321")
+          span.title New One
+          span.subtitle John Deere 1910-340 Bushels
+      li
+        a(href="/{{currentContext}}/{{currentParam 'section'}}/1111",data-equipment-id="1111")
+          span.title My Truck
+          span.subtitle Ford F-450
+      li
+        a(href="/{{currentContext}}/{{currentParam 'section'}}/2222",data-equipment-id="2222")
+          span.title My Combine
+          span.subtitle Combine C3
+      li
+        a(href="/{{currentContext}}/{{currentParam 'section'}}/3333",data-equipment-id="3333")
+          span.title Fleet X
+          span.subtitle Corvette
+      {{/if}}
+
+      {{#if currentContextIs 'market'}}
+      li
+        a(data-action="addCommodity")
+          span Add New Commodity
+          .iconWrapper.right.size-16
+            {{icon 'new'}}
+      li
+        a(href="/{{currentContext}}/{{currentParam 'section'}}/1221",data-commodity-id="1221")
+          span.title Canola
+          span.subtitle 382.4 Ac
+      li
+        a(href="/{{currentContext}}/{{currentParam 'section'}}/2873",data-commodity-id="2873")
+          span.title Carrots
+          span.subtitle 300 Ac
+      {{/if}}
+
+      {{!Farm Planner}}
+      {{#if currentContextIs 'farm-planner'}}
+        {{!Crop Plans}}
+        {{#if currentParamIs 'section' 'crop-plans'}}
+        li
+          a(data-action="addField")
+            span.title Add New Field
+            .iconWrapper.right.size-16
+              {{icon 'new'}}
+        //-li
+          a(href="/{{currentContext}}/{{currentParam 'section'}}/1212",data-plan-id="1212")
+            span.title Farm Plan - 2013
+            span.subtitle Started on..
+        //-li
+          a(href="/{{currentContext}}/{{currentParam 'section'}}/2121",data-plan-id="2121")
+            span.title Farm Plan - 2014
+            span.subtitle Started on..
+        //-li
+          a(href="/{{currentContext}}/{{currentParam 'section'}}/3232",data-plan-id="3232")
+            span.title Farm Plan - 2015
+            span.subtitle Started on..
+        //-li
+          a(href="/{{currentContext}}/{{currentParam 'section'}}/4343",data-plan-id="4343")
+            span.title Farm Plan - 2016
+            span.subtitle Started on..
+        //-li
+          a(href="/{{currentContext}}/{{currentParam 'section'}}/5353",data-plan-id="5353")
+            span.title Farm Plan - 2017
+            span.subtitle Started on..
+        li
+          a(href="/{{currentContext}}/{{currentParam 'section'}}/370",data-action="changeField",data-field-id="370")
+            span.title Field One
+            span.subtitle E 24 28 26 W4
+        li
+          a(href="/{{currentContext}}/{{currentParam 'section'}}/371",data-action="changeField",data-field-id="371")
+            span.title Field Two
+            span.subtitle NE 21 28 25 W4
+        li
+          a(href="/{{currentContext}}/{{currentParam 'section'}}/96",data-action="changeField",data-field-id="96")
+            span.title Field Three
+            span.subtitle NE 32 27 25 W4
+        li
+          a(href="/{{currentContext}}/{{currentParam 'section'}}/98",data-action="changeField",data-field-id="98")
+            span.title Field Four
+            span.subtitle NE 33 27 25 W4
+        li
+          a(href="/{{currentContext}}/{{currentParam 'section'}}/92",data-action="changeField",data-field-id="92")
+            span.title Field Five
+            span.subtitle NE 5 28 25 W4
+        li
+          a(href="/{{currentContext}}/{{currentParam 'section'}}/670",data-action="changeField",data-field-id="670")
+            span.title Field Six
+            span.subtitle NW 33 27 25 W4 
+        li
+          a(href="/{{currentContext}}/{{currentParam 'section'}}/91",data-action="changeField",data-field-id="91")
+            span.title Field Seven
+            span.subtitle NW 5 28 25 W4
+        li
+          a(href="/{{currentContext}}/{{currentParam 'section'}}/97",data-action="changeField",data-field-id="97")
+            span.title Field Eight
+            span.subtitle S 33 27 25 W4
+        li
+          a(href="/{{currentContext}}/{{currentParam 'section'}}/95",data-action="changeField",data-field-id="95")
+            span.title Field Nine
+            span.subtitle SC 32 27 25 W4
+        li
+          a(href="/{{currentContext}}/{{currentParam 'section'}}/89",data-action="changeField",data-field-id="89")
+            span.title Field Ten
+            span.subtitle SC 6 28 25 W4
+        li
+          a(href="/{{currentContext}}/{{currentParam 'section'}}/90",data-action="changeField",data-field-id="90")
+            span.title Field Eleven
+            span.subtitle SC 6 28 25 W4 E
+        li
+          a(href="/{{currentContext}}/{{currentParam 'section'}}/88",data-action="changeField",data-field-id="88")
+            span.title Field Twelve
+            span.subtitle SC 6 28 25 W4 W
+        li
+          a(href="/{{currentContext}}/{{currentParam 'section'}}/476",data-action="changeField",data-field-id="476")
+            span.title Field Thirteen
+            span.subtitle SE 29 28 25 W4
+        li
+          a(href="/{{currentContext}}/{{currentParam 'section'}}/94",data-action="changeField",data-field-id="94")
+            span.title Field Fourteen
+            span.subtitle SE 5 28 25 W4
+        li
+          a(href="/{{currentContext}}/{{currentParam 'section'}}/93",data-action="changeField",data-field-id="93")
+            span.title Field Fifteen
+            span.subtitle SW 5 28 25 W4
+        {{/if}}
+
+        {{!Revenue and Expenses}}
+        {{#if currentParamIs 'section' 'revenue-and-expenses'}}
+        li
+          a(data-action="addCommodity")
+            span.title Add New Commodity
+            .iconWrapper.right.size-16
+              {{icon 'new'}}
+        li
+          a(href="/{{currentContext}}/{{currentParam 'section'}}/1221",data-commodity-id="1221")
+            span.title Canola
+            span.subtitle 800 Ac
+        li
+          a(href="/{{currentContext}}/{{currentParam 'section'}}/1010",data-commodity-id="1010")
+            span.title HR Spring Wheat
+            span.subtitle 540 Ac
+        li
+          a(href="/{{currentContext}}/{{currentParam 'section'}}/1212",data-commodity-id="1212")
+            span.title Barley
+            span.subtitle 750 Ac
+        li
+          a(href="/{{currentContext}}/{{currentParam 'section'}}/9191",data-commodity-id="9191")
+            span.title Hard White Wheat
+            span.subtitle 650 Ac
+        li
+          a(href="/{{currentContext}}/{{currentParam 'section'}}/8181",data-commodity-id="8181")
+            span.title Faba Beans
+            span.subtitle 320 Ac
+        {{/if}}
+
+        {{!Market Plan}}
+        {{#if currentParamIs 'section' 'market-plan'}}
+        li
+          a(data-action="addCommodity")
+            span.title Add New Commodity
+            .iconWrapper.right.size-16
+              {{icon 'new'}}
+        li
+          a(href="/{{currentContext}}/{{currentParam 'section'}}/1221",data-commodity-id="1221")
+            span.title Canola
+            span.subtitle 800 Ac
+        li
+          a(href="/{{currentContext}}/{{currentParam 'section'}}/8383",data-commodity-id="8383")
+            span.title Fuel
+            span.subtitle 22,000 L
+        li
+          a(href="/{{currentContext}}/{{currentParam 'section'}}/1010",data-commodity-id="1010")
+            span.title HR Spring Wheat
+            span.subtitle 540 Ac
+        li
+          a(href="/{{currentContext}}/{{currentParam 'section'}}/1212",data-commodity-id="1212")
+            span.title Barley
+            span.subtitle 750 Ac
+        li
+          a(href="/{{currentContext}}/{{currentParam 'section'}}/9191",data-commodity-id="9191")
+            span.title Hard White Wheat
+            span.subtitle 650 Ac
+        li
+          a(href="/{{currentContext}}/{{currentParam 'section'}}/8181",data-commodity-id="8181")
+            span.title Faba Beans
+            span.subtitle 320 Ac
+        li
+          a(href="/{{currentContext}}/{{currentParam 'section'}}/5342",data-commodity-id="5342")
+            span.title 46-0-0
+            span.subtitle 125 MT
+        li
+          a(href="/{{currentContext}}/{{currentParam 'section'}}/8320",data-commodity-id="8320")
+            span.title 11-52-0-0
+            span.subtitle 12 MT
+        li
+          a(href="/{{currentContext}}/{{currentParam 'section'}}/7289",data-commodity-id="7289")
+            span.title 21-0-0-24
+            span.subtitle 976 MT
+        {{/if}}
+      {{/if}}
+
+template(name="rightSidebar")
+  .sidebarToggle.right.fixed(data-state="{{getSession 'rightSidebarToggleState'}}")
+    .sidebarNotch
+      .iconWrapper.right.size-24
+        {{icon 'sidebar'}}
+  .sidebar.right.fixed(data-state="{{getSession 'rightSidebarState'}}",data-sidebarToggleState="{{getSession 'rightSidebarToggleState'}}")
+    {{#if currentParamIs 'section' 'field-info'}}
+    .section
+      .title Field Details
+      form
+        input(type="text",placeholder="Field Name")
+        ul.inline-list
+          li
+            label.inline Division
+            select.inline
+              option(value="Division") Division
+              option(value="First") First
+              option(value="Second") Second
+              option(value="Third") Third
+              option(value="Fourth") Fourth
+              option(value="Fifth") Fifth
+              option(value="Sixth") Sixth
+              option(value="Seventh") Seventh
+              option(value="Eighth") Eighth
+              option(value="Ninth") Ninth
+              option(value="Tenth") Tenth
+        input(type="text",placeholder="Section")
+        input(type="text",placeholder="Township")
+        input(type="text",placeholder="Range")
+        ul.inline-list
+          li
+            select.inline
+              option(value="Meridian") Meridian
+            select.inline
+              option(value="Subdivision") Subdivision
+        ul.inline-list
+          li
+            input.inline(type="text",placeholder="Acres")
+            select.inline
+              option(value="Crop Type") Crop Type
+        input(type="text",placeholder="Variety")
+        ul.inline-list
+          li
+            input.inline(type="text",placeholder="Yield")
+            select.inline
+              option(value="bu/ac") bu/ac
+        ul.inline-list
+          li
+            .toggle.gray(data-action="toggle",data-toggle="sureCheck",data-state="no")
+              input(type="hidden")
+              .toggleOptions
+                .toggleOptionsTrack
+                  .toggleOption Yes
+                  .toggleOption No
+              .toggleLabel Sure-Check Soil Testing
+        ul.inline-list
+          li
+            .toggle.gray(data-action="toggle",data-toggle="optimizeRX",data-state="no")
+              input(type="hidden")
+              .toggleOptions
+                .toggleOptionsTrack
+                  .toggleOption Yes
+                  .toggleOption No
+              .toggleLabel Optimize RX
+    .section
+      .title Notes
+        a.iconWrapper.right.size-16(data-action="toggleCover",data-cover="notes")
+          {{icon 'new'}}
+      ul.list
+        li
+          a(data-action="toggleCover",data-cover="viewNote") 04 Oct 2012 - Harvest
+        li
+          a(data-action="toggleCover",data-cover="viewNote") 15 May 2013 - Seeding
+        li
+          a(data-action="toggleCover",data-cover="viewNote") 02 Jun 2013 - Scouting Notes
+    .section
+      form
+        table.table.uniform
+          thead
+            tr
+              td(colspan="3")
+                .cell Crop Rotation
+          tbody
+            tr
+              td
+                .cell
+                  input(placeholder="Year",value="2013")
+              td
+                .cell
+                  select
+                    option(value="Select") Select
+                    option(value="Canola") Canola
+              td
+                .cell
+                  input(placeholder="Yield",value="")
+                  //-select
+                    option(value="bu/ac") bu/ac
+                    option(value="obs/ac") obs/ac
+            tr
+              td
+                .cell
+                  input(placeholder="Year",value="2014")
+              td
+                .cell
+                  select
+                    option(value="Select") Select
+                    option(value="Canola") Canola
+              td
+                .cell
+                  input(placeholder="Yield",value="")
+                  //-select
+                    option(value="bu/ac") bu/ac
+                    option(value="obs/ac") obs/ac
+            tr
+              td
+                .cell
+                  input(placeholder="Year",value="2015")
+              td
+                .cell
+                  select
+                    option(value="Select") Select
+                    option(value="Canola") Canola
+              td
+                .cell
+                  input(placeholder="Yield",value="")
+                  //-select
+                    option(value="bu/ac") bu/ac
+                    option(value="obs/ac") obs/ac
+    //-.section
+      a.button.rounded Save Field Details
+    {{/if}}
+
+    {{#if currentParamIs 'section' 'fertility-map'}}
+    .section
+      .title Field One
+      ul.list
+        li.item
+          span.prefix Crop Plan
+          span.postfix Invigor Canola
+        li.item
+          span.prefix Projected Yield
+          span.postfix 72 bu/ac
+    .section
+      table.table.inline
+        thead
+          tr
+            td
+              .cell Zone
+            td
+              .cell Fertility
+              //- (bu/ac)
+            td
+              .cell Acres
+        tbody
+          tr
+            td
+              .cell(data-zone="1")
+            td
+              .cell 66.411 - 81.332
+            td
+              .cell 6.0
+          tr
+            td
+              .cell(data-zone="2")
+            td
+              .cell 81.332 - 89.579
+            td
+              .cell 12.1
+          tr
+            td
+              .cell(data-zone="3")
+            td
+              .cell 89.597 - 95.151
+            td
+              .cell 17.8
+          tr
+            td
+              .cell(data-zone="4")
+            td
+              .cell 95.151 - 99.442
+            td
+              .cell 30.1
+          tr
+            td
+              .cell(data-zone="5")
+            td
+              .cell 99.442 - 102.756
+            td
+              .cell 48.6
+          tr
+            td
+              .cell(data-zone="6")
+            td
+              .cell 102.756 - 105.618
+            td
+              .cell 73.3
+          tr
+            td
+              .cell(data-zone="7")
+            td
+              .cell 105.618 - 111.979
+            td
+              .cell 30.2
+        tfoot
+          tr
+            td(colspan="2")
+              .cell Total Acres
+            td
+              .cell 217.9
+    {{/if}}
+
+    {{#if currentParamIs 'section' 'hedge-plan'}}
+    .section
+      .title Canola 2014 - Hedge
+      .progress.rounded
+        .meter(style="width: 55%")
+        .subtitle 55% Hedged (398 of 725.25 MT)
+    .section
+      .title Time Triggers
+      form
+        ul.list
+          li.item.collapse
+            input.percentage(type="text",placeholder="0%",value="55%")
+            span on
+            input.datepicker(type="text",placeholder="DD/MM/YYYY",value="Current Date")
+            .iconWrapper.size-16.right
+              {{icon 'remove'}}
+          li.item.collapse
+            input.percentage(type="text",placeholder="0%",value="75%")
+            span on
+            input.datepicker(type="text",placeholder="DD/MM/YYYY",value="01/12/2013")
+            .iconWrapper.size-16.right
+              {{icon 'remove'}}
+          li.item.collapse
+            input.percentage(type="text",placeholder="0%",value="100%")
+            span on
+            input.datepicker(type="text",placeholder="DD/MM/YYYY",value="15/02/2014")
+            .iconWrapper.size-16.right
+              {{icon 'remove'}}
+          li.item.collapse
+            input.percentage(type="text",placeholder="0%")
+            span on
+            input.datepicker(type="text",placeholder="DD/MM/YYYY")
+            .iconWrapper.size-16.right
+              {{icon 'remove'}}
+    .section
+      .title Margin Triggers
+      form
+        ul.list
+          li.item.collapse
+            input.percentage(type="text",placeholder="0%",value="75%")
+            span when
+            input.currency(type="text",placeholder="$0/acre",value="$250/acre")
+            .iconWrapper.size-16.right
+              {{icon 'remove'}}
+          li.item.collapse
+            input.percentage(type="text",placeholder="0%",value="90%")
+            span when
+            input.currency(type="text",placeholder="$0/acre",value="$750/acre")
+            .iconWrapper.size-16.right
+              {{icon 'remove'}}
+          li.item.collapse
+            input.percentage(type="text",placeholder="0%",value="100%")
+            span when
+            input.currency(type="text",placeholder="$0/acre",value="$280/acre")
+            .iconWrapper.size-16.right
+              {{icon 'remove'}}
+          li.item.collapse
+            input.percentage(type="text",placeholder="0%")
+            span when
+            input.currency(type="text",placeholder="$0/acre")
+            .iconWrapper.size-16.right
+              {{icon 'remove'}}
+    .section
+      .title Notifications
+      form
+        ul.inline-list
+          li
+            .toggle.gray(data-action="toggle",data-toggle="sureCheck",data-state="no")
+                input(type="hidden")
+                .toggleOptions
+                  .toggleOptionsTrack
+                    .toggleOption Yes
+                    .toggleOption No
+                .toggleLabel When triggers reached
+        ul.inline-list
+          li
+            .toggle.gray(data-action="toggle",data-toggle="sureCheck",data-state="no")
+                input(type="hidden")
+                .toggleOptions
+                  .toggleOptionsTrack
+                    .toggleOption Yes
+                    .toggleOption No
+                .toggleLabel When contracts due
+    {{/if}}
+
+    {{#if currentParamIs 'section' 'crop-plans'}}
+    .section
+      .title Field Details
+      form
+        input(type="text",placeholder="Field Name")
+        ul.inline-list
+          li
+            label.inline Division
+            select.inline
+              option(value="Division") Division
+              option(value="First") First
+              option(value="Second") Second
+              option(value="Third") Third
+              option(value="Fourth") Fourth
+              option(value="Fifth") Fifth
+              option(value="Sixth") Sixth
+              option(value="Seventh") Seventh
+              option(value="Eighth") Eighth
+              option(value="Ninth") Ninth
+              option(value="Tenth") Tenth
+        input(type="text",placeholder="Section")
+        input(type="text",placeholder="Township")
+        input(type="text",placeholder="Range")
+        ul.inline-list
+          li
+            select.inline
+              option(value="Meridian") Meridian
+            select.inline
+              option(value="Subdivision") Subdivision
+        ul.inline-list
+          li
+            input.inline(type="text",placeholder="Acres")
+            select.inline
+              option(value="Crop Type") Crop Type
+        input(type="text",placeholder="Variety")
+        ul.inline-list
+          li
+            input.inline(type="text",placeholder="Yield")
+            select.inline
+              option(value="bu/ac") bu/ac
+        ul.inline-list
+          li
+            .toggle.gray(data-action="toggle",data-toggle="sureCheck",data-state="no")
+              input(type="hidden")
+              .toggleOptions
+                .toggleOptionsTrack
+                  .toggleOption Yes
+                  .toggleOption No
+              .toggleLabel Sure-Check Soil Testing
+        ul.inline-list
+          li
+            .toggle.gray(data-action="toggle",data-toggle="optimizeRX",data-state="no")
+              input(type="hidden")
+              .toggleOptions
+                .toggleOptionsTrack
+                  .toggleOption Yes
+                  .toggleOption No
+              .toggleLabel Optimize RX
+    .section
+      .title Notes
+        a.iconWrapper.right.size-16(data-action="toggleCover",data-cover="notes")
+          {{icon 'new'}}
+      ul.list
+        li
+          a(data-action="toggleCover",data-cover="viewNote") 04 Oct 2012 - Harvest
+        li
+          a(data-action="toggleCover",data-cover="viewNote") 15 May 2013 - Seeding
+        li
+          a(data-action="toggleCover",data-cover="viewNote") 02 Jun 2013 - Scouting Notes
+    .section
+      form
+        table.table.uniform
+          thead
+            tr
+              td(colspan="3")
+                .cell Crop Rotation
+          tbody
+            tr
+              td
+                .cell
+                  input(placeholder="Year",value="2013")
+              td
+                .cell
+                  select
+                    option(value="Select") Select
+                    option(value="Canola") Canola
+              td
+                .cell
+                  input(placeholder="Yield",value="")
+                  //-select
+                    option(value="bu/ac") bu/ac
+                    option(value="obs/ac") obs/ac
+            tr
+              td
+                .cell
+                  input(placeholder="Year",value="2014")
+              td
+                .cell
+                  select
+                    option(value="Select") Select
+                    option(value="Canola") Canola
+              td
+                .cell
+                  input(placeholder="Yield",value="")
+                  //-select
+                    option(value="bu/ac") bu/ac
+                    option(value="obs/ac") obs/ac
+            tr
+              td
+                .cell
+                  input(placeholder="Year",value="2015")
+              td
+                .cell
+                  select
+                    option(value="Select") Select
+                    option(value="Canola") Canola
+              td
+                .cell
+                  input(placeholder="Yield",value="")
+                  //-select
+                    option(value="bu/ac") bu/ac
+                    option(value="obs/ac") obs/ac
+    //-.section
+      a.button.rounded Save Field Details
+    {{/if}}
+
+    {{#if currentContextIs 'profile'}}
+    .section
+      .title Chris Kunz
+      form
+        ul.list
+          li
+            //-label.inline Farm Name
+            input(type="text", placeholder="Farm Name")
+          li
+            //-label.inline Farm Location
+            input(type="text", placeholder="Farm Location")
+          li
+            //-label.inline Main Contact
+            input(type="text", placeholder="Main Contact")
+          li
+            //-label.inline Position
+            input(type="text", placeholder="Job Position")
+          li
+            //-label.inline Telephone
+            input(type="text", placeholder="Telephone")
+          li
+            //-label.inline ????
+            input(type="text", placeholder="????")
+          li
+            //-label.inline Email (Username)
+            input(type="text", placeholder="Contact Email")
+          li
+            //-label.inline Current Password
+            input(type="password", placeholder="Current Password")
+          li
+            //-label.inline New Password
+            input(type="password", placeholder="New Password")
+          li
+            //-label.inline Confirm New Password
+            input(type="password", placeholder="Confirm New Password")
+        .subtitle Fuel Unit Settings
+        .button-bar.columns-3
+          a.button(data-active="true") Litres
+          a.button(data-active="false") US Gal
+          a.button(data-active="false") Imp Gal
+        .subtitle Tonnes/Ton Unit Settings
+        .button-bar.columns-2
+          a.button(data-active="true") MT
+          a.button(data-active="false") T
+      //-button(type="submit") Save
+    {{/if}}
+
+template(name="dashboard")
+  .content(data-subheaderState="{{getSession 'subHeaderState'}}",data-leftSidebarState="{{getSession 'leftSidebarState'}}",data-rightSidebarState="{{getSession 'rightSidebarState'}}")
+    {{>map}}
+    .tiles
+      .notifications.tile
+        .header Notifications
+        ul.list
+          //-li.item
+            h2.title Work Order #9 Kunz Farms Inc.
+            .progress.rounded
+              .meter(style="width: 20%")
+            span.subtitle Please Confirm:
+            a.inline(href="#") Field Boundaries
+          //-li.item
+            h2.title Work Order #195 2012 RX
+            .progress.rounded
+              .meter(style="width: 20%")
+            span.subtitle Please Confirm:
+            a.inline(href="#") Field Boundaries
+          li.item
+            h2.title Please Confirm Field Boundaries
+            span.subtitle 35 minutes ago
+          li.item
+            h2.title Barley Contract Due
+            span.subtitle 2 hours ago
+          li.item
+            h2.title Canola Hedge Trigger Reminder
+            span.subtitle Yesterday
+
+template(name="fields")
+  .content(data-subheaderState="{{getSession 'subHeaderState'}}",data-leftSidebarState="{{getSession 'leftSidebarState'}}",data-rightSidebarState="{{getSession 'rightSidebarState'}}")
+    {{#if currentParamIs 'section' 'field-info'}}
+    {{>map}}
+    {{>notice}}
+    {{/if}}
+
+    {{#if currentParamIs 'section' 'soil-testing'}}
+    .title E 24 28 26 W4 - Field One
+    .iconWrapper.size-16.right
+      {{icon 'print'}}
+    ul.inline-list
+      li
+        .subtitle Crop Type: Barley
+      li
+        .subtitle Acres: 235
+      li
+        .subtitle Projected Yield: 52 bu/ac
+    .section
+      table.table.uniform
+        thead
+          tr
+            td
+              .cell Zone
+            td
+              .cell N (lbs)
+            td
+              .cell P (lbs)
+            td
+              .cell K (ppm)
+            td
+              .cell S (lbs)
+            td
+              .cell Mg (lbs)
+            td
+              .cell Ca (ppm)
+            td
+              .cell B (ppm)
+            td
+              .cell CI (ppm)
+            td
+              .cell Cu (ppm)
+            td
+              .cell Fe (ppm)
+            td
+              .cell Mn (ppm)
+        tbody
+          tr
+            td
+              .cell 1A
+            td
+              .cell 5
+            td
+              .cell 30
+            td
+              .cell 231
+            td
+              .cell 41
+            td
+              .cell 225
+            td
+              .cell 2070
+            td
+              .cell 0.7
+            td
+              .cell 14
+            td
+              .cell 1.1
+            td
+              .cell 65
+            td
+              .cell 50
+          tr
+            td
+              .cell 1B
+            td
+              .cell 5
+            td
+              .cell 0
+            td
+              .cell 96
+            td
+              .cell 92
+            td
+              .cell 435
+            td
+              .cell 6570
+            td
+              .cell 0.7
+            td
+              .cell 14
+            td
+              .cell 1.0
+            td
+              .cell 68
+            td
+              .cell 52
+          tr
+            td
+              .cell 2A
+            td
+              .cell N/A
+            td
+              .cell N/A
+            td
+              .cell N/A
+            td
+              .cell N/A
+            td
+              .cell N/A
+            td
+              .cell N/A
+            td
+              .cell N/A
+            td
+              .cell N/A
+            td
+              .cell N/A
+            td
+              .cell N/A
+            td
+              .cell N/A
+          tr
+            td
+              .cell 2B
+            td
+              .cell N/A
+            td
+              .cell N/A
+            td
+              .cell N/A
+            td
+              .cell N/A
+            td
+              .cell N/A
+            td
+              .cell N/A
+            td
+              .cell N/A
+            td
+              .cell N/A
+            td
+              .cell N/A
+            td
+              .cell N/A
+            td
+              .cell N/A
+          tr
+            td
+              .cell 3A
+            td
+              .cell N/A
+            td
+              .cell N/A
+            td
+              .cell N/A
+            td
+              .cell N/A
+            td
+              .cell N/A
+            td
+              .cell N/A
+            td
+              .cell N/A
+            td
+              .cell N/A
+            td
+              .cell N/A
+            td
+              .cell N/A
+            td
+              .cell N/A
+          tr
+            td
+              .cell 3B
+            td
+              .cell N/A
+            td
+              .cell N/A
+            td
+              .cell N/A
+            td
+              .cell N/A
+            td
+              .cell N/A
+            td
+              .cell N/A
+            td
+              .cell N/A
+            td
+              .cell N/A
+            td
+              .cell N/A
+            td
+              .cell N/A
+            td
+              .cell N/A
+          tr
+            td
+              .cell Total
+            td
+              .cell 10
+            td
+              .cell 30
+            td
+              .cell 163.5
+            td
+              .cell 133
+            td
+              .cell 660
+            td
+              .cell 4320
+            td
+              .cell 0.7
+            td
+              .cell 14
+            td
+              .cell 1.1
+            td
+              .cell 66
+            td
+              .cell 51
+      table.table.uniform
+        thead
+          tr
+            td
+              .cell Status
+            td
+              .cell N (lbs)
+            td
+              .cell P (lbs)
+            td
+              .cell K (ppm)
+            td
+              .cell S (lbs)
+            td
+              .cell CI (ppm)
+            td
+              .cell Cu (ppm)
+        tbody
+          tr
+            td
+              .cell Available (avg/ac)
+            td
+              .cell 10
+            td
+              .cell 30
+            td
+              .cell 163.5
+            td
+              .cell 133
+            td
+              .cell 14
+            td
+              .cell 1.1
+          tr
+            td
+              .cell Total Required
+            td
+              .cell 115
+            td
+              .cell 45
+            td
+              .cell 370
+            td
+              .cell 120
+            td
+              .cell 14
+            td
+              .cell 1.5
+          tr
+            td
+              .cell Balance Required
+            td
+              .cell 105
+            td
+              .cell 15
+            td
+              .cell 43
+            td
+              .cell -13
+            td
+              .cell 0
+            td
+              .cell 0.4
+    {{/if}}
+
+    {{#if currentParamIs 'section' 'fertility-map'}}
+    {{>map}}
+    {{/if}}
+
+    {{#if currentParamIs 'section' 'rx-rates'}}
+    .title E 24 28 26 W4 - Field One
+    .iconWrapper.size-16.right
+      {{icon 'print'}}
+    ul.inline-list
+      li
+        .subtitle Crop Type: Barley
+      li
+        .subtitle Version: Draft for Review
+    .section
+      table.table.uniform
+        thead
+          tr
+            td
+              .cell  Zone
+            td
+              .cell  Yield Goal
+            td
+              .cell Acres
+            td
+              .cell N
+            td
+              .cell P
+            td
+              .cell K
+            td
+              .cell S
+            td
+              .cell Seed
+        tbody
+          tr
+            td
+              .cell 1
+            td
+              .cell 80
+            td
+              .cell 7.0
+            td
+              .cell 54
+            td
+              .cell 0
+            td
+              .cell 0
+            td
+              .cell
+            td
+              .cell
+          tr
+            td
+              .cell 2
+            td
+              .cell 98
+            td
+              .cell 25.9
+            td
+              .cell 65
+            td
+              .cell 23
+            td
+              .cell 14
+            td
+              .cell
+            td
+              .cell
+          tr
+            td
+              .cell 3
+            td
+              .cell 106
+            td
+              .cell 45.9
+            td
+              .cell 70
+            td
+              .cell 30
+            td
+              .cell 18
+            td
+              .cell
+            td
+              .cell
+          tr
+            td
+              .cell 4
+            td
+              .cell 110
+            td
+              .cell 50.7
+            td
+              .cell 68
+            td
+              .cell 41
+            td
+              .cell 24
+            td
+              .cell
+            td
+              .cell
+          tr
+            td
+              .cell 5
+            td
+              .cell 115
+            td
+              .cell 44.4
+            td
+              .cell 72
+            td
+              .cell 32
+            td
+              .cell 19
+            td
+              .cell
+            td
+              .cell
+          tr
+            td
+              .cell 6
+            td
+              .cell 12.2
+            td
+              .cell 29.7
+            td
+              .cell 68
+            td
+              .cell 30
+            td
+              .cell 18
+            td
+              .cell
+            td
+              .cell
+          tr
+            td
+              .cell Total
+            td
+              .cell 109
+            td
+              .cell 203.6
+            td
+              .cell 68.5
+            td
+              .cell 31.3
+            td
+              .cell 18.6
+            td
+              .cell
+            td
+              .cell
+    {{/if}}
+
+    {{#if currentParamIs 'section' 'rx-files'}}
+    {{>notImplemented}}
+    {{/if}}
+
+    {{#if currentParamIs 'section' 'yield-report'}}
+    {{>notImplemented}}
+    {{/if}}
+
+template(name="equipment")
+  .content(data-subheaderState="{{getSession 'subHeaderState'}}",data-leftSidebarState="{{getSession 'leftSidebarState'}}",data-rightSidebarState="{{getSession 'rightSidebarState'}}")
+    {{#if currentParamIs 'section' 'equipment-info'}}
+      {{#if currentParamIs 'assetsInfo' undefined}}
+      .title New Equipment
+      .iconWrapper.size-16.right
+        {{icon 'print'}}
+      form
+        input(type="text",placeholder="Unit Name")
+        ul.inline-list
+          li
+            a
+              select
+                option(value="Seeding System") Seeding System
+                option(value="Floater") Floater
+                option(value="Sprayer") Sprayer
+                option(value="NH3 Cultivator") NH3 Cultivator
+                option(value="Combine") Combine
+                option(value="Swather") Swather
+                option(value="Tractor") Tractor
+                option(value="Truck") Truck
+                option(value="Fleet") Fleet
+          li
+            a
+              select
+                option(value="Cart Make") Cart Make
+          li
+            a
+              select
+                option(value="Cart Model") Cart Model
+        ul.inline-list.columns-5
+          li.column
+            .title Tank 1
+            input(type="text",placeholder="Capacity (bu)",value="200 Bushels")
+            input(type="text",placeholder="Select Product",value="Select Product")
+          li.column
+            .title Tank 2
+            input(type="text",placeholder="Capacity (bu)",value="150 Bushels")
+            input(type="text",placeholder="Select Product",value="Select Product")
+          li.column
+            .title Tank 3
+            input(type="text",placeholder="Capacity (bu)",value="200 Bushels")
+            input(type="text",placeholder="Select Product",value="Select Product")
+          li.column
+            .title Tank 4
+            input(type="text",placeholder="Capacity (bu)")
+            input(type="text",placeholder="Select Product")
+          li.column
+            .title Tank 5
+            input(type="text",placeholder="Capacity (bu)")
+            input(type="text",placeholder="Select Product")
+        ul.inline-list
+          li
+            select
+              option(value="Drill Make") Drill Make
+          li
+            label.inline Drill Width
+            input.inline(type="text",placeholder="0",style="width: 80px;")
+            select.inline
+              option(value="Ft") Ft
+          li
+            select
+              option(value="Fertilizer Type") Fertilizer Type
+              option(value="Dry") Dry
+        ul.inline-list
+          li
+            label.inline Dry Rate Maximum
+            input.inline(type="text",placeholder="0 lbs/acre")
+        ul.inline-list
+          li
+            label.inline Opener Width
+            input.inline(type="text",placeholder="0 inches")
+        ul.inline-list
+          li
+            label.inline Shank Spacing
+            input.inline(type="text",placeholder="0 inches")
+        ul.inline-list
+          li
+            .toggle.gray.large(data-action="toggle",data-toggle="shootType",data-state="no")
+              input(type="hidden")
+              .toggleOptions
+                .toggleOptionsTrack
+                  .toggleOption Single-Shoot
+                  .toggleOption Double-Shoot
+              .toggleLabel Shoot Type?
+            select.inline
+              option(value="Receiver Make") Receiver Make
+              option(value="John Deere") John Deere
+            select.inline
+              option(value="Model") Model
+              option(value="1910") 1910
+        ul.inline-list
+          li
+            .toggle.gray(data-action="toggle",data-toggle="controllerConnection",data-state="no")
+              input(type="hidden")
+              .toggleOptions
+                .toggleOptionsTrack
+                  .toggleOption Yes
+                  .toggleOption No
+              .toggleLabel Connected to Controller?
+            select.inline
+              option(value="Controller Make") Controller Make
+              option(value="John Deere") John Deere
+            select.inline
+              option(value="Model") Model
+              option(value="1910") 1910
+        textarea.expanding(type="text",placeholder="Write Notes Here..")
+        button.button.rounded(type="submit") Save
+      {{else}}
+      .title New Equipment
+      .iconWrapper.size-16.right
+        {{icon 'print'}}
+      form
+        input(type="text",placeholder="Unit Name")
+        ul.inline-list
+          li
+            a
+              select
+                option(value="Seeding System") Seeding System
+                option(value="Floater") Floater
+                option(value="Sprayer") Sprayer
+                option(value="NH3 Cultivator") NH3 Cultivator
+                option(value="Combine") Combine
+                option(value="Swather") Swather
+                option(value="Tractor") Tractor
+                option(value="Truck") Truck
+                option(value="Fleet") Fleet
+          li
+            a
+              select
+                option(value="Cart Make") Cart Make
+          li
+            a
+              select
+                option(value="Cart Model") Cart Model
+        ul.inline-list.columns-5
+          li.column
+            .title Tank 1
+            input(type="text",placeholder="Capacity (bu)",value="200 Bushels")
+            input(type="text",placeholder="Select Product",value="Select Product")
+          li.column
+            .title Tank 2
+            input(type="text",placeholder="Capacity (bu)",value="150 Bushels")
+            input(type="text",placeholder="Select Product",value="Select Product")
+          li.column
+            .title Tank 3
+            input(type="text",placeholder="Capacity (bu)",value="200 Bushels")
+            input(type="text",placeholder="Select Product",value="Select Product")
+          li.column
+            .title Tank 4
+            input(type="text",placeholder="Capacity (bu)")
+            input(type="text",placeholder="Select Product")
+          li.column
+            .title Tank 5
+            input(type="text",placeholder="Capacity (bu)")
+            input(type="text",placeholder="Select Product")
+        ul.inline-list
+          li
+            select
+              option(value="Drill Make") Drill Make
+          li
+            label.inline Drill Width
+            input.inline(type="text",placeholder="0",style="width: 80px;")
+            select.inline
+              option(value="Ft") Ft
+          li
+            select
+              option(value="Fertilizer Type") Fertilizer Type
+              option(value="Dry") Dry
+        ul.inline-list
+          li
+            label.inline Dry Rate Maximum
+            input.inline(type="text",placeholder="0 lbs/acre")
+        ul.inline-list
+          li
+            label.inline Opener Width
+            input.inline(type="text",placeholder="0 inches")
+        ul.inline-list
+          li
+            label.inline Shank Spacing
+            input.inline(type="text",placeholder="0 inches")
+        ul.inline-list
+          li
+            .toggle.gray.large(data-action="toggle",data-toggle="shootType",data-state="no")
+              input(type="hidden")
+              .toggleOptions
+                .toggleOptionsTrack
+                  .toggleOption Single-Shoot
+                  .toggleOption Double-Shoot
+              .toggleLabel Shoot Type?
+            select.inline
+              option(value="Receiver Make") Receiver Make
+              option(value="John Deere") John Deere
+            select.inline
+              option(value="Model") Model
+              option(value="1910") 1910
+        ul.inline-list
+          li
+            .toggle.gray(data-action="toggle",data-toggle="controllerConnection",data-state="no")
+              input(type="hidden")
+              .toggleOptions
+                .toggleOptionsTrack
+                  .toggleOption Yes
+                  .toggleOption No
+              .toggleLabel Connected to Controller?
+            select.inline
+              option(value="Controller Make") Controller Make
+              option(value="John Deere") John Deere
+            select.inline
+              option(value="Model") Model
+              option(value="1910") 1910
+        textarea.expanding(type="text",placeholder="Write Notes Here..")
+        button.button.rounded(type="submit") Save
+      {{/if}}
+    {{/if}}
+
+template(name="market")
+  .content(data-subheaderState="{{getSession 'subHeaderState'}}",data-leftSidebarState="{{getSession 'leftSidebarState'}}",data-rightSidebarState="{{getSession 'rightSidebarState'}}")
+    {{#if currentParamIs 'section' 'profit'}}
+      {{#if currentParamIs 'assetsInfo' undefined}}
+      .title Market Summary 2013
+      .iconWrapper.size-16.right(style="right: 34px;")
+        {{icon 'new'}}
+      .iconWrapper.size-16.right
+        {{icon 'print'}}
+      .profit.tile
+        .title Canola 2013
+        .section
+          .progress.rounded
+            .meter(style="width:55%")
+            .subtitle 55% Hedged
+            .iconWrapper.size-16.right
+              {{icon 'alert'}}
+        ul.inline-list.right.columns-4
+          li.column
+            a
+              .title Last Quoted
+              .subtitle $529.390/MT
+          li.column
+            a
+              .title MTM Value
+              .subtitle $7,322.00
+          li.column
+            a
+              .title Profit
+              .subtitle $150,464.48
+          li.column
+            a
+              .title Per Acre
+              .subtitle $188.08/ac
+      .profit.tile
+        .title HR Spring Wheat 2013
+        .section
+          .progress.rounded
+            .meter(style="width:55%")
+            .subtitle 55% Hedged
+            .iconWrapper.size-16.right
+              {{icon 'alert'}}
+        ul.inline-list.right.columns-4
+          li.column
+            a
+              .title Last Quoted
+              .subtitle $529.390/MT
+          li.column
+            a
+              .title MTM Value
+              .subtitle $7,322.00
+          li.column
+            a
+              .title Profit
+              .subtitle $150,464.48
+          li.column
+            a
+              .title Per Acre
+              .subtitle $188.08/ac
+      .profit.tile
+        .title Barley 2013
+        .section
+          .progress.rounded
+            .meter(style="width:55%")
+            .subtitle 55% Hedged
+            .iconWrapper.size-16.right
+              {{icon 'check'}}
+        ul.inline-list.right.columns-4
+          li.column
+            a
+              .title Last Quoted
+              .subtitle $529.390/MT
+          li.column
+            a
+              .title MTM Value
+              .subtitle $7,322.00
+          li.column
+            a
+              .title Profit
+              .subtitle $150,464.48
+          li.column
+            a
+              .title Per Acre
+              .subtitle $188.08/ac
+      .profit.tile
+        .title Hard White Wheat 2013
+        .section
+          .progress.rounded
+            .meter(style="width:55%")
+            .subtitle 55% Hedged
+            .iconWrapper.size-16.right
+              {{icon 'check'}}
+        ul.inline-list.right.columns-4
+          li.column
+            a
+              .title Last Quoted
+              .subtitle $529.390/MT
+          li.column
+            a
+              .title MTM Value
+              .subtitle $7,322.00
+          li.column
+            a
+              .title Profit
+              .subtitle $150,464.48
+          li.column
+            a
+              .title Per Acre
+              .subtitle $188.08/ac
+      .profit.tile
+        .title Faba Beans 2013
+        .section
+          .progress.rounded
+            .meter(style="width:55%")
+            .subtitle 55% Hedged
+            .iconWrapper.size-16.right
+              {{icon 'alert'}}
+        ul.inline-list.right.columns-4
+          li.column
+            a
+              .title Last Quoted
+              .subtitle $529.390/MT
+          li.column
+            a
+              .title MTM Value
+              .subtitle $7,322.00
+          li.column
+            a
+              .title Profit
+              .subtitle $150,464.48
+          li.column
+            a
+              .title Per Acre
+              .subtitle $188.08/ac
+      {{else}}
+      .title Canola 2013 Profit Analysis
+      .iconWrapper.size-16.right
+          {{icon 'print'}}
+      .profit.full.tile
+        .progress.rounded
+          .meter(style="width:55%")
+          .subtitle 55% Hedged
+          .iconWrapper.size-16.right
+            {{icon 'alert'}}
+        ul.inline-list.right.columns-4
+          li.column
+            a
+              .title Last Quoted
+              .subtitle $529.390/MT
+          li.column
+            a
+              .title MTM Value
+              .subtitle $7,322.00
+          li.column
+            a
+              .title Profit
+              .subtitle $150,464.48
+          li.column
+            a
+              .title Per Acre
+              .subtitle $188.08/ac
+      .section.tile-section.clear
+        ul.tile-nav.inline-list
+          li
+            a(data-action="changeTile",data-tile="compareMarketPrice",data-active="{{equalsSession 'activeTile' 'compareMarketPrice'}}") Compare Market Price
+          li
+            a(data-action="changeTile",data-tile="compareYield",data-active="{{equalsSession 'activeTile' 'compareYield'}}") Compare Yield
+        .tile-group.clear
+          #compareMarketPrice.tile(data-active="{{equalsSession 'activeTile' 'compareMarketPrice'}}")
+            {{>notImplemented}}
+          #compareYield.tile(data-active="{{equalsSession 'activeTile' 'compareYield'}}")
+            {{>groupedBarChart}}
+            .slider
+              form
+                .subtitle.left Shift Yield
+                .sliderTrack.left
+                  .knob
+                input.left(type="text",placeholder="0",value="5")
+                select.left
+                  option(value="bu/ac") bu/ac
+      .section
+        .title What-If Positions
+        //-.iconWrapper.size-16.right
+          {{icon 'new'}}
+        form
+          table.table.uniform
+            thead
+              tr
+                td
+                  .cell Commodity
+                td
+                  .cell Position Type
+                td
+                  .cell Side
+                td
+                  .cell Contract Month
+                td
+                  .cell Option Type
+                td
+                  .cell Option Strike
+                td
+                  .cell Volume
+                td
+                  .cell Price
+                td
+                  .cell State
+            tbody
+              tr
+                td
+                  .cell
+                    input(type="text",placeholder="Commodity Name",value="Canola")
+                td
+                  .cell
+                    select
+                      option(value="Option") Option
+                td
+                  .cell
+                    select
+                      option(value="Sell") Sell
+                td
+                  .cell
+                    input.datepicker(type="text",placeholder="DD/MM/YYYY",value="Nov 2013")
+                td
+                  .cell
+                    select
+                      option(value="Put") Put
+                td
+                  .cell
+                    input(type="text",placeholder="$0",value="$540.00")
+                td
+                  .cell
+                    input(type="text",placeholder="0",value="300")
+                td
+                  .cell
+                    input(type="text",placeholder="$0",value="$2,270.00")
+                td
+                  .cell
+                    .toggle.gray(data-action="toggle",data-toggle="sureCheck",data-state="no")
+                      input(type="hidden")
+                      .toggleOptions
+                        .toggleOptionsTrack
+                          .toggleOption Yes
+                          .toggleOption No
+                    .iconWrapper.size-16.right
+                      {{icon 'remove'}}
+              tr
+                td
+                  .cell
+                    input(type="text",placeholder="Commodity Name",value="Canola")
+                td
+                  .cell
+                    select
+                      option(value="Option") Option
+                td
+                  .cell
+                    select
+                      option(value="Sell") Sell
+                td
+                  .cell
+                    input.datepicker(type="text",placeholder="DD/MM/YYYY",value="Nov 2013")
+                td
+                  .cell
+                    select
+                      option(value="Put") Put
+                td
+                  .cell
+                    input(type="text",placeholder="$0",value="$520.00")
+                td
+                  .cell
+                    input(type="text",placeholder="0",value="50")
+                td
+                  .cell
+                    input(type="text",placeholder="$0",value="$1,380.00")
+                td
+                  .cell
+                    .toggle.gray(data-action="toggle",data-toggle="sureCheck",data-state="no")
+                      input(type="hidden")
+                      .toggleOptions
+                        .toggleOptionsTrack
+                          .toggleOption Yes
+                          .toggleOption No
+                    .iconWrapper.size-16.right
+                      {{icon 'remove'}}
+              tr
+                td
+                  .cell
+                    input(type="text",placeholder="Commodity Name")
+                td
+                  .cell
+                    select
+                      option(value="Option") Option
+                td
+                  .cell
+                    select
+                      option(value="Sell") Sell
+                td
+                  .cell
+                    input.datepicker(type="text",placeholder="DD/MM/YYYY")
+                td
+                  .cell
+                    select
+                      option(value="Put") Put
+                td
+                  .cell
+                    input(type="text",placeholder="$0")
+                td
+                  .cell
+                    input(type="text",placeholder="0")
+                td
+                  .cell
+                    input(type="text",placeholder="$0")
+                td
+                  .cell
+                    .toggle.gray(data-action="toggle",data-toggle="sureCheck",data-state="no")
+                      input(type="hidden")
+                      .toggleOptions
+                        .toggleOptionsTrack
+                          .toggleOption Yes
+                          .toggleOption No
+      {{/if}}
+    {{/if}}
+
+    {{#if currentParamIs 'section' 'revenue-and-expenses'}}
+    .title Canola 2013 Revenue and Expenses
+    .iconWrapper.size-16.right
+      {{icon 'print'}}
+    .section
+      table.table.uniform
+        thead
+          tr
+            td
+              .cell Commodity
+            td
+              .cell Acres
+            td
+              .cell Average Yield (bu/ac)
+            td
+              .cell Total Yield (MT)
+            td
+              .cell Revenue
+            td
+              .cell /acre
+              //-select
+                option(value="acre") acre
+        tbody
+          tr
+            td
+              .cell Canola
+            td
+              .cell 800
+            td
+              .cell 40
+            td
+              .cell 725.76
+            td
+              .cell $402,286.99
+            td
+              .cell $502.86
+          tr
+            td
+              .cell Sask (Basis)
+            td
+              .cell -
+            td
+              .cell -
+            td
+              .cell -
+            td
+              .cell -$11,111.34
+            td
+              .cell -$13.98
+        tfoot
+          tr
+            td
+              .cell Total Revenue
+            td
+              .cell
+            td
+              .cell
+            td
+              .cell
+            td
+              .cell $391,175.65
+            td
+              .cell $488.88
+      table.table.uniform
+        tbody
+          tr
+            td
+              .cell Variable Expenses for Canola
+            td
+              .cell $97,017.78
+            td
+              .cell $121.27
+          tr
+            td
+              .cell Fixed Expenses for Canola
+            td
+              .cell $141,870.86
+            td
+              .cell $177.34
+          tr
+            td
+              .cell Total Margin
+            td
+              .cell $152,287.02
+            td
+              .cell $190.36
+    {{/if}}
+
+    {{#if currentParamIs 'section' 'hedge-plan'}}
+    {{>stackedAreaChart}}
+    {{/if}}
+
+    {{#if currentParamIs 'section' 'positions'}}
+    .title Canola 2013 Positions
+    .iconWrapper.size-16.right(style="right:34px;",data-action="toggleCover",data-cover="addOrEditPosition")
+      {{icon 'new'}}
+    .iconWrapper.size-16.right
+      {{icon 'print'}}
+    .section
+      table.table.uniform
+        thead
+          tr
+            td
+              .cell Commodity
+            td
+              .cell Trade Type
+            td
+              .cell Contract Month
+            td
+              .cell Option Type
+            td
+              .cell Option Strike
+            td
+              .cell Volume (MT)
+            td
+              .cell Price
+            td
+              .cell MTM Value
+            td
+              .cell Notes
+        tbody
+          tr
+            td
+              .cell Canola
+            td
+              .cell OTC Fwd
+            td
+              .cell Nov 2013
+            td
+              .cell -
+            td
+              .cell -
+            td
+              .cell -100.00
+            td
+              .cell $580,000
+            td
+              .cell
+            td
+              .cell
+                .iconWrapper.size-16.right
+                  {{icon 'note'}}
+                .iconWrapper.size-16.right
+                  {{icon 'remove'}}
+          tr
+            td
+              .cell Canola
+            td
+              .cell OTC Fwd
+            td
+              .cell Nov 2013
+            td
+              .cell -
+            td
+              .cell -
+            td
+              .cell -100.00
+            td
+              .cell $580,000
+            td
+              .cell
+            td
+              .cell
+                .iconWrapper.size-16.right
+                  {{icon 'note'}}
+                .iconWrapper.size-16.right
+                  {{icon 'remove'}}
+          tr
+            td
+              .cell Canola
+            td
+              .cell OTC Fwd
+            td
+              .cell Nov 2013
+            td
+              .cell -
+            td
+              .cell -
+            td
+              .cell -100.00
+            td
+              .cell $550,000
+            td
+              .cell
+            td
+              .cell
+                .iconWrapper.size-16.right
+                  {{icon 'note'}}
+                .iconWrapper.size-16.right
+                  {{icon 'remove'}}
+          tr
+            td
+              .cell Canola
+            td
+              .cell OTC Fwd
+            td
+              .cell Nov 2013
+            td
+              .cell -
+            td
+              .cell -
+            td
+              .cell -100.00
+            td
+              .cell $550,000
+            td
+              .cell
+            td
+              .cell
+                .iconWrapper.size-16.right
+                  {{icon 'note'}}
+                .iconWrapper.size-16.right
+                  {{icon 'remove'}}
+          tr
+            td
+              .cell Sask
+            td
+              .cell Basis
+            td
+              .cell Nov 2013
+            td
+              .cell -
+            td
+              .cell -
+            td
+              .cell -100.00
+            td
+              .cell $5,000
+            td
+              .cell
+            td
+              .cell
+                .iconWrapper.size-16.right
+                  {{icon 'note'}}
+                .iconWrapper.size-16.right
+                  {{icon 'remove'}}
+          tr
+            td
+              .cell Sask
+            td
+              .cell Basis
+            td
+              .cell Nov 2013
+            td
+              .cell -
+            td
+              .cell -
+            td
+              .cell -100.00
+            td
+              .cell $5,000
+            td
+              .cell
+            td
+              .cell
+                .iconWrapper.size-16.right
+                  {{icon 'note'}}
+                .iconWrapper.size-16.right
+                  {{icon 'remove'}}
+    .section
+      table.table.uniform
+        thead
+          tr
+            td
+              .cell Commodity
+            td
+              .cell Trade Type
+            td
+              .cell Contract Month
+            td
+              .cell Option Type
+            td
+              .cell Option Strike
+            td
+              .cell Volume
+            td
+              .cell Price
+            td
+              .cell MTM Value
+            td
+              .cell Note
+        tbody
+          tr
+            td
+              .cell Fuel
+            td
+              .cell OTC Fwd
+            td
+              .cell Aug 2013
+            td
+              .cell -
+            td
+              .cell -
+            td
+              .cell 375.03
+            td
+              .cell $2,990
+            td
+              .cell
+            td
+              .cell
+                .iconWrapper.size-16.right
+                  {{icon 'note'}}
+                .iconWrapper.size-16.right
+                  {{icon 'remove'}}
+          tr
+            td
+              .cell Fuel
+            td
+              .cell OTC Fwd
+            td
+              .cell Mar 2013
+            td
+              .cell -
+            td
+              .cell -
+            td
+              .cell 37.50
+            td
+              .cell $3,200
+            td
+              .cell
+            td
+              .cell
+                .iconWrapper.size-16.right
+                  {{icon 'note'}}
+                .iconWrapper.size-16.right
+                  {{icon 'remove'}}
+          tr
+            td
+              .cell Fuel
+            td
+              .cell OTC Fwd
+            td
+              .cell Apr 2013
+            td
+              .cell -
+            td
+              .cell -
+            td
+              .cell 75.01
+            td
+              .cell $3,000
+            td
+              .cell
+            td
+              .cell
+                .iconWrapper.size-16.right
+                  {{icon 'note'}}
+                .iconWrapper.size-16.right
+                  {{icon 'remove'}}
+          tr
+            td
+              .cell 46-0-0
+            td
+              .cell OTC Fwd
+            td
+              .cell May 2013
+            td
+              .cell -
+            td
+              .cell -
+            td
+              .cell 56.87
+            td
+              .cell $600,000
+            td
+              .cell
+            td
+              .cell
+                .iconWrapper.size-16.right
+                  {{icon 'note'}}
+                .iconWrapper.size-16.right
+                  {{icon 'remove'}}
+          tr
+            td
+              .cell 46-0-0
+            td
+              .cell OTC Fwd
+            td
+              .cell May 2013
+            td
+              .cell -
+            td
+              .cell -
+            td
+              .cell 37.91
+            td
+              .cell $600,000
+            td
+              .cell
+            td
+              .cell
+                .iconWrapper.size-16.right
+                  {{icon 'note'}}
+                .iconWrapper.size-16.right
+                  {{icon 'remove'}}
+    .section
+      form
+        ul.inline-list
+          li
+            .toggle.gray(data-action="toggle",data-toggle="sureCheck",data-state="no")
+              input(type="hidden")
+              .toggleOptions
+                .toggleOptionsTrack
+                  .toggleOption Yes
+                  .toggleOption No
+              .toggleLabel Notify me when contracts are due
+    {{/if}}
+
+    {{#if currentParamIs 'section' 'research'}}
+    .title Know-Risk Market Research
+    .research.tile
+      .header FCStone Letters
+      ul.list
+        li
+          a(href="http://www.rmiagra.com/ag/reports/MorningGrainComments.pdf") Grain Morning Update
+        li
+          a(href="http://www.rmiagra.com/ag/reports/AfternoonGrainMarketRecap.pdf") Grain Afternoon Recap
+        li
+          a(href="http://www.rmiagra.com/ag/reports/KCWheatRecap.pdf") Wheat Afternoon Recap
+        li
+          a(href="http://www.rmiagra.com/ag/reports/DailyCattleReport.pdf") Daily U.S. Cattle Market Overview
+        li
+          a(href="http://www.rmiagra.com/ag/reports/WeeklyCanolaWheatReport.pdf") Weekly RMI Canola and Wheat Update
+        li
+          a(href="http://www.rmienergy.com/RMIreports/BrazilianSoybeanMarketRecap.pdf") Weekly Brazilian Soybean Market Recap
+        li
+          a(href="http://www.rmiagra.com/ag/reports/WeeklyCommodityRecap.pdf") Weekly World Commodity Market Overview
+        li
+          a(href="http://www.rmiagra.com/ag/reports/PricePercentagesReport.pdf") Weekly Commodity Historical Price Percentages
+        li
+          a(href="http://www.rmiagra.com/ag/reports/WeeklyPriceSeasonalReport.pdf") Weekly Commodity Price Seasonal Reports
+        li
+          a(href="http://www.rmiagra.com/ag/reports/GrainSDReport.pdf") Monthly USDA Grain Supply and Demand Summary (U.S. & World)
+    .research.tile
+      .header Know-Risk Monthly Agricultural Outlook Webinars
+        .subtitle Password: kr2013
+      ul.list
+        li
+          a January 11, 2013 Webinar
+        li
+          a September 26th, 2012 Webinar
+        li
+          a February 13th, 2013 Webinar
+        li
+          a March 20th, 2013 Webinar
+        li
+          a April 12th, 2013 Webinar
+        li
+          a May 15th, 2013 Webinar
+        li
+          a June 26th, 2013 Webinar
+        li
+          a July 31st, 2013 Webinar
+        li
+          a August 27th, 2013 Webinar
+    .research.tile
+      .header Decisive Farming 2nd Annual Meeting - Chicago, December 2012
+        .subtitle Password: kr2012
+      ul.list
+        li
+          a Food Processing - How Are High Prices Affecting the Industry and Procurement Processes, Jeremy Schupp, FCStone, LLC
+        li
+          a Wheat & Barley - World Outlook and North American Cash Markets, Mike O'Dea, INTL FCSTone Inc.
+        li
+          a Current Agricultural Markets and Your Marketing Strategy, John Snell, FCStone, LLC
+        li
+          a 2012 Agronomy Research Results, Garth Donald, Decisive Farming
+        li
+          a The Science Behind A&L Labs, Greg Patterson, A&L Canada Laboratories Inc.
+    {{/if}}
+
+template(name="farm-planner")
+  .content(data-subheaderState="{{getSession 'subHeaderState'}}",data-leftSidebarState="{{getSession 'leftSidebarState'}}",data-rightSidebarState="{{getSession 'rightSidebarState'}}")
+    {{#if currentParamIs 'section' 'crop-plans'}}
+    {{>map}}
+    {{>notice}}
+    {{/if}}
+
+    {{#if currentParamIs 'section' 'equipment'}}
+    h2 Farm Planner Equipment!
+    {{/if}}
+
+    {{#if currentParamIs 'section' 'revenue-and-expenses'}}
+      {{#if currentParamIs 'assetsInfo' undefined}}
+      .title Fixed Expenses for 2013
+      .section
+        form
+          table.table.uniform
+            thead
+              tr
+                td
+                  .cell Item
+                td
+                  .cell Total
+                td
+                  .cell $/Acre
+            tbody
+              tr
+                td
+                  .cell
+                    input(type="text",placeholder="Expense Item",value="Machinery Repairs")
+                td
+                  .cell
+                    input(type="text",placeholder="$0.00",value="$10.00")
+                td
+                  .cell
+                    input(type="text",placeholder="$0.00",value="$5.00")
+                    .iconWrapper.right.size-16
+                      {{icon 'remove'}}
+              tr
+                td
+                  .cell
+                    input(type="text",placeholder="Expense Item",value="Machinery Rental")
+                td
+                  .cell
+                    input(type="text",placeholder="$0.00",value="$10.00")
+                td
+                  .cell
+                    input(type="text",placeholder="$0.00",value="$5.00")
+                    .iconWrapper.right.size-16
+                      {{icon 'remove'}}
+              tr
+                td
+                  .cell
+                    input(type="text",placeholder="Expense Item",value="Machinery Insurance")
+                td
+                  .cell
+                    input(type="text",placeholder="$0.00",value="$10.00")
+                td
+                  .cell
+                    input(type="text",placeholder="$0.00",value="$5.00")
+                    .iconWrapper.right.size-16
+                      {{icon 'remove'}}
+              tr
+                td
+                  .cell
+                    input(type="text",placeholder="Expense Item",value="Machinery Replacement")
+                td
+                  .cell
+                    input(type="text",placeholder="$0.00",value="$10.00")
+                td
+                  .cell
+                    input(type="text",placeholder="$0.00",value="$5.00")
+                    .iconWrapper.right.size-16
+                      {{icon 'remove'}}
+              tr
+                td
+                  .cell
+                    input(type="text",placeholder="Expense Item",value="Farm Insurance")
+                td
+                  .cell
+                    input(type="text",placeholder="$0.00",value="$10.00")
+                td
+                  .cell
+                    input(type="text",placeholder="$0.00",value="$5.00")
+                    .iconWrapper.right.size-16
+                      {{icon 'remove'}}
+              tr
+                td
+                  .cell
+                    input(type="text",placeholder="Expense Item",value="Building Repairs")
+                td
+                  .cell
+                    input(type="text",placeholder="$0.00",value="$10.00")
+                td
+                  .cell
+                    input(type="text",placeholder="$0.00",value="$5.00")
+                    .iconWrapper.right.size-16
+                      {{icon 'remove'}}
+              tr
+                td
+                  .cell
+                    input(type="text",placeholder="Expense Item",value="Freight")
+                td
+                  .cell
+                    input(type="text",placeholder="$0.00",value="$10.00")
+                td
+                  .cell
+                    input(type="text",placeholder="$0.00",value="$5.00")
+                    .iconWrapper.right.size-16
+                      {{icon 'remove'}}
+              tr
+                td
+                  .cell
+                    input(type="text",placeholder="Expense Item")
+                td
+                  .cell
+                    input(type="text",placeholder="Expense Total")
+                td
+                  .cell
+                    input(type="text",placeholder="Expense Per Acre")
+      //-a.button.right(href="/{{currentContext}}/{{currentParam 'section'}}/1221") Next
+      {{else}}
+      .section
+        .title Revenue for Canola 2013
+        form
+          ul.inline-list
+            li
+              label.inline Market Price
+              select.inline
+                option(value="Select Market") Select Market
+            li
+              label.inline Premium Discount
+              input.inline(type="text",placeholder="0")
+              select.inline
+                option(value="/MT") /MT
+          ul.inline-list
+            li
+              label.inline Fixed Price
+              input.inline(type="text",placeholder="572")
+              select.inline
+                option(value="/MT") /MT
+      .section
+        table.table.uniform
+          thead
+            tr
+              td
+                .cell Price (/MT)
+              td
+                .cell Acres
+              td
+                .cell Yield Avg (bu/ac)
+              td
+                .cell Total Yield (MT)
+              td
+                .cell Total Revenue
+              td
+                .cell $/Acre
+                  //-select
+                    option(value="Per Acre") Per Acre
+          tbody
+            tr
+              td
+                .cell $560.45
+              td
+                .cell 800
+              td
+                .cell 40
+              td
+                .cell 725.76
+              td
+                .cell $402,286.99
+              td
+                .cell $502.86
+      .section
+        .title Variable Expenses for Canola 2013
+        table.table.uniform
+          thead
+            tr
+              td
+                .cell Expense Item
+              td
+                .cell Total
+              td
+                .cell $/Acre
+          tbody
+            tr
+              td
+                .cell
+                  input(type="text",placeholder="Expense Item",value="Fertilizer")
+              td
+                .cell
+                  input(type="text",placeholder="$0.00",value="$10.00")
+              td
+                .cell
+                  input(type="text",placeholder="$0.00",value="$5.00")
+                  .iconWrapper.right.size-16
+                    {{icon 'remove'}}
+            tr
+              td
+                .cell
+                  input(type="text",placeholder="Expense Item",value="General")
+              td
+                .cell
+                  input(type="text",placeholder="$0.00",value="$10.00")
+              td
+                .cell
+                  input(type="text",placeholder="$0.00",value="$5.00")
+                  .iconWrapper.right.size-16
+                    {{icon 'remove'}}
+            tr
+              td.collapse
+                .cell
+                  input.left(type="text",placeholder="Expense Item",value="Nitrogen 82-0-0")
+                  input.right(type="text",placeholder="Amount",value="100 MT")
+                  //-select.right
+                    option(value="MT") MT
+                    option(value="L") L
+              td
+                .cell
+                  input(type="text",placeholder="$0.00",value="$10.00")
+              td
+                .cell
+                  input(type="text",placeholder="$0.00",value="$5.00")
+                  .iconWrapper.right.size-16
+                    {{icon 'remove'}}
+            tr
+              td.collapse
+                .cell
+                  input.left(type="text",placeholder="Expense Item",value="Nitrogen 46-0-0")
+                  input.right(type="text",placeholder="Amount",value="100 MT")
+                  //-select.right
+                    option(value="MT") MT
+                    option(value="L") L
+              td
+                .cell
+                  input(type="text",placeholder="$0.00",value="$10.00")
+              td
+                .cell
+                  input(type="text",placeholder="$0.00",value="$5.00")
+                  .iconWrapper.right.size-16
+                    {{icon 'remove'}}
+            tr
+              td.collapse
+                .cell
+                  input.left(type="text",placeholder="Expense Item",value="Nitrogen 28-0-0")
+                  input.right(type="text",placeholder="Amount",value="100 MT")
+                  //-select.right
+                    option(value="MT") MT
+                    option(value="L") L
+              td
+                .cell
+                  input(type="text",placeholder="$0.00",value="$10.00")
+              td
+                .cell
+                  input(type="text",placeholder="$0.00",value="$5.00")
+                  .iconWrapper.right.size-16
+                    {{icon 'remove'}}
+            tr
+              td.collapse
+                .cell
+                  input.left(type="text",placeholder="Expense Item",value="Phosphate 11-52-0-0")
+                  input.right(type="text",placeholder="Amount",value="100 MT")
+                  //-select.right
+                    option(value="MT") MT
+                    option(value="L") L
+              td
+                .cell
+                  input(type="text",placeholder="$0.00",value="$10.00")
+              td
+                .cell
+                  input(type="text",placeholder="$0.00",value="$5.00")
+                  .iconWrapper.right.size-16
+                    {{icon 'remove'}}
+            tr
+              td.collapse
+                .cell
+                  input.left(type="text",placeholder="Expense Item",value="Potash 0-0-60")
+                  input.right(type="text",placeholder="Amount",value="100 MT")
+                  //-select.right
+                    option(value="MT") MT
+                    option(value="L") L
+              td
+                .cell
+                  input(type="text",placeholder="$0.00",value="$10.00")
+              td
+                .cell
+                  input(type="text",placeholder="$0.00",value="$5.00")
+                  .iconWrapper.right.size-16
+                    {{icon 'remove'}}
+            tr
+              td.collapse
+                .cell
+                  input.left(type="text",placeholder="Expense Item",value="Sulphur 21-0-0-24")
+                  input.right(type="text",placeholder="Amount",value="100 MT")
+                  //-select.right
+                    option(value="MT") MT
+                    option(value="L") L
+              td
+                .cell
+                  input(type="text",placeholder="$0.00",value="$10.00")
+              td
+                .cell
+                  input(type="text",placeholder="$0.00",value="$5.00")
+                  .iconWrapper.right.size-16
+                    {{icon 'remove'}}
+            tr
+              td.collapse
+                .cell
+                  input.left(type="text",placeholder="Expense Item")
+                  input.right(type="text",placeholder="Amount")
+                  //-select.right
+                    option(value="MT") MT
+                    option(value="L") L
+              td
+                .cell
+                  input(type="text",placeholder="$0.00")
+              td
+                .cell
+                  input(type="text",placeholder="$0.00")
+                  .iconWrapper.right.size-16
+                    {{icon 'remove'}}
+            tr
+              td
+                .cell
+                  input(type="text",placeholder="Expense Item",value="Seed")
+              td
+                .cell
+                  input(type="text",placeholder="$0.00",value="$10.00")
+              td
+                .cell
+                  input(type="text",placeholder="$0.00",value="$5.00")
+                  .iconWrapper.right.size-16
+                    {{icon 'remove'}}
+            tr
+              td.collapse
+                .cell
+                  input.left(type="text",placeholder="Expense Item",value="General")
+                  input.right(type="text",placeholder="Amount",value="100 MT")
+                  //-select.right
+                    option(value="MT") MT
+                    option(value="L") L
+              td
+                .cell
+                  input(type="text",placeholder="$0.00")
+              td
+                .cell
+                  input(type="text",placeholder="$0.00")
+                  .iconWrapper.right.size-16
+                    {{icon 'remove'}}
+            tr
+              td
+                .cell
+                  input(type="text",placeholder="Expense Item",value="Chemical")
+              td
+                .cell
+                  input(type="text",placeholder="$0.00",value="$10.00")
+              td
+                .cell
+                  input(type="text",placeholder="$0.00",value="$5.00")
+                  .iconWrapper.right.size-16
+                    {{icon 'remove'}}
+            tr
+              td.collapse
+                .cell
+                  input.left(type="text",placeholder="Expense Item",value="General")
+                  input.right(type="text",placeholder="Amount",value="100 MT")
+                  //-select.right
+                    option(value="MT") MT
+                    option(value="L") L
+              td
+                .cell
+                  input(type="text",placeholder="$0.00")
+              td
+                .cell
+                  input(type="text",placeholder="$0.00")
+                  .iconWrapper.right.size-16
+                    {{icon 'remove'}}
+            tr
+              td.collapse
+                .cell
+                  input.left(type="text",placeholder="Expense Item",value="Fuel")
+                  input.right(type="text",placeholder="Amount",value="100 MT")
+                  //-select.right
+                    option(value="MT") MT
+                    option(value="L") L
+              td
+                .cell
+                  input(type="text",placeholder="$0.00",value="$10.00")
+              td
+                .cell
+                  input(type="text",placeholder="$0.00",value="$5.00")
+                  .iconWrapper.right.size-16
+                    {{icon 'remove'}}
+            tr
+              td
+                .cell
+                  input(type="text",placeholder="Expense Item")
+              td
+                .cell
+                  input(type="text",placeholder="Expense Total")
+              td
+                .cell
+                  input(type="text",placeholder="Expense Per Acre")
+          tfoot
+            tr
+              td
+                .cell Total Variable Expenses for Canola 2013
+              td
+                .cell $100
+              td
+                .cell $50
+      .section
+        .title Fixed Expenses for Canola 2013
+        table.table.uniform
+          thead
+            tr
+              td
+                .cell Expense Item
+              td
+                .cell Total
+              td
+                .cell $/Acre
+          tbody
+            tr
+              td
+                .cell Fixed Expenses (Assigned to Canola based on acres)
+              td
+                .cell $131,870.86
+              td
+                .cell $117.34
+          tfoot
+            tr
+              td
+                .cell Total Margin
+              td
+                .cell $152,287.02
+              td
+                .cell $190.36
+
+
+      {{/if}}
+    {{/if}}
+
+    {{#if currentParamIs 'section' 'market-plan'}}
+      {{!Canola}}
+      {{#if currentParamIs 'assetsInfo' '1221'}}
+      .title Market Plan for Canola
+        .progress.rounded
+          .meter(style="width:55%")
+            .subtitle Currently 55% hedged (398 of 725.25 MT)
+      .iconWrapper.size-16.right(data-action="toggleCover",data-cover="addOrEditPosition")
+        {{icon 'new'}}
+      .section
+        table.table.uniform
+          thead
+            tr
+              td
+                .cell Trade Type
+              td
+                .cell Contract Month
+              td
+                .cell Option Type
+              td
+                .cell Option Strike
+              td
+                .cell Volume (MT)
+              td
+                .cell Price
+              td
+                .cell MTM Value
+          tbody
+            tr(data-action="toggleCover",data-cover="addOrEditPosition")
+              td
+                .cell OTC Fwd
+              td
+                .cell Nov 2013
+              td
+                .cell -
+              td
+                .cell -
+              td
+                .cell -98.00
+              td
+                .cell $580.000
+              td
+                .cell
+            tr(data-action="toggleCover",data-cover="addOrEditPosition")
+              td
+                .cell OTC Fwd
+              td
+                .cell Nov 2013
+              td
+                .cell -
+              td
+                .cell -
+              td
+                .cell -100.00
+              td
+                .cell $580.000
+              td
+                .cell
+            tr(data-action="toggleCover",data-cover="addOrEditPosition")
+              td
+                .cell OTC Fwd
+              td
+                .cell Nov 2013
+              td
+                .cell -
+              td
+                .cell -
+              td
+                .cell -100.00
+              td
+                .cell $550.000
+              td
+                .cell
+            tr(data-action="toggleCover",data-cover="addOrEditPosition")
+              td
+                .cell OTC Fwd
+              td
+                .cell Nov 2013
+              td
+                .cell -
+              td
+                .cell -
+              td
+                .cell -100.00
+              td
+                .cell $550.000
+              td
+                .cell
+            tr(data-action="toggleCover",data-cover="addOrEditPosition")
+              td
+                .cell Basis
+              td
+                .cell Nov 2013
+              td
+                .cell -
+              td
+                .cell -
+              td
+                .cell -100.00
+              td
+                .cell -$5,000
+              td
+                .cell
+            tr(data-action="toggleCover",data-cover="addOrEditPosition")
+              td
+                .cell Basis
+              td
+                .cell Nov 2013
+              td
+                .cell -
+              td
+                .cell -
+              td
+                .cell -100.00
+              td
+                .cell -$5,000
+              td
+                .cell
+      .section
+        form
+          .title Time Triggers
+          ul.inline-list
+            li
+              input.inline.percentage(type="text",placeholder="0%",value="10%")
+              label.inline to hedge by
+              input.inline.datepicker(type="text",placeholder="DD/MM/YYYY",value="27/07/2014")
+              .subtitle.inline 72.3 MT required
+          ul.inline-list
+            li
+              input.inline.percentage(type="text",placeholder="0%",value="50%")
+              label.inline to hedge by
+              input.inline.datepicker(type="text",placeholder="DD/MM/YYYY",value="12/04/2014")
+              .subtitle.inline 362 MT required
+          ul.inline-list
+            li
+              input.inline.percentage(type="text",placeholder="0%")
+              label.inline to hedge by
+              input.inline.datepicker(type="text",placeholder="DD/MM/YYYY")
+          .title Margin Triggers
+          ul.inline-list
+            li
+              input.inline.percentage(type="text",placeholder="0",value="75%")
+              label.inline to hedge when margin reaches
+              input.inline(type="text",placeholder="0",value="$250/acre")
+              .subtitle.inline 544.13 MT required
+          ul.inline-list
+            li
+              input.inline.percentage(type="text",placeholder="0",value="90%")
+              label.inline to hedge when margin reaches
+              input.inline(type="text",placeholder="0",value="$270/acre")
+              .subtitle.inline 652.73 MT required
+          ul.inline-list
+            li
+              input.inline.percentage(type="text",placeholder="0",value="100%")
+              label.inline to hedge when margin reaches
+              input.inline(type="text",placeholder="0",value="$280/acre")
+              .subtitle.inline 725.25 MT required
+          ul.inline-list
+            li
+              input.inline.percentage(type="text",placeholder="0")
+              label.inline to hedge when margin reaches
+              input.inline(type="text",placeholder="0")
+          ul.inline-list
+            li
+              .toggle.gray(data-action="toggle",data-toggle="sureCheck",data-state="no")
+                input(type="hidden")
+                .toggleOptions
+                  .toggleOptionsTrack
+                    .toggleOption Yes
+                    .toggleOption No
+                .toggleLabel Notify me when triggers are reached
+          ul.inline-list
+            li
+              .toggle.gray(data-action="toggle",data-toggle="sureCheck",data-state="no")
+                input(type="hidden")
+                .toggleOptions
+                  .toggleOptionsTrack
+                    .toggleOption Yes
+                    .toggleOption No
+                .toggleLabel Notify me when contracts are due
+      {{/if}}
+
+      {{!Fuel}}
+      {{#if currentParamIs 'assetsInfo' '8383'}}
+      .title Market Plan for Fuel
+        .progress.rounded
+          .meter(style="width:55%")
+            .subtitle Currently 61% hedged (13,500 of 22,000 L)
+      .iconWrapper.size-16.right(data-action="toggleCover",data-cover="addOrEditPosition")
+        {{icon 'new'}}
+      form
+        .section
+          table.table.uniform
+            thead
+              tr
+                td
+                  .cell Commodity
+                td
+                  .cell Contract With
+                td
+                  .cell Contract Month
+                td
+                  .cell Volume (L)
+                td
+                  .cell Price
+            tbody
+              tr(data-action="toggleCover",data-cover="addOrEditPosition")
+                td
+                  .cell Fuel
+                td
+                  .cell UFA
+                td
+                  .cell Mar 2014
+                td
+                  .cell 8500 L
+                td
+                  .cell $7,924.18
+              tr(data-action="toggleCover",data-cover="addOrEditPosition")
+                td
+                  .cell Fuel
+                td
+                  .cell UFA
+                td
+                  .cell Jun 2014
+                td
+                  .cell 5000 L
+                td
+                  .cell $4,610.50
+        .section
+          ul.inline-list
+            li
+              .toggle.gray(data-action="toggle",data-toggle="sureCheck",data-state="no")
+                input(type="hidden")
+                .toggleOptions
+                  .toggleOptionsTrack
+                    .toggleOption Yes
+                    .toggleOption No
+                .toggleLabel Notify me when contracts are due
+      {{/if}}
+
+      {{!46-0-0}}
+      {{#if currentParamIs 'assetsInfo' '5342'}}
+      .title Market Plan for 46-0-0
+        .progress.rounded
+          .meter(style="width:55%")
+            .subtitle Currently 61% hedged (13,500 of 22,000 L)
+      .iconWrapper.size-16.right(data-action="toggleCover",data-cover="addOrEditPosition")
+        {{icon 'new'}}
+      form
+        .section
+          table.table.uniform
+            thead
+              tr
+                td
+                  .cell Commodity
+                td
+                  .cell Contract With
+                td
+                  .cell Contract Month
+                td
+                  .cell Volume (L)
+                td
+                  .cell Price
+            tbody
+              tr(data-action="toggleCover",data-cover="addOrEditPosition")
+                td
+                  .cell 46-0-0
+                td
+                  .cell DynAgra
+                td
+                  .cell Apr 2014
+                td
+                  .cell 50 MT
+                td
+                  .cell $35,000
+              tr(data-action="toggleCover",data-cover="addOrEditPosition")
+                td
+                  .cell 46-0-0
+                td
+                  .cell DynAgra
+                td
+                  .cell May 2014
+                td
+                  .cell 75 MT
+                td
+                  .cell $52,500
+        .section
+          ul.inline-list
+            li
+              .toggle.gray(data-action="toggle",data-toggle="sureCheck",data-state="no")
+                input(type="hidden")
+                .toggleOptions
+                  .toggleOptionsTrack
+                    .toggleOption Yes
+                    .toggleOption No
+                .toggleLabel Notify me when contracts are due
+      {{/if}}
+    {{/if}}
+
+    {{#if currentParamIs 'section' 'work-orders'}}
+    {{>notImplemented}}
+    {{/if}}
+
+template(name="profile")
+  .content(data-subheaderState="{{getSession 'subHeaderState'}}",data-leftSidebarState="{{getSession 'leftSidebarState'}}",data-rightSidebarState="{{getSession 'rightSidebarState'}}")
+    .title Users
+    .section
+      form
+        table.table.uniform
+          thead
+            tr
+              td
+                .cell Name
+              td
+                .cell Position
+              td
+                .cell Email
+              td
+                .cell Password
+              td
+                .cell Accessed
+              td
+                .cell Carbon
+              td
+                .cell Permissions
+          tbody
+            tr
+              td
+                .cell
+                  input(placeholder="Name",value="Joey Smith")
+              td
+                .cell
+                  input(placeholder="Position",value="Farm Hand")
+              td
+                .cell
+                  input(placeholder="Email",value="joe@farmhand.com")
+              td
+                .cell
+                  input(placeholder="Password",value="asdf")
+              td
+                .cell 11/26/2013
+              td
+                .cell
+                  .toggle.gray.inline(data-action="toggle",data-toggle="sureCheck",data-state="no")
+                    input(type="hidden")
+                    .toggleOptions
+                      .toggleOptionsTrack
+                        .toggleOption Yes
+                        .toggleOption No
+              td
+                .cell
+                  a.button.split.rounded All
+                    .dropdown
+                      ul.list
+                        .title Advanced
+                        li
+                          ul.inline-list
+                            li
+                              .toggle.gray.large(data-action="toggle",data-toggle="shootType",data-state="no")
+                                input(type="hidden")
+                                .toggleOptions
+                                  .toggleOptionsTrack
+                                    .toggleOption Read Only
+                                    .toggleOption Read & Write
+                                .toggleLabel Dashboard
+                        li
+                          ul.inline-list
+                            li
+                              .toggle.gray.large(data-action="toggle",data-toggle="shootType",data-state="no")
+                                input(type="hidden")
+                                .toggleOptions
+                                  .toggleOptionsTrack
+                                    .toggleOption Read Only
+                                    .toggleOption Read & Write
+                                .toggleLabel Fields
+                        li
+                          ul.inline-list
+                            li
+                              .toggle.gray.large(data-action="toggle",data-toggle="shootType",data-state="no")
+                                input(type="hidden")
+                                .toggleOptions
+                                  .toggleOptionsTrack
+                                    .toggleOption Read Only
+                                    .toggleOption Read & Write
+                                .toggleLabel Equipment
+                        li
+                          ul.inline-list
+                            li
+                              .toggle.gray.large(data-action="toggle",data-toggle="shootType",data-state="no")
+                                input(type="hidden")
+                                .toggleOptions
+                                  .toggleOptionsTrack
+                                    .toggleOption Read Only
+                                    .toggleOption Read & Write
+                                .toggleLabel Market
+                        li
+                          ul.inline-list
+                            li
+                              .toggle.gray.large(data-action="toggle",data-toggle="shootType",data-state="no")
+                                input(type="hidden")
+                                .toggleOptions
+                                  .toggleOptionsTrack
+                                    .toggleOption Read Only
+                                    .toggleOption Read & Write
+                                .toggleLabel Farm Planner
+                  .iconWrapper.right.size-16
+                    {{icon 'remove'}}
+            tr
+              td
+                .cell
+                  input(placeholder="Name",value="Joey Smith")
+              td
+                .cell
+                  input(placeholder="Position",value="Farm Hand")
+              td
+                .cell
+                  input(placeholder="Email",value="joe@farmhand.com")
+              td
+                .cell
+                  input(placeholder="Password",value="asdf")
+              td
+                .cell 11/26/2013
+              td
+                .cell
+                  .toggle.gray.inline(data-action="toggle",data-toggle="sureCheck",data-state="no")
+                    input(type="hidden")
+                    .toggleOptions
+                      .toggleOptionsTrack
+                        .toggleOption Yes
+                        .toggleOption No
+              td
+                .cell
+                  a.button.split.rounded All
+                    .dropdown
+                      ul.list
+                        .title Advanced
+                        li
+                          ul.inline-list
+                            li
+                              .toggle.gray.large(data-action="toggle",data-toggle="shootType",data-state="no")
+                                input(type="hidden")
+                                .toggleOptions
+                                  .toggleOptionsTrack
+                                    .toggleOption Read Only
+                                    .toggleOption Read & Write
+                                .toggleLabel Dashboard
+                        li
+                          ul.inline-list
+                            li
+                              .toggle.gray.large(data-action="toggle",data-toggle="shootType",data-state="no")
+                                input(type="hidden")
+                                .toggleOptions
+                                  .toggleOptionsTrack
+                                    .toggleOption Read Only
+                                    .toggleOption Read & Write
+                                .toggleLabel Fields
+                        li
+                          ul.inline-list
+                            li
+                              .toggle.gray.large(data-action="toggle",data-toggle="shootType",data-state="no")
+                                input(type="hidden")
+                                .toggleOptions
+                                  .toggleOptionsTrack
+                                    .toggleOption Read Only
+                                    .toggleOption Read & Write
+                                .toggleLabel Equipment
+                        li
+                          ul.inline-list
+                            li
+                              .toggle.gray.large(data-action="toggle",data-toggle="shootType",data-state="no")
+                                input(type="hidden")
+                                .toggleOptions
+                                  .toggleOptionsTrack
+                                    .toggleOption Read Only
+                                    .toggleOption Read & Write
+                                .toggleLabel Market
+                        li
+                          ul.inline-list
+                            li
+                              .toggle.gray.large(data-action="toggle",data-toggle="shootType",data-state="no")
+                                input(type="hidden")
+                                .toggleOptions
+                                  .toggleOptionsTrack
+                                    .toggleOption Read Only
+                                    .toggleOption Read & Write
+                                .toggleLabel Farm Planner
+                  .iconWrapper.right.size-16
+                    {{icon 'remove'}}
+            tr
+              td
+                .cell
+                  input(placeholder="Name",value="Joey Smith")
+              td
+                .cell
+                  input(placeholder="Position",value="Farm Hand")
+              td
+                .cell
+                  input(placeholder="Email",value="joe@farmhand.com")
+              td
+                .cell
+                  input(placeholder="Password",value="asdf")
+              td
+                .cell 11/26/2013
+              td
+                .cell
+                  .toggle.gray.inline(data-action="toggle",data-toggle="sureCheck",data-state="no")
+                    input(type="hidden")
+                    .toggleOptions
+                      .toggleOptionsTrack
+                        .toggleOption Yes
+                        .toggleOption No
+              td
+                .cell
+                  a.button.split.rounded All
+                    .dropdown
+                      ul.list
+                        .title Advanced
+                        li
+                          ul.inline-list
+                            li
+                              .toggle.gray.large(data-action="toggle",data-toggle="shootType",data-state="no")
+                                input(type="hidden")
+                                .toggleOptions
+                                  .toggleOptionsTrack
+                                    .toggleOption Read Only
+                                    .toggleOption Read & Write
+                                .toggleLabel Dashboard
+                        li
+                          ul.inline-list
+                            li
+                              .toggle.gray.large(data-action="toggle",data-toggle="shootType",data-state="no")
+                                input(type="hidden")
+                                .toggleOptions
+                                  .toggleOptionsTrack
+                                    .toggleOption Read Only
+                                    .toggleOption Read & Write
+                                .toggleLabel Fields
+                        li
+                          ul.inline-list
+                            li
+                              .toggle.gray.large(data-action="toggle",data-toggle="shootType",data-state="no")
+                                input(type="hidden")
+                                .toggleOptions
+                                  .toggleOptionsTrack
+                                    .toggleOption Read Only
+                                    .toggleOption Read & Write
+                                .toggleLabel Equipment
+                        li
+                          ul.inline-list
+                            li
+                              .toggle.gray.large(data-action="toggle",data-toggle="shootType",data-state="no")
+                                input(type="hidden")
+                                .toggleOptions
+                                  .toggleOptionsTrack
+                                    .toggleOption Read Only
+                                    .toggleOption Read & Write
+                                .toggleLabel Market
+                        li
+                          ul.inline-list
+                            li
+                              .toggle.gray.large(data-action="toggle",data-toggle="shootType",data-state="no")
+                                input(type="hidden")
+                                .toggleOptions
+                                  .toggleOptionsTrack
+                                    .toggleOption Read Only
+                                    .toggleOption Read & Write
+                                .toggleLabel Farm Planner
+                  .iconWrapper.right.size-16
+                    {{icon 'remove'}}
+            tr
+              td
+                .cell
+                  input(placeholder="Add New User")
+              td
+                .cell
+                  input(placeholder="Position")
+              td
+                .cell
+                  input(placeholder="email@email.com")
+              td
+                .cell
+                  input(placeholder="Password")
+              td
+                .cell Never
+              td
+                .cell
+                  .toggle.gray.inline(data-action="toggle",data-toggle="sureCheck",data-state="no")
+                    input(type="hidden")
+                    .toggleOptions
+                      .toggleOptionsTrack
+                        .toggleOption Yes
+                        .toggleOption No
+              td
+                .cell
+                  a.button.split.rounded All
+                    .dropdown
+                      ul.list
+                        .title Advanced
+                        li
+                          ul.inline-list
+                            li
+                              .toggle.gray.large(data-action="toggle",data-toggle="shootType",data-state="no")
+                                input(type="hidden")
+                                .toggleOptions
+                                  .toggleOptionsTrack
+                                    .toggleOption Read Only
+                                    .toggleOption Read & Write
+                                .toggleLabel Dashboard
+                        li
+                          ul.inline-list
+                            li
+                              .toggle.gray.large(data-action="toggle",data-toggle="shootType",data-state="no")
+                                input(type="hidden")
+                                .toggleOptions
+                                  .toggleOptionsTrack
+                                    .toggleOption Read Only
+                                    .toggleOption Read & Write
+                                .toggleLabel Fields
+                        li
+                          ul.inline-list
+                            li
+                              .toggle.gray.large(data-action="toggle",data-toggle="shootType",data-state="no")
+                                input(type="hidden")
+                                .toggleOptions
+                                  .toggleOptionsTrack
+                                    .toggleOption Read Only
+                                    .toggleOption Read & Write
+                                .toggleLabel Equipment
+                        li
+                          ul.inline-list
+                            li
+                              .toggle.gray.large(data-action="toggle",data-toggle="shootType",data-state="no")
+                                input(type="hidden")
+                                .toggleOptions
+                                  .toggleOptionsTrack
+                                    .toggleOption Read Only
+                                    .toggleOption Read & Write
+                                .toggleLabel Market
+                        li
+                          ul.inline-list
+                            li
+                              .toggle.gray.large(data-action="toggle",data-toggle="shootType",data-state="no")
+                                input(type="hidden")
+                                .toggleOptions
+                                  .toggleOptionsTrack
+                                    .toggleOption Read Only
+                                    .toggleOption Read & Write
+                                .toggleLabel Farm Planner
+          //-button(type="Submit") Add New User
+
+template(name="map")
+  .mapHolder(data-state="{{getSession 'mapState'}}")
+    {{#constant}}
+    .mapWrapper(data-dojo-type='dijit/layout/BorderContainer', data-dojo-props='design:\'headline\', gutters:false', style='width: 100%; height: 100%; margin-left: 0%;')
+      #map(data-dojo-type='dijit/layout/ContentPane', data-dojo-props='region:\'center\'', style='padding: 0;')
+          //-div(style='position: absolute; right: 20px; top: 40px; z-Index: 999; padding: 10px; background: white;')
+            div(data-dojo-type='dijit/TitlePane', data-dojo-props='title:\'Switch Basemap\', closable:false,  open:false')
+              div(data-dojo-type='dijit/layout/ContentPane', style='width: 380px; height: 280px; overflow: auto;')
+                #basemapGallery
+    {{/constant}}
+
+template(name="notice")
+  .notice
+    {{#if currentContextIs 'fields'}}
+    .title Please confirm field boundary
+    a(href="#") more info
+    ul.inline-list
+      li
+        a
+          .iconWrapper.left.size-16
+            {{icon 'edit'}}
+          | edit
+      li
+        a
+          .iconWrapper.left.size-16
+            {{icon 'comment'}}
+          | comment
+      li
+        a
+          .iconWrapper.left.size-16
+            {{icon 'approve'}}
+          | approved
+    {{/if}}
+
+    {{#if currentContextIs 'farm-planner'}}
+    .iconWrapper.right.size-16
+      {{icon 'remove'}}
+    .title
+      | Click on the map to add/edit field boundary
+    {{/if}}
+
+template(name="cover")
+  .cover(data-action="toggleCover",data-cover="{{getSession 'cover'}}",data-hidden="{{getSession 'coverHidden'}}")
+    .coverContent
+      {{#if coverIs 'notes'}}
+      .title Add Note
+      form
+        input(type="text",placeholder="Note Title")
+        textarea.expanding(type="text",placeholder="Note Content")
+        //-a.button Upload File
+        button.button(type="submit",data-action="toggleCover") Save
+      {{/if}}
+
+      {{#if coverIs 'addOrEditPosition'}}
+      .title Add/Edit Position
+      form
+        ul.inline-list
+          li
+            label.inline New Position For
+            select.inline(data-action="setPositionCommodity")
+              option(value="Canola") Canola
+              option(value="46-0-0") 46-0-0
+              option(value="Fuel") Fuel
+        ul.inline-list
+          li
+            label.inline Crop Year
+            select.inline
+              option(value="2013") 2013
+        {{#if equalsSession 'positionCommodity' 'Canola'}}
+        ul.inline-list
+          li
+            label.inline Position Type
+            select.inline(data-action="setPositionType")
+              option(value="Future") Future
+              option(value="Basis") Basis
+              option(value="Option") Option
+              option(value="Future Cross-Hedge") Future Cross-Hedge
+        {{/if}}
+        {{#if equalsSession 'positionType' 'Future Cross-Hedge'}}
+        ul.inline-list
+          li
+            label.inline Cross-hedge
+            select.inline
+              option(value="Select Commodity") Select Commodity
+            select.inline
+              option(value="Select Market") Select Market
+        {{/if}}
+        ul.inline-list
+          li
+            label.inline Contract With
+            input.inline(type="text",placeholder="Name")
+          li
+            label.inline Trade Date
+            input.inline.datepicker(type="text",placeholder="DD/MM/YYYY")
+        ul.inline-list
+          li
+            label.inline Side
+            select.inline
+              option(value="Buy") Buy
+              option(value="Sell") Sell
+        ul.inline-list
+          li
+            label.inline Contract Month
+            input.inline.datepicker(type="text",placeholder="DD/MM/YYYY")
+        {{#if equalsSession 'positionType' 'Option'}}
+        ul.inline-list
+          li
+            label.inline Option Type
+            select.inline
+              option(value="Put") Put
+          li
+            label.inline Option Strike
+            input.inline(type="text",placeholder="Strike Name")
+        {{/if}}
+        ul.inline-list
+          li
+            label.inline Volume
+            input.inline(type="text",placeholder="0")
+            select.inline
+              option(value="Tonnes") Tonnes
+              option(value="MT") MT
+              option(value="Litres") Litres
+        ul.inline-list
+          li
+            label.inline Price
+            input.inline(type="text",placeholder="$0")
+        {{#if equalsSession 'positionCommodity' 'Canola'}}
+          {{#if notEqualsSession 'positionType' 'Basis'}}
+        ul.inline-list
+          li
+            label.inline Basis Price
+            input.inline(type="text",placeholder="$0")
+          {{/if}}
+        {{/if}}
+        textarea.expanding(type="text",placeholder="Notes")
+        .button-bar
+          a.button(data-action="addPosition",data-action="toggleCover") Save
+          a.button(data-action="addPosition") Save & New
+      {{/if}}
+
+      {{#if coverIs 'viewNote'}}
+      .title View Note
+      form
+        input(type="text",placeholder="Title",value="Harvest")
+        textarea.expanding(type="text",placeholder="Content") Harvest Note Content
+        //-a.button Upload File
+        button.button(type="submit",data-action="toggleCover") Update
+      {{/if}}
+
+template(name="groupedBarChart")
+  .groupedBarChart
+
+template(name="stackedAreaChart")
+  .stackedAreaChart
+
+template(name="notImplemented")
+  .notImplemented
+    .notImplementedText This section not implemented.

@@ -1,0 +1,1697 @@
+//Variables
+@import "nib"
+
+//Variables
+borderRadius = 4px
+
+//Colors
+white(opacity=1)
+  rgba(255,255,255,opacity)
+
+black(opacity=1)
+  rgba(0,0,0,opacity)
+
+offWhite(opacity=1)
+  rgba(245,245,245,opacity)
+
+offerWhite(opacity=1)
+  rgba(235,235,235,opacity)
+
+gray(opacity=1)
+  rgba(223,223,223,opacity)
+
+offGray(opacity=1)
+  rgba(159,159,159,opacity)
+
+offerGray(opacity=1)
+  rgba(137,137,137,opacity)
+
+midnight(opacity=1)
+  rgba(63,63,63,opacity)
+
+highlight(opacity=1)
+  rgba(74,182,235,opacity)
+
+lowlight(opacity=1)
+  rgba(66,68,88,opacity)
+
+red(opacity=1)
+  rgba(242,116,114,opacity)
+
+green(opacity=1)
+  rgba(118,217,158,opacity)
+
+orange(opacity=1)
+  rgba(237,128,29,opacity)
+
+//Sizings
+minSize(min-width=initial,min-height=initial)
+  if min-width is a 'unit'
+    min-width min-width px
+  else
+    min-width min-width
+
+  if min-height is a 'unit'
+    min-height min-height px
+  else
+    min-height min-height
+
+size(width=auto,height=auto)
+  if width is a 'unit'
+    width width px
+  else
+    width width
+
+  if height is a 'unit'
+    height height px
+  else
+    height height
+
+maxSize(max-width=initial,max-height=initial)
+  if max-width is a 'unit'
+    max-width max-width px
+  else
+    max-width max-width
+
+  if max-height is a 'unit'
+    max-height max-height px
+  else
+    max-height max-height
+
+//Position
+position(position=static,top=auto,right=auto,bottom=auto,left=auto)
+  position position
+
+  if top is auto
+    top auto
+  else
+    top top px
+
+  if right is auto
+    right auto
+  else
+    right right px
+
+  if bottom is auto
+    bottom auto
+  else
+    bottom bottom px
+
+  if left is auto
+    left auto
+  else
+    left left px
+
+//Overflow
+overflow(x=false,y=x)
+  if x
+    overflow-x x
+  if y
+    overflow-y y
+  -webkit-overflow-scrolling touch
+
+ellipsis()
+  text-overflow ellipsis
+  white-space nowrap
+  overflow hidden
+
+//Resets
+*
+  box-sizing border-box
+  -webkit-tap-highlight-color transparent
+html
+  height 100%
+body
+  margin 0
+  font-family "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif
+  font-weight 300
+  height 100%
+  overflow(hidden)
+  background offWhite()
+form
+  margin 0
+input,button,textarea
+  margin 0
+  border none
+  border-radius 0
+  appearance none
+  user-select text
+  resize none
+  display block
+  color midnight()
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button
+  -webkit-appearance none
+  margin 0
+input:focus,
+textarea:focus,
+button:focus,
+[contenteditable="true"]:focus
+  outline none
+  -webkit-appearance none
+input:focus,
+textarea:focus
+  background white
+  color midnight(0.9)
+button:focus
+  background midnight(0.9)
+  color radiantBlue(0.9)
+//Placeholder Styles
+input::-webkit-input-placeholder
+  color midnight(0.5)
+input::-moz-placeholder
+  color midnight(0.5)
+input:-ms-input-placeholder
+  color midnight(0.5)
+select
+  cursor pointer
+nav,ul,ol
+  list-style none
+  margin 0
+  padding 0
+table
+  border-spacing 0
+tr,th,td
+  font-weight normal
+  position relative
+h1,h2,h3,h4,h5,h6
+  padding 0
+  margin 0
+  font-weight normal
+a
+  text-decoration none
+  text-transform capitalize
+  color inherit
+  position relative
+  cursor pointer
+p
+  margin 0
+a:hover,a:active,a[data-active="true"]
+  text-decoration none
+
+//Dimensions
+headerHeight = 30px
+subHeaderHeight = 40px
+sidebarWidth = 250px
+borderRadius = 4px
+
+//Utility Classes
+.fixed
+  position(fixed)
+  &.top
+    top 0
+    bottom auto
+  &.left
+    right auto
+    left 0
+  &.right
+    right 0
+    left auto
+  &.bottom
+    top auto
+    bottom 0
+.spanWidth
+  left 0
+  right 0
+.spanHeight
+  top 0
+  bottom 0
+.left
+  float left
+  clear none
+.right
+  float right
+  clear none
+
+//Layout - Icon
+.iconWrapper
+  position(absolute)
+  top 50%
+  cursor pointer
+  & > *
+    fill gray()
+    line
+      stroke-width 6px
+      stroke gray()
+  &:hover > *
+    fill orange(0.75)
+    line
+      stroke orange(0.75)
+  &.top
+    top 10px
+    bottom auto
+  &.right
+    right 10px
+    left auto
+  &.bottom
+    top auto
+    bottom 10px
+  &.left
+    right auto
+    left 10px
+  &.size-8
+    size(8,8)
+    margin-top -4px
+  &.size-16
+    size(16,16)
+    margin-top -8px
+  &.size-24
+    size(24,24)
+    margin-top -12px
+  .icon
+    position absolute
+    top 0
+    right 0
+    width 100%
+    height 100%
+
+//Layout - Tile Section
+.tile-section
+  margin 20px 0 0 0
+  border-top 1px solid gray()
+  border-bottom 1px solid gray()
+  .tile-nav
+    background offWhite()
+    float left
+    width 100%
+    height 30px
+    line-height 30px
+    text-align center
+    li
+      width 50%
+      border-right 1px solid gray()
+      border-bottom 1px solid gray()
+      &:last-of-type
+        border-right none
+      a
+        &[data-active="true"]
+          background white()
+          color orange(0.75)
+        width 100%
+  .tile-group
+    .tile
+      border none
+      border-radius 0
+      min-height 600px
+      display none
+      &[data-active="true"]
+        display block
+
+//Layout - Prefix
+.prefix
+  font-weight bold
+  margin 0 5px 0 0
+  color offerGray()
+.postfix
+  color midnight()
+
+//Layout - List
+.list
+  width 100%
+  padding 0
+  font-size 12px
+  .active
+    & > a:first-child
+      font-weight 300
+  li
+    margin 0
+    font-size inherit
+    width 100%
+    position relative
+    &.collapse
+      border-bottom 1px solid gray()
+      input
+        background offWhite()
+        display inline-block
+        border 1px solid gray()
+        padding 5px
+        border-radius borderRadius
+        margin 0 5px 0 0
+      span
+        margin 0 5px 0 0
+      .inline
+        background transparent
+        border none
+        border-right 1px solid gray()
+        border-radius 0
+      span
+        display inline-block
+      .subtitle
+        float left
+        line-height 30px
+        margin 0 0 0 10px
+    a:not(.inline)
+      padding 10px
+      display inline-block
+      width 100%
+      color midnight()
+      border-bottom 1px solid gray()
+      &[data-state="active"]
+      &:hover
+        border-color orange(0.45)
+        background orange(0.75)
+        color white()
+        .title
+        .subtitle
+          color white()
+      .title
+      .subtitle
+        display inline-block
+        width inherit
+      .subtitle
+        font-size inherit
+        color offGray()
+    a
+      font-size inherit
+    &:last-of-type
+      a
+        border-bottom none
+    &.item
+      padding 10px
+      border-bottom 1px solid gray()
+      &.collapse
+        padding 10px
+        input
+          &:last-of-type
+            //border-right none
+      &:last-child
+        border-bottom none
+
+//Layout - Title
+.title
+  position relative
+
+//Layout - Clear
+.clear
+  clear both
+
+//Layout - Button
+.button
+  size(auto,40)
+  border 1px solid offGray()
+  background offGray()
+  padding 0 20px 0 20px
+  display block
+  font-size 12px
+  line-height 40px
+  text-align center
+  color white()
+  clear both
+  position relative
+  cursor pointer
+  &:hover
+    border 1px solid orange(0.75)
+    background transparent
+    color orange(0.75)
+  &.rounded
+    border-radius borderRadius
+  &.split
+    size(100,30)
+    line-height 30px
+    padding-right 31px
+    background offWhite()
+    border 1px solid gray()
+    color midnight()
+    &:hover
+      border-radius borderRadius borderRadius 0 0
+      border-bottom none
+      background white()
+      color orange(0.75)
+      .dropdown
+        border-radius 0 borderRadius 0 0
+        background white()
+      .list
+        display block
+    .dropdown
+      position(absolute,-1,-1,auto,auto)
+      size(20,30)
+      border-radius 0 borderRadius borderRadius 0
+      background offerWhite()
+      border 1px solid gray()
+      &:after
+        content ""
+        position absolute
+        top 50%
+        right 6px
+        width 0
+        height 0
+        margin-top -2px
+        border-color offGray() transparent transparent transparent
+        border-style solid
+        border-width 3px 3px 0 3px
+    .list
+      display none
+      position(absolute,28,-1,auto,auto)
+      z-index 9
+      width 200px
+      text-align left
+      background white()
+      border 1px solid gray()
+      border-radius borderRadius 0 borderRadius borderRadius
+      .title
+        font-size 12px
+        padding 0 10px 0 10px
+        line-height 30px
+        height 30px
+      li
+        &:last-of-type
+          .inline-list
+              border-bottom none
+      .toggle
+        &[data-state="yes"]
+        &[data-state="no"]
+          .toggleOptions
+            border-right none
+      .toggleLabel
+        width 98px
+        text-align right
+
+//Layout - Cover
+.cover
+  position(fixed,0,0,0,0)
+  z-index 999
+  height 100%
+  width 100%
+  background black(0.75)
+  transition all 0.25s ease-in-out
+  text-align center
+  overflow(hidden,auto)
+  padding 50px 10px 50px 10px
+  display none
+  &:after
+    content ""
+    height 100%
+    vertical-align middle
+    display inline-block
+  &[data-hidden="true"]
+    opacity 0
+    pointer-events none
+    .coverContent
+      opacity 0
+      transform scale3d(0,0,0)
+  .coverContent
+    background white()
+    transition all 0.25s ease-in-out
+    min-width 320px
+    max-width 600px
+    width 100%
+    border-radius borderRadius
+    display inline-block
+    vertical-align middle
+    text-align left
+    position relative
+    color midnight()
+    input
+      background transparent
+      border-bottom none
+    .title
+      border-bottom 1px solid gray()
+      padding 0 10px 0 10px
+      line-height 30px
+    .content
+      position(static)
+      padding 10px
+    .expandingText
+      margin 0 0 10px 0
+    .button-bar
+      width 100%
+      float left
+      .button
+        float left
+        clear none
+    .button
+      border-radius borderRadius
+      margin 0 0 10px 10px
+
+//Layout - Forms
+form
+  //padding 10px
+  font-size 12px
+  .title
+    font-size 16px
+  &.inline
+    padding 0
+    width auto
+    float left
+    clear none
+  .inline-list
+    border-bottom 1px solid gray()
+    float left
+    width 100%
+    &:last-of-type
+      border-bottom none
+    li
+      a
+        padding 0 0 0 0
+  label
+    line-height 30px
+    padding 0 10px 0 10px
+    border-left 1px solid gray()
+    border-right 1px solid gray()
+    &:first-of-type
+      border-left none
+    &.inline
+      float left
+  input
+    //background offWhite()
+    //border 1px solid gray()
+    width 100%
+    height 30px
+    padding 0 10px 0 10px
+    ellipsis()
+    display block
+    //margin 0 0 10px 0
+    //border-radius borderRadius
+    border-bottom 1px solid gray()
+    &.inline
+      width auto
+      float left
+      clear none
+      border-bottom none
+      border-right 1px solid gray()
+    &.percentage
+      width 50px
+    &.currency
+      width 95px
+      margin 0 0 0 5px
+    &.datepicker
+      width 109px
+      margin 0 0 0 5px
+      border-radius 0
+  textarea
+    float left
+    clear left
+    padding 10px
+    width 100%
+    border-top 1px solid gray()
+    border-bottom 1px solid gray()
+  //Input Groups
+  /*.input-group
+    margin 0 0 10px 0
+    input
+      margin 0
+      border-top none
+      border-radius 0
+      &:first-of-type
+        border-top 1px solid gray()
+        border-radius borderRadius borderRadius 0 0
+      &:last-of-type
+        border-radius 0 0 borderRadius borderRadius*/
+
+  //Select Dropdowns
+  .selectize-control
+    position relative
+    clear left
+    //display block
+    //margin 0 0 10px 0
+    //margin 0
+    &.inline
+      float left
+      clear none
+    .selectize-input
+      padding 0 20px 0 10px
+      height 30px
+      line-height 30px
+      background offWhite()
+      border-right 1px solid gray()
+      //background offerWhite()
+      //border 1px solid gray()
+      //border-radius borderRadius
+      color midnight()
+      & > *
+        display -moz-inline-stack
+        display inline-block
+        vertical-align baseline
+        zoom 1
+      & > input
+        display none
+      &:after
+        content ""
+        position absolute
+        top 50%
+        right 8px
+        width 0
+        height 0
+        margin-top -2px
+        border-color offGray() transparent transparent transparent
+        border-style solid
+        border-width 3px 3px 0 3px
+      &.dropdown-active
+        background offWhite()
+        //border-radius borderRadius borderRadius 0 0
+        &:after
+          margin-top -2px
+          border-color transparent transparent #808080 transparent
+          border-width 0 3px 3px 3px
+  .selectize-dropdown
+    position absolute
+    margin-top 1px
+    left -1px!important
+    right 0!important
+    width auto!important
+    z-index 10
+    background offWhite()
+    border 1px solid gray()
+    border-radius 0 0 borderRadius borderRadius
+    //border-top none
+    color midnight()
+    [data-selectable]
+      padding 10px
+      &:last-of-type
+        &.active
+          border-radius 0 0 borderRadius borderRadius
+    .active
+      color orange(0.75)
+      background white()
+  .selectize-dropdown-content
+    max-height 200px
+    overflow-x hidden
+    overflow-y auto
+  .expandingText
+    margin 0 0 10px 0
+  .button
+    margin 10px
+
+//Layout - Expanding Text
+.expandingText
+  float left
+  clear left
+  width 100%
+
+//Layout - Table
+table.table
+  font-size 12px
+  border-bottom 1px solid gray()
+  color midnight()
+  width 100%
+  &:last-of-type
+    border-bottom none
+  &.inline
+    border none
+  &.centered
+    text-align center
+  &.rounded
+    border-radius borderRadius
+  &.uniform
+    table-layout fixed
+    width 100%
+    td
+      max-width 0
+      position relative
+  thead
+    tr
+      background offWhite()
+      td
+        padding 5px 10px 5px 10px
+        border-bottom 1px solid gray()
+  tbody
+    tr
+      td
+        border-right 1px solid gray()
+        border-bottom 1px solid gray()
+        text-indent 10px
+        //padding 5px 10px 5px 10px
+        position relative
+        height 40px
+        &:hover
+          background orange(0.15)
+        &.collapse
+          .left
+            width auto
+            right 100px
+            border-right 1px solid gray()
+          .middle
+            left 60%
+            right 100px
+            width auto
+            border-right 1px solid gray()
+          .right
+            left auto
+            width 100px
+        .cell
+          position relative
+          height 40px
+          line-height 40px
+          //padding 5px
+          &:hover
+            //background orange(0.15)
+        .button
+          margin 5px
+          text-indent 0
+        input
+        .selectize-control
+        .selectize-input
+          margin 0
+          border-radius 0
+          margin 0
+          border none
+          background transparent
+          color midnight()
+          height 100%
+          width 100%
+        .selectize-control
+          &.inline
+            width 60px
+            left auto
+          .selectize-input
+            background transparent
+            border-radius 0
+            border none
+            position relative
+            padding 0
+            //padding 1px 5px 0 8px
+            line-height 40px
+            //margin -5px -10px -5px -10px
+            height 100%
+            &.dropdown-active
+              background white()
+            .item
+              width 100%
+              display block
+        input
+          //position(absolute,0,0,0,0)
+          height 100%
+          padding 0 10px 0 10px
+          //padding 10px
+        .selectize-dropdown
+          //background white()
+          //XXX: Kinda hacky, Only for use with inline dropdowns in tables
+          //margin 5px 0 0 0
+          //margin-top -1px
+          right -1px!important
+          width auto
+          text-indent 0
+          border-right none
+          border-left none
+          //left -11px!important
+          //width auto!important
+        &:last-of-type
+          border-right none
+      &:last-of-type
+        td
+          border-bottom none
+  tfoot
+    tr
+      td
+        padding 10px
+        border-top 1px solid gray()
+        background offerWhite()
+  .toggle
+    margin 5px
+  .iconWrapper
+    position(absolute,auto,10,auto,auto)
+    top 50%
+    &:hover
+      & > *
+      line
+        fill orange(0.75)
+        stroke orange(0.75)
+    & > *
+    line
+      fill offerGray()
+      stroke offerGray()
+    &.size-16
+      margin-top -8px
+    opacity 1
+
+//Layout - Inline List
+.inline-list
+  height inherit
+  position relative
+  & + .section
+    .table
+      &:first-of-type
+        border-top 1px solid gray()
+  &.columns-1
+    li
+      width 100%
+  &.columns-2
+    li
+      width 50%
+  &.columns-3
+    li
+      width 33.333333333%
+  &.columns-4
+    li
+      width 25%
+  &.columns-5
+    li
+      width 20%
+  &.left
+    float left
+    li
+      //padding 0 0 0 10px
+  &.right
+    float right
+    li
+      //padding 0 10px 0 0
+  li
+    float left
+    height inherit
+    &:last-of-type
+      margin 0
+    &.column
+      border-right 1px solid gray()
+      .title
+        font-size 12px
+        background offWhite()
+      &:last-of-type
+        border none
+      input
+        &:last-of-type
+          border none
+    .subtitle
+      margin 0 10px 0 0
+      &.inline
+        line-height 30px
+    &> a
+      color midnight()
+      font-family inherit
+      font-size 12px
+      position(relative)
+      padding 0 10px 0 30px
+      height inherit
+      cursor pointer
+      display block
+      &[data-state="active"]
+      &:hover
+        color orange(0.75)
+        .iconWrapper > *
+            fill orange(0.75)
+            stroke orange(0.75)
+    label + input
+      border-right 1px solid gray()
+    .toggle
+      margin 0
+      .toggleOptions
+        .toggleOptionsTrack
+          height 30px
+          .toggleOption
+            height 30px
+      /*&:hover
+        &[data-state="no"]
+          .toggleOptions
+            background orange()
+            border-right 1px solid orange(0.75)
+            .toggleOptionsTrack
+              .toggleOption
+                color offWhite()
+          .toggleLabel
+            background orange(0.75)
+            color offWhite()
+        &[data-state="yes"]
+          .toggleOptions
+            background offerWhite()
+            border-right 1px solid gray()
+            .toggleOptionsTrack
+              .toggleOption
+                color midnight()
+          .toggleLabel
+            background gray()
+            color midnight()*/
+      &[data-state="no"]
+        .toggleOptions
+          margin 0
+          border-radius 0
+          background offerWhite()
+          border none
+          border-right 1px solid gray()
+          .toggleOptionsTrack
+            .toggleOption
+              color offerGray()
+      &[data-state="yes"]
+        .toggleOptions
+          margin 0
+          border-radius 0
+          background orange(0.55)
+          border none
+          border-right 1px solid orange(0.25)
+          .toggleOptionsTrack
+            .toggleOption
+              color white()
+        .toggleLabel
+          //background orange(0.65)
+          //color white()
+    .toggleLabel
+      padding 0 10px 0 10px
+      margin 0
+      background offWhite()
+      border-right 1px solid gray()
+
+//Layout - Toggle
+.toggle
+  margin 10px 0 0 10px
+  size(auto,30)
+  cursor pointer
+  float left
+  clear both
+  text-indent 0
+  /*&:hover
+    .toggleOption
+      transform scale3d(1.1,1.1,1.1)*/
+  &.large
+    .toggleOptions
+      size(100,30)
+      .toggleOptionsTrack
+        size(200,30)
+        .toggleOption
+          size(100,auto)
+          &:last-of-type
+            left 100px
+    &[data-state="no"]
+      .toggleOptions
+        .toggleOptionsTrack
+          transform translate3d(-100px,0,0)
+  &:last-of-type
+    //margin 0
+  &.black
+    &[data-state="no"]
+      .toggleOptions
+        background midnight()
+        border 2px solid midnight()
+        .toggleOptionsTrack
+          .toggleOption
+            color white()
+    &[data-state="yes"]
+      .toggleOptions
+        background transparent
+        border 2px solid midnight()
+        .toggleOptionsTrack
+          .toggleOption
+            color midnight()
+    .toggleLabel
+      color midnight()
+  &.gray
+    &[data-state="no"]
+      .toggleOptions
+        background offGray()
+        border 1px solid offGray()
+        .toggleOptionsTrack
+          .toggleOption
+            color white()
+    &[data-state="yes"]
+      .toggleOptions
+        background transparent
+        border 1px solid orange(0.75)
+        .toggleOptionsTrack
+          .toggleOption
+            color orange(0.75)
+    .toggleLabel
+      color midnight()
+  &.white
+    &[data-state="no"]
+      .toggleOptions
+        background white()
+        border 2px solid white()
+        .toggleOptionsTrack
+          .toggleOption
+            color midnight()
+    &[data-state="yes"]
+      .toggleOptions
+        background transparent
+        border 2px solid white()
+        .toggleOptionsTrack
+          .toggleOption
+            color white()
+    .toggleLabel
+      color white()
+  &[data-state="no"]
+    .toggleOptions
+        .toggleOptionsTrack
+          transform translate3d(-40px,0,0)
+  &[data-state="yes"]
+    .toggleOptions
+      .toggleOptionsTrack
+        transform translate3d(0,0,0)
+  .checkbox
+    display none
+  .toggleOptions
+    size(40,30)
+    border-radius borderRadius
+    float right
+    margin 0 10px 0 0
+    overflow(hidden)
+    position(relative)
+    transition all 0.25s ease-in-out
+    cursor pointer
+    .toggleOptionsTrack
+      position(absolute,0,auto,auto,-1)
+      size(80,28)
+      transition all 0.25s ease-in-out
+      .toggleOption
+        size(40,28)
+        line-height 30px
+        position(absolute,0,auto,auto,auto)
+        text-align center
+        transition all 0.25s ease-in-out
+        font-size 12px
+        &:first-of-type
+          left 0
+        &:last-of-type
+          left 40px
+  .toggleLabel
+    float left
+    size(auto,30)
+    line-height 30px
+    font-size 12px
+    transition all 0.25s ease-in-out
+    margin 0 10px 0 0
+
+//Theme
+#iron-router-progress
+  background-color orange(0.75)
+  box-shadow none
+
+.header
+  background white()
+  border-bottom 1px solid gray()
+  height headerHeight
+  li
+    a
+      line-height headerHeight
+
+.subHeader
+  top headerHeight
+  background white()
+  height subHeaderHeight
+  border-bottom 1px solid gray()
+  //transition all 0.25s ease-in-out
+  &[data-state="closed"]
+    transform translate3d(0,-100%,0)
+    opacity 0
+    pointer-events none
+  .inline-list
+    left sidebarWidth
+    li
+      a
+        border-right 1px solid gray()
+        line-height subHeaderHeight
+        padding-left 40px
+        &[data-state="active"]
+        &:hover
+          background orange(0.75)
+          color white()
+          .iconWrapper
+            &>*
+              fill white()
+              stroke white()
+
+//Sidebar Toggle
+.sidebarToggle
+  top headerHeight
+  z-index 100
+  height subHeaderHeight
+  width sidebarWidth
+  background white()
+  border-bottom 1px solid gray()
+  //transition all 0.25s ease-in-out
+  &[data-state="open"]
+    .sidebarNotch
+      .iconWrapper
+        & > *
+          fill orange(0.75)
+  &.left
+    right auto
+    left 0
+    border-right 1px solid gray()
+    &[data-state="closed"]
+      transform translate3d(- sidebarWidth,0,0)
+    .sidebarNotch
+      left 0
+      border-right 1px solid gray()
+  &.right
+    right 0
+    left auto
+    &[data-state="closed"]
+      transform translate3d(sidebarWidth,0,0)
+    .sidebarNotch
+      right 0
+      border-left 1px solid gray()
+  .sidebarNotch
+    size(40,40)
+    position(absolute,0,auto,auto,auto)
+    .iconWrapper
+      left 50%
+      margin-left -12px
+  .has-dropdown
+    margin 0 0 0 40px
+    &:hover
+      .iconWrapper > *
+        fill orange(0.75)
+        stroke orange(0.75)
+      .dropdown
+        display block
+    a
+      line-height 40px
+      padding 0 10px 0 10px
+      font-size 12px
+      position(relative)
+      display block
+      &:hover
+        color orange(0.75)
+        .subtitle
+          color orange(0.75)
+      .subtitle
+        position(absolute,0,10,auto,auto)
+        font-size 10px
+        color offGray()
+        line-height 40px
+    .dropdown
+      margin 0 -1px 0 -1px
+      background white()
+      position(relative)
+      top -1px
+      z-index 1
+      max-height 247px
+      overflow(auto)
+      display none
+      border 1px solid gray()
+      border-radius 0 0 borderRadius borderRadius
+      li
+        &:last-of-type
+          a
+            border-bottom none
+        a
+          border-bottom 1px solid gray()
+
+//Layout - Section
+.section
+  position relative
+  float left
+  width 100%
+  clear both
+  border-bottom 1px solid gray()
+  &:last-of-type
+    margin 0 0 20px 0
+
+//Sidebar
+.sidebar
+  top headerHeight + subHeaderHeight
+  bottom 0
+  width sidebarWidth
+  background white()
+  //transition all 0.25s ease-in-out
+  overflow(hidden,auto)
+  .subtitle
+    background offWhite()
+    padding 5px 10px 5px 10px
+    float left
+    clear left
+    width 100%
+    color midnight()
+  &[data-sidebartogglestate="closed"]
+    top headerHeight
+  &.left
+    border-right 1px solid gray()
+    &[data-state="closed"]
+      transform translate3d(- sidebarWidth,0,0)
+    .list
+      li
+        &:first-of-type
+          a
+            background offWhite()
+            &:hover
+              background orange(0.75)
+              color white()
+              .iconWrapper
+                & > *
+                  fill white()
+                  stroke white()
+        .subtitle
+          background transparent
+          padding 0
+  &.right
+    border-left 1px solid gray()
+    &[data-state="closed"]
+      transform translate3d(sidebarWidth,0,0)
+  .section
+    border-bottom 1px solid gray()
+    .progress
+      margin 10px
+    .toggle.inline
+      margin 10px 10px 10px 10px
+    .title
+      line-height 30px
+      background offerWhite()
+      border-bottom 1px solid gray()
+      padding 0 10px 0 10px
+      font-size 14px
+      color midnight()
+      .iconWrapper
+        & > *
+          fill offerGray()
+  .button
+    margin 10px
+  .button-bar
+    float left
+    clear left
+    width 100%
+    height 30px
+    border-top 1px solid gray()
+    border-bottom 1px solid gray()
+    &:last-of-type
+      border-bottom none
+    //padding 10px
+    &.columns-1
+      .button
+        width 100%
+    &.columns-2
+      .button
+        width 50%
+    &.columns-3
+      .button
+        width 33.33%
+    .button
+      margin 0
+      float left
+      clear none
+      height 30px
+      line-height 30px
+      background transparent
+      border none
+      border-color gray()
+      color midnight()
+      border-right 1px solid gray()
+      &[data-active="true"]
+      &:hover
+        background orange(0.75)
+        color white()
+      &:last-of-type
+        border-right none
+  form
+    .inline-list
+      li
+        width 100%
+        .inline
+          max-width 100px
+        .toggle
+          width 100%
+          .toggleLabel
+            margin 0 40px 0 0
+            text-align right
+            float none
+
+//Content
+.content
+  position(absolute,30,0,0,0)
+  background white()
+  margin 20px
+  //padding 20px 35px 20px 35px
+  border 1px solid gray()
+  border-radius borderRadius
+  //padding 10px
+  //transition all 0.25s ease-in-out
+  overflow(auto)
+  &[data-subheaderState="open"]
+    top headerHeight + subHeaderHeight
+  &[data-rightsidebarstate="open"]
+    right sidebarWidth
+  &[data-leftsidebarstate="open"]
+    left sidebarWidth
+  .iconWrapper
+    top 10px
+    margin-top 0
+  .title
+    color midnight()
+    //margin 5px 0 5px 0
+    clear both
+    padding 10px 10px 10px 10px
+    border-bottom 1px solid gray()
+    .progress
+      margin-top 10px
+  .subtitle
+    color offerGray()
+    margin 5px 0 5px 0
+    padding 0 10px 0 10px
+    font-size 12px
+    &.inline
+      float left
+  .table
+    //margin 10px 0 20px 0
+  .form
+    padding 0
+  .progress
+    .subtitle
+      margin 0
+      font-weight bold
+
+//Tiles
+.tiles
+  size(320,auto)
+  position(absolute,0,auto,0,0)
+  padding 10px
+  overflow(hidden,auto)
+
+//Layout - Tile
+.tile
+  width 100%
+  background white()
+  border 1px solid gray()
+  border-radius borderRadius
+  position relative
+  &.notifications
+    .subtitle
+      padding 0
+  &.research
+    float left
+    width 33.33%
+    height 100%
+    border-radius 0
+    border none
+    border-right 1px solid gray()
+    border-bottom 1px solid gray()
+    &:last-of-type
+      border-right none
+    .header
+      height auto
+      line-height 20px
+      padding 10px
+    .subtitle
+      margin 0
+      padding 0
+  &.profit
+    width 50%
+    float left
+    border-radius 0
+    border none
+    border-right 1px solid gray()
+    border-bottom 1px solid gray()
+    &.full
+      width 100%
+    &:nth-of-type(odd)
+      border-right none
+    .title
+      padding 10px 10px 0 10px
+    .progress
+      margin 10px 10px 10px 10px
+    .inline-list
+      width 100%
+      border-top 1px solid gray()
+      .column
+        a
+          padding 0
+          width 100%
+          .title
+          .subtitle
+            font-size 12px
+            text-align center
+            color offerGray()
+            padding 5px
+    .iconWrapper
+      top 50%
+      &.size-16
+        margin-top -8px
+    .subtitle
+      margin 0
+  .header
+    min-height headerHeight
+    line-height 30px
+    border-bottom 1px solid gray()
+    padding 0 10px 0 10px
+    background transparent
+  .title
+    font-size 14px
+    font-weight bold
+    ellipsis()
+    border-bottom none
+    padding 0
+  .subtitle
+    font-weight bold
+    font-size 12px
+    color offGray()
+    margin 0 5px 0 0
+    & + a
+      font-size 12px
+      color midnight()
+      &:hover
+        color orange(0.75)
+
+//Layout - Notice
+.notice
+  background white()
+  border-radius borderRadius
+  border 1px solid gray()
+  position(absolute,10,auto,auto,10)
+  padding 10px 40px 10px 10px
+  z-index 1
+  .title
+    font-size 16px
+    line-height 20px
+    padding 0
+    border-bottom none
+  a
+    margin 5px 0 5px 0
+    font-size 10px
+    color offerGray()
+    &:hover
+      color orange(0.75)
+  .inline-list
+    left -10px
+  .iconWrapper
+    top 50%
+    &.size-16
+      margin-top -8px
+
+//Layout - Progress
+.progress
+  height 20px
+  margin 5px 0 5px 0
+  padding 2px
+  background offWhite()
+  border 1px solid gray()
+  position relative
+  &.rounded
+    border-radius 9999px
+    .meter
+      border-radius 9999px
+  .meter
+    height 100%
+    background orange(0.75)
+  .subtitle
+    color midnight()
+    font-size 10px
+    position(absolute,0,0,0,0)
+    line-height 19px
+    padding 0 10px 0 10px
+    text-align center
+    background transparent
+
+//Map Styles
+.mapHolder
+  position(absolute,0,0,0,0)
+  width 100%
+  height 100%
+  //transition all 0.25s ease-in-out
+  &[data-state="closed"]
+    transform scale3d(0,0,0)
+    opacity 0
+    pointer-events none
+.mapWrapper
+.map
+  position(absolute,0,0,0,0)!important
+  width 100%!important
+  height 100%!important
+#map_root
+#map_layer0
+#map_layer1
+  position(absolute,0,0,0,0)!important
+  width 100%!important
+  height 100%!important
+//Hiding the ESRI sign in dialog because it's fucking annoying
+.dijitDialogUnderlayWrapper
+.esriSignInDialog
+  display none!important
+.esriSimpleSliderTL
+  top 10px
+  left auto
+  right 10px
+  border 1px solid gray()
+  background white()
+  border-radius borderRadius
+  .esriSimpleSliderIncrementButton
+  .esriSimpleSliderDecrementButton
+    color offerGray()
+    &:hover
+      color orange(0.75)
+  .esriSimpleSliderIncrementButton
+    border-bottom 1px solid gray()
+.scalebar_bottom-left
+  bottom 40px
+  .esriScalebarLabel
+    color white()
+    margin 5px 0 5px 0
+  .esriScalebarSecondNumber
+    left 90%
+  .esriScalebarLine
+    border 1px solid white()
+  .esriScalebarMetricLine
+    border-top none
+  .esriScalebarEnglishLine
+    border-bottom none
+    top -1px
+
+//Unique Icon Styles
+.helpIcon
+  background-image none
+
+//Datepicker Styles
+.datepicker-dropdown
+  background white()
+  border 1px solid gray()
+  border-radius borderRadius
+  position absolute
+  margin-top 4px
+
+//Grouped Bar Chart Styles
+.groupedBarChart
+  position(relative,60,auto,auto,auto)
+  .axis path
+  .axis line
+    fill none
+    stroke #000
+    shape-rendering crispEdges
+  .bar
+    fill steelblue
+  .x
+    &.axis
+      path
+        display none
+
+//Stacked Area Chart Styles
+.stackedAreaChart
+  .axis path
+  .axis line
+    fill none
+    stroke #000
+    shape-rendering crispEdges
+  .browser
+    text
+      text-anchor end
+
+//Layout - Slider
+.slider
+  position(absolute,20,20,auto,auto)
+  height 30px
+  //background red
+  .subtitle
+    margin 0 10px 0 0
+    line-height 30px
+  .sliderTrack
+    border 1px solid gray()
+    border-radius 9999px
+    background offWhite()
+    height 4px
+    min-width 140px
+    position relative
+    top 12px
+    .knob
+      background white()
+      border 1px solid gray()
+      border-radius 9999px
+      size(10,10)
+      position(absolute,-4,auto,auto,auto)
+  input
+    size(40,26)
+    position(relative,2,auto,auto,auto)
+    margin 0 0 0 10px
+    //background offWhite()
+    border 1px solid gray()
+    border-right none
+    border-radius borderRadius 0 0 borderRadius
+    padding 5px
+  .selectize-control
+    clear none
+    .selectize-input
+      height 26px
+      line-height 26px
+      border 1px solid gray()
+      border-radius 0 borderRadius borderRadius 0
+      position relative
+      top 2px
+      &.dropdown-active
+        border-radius 0 borderRadius 0 0
+    .selectize-dropdown
+      margin-top 0
+      margin-left 1px
+
+//Not Implemented Debug Text
+.notImplemented
+  position(absolute,0,0,0,0)
+  width 100%
+  height 100%
+  text-align center
+  font-size 18px
+  background offerGray()
+  color offWhite()
+  .notImplementedText
+    size(200,44)
+    position absolute
+    top 50%
+    right 0
+    bottom 0
+    left 50%
+    margin -22px 0 0 -100px
+
+//Individual Table Cell Styles
+table.table
+  .cell[data-zone="1"]
+    background rgba(101,2,5,0.3)
+  .cell[data-zone="2"]
+    background rgba(202,8,20,0.3)
+  .cell[data-zone="3"]
+    background rgba(205,44,46,0.3)
+  .cell[data-zone="4"]
+    background rgba(255,253,56,0.3)
+  .cell[data-zone="5"]
+    background rgba(183,214,170,0.3)
+  .cell[data-zone="6"]
+    background rgba(108,167,84,0.3)
+  .cell[data-zone="7"]
+    background rgba(58,117,35,0.3)
+
+/*
+//Custom Scrollbars - IE
+body
+  scrollbar-base-color #C0C0C0
+  scrollbar-base-color #C0C0C0
+  scrollbar-3dlight-color #C0C0C0
+  scrollbar-highlight-color #C0C0C0
+  scrollbar-track-color #EBEBEB
+  scrollbar-arrow-color black
+  scrollbar-shadow-color #C0C0C0
+  scrollbar-dark-shadow-color #C0C0C0
+
+//Custom Scrollbars - Chrome
+::-webkit-scrollbar
+  width 3px
+  height 3px
+::-webkit-scrollbar-button
+  background-color #666
+::-webkit-scrollbar-track
+  background-color #999
+::-webkit-scrollbar-track-piece
+  background-color #ffffff
+::-webkit-scrollbar-thumb
+  height 50px
+  background-color #666
+  border-radius 3px
+::-webkit-scrollbar-corner
+  background-color #999
+::-webkit-resizer
+  background-color #666
+
+//Custom Scrollbars - Firefox
+@-moz-document url-prefix(http://),url-prefix(https://)
+  scrollbar
+    -moz-appearance none!important
+    background rgb(0,255,0)!important
+  thumb,scrollbarbutton
+    -moz-appearance none!important
+    background-color rgb(0,0,255)!important
+  thumb:hover,scrollbarbutton:hover
+    -moz-appearance none!important
+    background-color rgb(255,0,0)!important
+  scrollbarbutton
+    display none!important
+  scrollbar[orient="vertical"]
+    min-width 15px!important*/

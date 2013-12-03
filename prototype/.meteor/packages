@@ -7,3 +7,10 @@ standard-app-packages
 autopublish
 insecure
 preserve-inputs
+jade-handlebars-refactored
+coffeescript
+stylus
+iron-router
+iron-router-progress
+bootstrap-datepicker2
+d3
