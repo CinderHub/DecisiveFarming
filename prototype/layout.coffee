@@ -58,7 +58,12 @@ Router.map ->
         Session.set "activeSubheaderPath",@params.section
 
       if !@params.assetsInfo
-        Session.set "activeSidebarPath",null
+        Session.set "activeSidebarPath",undefined
+        #Session.set "activeSidebarPath",undefined
+        #if Session.equals "activeSidebarPath",undefined
+        #  Session.set "activeSidebarPath","370"
+        #if !Session.equals "activeSidebarPath","370"
+        #  Session.set "activeSidebarPath","370"
       else
         Session.set "activeSidebarPath",@params.assetsInfo
 
@@ -134,7 +139,7 @@ Router.map ->
         Session.set "activeSubheaderPath",@params.section
 
       if !@params.assetsInfo
-        Session.set "activeSidebarPath",null
+        Session.set "activeSidebarPath",undefined
       else
         Session.set "activeSidebarPath",@params.assetsInfo
 
@@ -159,7 +164,7 @@ Router.map ->
         Session.set "activeSubheaderPath",@params.section
 
       if !@params.assetsInfo
-        Session.set "activeSidebarPath","1221"
+        #Session.set "activeSidebarPath","1221"
       else
         Session.set "activeSidebarPath",@params.assetsInfo
 
@@ -169,6 +174,8 @@ Router.map ->
         Session.set "leftSidebarToggleState","open"
         Session.set "rightSidebarState","closed"
         Session.set "rightSidebarToggleState","closed"
+        if !@params.assetsInfo
+          Session.set "activeSidebarPath",undefined
 
       #Revenue & Expenses
       if @params.section is "revenue-and-expenses"
@@ -176,13 +183,16 @@ Router.map ->
         Session.set "leftSidebarToggleState","open"
         Session.set "rightSidebarState","closed"
         Session.set "rightSidebarToggleState","closed"
-
+        if !@params.assetsInfo
+          Session.set "activeSidebarPath","1221"
       #Hedge Plan
       if @params.section is "hedge-plan"
         Session.set "leftSidebarState","open"
         Session.set "leftSidebarToggleState","open"
         Session.set "rightSidebarState","open"
         Session.set "rightSidebarToggleState","open"
+        if !@params.assetsInfo
+          Session.set "activeSidebarPath","1221"
 
       #Positions
       if @params.section is "positions"
@@ -190,6 +200,8 @@ Router.map ->
         Session.set "leftSidebarToggleState","open"
         Session.set "rightSidebarState","closed"
         Session.set "rightSidebarToggleState","closed"
+        if !@params.assetsInfo
+          Session.set "activeSidebarPath","1221"
 
       #Research
       if @params.section is "research"
@@ -197,6 +209,8 @@ Router.map ->
         Session.set "leftSidebarToggleState","open"
         Session.set "rightSidebarState","closed"
         Session.set "rightSidebarToggleState","closed"
+        if !@params.assetsInfo
+          Session.set "activeSidebarPath","1221"
 
   @route "farm-planner",
     path: "/farm-planner/:section?/:assetsInfo?"
@@ -220,8 +234,7 @@ Router.map ->
         Session.set "activeSubheaderPath",@params.section
 
       if !@params.assetsInfo
-        #if Session.equals "activeSidebarPath",null
-        #Session.set "activeSidebarPath",null
+        Session.set "activeSidebarPath",undefined
       else
         Session.set "activeSidebarPath",@params.assetsInfo
 
@@ -449,7 +462,7 @@ if Meteor.isClient
         action = currentTarget.attr("data-action")
         if action is "setPositionCommodity"
           Session.set "positionCommodity",currentTarget.attr("value")
-          Session.set "positionType",null
+          Session.set "positionType",undefined
         if action is "setPositionType"
           Session.set "positionType",currentTarget.attr("value")
       )
@@ -472,7 +485,7 @@ if Meteor.isClient
       "change [data-action='setPositionCommodity']":(e,t)->
         currentTarget = $(e.currentTarget)
         Session.set "positionCommodity",currentTarget.attr("value")
-        Session.set "positionType",null
+        Session.set "positionType",undefined
       "click .coverContent":(e,t)->
         e.stopImmediatePropagation()
       "click [data-action='toggle']":(e,t)->
