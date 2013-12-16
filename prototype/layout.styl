@@ -376,7 +376,6 @@ borderRadius = 4px
         .list
           position relative
           top 10px
-          left 100px
           li
             background offWhite(0.25)
             border-left 1px solid gray()
@@ -406,11 +405,12 @@ borderRadius = 4px
           padding 0 10px 0 0
           float left
           text-align right
-          min-width 100px
         input
           width auto
           &:last-of-type
             //border-right none
+        .button
+          margin 0
         .button-bar
           width 330px
           .button
@@ -443,6 +443,8 @@ borderRadius = 4px
   position relative
   form
     position(absolute,-6,30,auto,auto)
+    .selectize-control
+      min-width 120px
 
 //Layout - Clear
 .clear

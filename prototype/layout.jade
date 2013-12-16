@@ -574,10 +574,10 @@ template(name="rightSidebar")
       form
         ul.list
           li.item.collapse
-            label Field Name
+            label(style="width:70px;") Field Name
             input(type="text",placeholder="Field Name")
           li.item.collapse
-            label Division
+            label(style="width:70px;") Division
             select.select
               option(value="Division") Division
               option(value="First") First
@@ -591,36 +591,36 @@ template(name="rightSidebar")
               option(value="Ninth") Ninth
               option(value="Tenth") Tenth
           li.item.collapse
-            label Section
+            label(style="width:70px;") Section
             input(type="text",placeholder="Section")
           li.item.collapse
-            label Township
+            label(style="width:70px;") Township
             input(type="text",placeholder="Township")
           li.item.collapse
-            label Range
+            label(style="width:70px;") Range
             input(type="text",placeholder="Range")
           li.item.collapse
-            label Meridian
+            label(style="width:70px;") Meridian
             select.select
               option(value="Meridian") Meridian
           li.item.collapse
-            label Subdivision
+            label(style="width:70px;") Subdivision
             select.select
               option(value="Subdivision") Subdivision
           li.item.collapse
-            .button(data-action="toggleNotice",data-notice="field-boundary")
+            .button.rounded(data-action="toggleNotice",data-notice="field-boundary")
               | Edit Field Boundary
           li.item.collapse
-            label Acres
-            input(type="text",placeholder="Acres")
+            label(style="width:70px;") Acres
+            input(type="text",placeholder="Acres",style="width:60px;float:left;")
             select.select
               option(value="Crop Type") Crop Type
           li.item.collapse
-            label Variety
+            label(style="width:70px;") Variety
             input(type="text",placeholder="Variety")
           li.item.collapse
-            label Yield
-            input(type="text",placeholder="Yield")
+            label(style="width:70px;") Yield
+            input(type="text",placeholder="Yield",style="width:90px;float:left;")
             select.select
               option(value="bu/ac") bu/ac
           li.item.collapse
@@ -704,8 +704,8 @@ template(name="rightSidebar")
                     option(value="bu/ac") bu/ac
                     option(value="obs/ac") obs/ac
     .section
-      a.button Cancel
-      a.button Save Field Details
+      a.button.rounded Cancel
+      a.button.rounded Save Field Details
     {{/if}}
 
     {{#if currentParamIs 'section' 'fertility-map'}}
@@ -876,11 +876,13 @@ template(name="rightSidebar")
     .section
       .title Field Details
       form
-        input(type="text",placeholder="Field Name")
-        ul.inline-list
-          li
-            label.inline Division
-            select.inline
+        ul.list
+          li.item.collapse
+            label(style="width:70px;") Field Name
+            input(type="text",placeholder="Field Name")
+          li.item.collapse
+            label(style="width:70px;") Division
+            select.select
               option(value="Division") Division
               option(value="First") First
               option(value="Second") Second
@@ -892,28 +894,40 @@ template(name="rightSidebar")
               option(value="Eighth") Eighth
               option(value="Ninth") Ninth
               option(value="Tenth") Tenth
-        input(type="text",placeholder="Section")
-        input(type="text",placeholder="Township")
-        input(type="text",placeholder="Range")
-        ul.inline-list
-          li
-            select.inline
+          li.item.collapse
+            label(style="width:70px;") Section
+            input(type="text",placeholder="Section")
+          li.item.collapse
+            label(style="width:70px;") Township
+            input(type="text",placeholder="Township")
+          li.item.collapse
+            label(style="width:70px;") Range
+            input(type="text",placeholder="Range")
+          li.item.collapse
+            label(style="width:70px;") Meridian
+            select.select
               option(value="Meridian") Meridian
-            select.inline
+          li.item.collapse
+            label(style="width:70px;") Subdivision
+            select.select
               option(value="Subdivision") Subdivision
-        ul.inline-list
-          li
-            input.inline(type="text",placeholder="Acres")
-            select.inline
+          li.item.collapse
+            .button.rounded(data-action="toggleNotice",data-notice="field-boundary")
+              | Edit Field Boundary
+          li.item.collapse
+            label(style="width:70px;") Acres
+            input(type="text",placeholder="Acres",style="width:60px;float:left;")
+            select.select
               option(value="Crop Type") Crop Type
-        input(type="text",placeholder="Variety")
-        ul.inline-list
-          li
-            input.inline(type="text",placeholder="Yield")
-            select.inline
+          li.item.collapse
+            label(style="width:70px;") Variety
+            input(type="text",placeholder="Variety")
+          li.item.collapse
+            label(style="width:70px;") Yield
+            input(type="text",placeholder="Yield",style="width:90px;float:left;")
+            select.select
               option(value="bu/ac") bu/ac
-        ul.inline-list
-          li
+          li.item.collapse
             .toggle.gray(data-action="toggle",data-toggle="sureCheck",data-state="no")
               input(type="hidden")
               .toggleOptions
@@ -921,8 +935,7 @@ template(name="rightSidebar")
                   .toggleOption Yes
                   .toggleOption No
               .toggleLabel Sure-Check Soil Testing
-        ul.inline-list
-          li
+          li.item.collapse
             .toggle.gray(data-action="toggle",data-toggle="optimizeRX",data-state="no")
               input(type="hidden")
               .toggleOptions
@@ -994,7 +1007,8 @@ template(name="rightSidebar")
                   //-select
                     option(value="bu/ac") bu/ac
                     option(value="obs/ac") obs/ac
-    //-.section
+    .section
+      a.button.rounded Cancel
       a.button.rounded Save Field Details
     {{/if}}
 
@@ -1106,9 +1120,12 @@ template(name="fields")
 
     {{#if currentParamIs 'section' 'soil-testing'}}
     .title E 24 28 26 W4 - Field One
-    .subtitle Crop Type: Barley
-    .subtitle Acres: 235
-    .subtitle Projected Yield: 52 bu/ac
+    .section
+      ul.list
+        li.item.collapse
+          label(style="border-right:1px solid #dfdfdf;margin-right:10px") Crop Type: Barley
+          label(style="border-right:1px solid #dfdfdf;margin-right:10px") Acres: 235
+          label Projected Yield: 52 bu/ac
     .iconWrapper.size-16.right
       {{icon 'print'}}
     .section
@@ -1391,10 +1408,14 @@ template(name="fields")
     .title E 24 28 26 W4 - Field One
     .iconWrapper.size-16.right
       {{icon 'print'}}
-    .subtitle Crop Type: Barley
-    .subtitle Version:
-    select.select.inline
-      option(value="Draft for Review") Draft for Review
+    .section
+      form
+        ul.list
+          li.item.collapse
+            label(style="border-right:1px solid #dfdfdf;margin-right:10px;") Crop Type: Barley
+            label Version:
+            select.select
+              option(value="Draft for Review") Draft for Review
     .section
       table.table.uniform
         thead
@@ -1580,17 +1601,17 @@ template(name="equipment")
         .section
           ul.list
             li.item.collapse
-              label Unit Name
+              label(style="width:100px;") Unit Name
               input(type="text",placeholder="Unit Name")
             li.item.collapse
-              label Cart Make
+              label(style="width:100px;") Cart Make
               select.select
                 option(value="Cart Make") Cart Make
             li.item.collapse
-              label Cart Model
+              label(style="width:100px;") Cart Model
               select.select
                 option(value="Cart Model") Cart Model
-              ul.list
+              ul.list(style="left:100px;")
                 li.item.collapse
                   label Tank 1
                   input(type="text",placeholder="Capacity (bu)",value="200 Bushels")
@@ -1613,20 +1634,20 @@ template(name="equipment")
                   input(type="text",placeholder="Select Product")
           ul.list
             li.item.collapse
-              label Drill Make
+              label(style="width:100px;") Drill Make
               select.select
                 option(value="Drill Make") Drill Make
             li.item.collapse
-              label Drill Width
+              label(style="width:100px;") Drill Width
               input.left(type="text",placeholder="0",style="width: 80px;")
               select.select
                 option(value="Ft") Ft
             li.item.collapse
-              label Fertilizer Type
+              label(style="width:100px;") Fertilizer Type
               select.select
                 option(value="Fertilizer Type") Fertilizer Type
                 option(value="Dry") Dry
-              ul.list
+              ul.list(style="left:100px;")
                 li.item.collapse
                   label Dry Rate Maximum
                   input(type="text",placeholder="0")
@@ -1649,12 +1670,12 @@ template(name="equipment")
                     .toggleLabel Shoot Type?
           ul.list
             li.item.collapse
-              label Receiver Make
+              label(style="width:100px;") Receiver Make
               select.select
                 option(value="Receiver Make") Receiver Make
                 option(value="John Deere") John Deere
             li.item.collapse
-              label Model
+              label(style="width:100px;") Model
               select.select
                 option(value="Model") Model
                 option(value="1910") 1910
@@ -1667,12 +1688,12 @@ template(name="equipment")
                     .toggleOption No
                 .toggleLabel Connected to Controller?
             li.item.collapse
-              label Controller Make
+              label(style="width:100px;") Controller Make
               select.select
                 option(value="Controller Make") Controller Make
                 option(value="John Deere") John Deere
             li.item.collapse
-              label Model
+              label(style="width:100px;") Model
               select.select
                 option(value="Model") Model
                 option(value="1910") 1910
@@ -1682,13 +1703,13 @@ template(name="equipment")
         .section
           ul.list
             li.item.collapse
-              label Unit Name
+              label(style="width:100px;") Unit Name
               input(type="text",placeholder="Unit Name")
             li.item.collapse
-              label Make
+              label(style="width:100px;") Make
               select.select
                 option(value="Make") Make
-              ul.list
+              ul.list(style="left:100px;")
                 li.item.collapse
                   label Tank 1
                   input(type="text",placeholder="Capacity (bu)",value="200 Bushels")
@@ -1711,11 +1732,11 @@ template(name="equipment")
                   input(type="text",placeholder="Select Product")
           ul.list
             li.item.collapse
-              label Fertilizer Type
+              label(style="width:100px;") Fertilizer Type
               select.select
                 option(value="Fertilizer Type") Fertilizer Type
                 option(value="Dry") Dry
-              ul.list
+              ul.list(style="left:100px;")
                 li.item.collapse
                   label Dry Rate Maximum
                   input(type="text",placeholder="0")
@@ -1738,12 +1759,12 @@ template(name="equipment")
                     .toggleLabel Shoot Type?
           ul.list
             li.item.collapse
-              label Receiver Make
+              label(style="width:100px;") Receiver Make
               select.select
                 option(value="Receiver Make") Receiver Make
                 option(value="John Deere") John Deere
             li.item.collapse
-              label Model
+              label(style="width:100px;") Model
               select.select
                 option(value="Model") Model
                 option(value="1910") 1910
@@ -1756,12 +1777,12 @@ template(name="equipment")
                     .toggleOption No
                 .toggleLabel Connected to Controller?
             li.item.collapse
-              label Controller Make
+              label(style="width:100px;") Controller Make
               select.select
                 option(value="Controller Make") Controller Make
                 option(value="John Deere") John Deere
             li.item.collapse
-              label Model
+              label(style="width:100px;") Model
               select.select
                 option(value="Model") Model
                 option(value="1910") 1910
@@ -1771,13 +1792,13 @@ template(name="equipment")
         .section
           ul.list
             li.item.collapse
-              label Unit Name
+              label(style="width:100px;") Unit Name
               input(type="text",placeholder="Unit Name")
             li.item.collapse
-              label Make
+              label(style="width:100px;") Make
               select.select
                 option(value="Make") Make
-              ul.list
+              ul.list(style="left:100px;")
                 li.item.collapse
                   label Tank 1
                   input(type="text",placeholder="Capacity (bu)",value="200 Bushels")
@@ -1800,13 +1821,13 @@ template(name="equipment")
                   input(type="text",placeholder="Select Product")
           ul.list
             li.item.collapse
-              label Fertilizer Type
+              label(style="width:100px;") Fertilizer Type
               select.select
                 option(value="Fertilizer Type") Fertilizer Type
                 option(value="Dry") Liquid
-              ul.list
+              ul.list(style="left:100px;")
                 li.item.collapse
-                  label Liquid Rates for Nozzles
+                  label(style="width:100px;") Liquid Rates for Nozzles
                   input(type="text",placeholder="min")
                   span -
                   input(type="text",placeholder="max")
@@ -1826,12 +1847,12 @@ template(name="equipment")
                     a.button(data-active="false") Side Band
           ul.list
             li.item.collapse
-              label Receiver Make
+              label(style="width:100px;") Receiver Make
               select.select
                 option(value="Receiver Make") Receiver Make
                 option(value="John Deere") John Deere
             li.item.collapse
-              label Model
+              label(style="width:100px;") Model
               select.select
                 option(value="Model") Model
                 option(value="1910") 1910
@@ -1844,12 +1865,12 @@ template(name="equipment")
                     .toggleOption No
                 .toggleLabel Connected to Controller?
             li.item.collapse
-              label Controller Make
+              label(style="width:100px;") Controller Make
               select.select
                 option(value="Controller Make") Controller Make
                 option(value="John Deere") John Deere
             li.item.collapse
-              label Model
+              label(style="width:100px;") Model
               select.select
                 option(value="Model") Model
                 option(value="1910") 1910
@@ -1859,25 +1880,25 @@ template(name="equipment")
         .section
           ul.list
             li.item.collapse
-              label Unit Name
+              label(style="width:100px;") Unit Name
               input(type="text",placeholder="Unit Name")
             li.item.collapse
-              label Make
+              label(style="width:100px;") Make
               select.select
                 option(value="Make") Make
             li.item.collapse
-              label NH3 Rates
+              label(style="width:100px;") NH3 Rates
               input(type="text",placeholder="min")
               span -
               input(type="text",placeholder="max")
               span lbs actual/acre
             li.item.collapse
-              label Receiver Make
+              label(style="width:100px;") Receiver Make
               select.select
                 option(value="Receiver Make") Receiver Make
                 option(value="John Deere") John Deere
             li.item.collapse
-              label Model
+              label(style="width:100px;") Model
               select.select
                 option(value="Model") Model
                 option(value="1910") 1910
@@ -1890,12 +1911,12 @@ template(name="equipment")
                     .toggleOption No
                 .toggleLabel Connected to Controller?
             li.item.collapse
-              label Controller Make
+              label(style="width:100px;") Controller Make
               select.select
                 option(value="Controller Make") Controller Make
                 option(value="John Deere") John Deere
             li.item.collapse
-              label Model
+              label(style="width:100px;") Model
               select.select
                 option(value="Model") Model
                 option(value="1910") 1910
@@ -1905,26 +1926,26 @@ template(name="equipment")
         .section
           ul.list
             li.item.collapse
-              label Unit Name or #
+              label(style="width:100px;") Unit Name or #
               input(type="text",placeholder="Unit Name")
             li.item.collapse
-              label Make
+              label(style="width:100px;") Make
               select.select
                 option(value="Make") Make
             li.item.collapse
-              label Model
+              label(style="width:100px;") Model
               input(type="text",placeholder="Model")
             li.item.collapse
-              label Year
+              label(style="width:100px;") Year
               input(type="text",placeholder="Year")
         .section
           .title Yield Monitor
           ul.list
             li.item.collapse
-              label Make
+              label(style="width:100px;") Make
               input(type="text",placeholder="Make")
             li.item.collapse
-              label Model
+              label(style="width:100px;") Model
               input(type="text",placeholder="Model")
             li.item.collapse
               .toggle.gray(data-action="toggle",data-toggle="controllerConnection",data-state="no")
@@ -1935,7 +1956,7 @@ template(name="equipment")
                     .toggleOption No
                 .toggleLabel Is Monitor Setup and Running?
             li.item.collapse
-              label Data Card Type
+              label(style="width:100px;") Data Card Type
               input(type="text",placeholder="Data Card Type")
         {{/if}}
 
@@ -1943,17 +1964,17 @@ template(name="equipment")
         .section
           ul.list
             li.item.collapse
-              label Unit Name or #
+              label(style="width:100px;") Unit Name or #
               input(type="text",placeholder="Unit Name")
             li.item.collapse
-              label Make
+              label(style="width:100px;") Make
               select.select
                 option(value="Make") Make
             li.item.collapse
-              label Model
+              label(style="width:100px;") Model
               input(type="text",placeholder="Model")
             li.item.collapse
-              label Year
+              label(style="width:100px;") Year
               input(type="text",placeholder="Year")
         {{/if}}
         button.button.rounded(type="submit") Save
@@ -1979,17 +2000,17 @@ template(name="equipment")
         .section
           ul.list
             li.item.collapse
-              label Unit Name
+              label(style="width:100px;") Unit Name
               input(type="text",placeholder="Unit Name")
             li.item.collapse
-              label Cart Make
+              label(style="width:100px;") Cart Make
               select.select
                 option(value="Cart Make") Cart Make
             li.item.collapse
-              label Cart Model
+              label(style="width:100px;") Cart Model
               select.select
                 option(value="Cart Model") Cart Model
-              ul.list
+              ul.list(style="left:100px;")
                 li.item.collapse
                   label Tank 1
                   input(type="text",placeholder="Capacity (bu)",value="200 Bushels")
@@ -2012,20 +2033,20 @@ template(name="equipment")
                   input(type="text",placeholder="Select Product")
           ul.list
             li.item.collapse
-              label Drill Make
+              label(style="width:100px;") Drill Make
               select.select
                 option(value="Drill Make") Drill Make
             li.item.collapse
-              label Drill Width
+              label(style="width:100px;") Drill Width
               input.left(type="text",placeholder="0",style="width: 80px;")
               select.select
                 option(value="Ft") Ft
             li.item.collapse
-              label Fertilizer Type
+              label(style="width:100px;") Fertilizer Type
               select.select
                 option(value="Fertilizer Type") Fertilizer Type
                 option(value="Dry") Dry
-              ul.list
+              ul.list(style="left:100px;")
                 li.item.collapse
                   label Dry Rate Maximum
                   input(type="text",placeholder="0")
@@ -2048,12 +2069,12 @@ template(name="equipment")
                     .toggleLabel Shoot Type?
           ul.list
             li.item.collapse
-              label Receiver Make
+              label(style="width:100px;") Receiver Make
               select.select
                 option(value="Receiver Make") Receiver Make
                 option(value="John Deere") John Deere
             li.item.collapse
-              label Model
+              label(style="width:100px;") Model
               select.select
                 option(value="Model") Model
                 option(value="1910") 1910
@@ -2066,12 +2087,12 @@ template(name="equipment")
                     .toggleOption No
                 .toggleLabel Connected to Controller?
             li.item.collapse
-              label Controller Make
+              label(style="width:100px;") Controller Make
               select.select
                 option(value="Controller Make") Controller Make
                 option(value="John Deere") John Deere
             li.item.collapse
-              label Model
+              label(style="width:100px;") Model
               select.select
                 option(value="Model") Model
                 option(value="1910") 1910
@@ -2081,13 +2102,13 @@ template(name="equipment")
         .section
           ul.list
             li.item.collapse
-              label Unit Name
+              label(style="width:100px;") Unit Name
               input(type="text",placeholder="Unit Name")
             li.item.collapse
-              label Make
+              label(style="width:100px;") Make
               select.select
                 option(value="Make") Make
-              ul.list
+              ul.list(style="left:100px;")
                 li.item.collapse
                   label Tank 1
                   input(type="text",placeholder="Capacity (bu)",value="200 Bushels")
@@ -2110,11 +2131,11 @@ template(name="equipment")
                   input(type="text",placeholder="Select Product")
           ul.list
             li.item.collapse
-              label Fertilizer Type
+              label(style="width:100px;") Fertilizer Type
               select.select
                 option(value="Fertilizer Type") Fertilizer Type
                 option(value="Dry") Dry
-              ul.list
+              ul.list(style="left:100px;")
                 li.item.collapse
                   label Dry Rate Maximum
                   input(type="text",placeholder="0")
@@ -2137,12 +2158,12 @@ template(name="equipment")
                     .toggleLabel Shoot Type?
           ul.list
             li.item.collapse
-              label Receiver Make
+              label(style="width:100px;") Receiver Make
               select.select
                 option(value="Receiver Make") Receiver Make
                 option(value="John Deere") John Deere
             li.item.collapse
-              label Model
+              label(style="width:100px;") Model
               select.select
                 option(value="Model") Model
                 option(value="1910") 1910
@@ -2155,12 +2176,12 @@ template(name="equipment")
                     .toggleOption No
                 .toggleLabel Connected to Controller?
             li.item.collapse
-              label Controller Make
+              label(style="width:100px;") Controller Make
               select.select
                 option(value="Controller Make") Controller Make
                 option(value="John Deere") John Deere
             li.item.collapse
-              label Model
+              label(style="width:100px;") Model
               select.select
                 option(value="Model") Model
                 option(value="1910") 1910
@@ -2170,13 +2191,13 @@ template(name="equipment")
         .section
           ul.list
             li.item.collapse
-              label Unit Name
+              label(style="width:100px;") Unit Name
               input(type="text",placeholder="Unit Name")
             li.item.collapse
-              label Make
+              label(style="width:100px;") Make
               select.select
                 option(value="Make") Make
-              ul.list
+              ul.list(style="left:100px;")
                 li.item.collapse
                   label Tank 1
                   input(type="text",placeholder="Capacity (bu)",value="200 Bushels")
@@ -2199,13 +2220,13 @@ template(name="equipment")
                   input(type="text",placeholder="Select Product")
           ul.list
             li.item.collapse
-              label Fertilizer Type
+              label(style="width:100px;") Fertilizer Type
               select.select
                 option(value="Fertilizer Type") Fertilizer Type
                 option(value="Dry") Liquid
-              ul.list
+              ul.list(style="left:100px;")
                 li.item.collapse
-                  label Liquid Rates for Nozzles
+                  label(style="width:100px;") Liquid Rates for Nozzles
                   input(type="text",placeholder="min")
                   span -
                   input(type="text",placeholder="max")
@@ -2225,12 +2246,12 @@ template(name="equipment")
                     a.button(data-active="false") Side Band
           ul.list
             li.item.collapse
-              label Receiver Make
+              label(style="width:100px;") Receiver Make
               select.select
                 option(value="Receiver Make") Receiver Make
                 option(value="John Deere") John Deere
             li.item.collapse
-              label Model
+              label(style="width:100px;") Model
               select.select
                 option(value="Model") Model
                 option(value="1910") 1910
@@ -2243,12 +2264,12 @@ template(name="equipment")
                     .toggleOption No
                 .toggleLabel Connected to Controller?
             li.item.collapse
-              label Controller Make
+              label(style="width:100px;") Controller Make
               select.select
                 option(value="Controller Make") Controller Make
                 option(value="John Deere") John Deere
             li.item.collapse
-              label Model
+              label(style="width:100px;") Model
               select.select
                 option(value="Model") Model
                 option(value="1910") 1910
@@ -2258,25 +2279,25 @@ template(name="equipment")
         .section
           ul.list
             li.item.collapse
-              label Unit Name
+              label(style="width:100px;") Unit Name
               input(type="text",placeholder="Unit Name")
             li.item.collapse
-              label Make
+              label(style="width:100px;") Make
               select.select
                 option(value="Make") Make
             li.item.collapse
-              label NH3 Rates
+              label(style="width:100px;") NH3 Rates
               input(type="text",placeholder="min")
               span -
               input(type="text",placeholder="max")
               span lbs actual/acre
             li.item.collapse
-              label Receiver Make
+              label(style="width:100px;") Receiver Make
               select.select
                 option(value="Receiver Make") Receiver Make
                 option(value="John Deere") John Deere
             li.item.collapse
-              label Model
+              label(style="width:100px;") Model
               select.select
                 option(value="Model") Model
                 option(value="1910") 1910
@@ -2289,12 +2310,12 @@ template(name="equipment")
                     .toggleOption No
                 .toggleLabel Connected to Controller?
             li.item.collapse
-              label Controller Make
+              label(style="width:100px;") Controller Make
               select.select
                 option(value="Controller Make") Controller Make
                 option(value="John Deere") John Deere
             li.item.collapse
-              label Model
+              label(style="width:100px;") Model
               select.select
                 option(value="Model") Model
                 option(value="1910") 1910
@@ -2304,26 +2325,26 @@ template(name="equipment")
         .section
           ul.list
             li.item.collapse
-              label Unit Name or #
+              label(style="width:100px;") Unit Name or #
               input(type="text",placeholder="Unit Name")
             li.item.collapse
-              label Make
+              label(style="width:100px;") Make
               select.select
                 option(value="Make") Make
             li.item.collapse
-              label Model
+              label(style="width:100px;") Model
               input(type="text",placeholder="Model")
             li.item.collapse
-              label Year
+              label(style="width:100px;") Year
               input(type="text",placeholder="Year")
         .section
           .title Yield Monitor
           ul.list
             li.item.collapse
-              label Make
+              label(style="width:100px;") Make
               input(type="text",placeholder="Make")
             li.item.collapse
-              label Model
+              label(style="width:100px;") Model
               input(type="text",placeholder="Model")
             li.item.collapse
               .toggle.gray(data-action="toggle",data-toggle="controllerConnection",data-state="no")
@@ -2334,7 +2355,7 @@ template(name="equipment")
                     .toggleOption No
                 .toggleLabel Is Monitor Setup and Running?
             li.item.collapse
-              label Data Card Type
+              label(style="width:100px;") Data Card Type
               input(type="text",placeholder="Data Card Type")
         {{/if}}
 
@@ -2342,17 +2363,17 @@ template(name="equipment")
         .section
           ul.list
             li.item.collapse
-              label Unit Name or #
+              label(style="width:100px;") Unit Name or #
               input(type="text",placeholder="Unit Name")
             li.item.collapse
-              label Make
+              label(style="width:100px;") Make
               select.select
                 option(value="Make") Make
             li.item.collapse
-              label Model
+              label(style="width:100px;") Model
               input(type="text",placeholder="Model")
             li.item.collapse
-              label Year
+              label(style="width:100px;") Year
               input(type="text",placeholder="Year")
         {{/if}}
         button.button.rounded(type="submit") Save
