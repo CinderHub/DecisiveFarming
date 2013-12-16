@@ -998,7 +998,7 @@ template(name="rightSidebar")
       a.button.rounded Save Field Details
     {{/if}}
 
-    {{#if currentParamIs 'equipment-info'}}
+    {{#if currentParamIs 'section' 'equipment-info'}}
     .section
       .title Notes
         a.iconWrapper.right.size-16(data-action="toggleCover",data-cover="notes")
@@ -1017,35 +1017,35 @@ template(name="rightSidebar")
       .title John Carpenter
       form
         ul.list
-          li
-            //-label.inline Farm Name
+          li.item.collapse
+            label Farm Name
             input(type="text", placeholder="Farm Name")
-          li
-            //-label.inline Farm Location
+          li.item.collapse
+            label Farm Location
             input(type="text", placeholder="Farm Location")
-          li
-            //-label.inline Main Contact
+          li.item.collapse
+            label Main Contact
             input(type="text", placeholder="Main Contact")
-          li
-            //-label.inline Position
+          li.item.collapse
+            label Position
             input(type="text", placeholder="Job Position")
-          li
-            //-label.inline Telephone
+          li.item.collapse
+            label Telephone
             input(type="text", placeholder="Telephone")
-          li
-            //-label.inline ????
+          li.item.collapse
+            label ????
             input(type="text", placeholder="????")
-          li
-            //-label.inline Email (Username)
+          li.item.collapse
+            label Email (Username)
             input(type="text", placeholder="Contact Email")
-          li
-            //-label.inline Current Password
+          li.item.collapse
+            label Current Password
             input(type="password", placeholder="Current Password")
-          li
-            //-label.inline New Password
+          li.item.collapse
+            label New Password
             input(type="password", placeholder="New Password")
-          li
-            //-label.inline Confirm New Password
+          li.item.collapse
+            label Confirm New Password
             input(type="password", placeholder="Confirm New Password")
         .subtitle Fuel Unit Settings
         .button-bar.columns-3
@@ -1560,498 +1560,801 @@ template(name="equipment")
     {{#if currentParamIs 'section' 'equipment-info'}}
       {{#if currentParamIs 'assetsInfo' undefined}}
       .title New Equipment
-      .iconWrapper.size-16.right
-        {{icon 'print'}}
-      form
-        select.select(data-action="setEquipmentType")
-          option(value="Seeding System") Seeding System
-          option(value="Floater") Floater
-          option(value="Sprayer") Sprayer
-          option(value="NH3 Cultivator") NH3 Cultivator
-          option(value="Combine") Combine
-          //-option(value="Swather") Swather
-          //-option(value="Tractor") Tractor
-          option(value="Truck") Truck
-          //-option(value="Fleet") Fleet
-        {{#if equalsSession 'equipmentType' 'Seeding System'}}
-        ul.list
-          li.item.collapse
-            label Unit Name
-            input(type="text",placeholder="Unit Name")
-          li.item.collapse
-            label Cart Make
-            select.select
-              option(value="Cart Make") Cart Make
-          li.item.collapse
-            label Cart Model
-            select.select
-              option(value="Cart Model") Cart Model
-            ul.list
-              li.item.collapse
-                label Tank 1
-                input(type="text",placeholder="Capacity (bu)",value="200 Bushels")
-                input(type="text",placeholder="Select Product",value="Select Product")
-              li.item.collapse
-                label Tank 2
-                input(type="text",placeholder="Capacity (bu)",value="150 Bushels")
-                input(type="text",placeholder="Select Product",value="Select Product")
-              li.item.collapse
-                label Tank 3
-                input(type="text",placeholder="Capacity (bu)",value="200 Bushels")
-                input(type="text",placeholder="Select Product",value="Select Product")
-              li.item.collapse
-                label Tank 4
-                input(type="text",placeholder="Capacity (bu)")
-                input(type="text",placeholder="Select Product")
-              li.item.collapse
-                label Tank 5
-                input(type="text",placeholder="Capacity (bu)")
-                input(type="text",placeholder="Select Product")
-        ul.list
-          li.item.collapse
-            label Drill Make
-            select.select
-              option(value="Drill Make") Drill Make
-          li.item.collapse
-            label Drill Width
-            input(type="text",placeholder="0",style="width: 80px;")
-            select.select
-              option(value="Ft") Ft
-          li.item.collapse
-            label Fertilizer Type
-            select.select
-              option(value="Fertilizer Type") Fertilizer Type
-              option(value="Dry") Dry
-            ul.list
-              li.item.collapse
-                label Dry Rate Maximum
-                input(type="text",placeholder="0")
-                span lbs/acre
-              li.item.collapse
-                label Opener Width
-                input(type="text",placeholder="0")
-                span inches
-              li.item.collapse
-                label Shank Spacing
-                input(type="text",placeholder="0")
-                span inches
-              li.item.collapse
-                .toggle.gray.large(data-action="toggle",data-toggle="shootType",data-state="no")
-                  input(type="hidden")
-                  .toggleOptions
-                    .toggleOptionsTrack
-                      .toggleOption Single-Shoot
-                      .toggleOption Double-Shoot
-                  .toggleLabel Shoot Type?
-        ul.list
-          li.item.collapse
-            label Receiver Make
-            select.select
-              option(value="Receiver Make") Receiver Make
-              option(value="John Deere") John Deere
-          li.item.collapse
-            label Model
-            select.select
-              option(value="Model") Model
-              option(value="1910") 1910
-          li.item.collapse
-            .toggle.gray(data-action="toggle",data-toggle="controllerConnection",data-state="no")
-              input(type="hidden")
-              .toggleOptions
-                .toggleOptionsTrack
-                  .toggleOption Yes
-                  .toggleOption No
-              .toggleLabel Connected to Controller?
-          li.item.collapse
-            label Controller Make
-            select.select
-              option(value="Controller Make") Controller Make
-              option(value="John Deere") John Deere
-          li.item.collapse
-            label Model
-            select.select
-              option(value="Model") Model
-              option(value="1910") 1910
-        {{/if}}
-
-        {{#if equalsSession 'equipmentType' 'Floater'}}
-        ul.list
-          li.item.collapse
-            label Unit Name
-            input(type="text",placeholder="Unit Name")
-          li.item.collapse
-            label Make
-            select.select
-              option(value="Make") Make
-            ul.list
-              li.item.collapse
-                label Tank 1
-                input(type="text",placeholder="Capacity (bu)",value="200 Bushels")
-                input(type="text",placeholder="Select Product",value="Select Product")
-              li.item.collapse
-                label Tank 2
-                input(type="text",placeholder="Capacity (bu)",value="150 Bushels")
-                input(type="text",placeholder="Select Product",value="Select Product")
-              li.item.collapse
-                label Tank 3
-                input(type="text",placeholder="Capacity (bu)",value="200 Bushels")
-                input(type="text",placeholder="Select Product",value="Select Product")
-              li.item.collapse
-                label Tank 4
-                input(type="text",placeholder="Capacity (bu)")
-                input(type="text",placeholder="Select Product")
-              li.item.collapse
-                label Tank 5
-                input(type="text",placeholder="Capacity (bu)")
-                input(type="text",placeholder="Select Product")
-        ul.list
-          li.item.collapse
-            label Fertilizer Type
-            select.select
-              option(value="Fertilizer Type") Fertilizer Type
-              option(value="Dry") Dry
-            ul.list
-              li.item.collapse
-                label Dry Rate Maximum
-                input(type="text",placeholder="0")
-                span lbs/acre
-              li.item.collapse
-                label Opener Width
-                input(type="text",placeholder="0")
-                span inches
-              li.item.collapse
-                label Shank Spacing
-                input(type="text",placeholder="0")
-                span inches
-              li.item.collapse
-                .toggle.gray.large(data-action="toggle",data-toggle="shootType",data-state="no")
-                  input(type="hidden")
-                  .toggleOptions
-                    .toggleOptionsTrack
-                      .toggleOption Single-Shoot
-                      .toggleOption Double-Shoot
-                  .toggleLabel Shoot Type?
-        ul.list
-          li.item.collapse
-            label Receiver Make
-            select.select
-              option(value="Receiver Make") Receiver Make
-              option(value="John Deere") John Deere
-          li.item.collapse
-            label Model
-            select.select
-              option(value="Model") Model
-              option(value="1910") 1910
-          li.item.collapse
-            .toggle.gray(data-action="toggle",data-toggle="controllerConnection",data-state="no")
-              input(type="hidden")
-              .toggleOptions
-                .toggleOptionsTrack
-                  .toggleOption Yes
-                  .toggleOption No
-              .toggleLabel Connected to Controller?
-          li.item.collapse
-            label Controller Make
-            select.select
-              option(value="Controller Make") Controller Make
-              option(value="John Deere") John Deere
-          li.item.collapse
-            label Model
-            select.select
-              option(value="Model") Model
-              option(value="1910") 1910
-        {{/if}}
-
-        {{#if equalsSession 'equipmentType' 'Sprayer'}}
-        ul.list
-          li.item.collapse
-            label Unit Name
-            input(type="text",placeholder="Unit Name")
-          li.item.collapse
-            label Make
-            select.select
-              option(value="Make") Make
-            ul.list
-              li.item.collapse
-                label Tank 1
-                input(type="text",placeholder="Capacity (bu)",value="200 Bushels")
-                input(type="text",placeholder="Select Product",value="Select Product")
-              li.item.collapse
-                label Tank 2
-                input(type="text",placeholder="Capacity (bu)",value="150 Bushels")
-                input(type="text",placeholder="Select Product",value="Select Product")
-              li.item.collapse
-                label Tank 3
-                input(type="text",placeholder="Capacity (bu)",value="200 Bushels")
-                input(type="text",placeholder="Select Product",value="Select Product")
-              li.item.collapse
-                label Tank 4
-                input(type="text",placeholder="Capacity (bu)")
-                input(type="text",placeholder="Select Product")
-              li.item.collapse
-                label Tank 5
-                input(type="text",placeholder="Capacity (bu)")
-                input(type="text",placeholder="Select Product")
-        ul.list
-          li.item.collapse
-            label Fertilizer Type
-            select.select
-              option(value="Fertilizer Type") Fertilizer Type
-              option(value="Dry") Liquid
-            ul.list
-              li.item.collapse
-                label Liquid Rates for Nozzles
-                input(type="text",placeholder="min")
-                span -
-                input(type="text",placeholder="max")
-                span gal/acre
-              li.item.collapse
-                .toggle.gray.large(data-action="toggle",data-toggle="shootType",data-state="no")
-                  input(type="hidden")
-                  .toggleOptions
-                    .toggleOptionsTrack
-                      .toggleOption U.S. Gallons
-                      .toggleOption Imp. Gallons
-                  .toggleLabel Gallons
-              li.item.collapse
-                .button-bar.columns-3
-                  a.button(data-active="true") Mid-Row Bander
-                  a.button(data-active="true") Paired Row
-                  a.button(data-active="true") Side Band
-        ul.list
-          li.item.collapse
-            label Receiver Make
-            select.select
-              option(value="Receiver Make") Receiver Make
-              option(value="John Deere") John Deere
-          li.item.collapse
-            label Model
-            select.select
-              option(value="Model") Model
-              option(value="1910") 1910
-          li.item.collapse
-            .toggle.gray(data-action="toggle",data-toggle="controllerConnection",data-state="no")
-              input(type="hidden")
-              .toggleOptions
-                .toggleOptionsTrack
-                  .toggleOption Yes
-                  .toggleOption No
-              .toggleLabel Connected to Controller?
-          li.item.collapse
-            label Controller Make
-            select.select
-              option(value="Controller Make") Controller Make
-              option(value="John Deere") John Deere
-          li.item.collapse
-            label Model
-            select.select
-              option(value="Model") Model
-              option(value="1910") 1910
-        {{/if}}
-
-        {{#if equalsSession 'equipmentType' 'NH3 Cultivator'}}
-        ul.list
-          li.item.collapse
-            label Unit Name
-            input(type="text",placeholder="Unit Name")
-          li.item.collapse
-            label Make
-            select.select
-              option(value="Make") Make
-          li.item.collapse
-            label NH3 Rates
-            input(type="text",placeholder="min")
-            span -
-            input(type="text",placeholder="max")
-            span lbs actual/acre
-        ul.list
-          li.item.collapse
-            label Receiver Make
-            select.select
-              option(value="Receiver Make") Receiver Make
-              option(value="John Deere") John Deere
-          li.item.collapse
-            label Model
-            select.select
-              option(value="Model") Model
-              option(value="1910") 1910
-          li.item.collapse
-            .toggle.gray(data-action="toggle",data-toggle="controllerConnection",data-state="no")
-              input(type="hidden")
-              .toggleOptions
-                .toggleOptionsTrack
-                  .toggleOption Yes
-                  .toggleOption No
-              .toggleLabel Connected to Controller?
-          li.item.collapse
-            label Controller Make
-            select.select
-              option(value="Controller Make") Controller Make
-              option(value="John Deere") John Deere
-          li.item.collapse
-            label Model
-            select.select
-              option(value="Model") Model
-              option(value="1910") 1910
-        {{/if}}
-
-        {{#if equalsSession 'equipmentType' 'Combine'}}
-        ul.list
-          li.item.collapse
-            label Unit Name or #
-            input(type="text",placeholder="Unit Name")
-          li.item.collapse
-            label Make
-            select.select
-              option(value="Make") Make
-          li.item.collapse
-            label Model
-            input(type="text",placeholder="Model")
-          li.item.collapse
-            label Year
-            input(type="text",placeholder="Year")
-        .title Yield Monitor
-        ul.list
-          li.item.collapse
-            label Make
-            input(type="text",placeholder="Make")
-          li.item.collapse
-            label Model
-            input(type="text",placeholder="Model")
-          li.item.collapse
-            .toggle.gray(data-action="toggle",data-toggle="controllerConnection",data-state="no")
-              input(type="hidden")
-              .toggleOptions
-                .toggleOptionsTrack
-                  .toggleOption Yes
-                  .toggleOption No
-              .toggleLabel Is Monitor Setup and Running?
-          li.item.collapse
-            label Data Card Type
-            input(type="text",placeholder="Data Card Type")
-        {{/if}}
-
-        {{#if equalsSession 'equipmentType' 'Truck'}}
-        ul.list
-          li.item.collapse
-            label Unit Name or #
-            input(type="text",placeholder="Unit Name")
-          li.item.collapse
-            label Make
-            select.select
-              option(value="Make") Make
-          li.item.collapse
-            label Model
-            input(type="text",placeholder="Model")
-          li.item.collapse
-            label Year
-            input(type="text",placeholder="Year")
-        {{/if}}
-        button.button.rounded(type="submit") Save
-      {{else}}
-      .title Big Red
-      .iconWrapper.size-16.right
-        {{icon 'print'}}
-      form
-        input(type="text",placeholder="Unit Name")
-        ul.inline-list
-          li
-            a
-              select
+        form
+          ul.list
+            li.item.collapse
+              select.select(data-action="setEquipmentType")
                 option(value="Seeding System") Seeding System
                 option(value="Floater") Floater
                 option(value="Sprayer") Sprayer
                 option(value="NH3 Cultivator") NH3 Cultivator
                 option(value="Combine") Combine
-                option(value="Swather") Swather
-                option(value="Tractor") Tractor
+                //-option(value="Swather") Swather
+                //-option(value="Tractor") Tractor
                 option(value="Truck") Truck
-                option(value="Fleet") Fleet
-          li
-            a
-              select
+                //-option(value="Fleet") Fleet
+      .iconWrapper.size-16.right
+        {{icon 'print'}}
+      form
+        {{#if equalsSession 'equipmentType' 'Seeding System'}}
+        .section
+          ul.list
+            li.item.collapse
+              label Unit Name
+              input(type="text",placeholder="Unit Name")
+            li.item.collapse
+              label Cart Make
+              select.select
                 option(value="Cart Make") Cart Make
-          li
-            a
-              select
+            li.item.collapse
+              label Cart Model
+              select.select
                 option(value="Cart Model") Cart Model
-        ul.inline-list.columns-5
-          li.column
-            .title Tank 1
-            input(type="text",placeholder="Capacity (bu)",value="200 Bushels")
-            input(type="text",placeholder="Select Product",value="Select Product")
-          li.column
-            .title Tank 2
-            input(type="text",placeholder="Capacity (bu)",value="150 Bushels")
-            input(type="text",placeholder="Select Product",value="Select Product")
-          li.column
-            .title Tank 3
-            input(type="text",placeholder="Capacity (bu)",value="200 Bushels")
-            input(type="text",placeholder="Select Product",value="Select Product")
-          li.column
-            .title Tank 4
-            input(type="text",placeholder="Capacity (bu)")
-            input(type="text",placeholder="Select Product")
-          li.column
-            .title Tank 5
-            input(type="text",placeholder="Capacity (bu)")
-            input(type="text",placeholder="Select Product")
-        ul.inline-list
-          li
-            select
-              option(value="Drill Make") Drill Make
-          li
-            label.inline Drill Width
-            input.inline(type="text",placeholder="0",style="width: 80px;")
-            select.inline
-              option(value="Ft") Ft
-          li
-            select
-              option(value="Fertilizer Type") Fertilizer Type
-              option(value="Dry") Dry
-        ul.inline-list
-          li
-            label.inline Dry Rate Maximum
-            input.inline(type="text",placeholder="0 lbs/acre")
-        ul.inline-list
-          li
-            label.inline Opener Width
-            input.inline(type="text",placeholder="0 inches")
-        ul.inline-list
-          li
-            label.inline Shank Spacing
-            input.inline(type="text",placeholder="0 inches")
-        ul.inline-list
-          li
-            .toggle.gray.large(data-action="toggle",data-toggle="shootType",data-state="no")
-              input(type="hidden")
-              .toggleOptions
-                .toggleOptionsTrack
-                  .toggleOption Single-Shoot
-                  .toggleOption Double-Shoot
-              .toggleLabel Shoot Type?
-            select.inline
-              option(value="Receiver Make") Receiver Make
-              option(value="John Deere") John Deere
-            select.inline
-              option(value="Model") Model
-              option(value="1910") 1910
-        ul.inline-list
-          li
-            .toggle.gray(data-action="toggle",data-toggle="controllerConnection",data-state="no")
-              input(type="hidden")
-              .toggleOptions
-                .toggleOptionsTrack
-                  .toggleOption Yes
-                  .toggleOption No
-              .toggleLabel Connected to Controller?
-            select.inline
-              option(value="Controller Make") Controller Make
-              option(value="John Deere") John Deere
-            select.inline
-              option(value="Model") Model
-              option(value="1910") 1910
-        textarea.expanding(type="text",placeholder="Write Notes Here..")
+              ul.list
+                li.item.collapse
+                  label Tank 1
+                  input(type="text",placeholder="Capacity (bu)",value="200 Bushels")
+                  input(type="text",placeholder="Select Product",value="Select Product")
+                li.item.collapse
+                  label Tank 2
+                  input(type="text",placeholder="Capacity (bu)",value="150 Bushels")
+                  input(type="text",placeholder="Select Product",value="Select Product")
+                li.item.collapse
+                  label Tank 3
+                  input(type="text",placeholder="Capacity (bu)",value="200 Bushels")
+                  input(type="text",placeholder="Select Product",value="Select Product")
+                li.item.collapse
+                  label Tank 4
+                  input(type="text",placeholder="Capacity (bu)")
+                  input(type="text",placeholder="Select Product")
+                li.item.collapse
+                  label Tank 5
+                  input(type="text",placeholder="Capacity (bu)")
+                  input(type="text",placeholder="Select Product")
+          ul.list
+            li.item.collapse
+              label Drill Make
+              select.select
+                option(value="Drill Make") Drill Make
+            li.item.collapse
+              label Drill Width
+              input.left(type="text",placeholder="0",style="width: 80px;")
+              select.select
+                option(value="Ft") Ft
+            li.item.collapse
+              label Fertilizer Type
+              select.select
+                option(value="Fertilizer Type") Fertilizer Type
+                option(value="Dry") Dry
+              ul.list
+                li.item.collapse
+                  label Dry Rate Maximum
+                  input(type="text",placeholder="0")
+                  span lbs/acre
+                li.item.collapse
+                  label Opener Width
+                  input(type="text",placeholder="0")
+                  span inches
+                li.item.collapse
+                  label Shank Spacing
+                  input(type="text",placeholder="0")
+                  span inches
+                li.item.collapse
+                  .toggle.gray.large(data-action="toggle",data-toggle="shootType",data-state="no")
+                    input(type="hidden")
+                    .toggleOptions
+                      .toggleOptionsTrack
+                        .toggleOption Single-Shoot
+                        .toggleOption Double-Shoot
+                    .toggleLabel Shoot Type?
+          ul.list
+            li.item.collapse
+              label Receiver Make
+              select.select
+                option(value="Receiver Make") Receiver Make
+                option(value="John Deere") John Deere
+            li.item.collapse
+              label Model
+              select.select
+                option(value="Model") Model
+                option(value="1910") 1910
+            li.item.collapse
+              .toggle.gray(data-action="toggle",data-toggle="controllerConnection",data-state="no")
+                input(type="hidden")
+                .toggleOptions
+                  .toggleOptionsTrack
+                    .toggleOption Yes
+                    .toggleOption No
+                .toggleLabel Connected to Controller?
+            li.item.collapse
+              label Controller Make
+              select.select
+                option(value="Controller Make") Controller Make
+                option(value="John Deere") John Deere
+            li.item.collapse
+              label Model
+              select.select
+                option(value="Model") Model
+                option(value="1910") 1910
+        {{/if}}
+
+        {{#if equalsSession 'equipmentType' 'Floater'}}
+        .section
+          ul.list
+            li.item.collapse
+              label Unit Name
+              input(type="text",placeholder="Unit Name")
+            li.item.collapse
+              label Make
+              select.select
+                option(value="Make") Make
+              ul.list
+                li.item.collapse
+                  label Tank 1
+                  input(type="text",placeholder="Capacity (bu)",value="200 Bushels")
+                  input(type="text",placeholder="Select Product",value="Select Product")
+                li.item.collapse
+                  label Tank 2
+                  input(type="text",placeholder="Capacity (bu)",value="150 Bushels")
+                  input(type="text",placeholder="Select Product",value="Select Product")
+                li.item.collapse
+                  label Tank 3
+                  input(type="text",placeholder="Capacity (bu)",value="200 Bushels")
+                  input(type="text",placeholder="Select Product",value="Select Product")
+                li.item.collapse
+                  label Tank 4
+                  input(type="text",placeholder="Capacity (bu)")
+                  input(type="text",placeholder="Select Product")
+                li.item.collapse
+                  label Tank 5
+                  input(type="text",placeholder="Capacity (bu)")
+                  input(type="text",placeholder="Select Product")
+          ul.list
+            li.item.collapse
+              label Fertilizer Type
+              select.select
+                option(value="Fertilizer Type") Fertilizer Type
+                option(value="Dry") Dry
+              ul.list
+                li.item.collapse
+                  label Dry Rate Maximum
+                  input(type="text",placeholder="0")
+                  span lbs/acre
+                li.item.collapse
+                  label Opener Width
+                  input(type="text",placeholder="0")
+                  span inches
+                li.item.collapse
+                  label Shank Spacing
+                  input(type="text",placeholder="0")
+                  span inches
+                li.item.collapse
+                  .toggle.gray.large(data-action="toggle",data-toggle="shootType",data-state="no")
+                    input(type="hidden")
+                    .toggleOptions
+                      .toggleOptionsTrack
+                        .toggleOption Single-Shoot
+                        .toggleOption Double-Shoot
+                    .toggleLabel Shoot Type?
+          ul.list
+            li.item.collapse
+              label Receiver Make
+              select.select
+                option(value="Receiver Make") Receiver Make
+                option(value="John Deere") John Deere
+            li.item.collapse
+              label Model
+              select.select
+                option(value="Model") Model
+                option(value="1910") 1910
+            li.item.collapse
+              .toggle.gray(data-action="toggle",data-toggle="controllerConnection",data-state="no")
+                input(type="hidden")
+                .toggleOptions
+                  .toggleOptionsTrack
+                    .toggleOption Yes
+                    .toggleOption No
+                .toggleLabel Connected to Controller?
+            li.item.collapse
+              label Controller Make
+              select.select
+                option(value="Controller Make") Controller Make
+                option(value="John Deere") John Deere
+            li.item.collapse
+              label Model
+              select.select
+                option(value="Model") Model
+                option(value="1910") 1910
+        {{/if}}
+
+        {{#if equalsSession 'equipmentType' 'Sprayer'}}
+        .section
+          ul.list
+            li.item.collapse
+              label Unit Name
+              input(type="text",placeholder="Unit Name")
+            li.item.collapse
+              label Make
+              select.select
+                option(value="Make") Make
+              ul.list
+                li.item.collapse
+                  label Tank 1
+                  input(type="text",placeholder="Capacity (bu)",value="200 Bushels")
+                  input(type="text",placeholder="Select Product",value="Select Product")
+                li.item.collapse
+                  label Tank 2
+                  input(type="text",placeholder="Capacity (bu)",value="150 Bushels")
+                  input(type="text",placeholder="Select Product",value="Select Product")
+                li.item.collapse
+                  label Tank 3
+                  input(type="text",placeholder="Capacity (bu)",value="200 Bushels")
+                  input(type="text",placeholder="Select Product",value="Select Product")
+                li.item.collapse
+                  label Tank 4
+                  input(type="text",placeholder="Capacity (bu)")
+                  input(type="text",placeholder="Select Product")
+                li.item.collapse
+                  label Tank 5
+                  input(type="text",placeholder="Capacity (bu)")
+                  input(type="text",placeholder="Select Product")
+          ul.list
+            li.item.collapse
+              label Fertilizer Type
+              select.select
+                option(value="Fertilizer Type") Fertilizer Type
+                option(value="Dry") Liquid
+              ul.list
+                li.item.collapse
+                  label Liquid Rates for Nozzles
+                  input(type="text",placeholder="min")
+                  span -
+                  input(type="text",placeholder="max")
+                  span gal/acre
+                li.item.collapse
+                  .toggle.gray.large(data-action="toggle",data-toggle="shootType",data-state="no")
+                    input(type="hidden")
+                    .toggleOptions
+                      .toggleOptionsTrack
+                        .toggleOption U.S. Gallons
+                        .toggleOption Imp. Gallons
+                    .toggleLabel Gallons
+                li.item.collapse
+                  .button-bar.columns-3
+                    a.button(data-active="true") Mid-Row Bander
+                    a.button(data-active="false") Paired Row
+                    a.button(data-active="false") Side Band
+          ul.list
+            li.item.collapse
+              label Receiver Make
+              select.select
+                option(value="Receiver Make") Receiver Make
+                option(value="John Deere") John Deere
+            li.item.collapse
+              label Model
+              select.select
+                option(value="Model") Model
+                option(value="1910") 1910
+            li.item.collapse
+              .toggle.gray(data-action="toggle",data-toggle="controllerConnection",data-state="no")
+                input(type="hidden")
+                .toggleOptions
+                  .toggleOptionsTrack
+                    .toggleOption Yes
+                    .toggleOption No
+                .toggleLabel Connected to Controller?
+            li.item.collapse
+              label Controller Make
+              select.select
+                option(value="Controller Make") Controller Make
+                option(value="John Deere") John Deere
+            li.item.collapse
+              label Model
+              select.select
+                option(value="Model") Model
+                option(value="1910") 1910
+        {{/if}}
+
+        {{#if equalsSession 'equipmentType' 'NH3 Cultivator'}}
+        .section
+          ul.list
+            li.item.collapse
+              label Unit Name
+              input(type="text",placeholder="Unit Name")
+            li.item.collapse
+              label Make
+              select.select
+                option(value="Make") Make
+            li.item.collapse
+              label NH3 Rates
+              input(type="text",placeholder="min")
+              span -
+              input(type="text",placeholder="max")
+              span lbs actual/acre
+            li.item.collapse
+              label Receiver Make
+              select.select
+                option(value="Receiver Make") Receiver Make
+                option(value="John Deere") John Deere
+            li.item.collapse
+              label Model
+              select.select
+                option(value="Model") Model
+                option(value="1910") 1910
+            li.item.collapse
+              .toggle.gray(data-action="toggle",data-toggle="controllerConnection",data-state="no")
+                input(type="hidden")
+                .toggleOptions
+                  .toggleOptionsTrack
+                    .toggleOption Yes
+                    .toggleOption No
+                .toggleLabel Connected to Controller?
+            li.item.collapse
+              label Controller Make
+              select.select
+                option(value="Controller Make") Controller Make
+                option(value="John Deere") John Deere
+            li.item.collapse
+              label Model
+              select.select
+                option(value="Model") Model
+                option(value="1910") 1910
+        {{/if}}
+
+        {{#if equalsSession 'equipmentType' 'Combine'}}
+        .section
+          ul.list
+            li.item.collapse
+              label Unit Name or #
+              input(type="text",placeholder="Unit Name")
+            li.item.collapse
+              label Make
+              select.select
+                option(value="Make") Make
+            li.item.collapse
+              label Model
+              input(type="text",placeholder="Model")
+            li.item.collapse
+              label Year
+              input(type="text",placeholder="Year")
+        .section
+          .title Yield Monitor
+          ul.list
+            li.item.collapse
+              label Make
+              input(type="text",placeholder="Make")
+            li.item.collapse
+              label Model
+              input(type="text",placeholder="Model")
+            li.item.collapse
+              .toggle.gray(data-action="toggle",data-toggle="controllerConnection",data-state="no")
+                input(type="hidden")
+                .toggleOptions
+                  .toggleOptionsTrack
+                    .toggleOption Yes
+                    .toggleOption No
+                .toggleLabel Is Monitor Setup and Running?
+            li.item.collapse
+              label Data Card Type
+              input(type="text",placeholder="Data Card Type")
+        {{/if}}
+
+        {{#if equalsSession 'equipmentType' 'Truck'}}
+        .section
+          ul.list
+            li.item.collapse
+              label Unit Name or #
+              input(type="text",placeholder="Unit Name")
+            li.item.collapse
+              label Make
+              select.select
+                option(value="Make") Make
+            li.item.collapse
+              label Model
+              input(type="text",placeholder="Model")
+            li.item.collapse
+              label Year
+              input(type="text",placeholder="Year")
+        {{/if}}
+        button.button.rounded(type="submit") Save
+      {{else}}
+      .title Big Red
+        form
+          ul.list
+            li.item.collapse
+              select.select(data-action="setEquipmentType")
+                option(value="Seeding System") Seeding System
+                option(value="Floater") Floater
+                option(value="Sprayer") Sprayer
+                option(value="NH3 Cultivator") NH3 Cultivator
+                option(value="Combine") Combine
+                //-option(value="Swather") Swather
+                //-option(value="Tractor") Tractor
+                option(value="Truck") Truck
+                //-option(value="Fleet") Fleet
+      .iconWrapper.size-16.right
+        {{icon 'print'}}
+      form
+        {{#if equalsSession 'equipmentType' 'Seeding System'}}
+        .section
+          ul.list
+            li.item.collapse
+              label Unit Name
+              input(type="text",placeholder="Unit Name")
+            li.item.collapse
+              label Cart Make
+              select.select
+                option(value="Cart Make") Cart Make
+            li.item.collapse
+              label Cart Model
+              select.select
+                option(value="Cart Model") Cart Model
+              ul.list
+                li.item.collapse
+                  label Tank 1
+                  input(type="text",placeholder="Capacity (bu)",value="200 Bushels")
+                  input(type="text",placeholder="Select Product",value="Select Product")
+                li.item.collapse
+                  label Tank 2
+                  input(type="text",placeholder="Capacity (bu)",value="150 Bushels")
+                  input(type="text",placeholder="Select Product",value="Select Product")
+                li.item.collapse
+                  label Tank 3
+                  input(type="text",placeholder="Capacity (bu)",value="200 Bushels")
+                  input(type="text",placeholder="Select Product",value="Select Product")
+                li.item.collapse
+                  label Tank 4
+                  input(type="text",placeholder="Capacity (bu)")
+                  input(type="text",placeholder="Select Product")
+                li.item.collapse
+                  label Tank 5
+                  input(type="text",placeholder="Capacity (bu)")
+                  input(type="text",placeholder="Select Product")
+          ul.list
+            li.item.collapse
+              label Drill Make
+              select.select
+                option(value="Drill Make") Drill Make
+            li.item.collapse
+              label Drill Width
+              input.left(type="text",placeholder="0",style="width: 80px;")
+              select.select
+                option(value="Ft") Ft
+            li.item.collapse
+              label Fertilizer Type
+              select.select
+                option(value="Fertilizer Type") Fertilizer Type
+                option(value="Dry") Dry
+              ul.list
+                li.item.collapse
+                  label Dry Rate Maximum
+                  input(type="text",placeholder="0")
+                  span lbs/acre
+                li.item.collapse
+                  label Opener Width
+                  input(type="text",placeholder="0")
+                  span inches
+                li.item.collapse
+                  label Shank Spacing
+                  input(type="text",placeholder="0")
+                  span inches
+                li.item.collapse
+                  .toggle.gray.large(data-action="toggle",data-toggle="shootType",data-state="no")
+                    input(type="hidden")
+                    .toggleOptions
+                      .toggleOptionsTrack
+                        .toggleOption Single-Shoot
+                        .toggleOption Double-Shoot
+                    .toggleLabel Shoot Type?
+          ul.list
+            li.item.collapse
+              label Receiver Make
+              select.select
+                option(value="Receiver Make") Receiver Make
+                option(value="John Deere") John Deere
+            li.item.collapse
+              label Model
+              select.select
+                option(value="Model") Model
+                option(value="1910") 1910
+            li.item.collapse
+              .toggle.gray(data-action="toggle",data-toggle="controllerConnection",data-state="no")
+                input(type="hidden")
+                .toggleOptions
+                  .toggleOptionsTrack
+                    .toggleOption Yes
+                    .toggleOption No
+                .toggleLabel Connected to Controller?
+            li.item.collapse
+              label Controller Make
+              select.select
+                option(value="Controller Make") Controller Make
+                option(value="John Deere") John Deere
+            li.item.collapse
+              label Model
+              select.select
+                option(value="Model") Model
+                option(value="1910") 1910
+        {{/if}}
+
+        {{#if equalsSession 'equipmentType' 'Floater'}}
+        .section
+          ul.list
+            li.item.collapse
+              label Unit Name
+              input(type="text",placeholder="Unit Name")
+            li.item.collapse
+              label Make
+              select.select
+                option(value="Make") Make
+              ul.list
+                li.item.collapse
+                  label Tank 1
+                  input(type="text",placeholder="Capacity (bu)",value="200 Bushels")
+                  input(type="text",placeholder="Select Product",value="Select Product")
+                li.item.collapse
+                  label Tank 2
+                  input(type="text",placeholder="Capacity (bu)",value="150 Bushels")
+                  input(type="text",placeholder="Select Product",value="Select Product")
+                li.item.collapse
+                  label Tank 3
+                  input(type="text",placeholder="Capacity (bu)",value="200 Bushels")
+                  input(type="text",placeholder="Select Product",value="Select Product")
+                li.item.collapse
+                  label Tank 4
+                  input(type="text",placeholder="Capacity (bu)")
+                  input(type="text",placeholder="Select Product")
+                li.item.collapse
+                  label Tank 5
+                  input(type="text",placeholder="Capacity (bu)")
+                  input(type="text",placeholder="Select Product")
+          ul.list
+            li.item.collapse
+              label Fertilizer Type
+              select.select
+                option(value="Fertilizer Type") Fertilizer Type
+                option(value="Dry") Dry
+              ul.list
+                li.item.collapse
+                  label Dry Rate Maximum
+                  input(type="text",placeholder="0")
+                  span lbs/acre
+                li.item.collapse
+                  label Opener Width
+                  input(type="text",placeholder="0")
+                  span inches
+                li.item.collapse
+                  label Shank Spacing
+                  input(type="text",placeholder="0")
+                  span inches
+                li.item.collapse
+                  .toggle.gray.large(data-action="toggle",data-toggle="shootType",data-state="no")
+                    input(type="hidden")
+                    .toggleOptions
+                      .toggleOptionsTrack
+                        .toggleOption Single-Shoot
+                        .toggleOption Double-Shoot
+                    .toggleLabel Shoot Type?
+          ul.list
+            li.item.collapse
+              label Receiver Make
+              select.select
+                option(value="Receiver Make") Receiver Make
+                option(value="John Deere") John Deere
+            li.item.collapse
+              label Model
+              select.select
+                option(value="Model") Model
+                option(value="1910") 1910
+            li.item.collapse
+              .toggle.gray(data-action="toggle",data-toggle="controllerConnection",data-state="no")
+                input(type="hidden")
+                .toggleOptions
+                  .toggleOptionsTrack
+                    .toggleOption Yes
+                    .toggleOption No
+                .toggleLabel Connected to Controller?
+            li.item.collapse
+              label Controller Make
+              select.select
+                option(value="Controller Make") Controller Make
+                option(value="John Deere") John Deere
+            li.item.collapse
+              label Model
+              select.select
+                option(value="Model") Model
+                option(value="1910") 1910
+        {{/if}}
+
+        {{#if equalsSession 'equipmentType' 'Sprayer'}}
+        .section
+          ul.list
+            li.item.collapse
+              label Unit Name
+              input(type="text",placeholder="Unit Name")
+            li.item.collapse
+              label Make
+              select.select
+                option(value="Make") Make
+              ul.list
+                li.item.collapse
+                  label Tank 1
+                  input(type="text",placeholder="Capacity (bu)",value="200 Bushels")
+                  input(type="text",placeholder="Select Product",value="Select Product")
+                li.item.collapse
+                  label Tank 2
+                  input(type="text",placeholder="Capacity (bu)",value="150 Bushels")
+                  input(type="text",placeholder="Select Product",value="Select Product")
+                li.item.collapse
+                  label Tank 3
+                  input(type="text",placeholder="Capacity (bu)",value="200 Bushels")
+                  input(type="text",placeholder="Select Product",value="Select Product")
+                li.item.collapse
+                  label Tank 4
+                  input(type="text",placeholder="Capacity (bu)")
+                  input(type="text",placeholder="Select Product")
+                li.item.collapse
+                  label Tank 5
+                  input(type="text",placeholder="Capacity (bu)")
+                  input(type="text",placeholder="Select Product")
+          ul.list
+            li.item.collapse
+              label Fertilizer Type
+              select.select
+                option(value="Fertilizer Type") Fertilizer Type
+                option(value="Dry") Liquid
+              ul.list
+                li.item.collapse
+                  label Liquid Rates for Nozzles
+                  input(type="text",placeholder="min")
+                  span -
+                  input(type="text",placeholder="max")
+                  span gal/acre
+                li.item.collapse
+                  .toggle.gray.large(data-action="toggle",data-toggle="shootType",data-state="no")
+                    input(type="hidden")
+                    .toggleOptions
+                      .toggleOptionsTrack
+                        .toggleOption U.S. Gallons
+                        .toggleOption Imp. Gallons
+                    .toggleLabel Gallons
+                li.item.collapse
+                  .button-bar.columns-3
+                    a.button(data-active="true") Mid-Row Bander
+                    a.button(data-active="false") Paired Row
+                    a.button(data-active="false") Side Band
+          ul.list
+            li.item.collapse
+              label Receiver Make
+              select.select
+                option(value="Receiver Make") Receiver Make
+                option(value="John Deere") John Deere
+            li.item.collapse
+              label Model
+              select.select
+                option(value="Model") Model
+                option(value="1910") 1910
+            li.item.collapse
+              .toggle.gray(data-action="toggle",data-toggle="controllerConnection",data-state="no")
+                input(type="hidden")
+                .toggleOptions
+                  .toggleOptionsTrack
+                    .toggleOption Yes
+                    .toggleOption No
+                .toggleLabel Connected to Controller?
+            li.item.collapse
+              label Controller Make
+              select.select
+                option(value="Controller Make") Controller Make
+                option(value="John Deere") John Deere
+            li.item.collapse
+              label Model
+              select.select
+                option(value="Model") Model
+                option(value="1910") 1910
+        {{/if}}
+
+        {{#if equalsSession 'equipmentType' 'NH3 Cultivator'}}
+        .section
+          ul.list
+            li.item.collapse
+              label Unit Name
+              input(type="text",placeholder="Unit Name")
+            li.item.collapse
+              label Make
+              select.select
+                option(value="Make") Make
+            li.item.collapse
+              label NH3 Rates
+              input(type="text",placeholder="min")
+              span -
+              input(type="text",placeholder="max")
+              span lbs actual/acre
+            li.item.collapse
+              label Receiver Make
+              select.select
+                option(value="Receiver Make") Receiver Make
+                option(value="John Deere") John Deere
+            li.item.collapse
+              label Model
+              select.select
+                option(value="Model") Model
+                option(value="1910") 1910
+            li.item.collapse
+              .toggle.gray(data-action="toggle",data-toggle="controllerConnection",data-state="no")
+                input(type="hidden")
+                .toggleOptions
+                  .toggleOptionsTrack
+                    .toggleOption Yes
+                    .toggleOption No
+                .toggleLabel Connected to Controller?
+            li.item.collapse
+              label Controller Make
+              select.select
+                option(value="Controller Make") Controller Make
+                option(value="John Deere") John Deere
+            li.item.collapse
+              label Model
+              select.select
+                option(value="Model") Model
+                option(value="1910") 1910
+        {{/if}}
+
+        {{#if equalsSession 'equipmentType' 'Combine'}}
+        .section
+          ul.list
+            li.item.collapse
+              label Unit Name or #
+              input(type="text",placeholder="Unit Name")
+            li.item.collapse
+              label Make
+              select.select
+                option(value="Make") Make
+            li.item.collapse
+              label Model
+              input(type="text",placeholder="Model")
+            li.item.collapse
+              label Year
+              input(type="text",placeholder="Year")
+        .section
+          .title Yield Monitor
+          ul.list
+            li.item.collapse
+              label Make
+              input(type="text",placeholder="Make")
+            li.item.collapse
+              label Model
+              input(type="text",placeholder="Model")
+            li.item.collapse
+              .toggle.gray(data-action="toggle",data-toggle="controllerConnection",data-state="no")
+                input(type="hidden")
+                .toggleOptions
+                  .toggleOptionsTrack
+                    .toggleOption Yes
+                    .toggleOption No
+                .toggleLabel Is Monitor Setup and Running?
+            li.item.collapse
+              label Data Card Type
+              input(type="text",placeholder="Data Card Type")
+        {{/if}}
+
+        {{#if equalsSession 'equipmentType' 'Truck'}}
+        .section
+          ul.list
+            li.item.collapse
+              label Unit Name or #
+              input(type="text",placeholder="Unit Name")
+            li.item.collapse
+              label Make
+              select.select
+                option(value="Make") Make
+            li.item.collapse
+              label Model
+              input(type="text",placeholder="Model")
+            li.item.collapse
+              label Year
+              input(type="text",placeholder="Year")
+        {{/if}}
         button.button.rounded(type="submit") Save
       {{/if}}
     {{/if}}
