@@ -51,6 +51,7 @@ Router.map ->
     data: ->
       Session.set "subHeaderState","open"
       Session.set "activeHeaderPath","fields"
+      Session.set "notice","field-boundary"
       if !@params.section
         Router.go "fields",
           section: "field-info"
@@ -125,11 +126,11 @@ Router.map ->
       rightSidebar:
         to: "rightSidebar"
     data: ->
-      Session.set "subHeaderState","closed"
+      Session.set "subHeaderState","open"
       Session.set "leftSidebarState","open"
       Session.set "leftSidebarToggleState","open"
-      Session.set "rightSidebarState","closed"
-      Session.set "rightSidebarToggleState","closed"
+      Session.set "rightSidebarState","open"
+      Session.set "rightSidebarToggleState","open"
       Session.set "activeHeaderPath","equipment"
       if !@params.section
         Router.go "equipment",
@@ -226,6 +227,8 @@ Router.map ->
     data: ->
       Session.set "subHeaderState","open"
       Session.set "activeHeaderPath","farm-planner"
+      Session.set "noticeHidden",false
+      Session.set "notice","field-boundary"
       if !@params.section
         Session.set "rightSidebarState","closed"
         Router.go "farm-planner",
@@ -307,6 +310,13 @@ if Meteor.isClient
       Session.set("coverHidden",true)
     else
       Session.set("coverHidden",false)
+
+  @toggleNotice = () ->
+    if Session.equals("noticeHidden",false)
+      Session.set("noticeHidden",true)
+    else
+      Session.set("noticeHidden",false)
+
   initMap = () ->
     map = undefined
     fbLayer = undefined
@@ -444,13 +454,16 @@ if Meteor.isClient
     Session.setDefault "leftSidebarState","open"
     Session.setDefault "rightSidebarState","open"
     Session.setDefault "coverHidden",true
+    Session.setDefault "noticeHidden",false
     Session.setDefault "fieldsFilter","All Fields - 2013"
     Session.setDefault "equipmentFilter","All Equipment"
     Session.setDefault "marketFilter","All Commodities"
     Session.setDefault "farm-plannerFilter","Farm Planner 2013"
     Session.setDefault "positionType","Future"
+    Session.setDefault "equipmentType","Seeding System"
     Session.setDefault "positionCommodity","Canola"
     Session.setDefault "activeTile","compareYield"
+    Session.setDefault "dropdownState","closed"
 
     Template.layout.rendered = ->
       datepickers = this.findAll(".datepicker")
@@ -465,12 +478,32 @@ if Meteor.isClient
           Session.set "positionType",undefined
         if action is "setPositionType"
           Session.set "positionType",currentTarget.attr("value")
+        if action is "setEquipmentType"
+          console.log "CHANGING!"
+          console.log currentTarget.attr("value")
+          Session.set "equipmentType",currentTarget.attr("value")
       )
       textareas = $(this.findAll(".expanding"))
       if textareas.length isnt 0
         textareas.expandingTextarea()
 
+      $(".stubImage").waitForImages({
+        finished: ->
+          loadingSpinner.stop()
+        each: ->
+          console.log "Each Image"
+        waitForAll: true
+      })
+
     Template.layout.events
+      #Disable dropdown when the user clicks outside the region
+      "click .header, click .subHeader, click .sidebar, click .content":(e,t)->
+        Session.set "dropdownState","closed"
+      "click [data-action='toggleDropdown']":(e,t)->
+        if Session.equals "dropdownState","open"
+          Session.set "dropdownState","closed"
+        else
+          Session.set "dropdownState","open"
       "click [data-action='toggleCover']":(e,t)->
         e.stopImmediatePropagation()
         console.log "toggleCover clicked!"
@@ -479,13 +512,18 @@ if Meteor.isClient
         #If there's a cover data-attribute, set the current cover to be that ID
         Session.set("cover",cover) if cover?
         toggleCover()
-      "change [data-action='setPositionType']":(e,t)->
+      "click [data-action='toggleNotice']":(e,t)->
+        e.stopImmediatePropagation()
+        console.log "toggleNotice clicked!"
         currentTarget = $(e.currentTarget)
-        Session.set "positionType",currentTarget.attr("value")
-      "change [data-action='setPositionCommodity']":(e,t)->
+        notice = currentTarget.data("notice")
+        #If there's a cover data-attribute, set the current cover to be that ID
+        Session.set("notice",notice) if notice?
+        toggleNotice()
+      "click [data-action='setNotice']":(e,t)->
         currentTarget = $(e.currentTarget)
-        Session.set "positionCommodity",currentTarget.attr("value")
-        Session.set "positionType",undefined
+        notice = currentTarget.data("notice")
+        Session.set("notice",notice) if notice?
       "click .coverContent":(e,t)->
         e.stopImmediatePropagation()
       "click [data-action='toggle']":(e,t)->
@@ -503,6 +541,29 @@ if Meteor.isClient
         console.log("tile",tile)
         console.log("this:",this)
         Session.set "activeTile",tile
+
+    Template.spinner.rendered = ->
+      opts =
+        lines: 10 # The number of lines to draw
+        length: 0 # The length of each line
+        width: 10 # The line thickness
+        radius: 30 # The radius of the inner circle
+        corners: 1 # Corner roundness (0..1)
+        rotate: 0 # The rotation offset
+        direction: 1 # 1: clockwise, -1: counterclockwise
+        color: "#000" # #rgb or #rrggbb
+        speed: 1 # Rounds per second
+        trail: 50 # Afterglow percentage
+        shadow: false # Whether to render a shadow
+        hwaccel: true # Whether to use hardware acceleration
+        className: "spinner" # The CSS class to assign to the spinner
+        zIndex: 2e9 # The z-index (defaults to 2000000000)
+        #top: "auto" # Top position relative to parent in px
+        #left: "auto" # Left position relative to parent in px
+
+      target = document.getElementById("spinner")
+      window.loadingSpinner = new Spinner(opts)
+      loadingSpinner.spin(target)
 
     Template.map.rendered = ->
       console.log "Map rendered!"

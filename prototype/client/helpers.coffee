@@ -26,3 +26,10 @@ Handlebars.registerHelper "equalsSession", (context,value) ->
   Session.equals context,value
 Handlebars.registerHelper "notEqualsSession", (context,value) ->
   !Session.equals context,value
+Handlebars.registerHelper "borderState", (context,value) ->
+  if Router.current().template is "dashboard" or
+    Router.current().params["section"] is "field-info" or
+    Router.current().params["section"] is "fertility-map"
+      "collapsed"
+    else
+      "expanded"

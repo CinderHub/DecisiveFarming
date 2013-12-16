@@ -64,27 +64,32 @@ template(name="subHeader")
     ul.inline-list.left
       {{#if currentContextIs 'fields'}}
         li
-          a(href="/{{currentContext}}/field-info/370",data-active="{{equalsSession 'activeSubheaderPath' 'field-info'}}")
+          a(href="/{{currentContext}}/field-info/370",data-active="{{equalsSession 'activeSubheaderPath' 'field-info'}}",data-progress="complete")
+            .badge 1
             .iconWrapper.left.size-24
               {{icon 'summary'}}
             | Field Info
         li
-          a(href="/{{currentContext}}/soil-testing/370",data-active="{{equalsSession 'activeSubheaderPath' 'soil-testing'}}")
+          a(href="/{{currentContext}}/soil-testing/370",data-active="{{equalsSession 'activeSubheaderPath' 'soil-testing'}}",data-progress="inProgress")
+            .badge 2
             .iconWrapper.left.size-24
               {{icon 'soilTesting'}}
             | Soil Testing
         li
-          a(href="/{{currentContext}}/fertility-map/370",data-active="{{equalsSession 'activeSubheaderPath' 'fertility-map'}}")
+          a(href="/{{currentContext}}/fertility-map/370",data-active="{{equalsSession 'activeSubheaderPath' 'fertility-map'}}",data-progress="incomplete")
+            .badge 3
             .iconWrapper.left.size-24
               {{icon 'fertilityMap'}}
             | Fertility Map
         li
-          a(href="/{{currentContext}}/rx-rates/370",data-active="{{equalsSession 'activeSubheaderPath' 'rx-rates'}}")
+          a(href="/{{currentContext}}/rx-rates/370",data-active="{{equalsSession 'activeSubheaderPath' 'rx-rates'}}",data-progress="inactive")
+            .badge 4
             .iconWrapper.left.size-24
               {{icon 'rxRates'}}
             | RX Rates
         li
-          a(href="/{{currentContext}}/rx-files/370",data-active="{{equalsSession 'activeSubheaderPath' 'rx-files'}}")
+          a(href="/{{currentContext}}/rx-files/370",data-active="{{equalsSession 'activeSubheaderPath' 'rx-files'}}",data-progress="inactive")
+            .badge 5
             .iconWrapper.left.size-24
               {{icon 'rxFiles'}}
             | RX Files
@@ -125,7 +130,8 @@ template(name="subHeader")
 
       {{#if currentContextIs 'farm-planner'}}
         li
-          a(href="/{{currentContext}}/crop-plans",data-active="{{equalsSession 'activeSubheaderPath' 'crop-plans'}}")
+          a(href="/{{currentContext}}/crop-plans",data-active="{{equalsSession 'activeSubheaderPath' 'crop-plans'}}",data-progress="complete")
+            .badge 1
             .iconWrapper.left.size-24
               {{icon 'cropPlans'}}
             | Crop Plans
@@ -135,17 +141,20 @@ template(name="subHeader")
               {{icon 'equipment'}}
             | Equipment
         li
-          a(href="/{{currentContext}}/revenue-and-expenses",data-active="{{equalsSession 'activeSubheaderPath' 'revenue-and-expenses'}}")
+          a(href="/{{currentContext}}/revenue-and-expenses",data-active="{{equalsSession 'activeSubheaderPath' 'revenue-and-expenses'}}",data-progress="inProgress")
+            .badge 2
             .iconWrapper.left.size-24
               {{icon 'revenueAndExpenses'}}
             | Revenue And Expenses
         li
-          a(href="/{{currentContext}}/market-plan/1221",data-active="{{equalsSession 'activeSubheaderPath' 'market-plan'}}")
+          a(href="/{{currentContext}}/market-plan/1221",data-active="{{equalsSession 'activeSubheaderPath' 'market-plan'}}",data-progress="incomplete")
+            .badge 3
             .iconWrapper.left.size-24
               {{icon 'marketPlan'}}
             | Market Plan
         li
-          a(href="/{{currentContext}}/work-orders",data-active="{{equalsSession 'activeSubheaderPath' 'work-orders'}}")
+          a(href="/{{currentContext}}/work-orders",data-active="{{equalsSession 'activeSubheaderPath' 'work-orders'}}",data-progress="inactive")
+            .badge 4
             .iconWrapper.left.size-24
               {{icon 'workOrders'}}
             | Work Orders
@@ -157,7 +166,7 @@ template(name="leftSidebar")
       .iconWrapper.left.size-24
         {{icon 'sidebar'}}
     ul
-      li.has-dropdown
+      li.has-dropdown(data-action="toggleDropdown",data-state="{{getSession 'dropdownState'}}")
         a
           {{#if currentContextIs 'fields'}}
           {{getSession 'fieldsFilter'}}
@@ -372,7 +381,7 @@ template(name="leftSidebar")
       {{/if}}
 
       {{#if currentContextIs 'market'}}
-      li
+      //-li
         a(data-action="addCommodity")
           span Add New Commodity
           .iconWrapper.right.size-16
@@ -563,11 +572,13 @@ template(name="rightSidebar")
     .section
       .title Field Details
       form
-        input(type="text",placeholder="Field Name")
-        ul.inline-list
-          li
-            label.inline Division
-            select.inline
+        ul.list
+          li.item.collapse
+            label Field Name
+            input(type="text",placeholder="Field Name")
+          li.item.collapse
+            label Division
+            select.select
               option(value="Division") Division
               option(value="First") First
               option(value="Second") Second
@@ -579,28 +590,40 @@ template(name="rightSidebar")
               option(value="Eighth") Eighth
               option(value="Ninth") Ninth
               option(value="Tenth") Tenth
-        input(type="text",placeholder="Section")
-        input(type="text",placeholder="Township")
-        input(type="text",placeholder="Range")
-        ul.inline-list
-          li
-            select.inline
+          li.item.collapse
+            label Section
+            input(type="text",placeholder="Section")
+          li.item.collapse
+            label Township
+            input(type="text",placeholder="Township")
+          li.item.collapse
+            label Range
+            input(type="text",placeholder="Range")
+          li.item.collapse
+            label Meridian
+            select.select
               option(value="Meridian") Meridian
-            select.inline
+          li.item.collapse
+            label Subdivision
+            select.select
               option(value="Subdivision") Subdivision
-        ul.inline-list
-          li
-            input.inline(type="text",placeholder="Acres")
-            select.inline
+          li.item.collapse
+            .button(data-action="toggleNotice",data-notice="field-boundary")
+              | Edit Field Boundary
+          li.item.collapse
+            label Acres
+            input(type="text",placeholder="Acres")
+            select.select
               option(value="Crop Type") Crop Type
-        input(type="text",placeholder="Variety")
-        ul.inline-list
-          li
-            input.inline(type="text",placeholder="Yield")
-            select.inline
+          li.item.collapse
+            label Variety
+            input(type="text",placeholder="Variety")
+          li.item.collapse
+            label Yield
+            input(type="text",placeholder="Yield")
+            select.select
               option(value="bu/ac") bu/ac
-        ul.inline-list
-          li
+          li.item.collapse
             .toggle.gray(data-action="toggle",data-toggle="sureCheck",data-state="no")
               input(type="hidden")
               .toggleOptions
@@ -608,8 +631,7 @@ template(name="rightSidebar")
                   .toggleOption Yes
                   .toggleOption No
               .toggleLabel Sure-Check Soil Testing
-        ul.inline-list
-          li
+          li.item.collapse
             .toggle.gray(data-action="toggle",data-toggle="optimizeRX",data-state="no")
               input(type="hidden")
               .toggleOptions
@@ -681,8 +703,9 @@ template(name="rightSidebar")
                   //-select
                     option(value="bu/ac") bu/ac
                     option(value="obs/ac") obs/ac
-    //-.section
-      a.button.rounded Save Field Details
+    .section
+      a.button Cancel
+      a.button Save Field Details
     {{/if}}
 
     {{#if currentParamIs 'section' 'fertility-map'}}
@@ -975,6 +998,20 @@ template(name="rightSidebar")
       a.button.rounded Save Field Details
     {{/if}}
 
+    {{#if currentParamIs 'equipment-info'}}
+    .section
+      .title Notes
+        a.iconWrapper.right.size-16(data-action="toggleCover",data-cover="notes")
+          {{icon 'new'}}
+      ul.list
+        li
+          a(data-action="toggleCover",data-cover="viewNote") 04 Oct 2012 - Harvest
+        li
+          a(data-action="toggleCover",data-cover="viewNote") 15 May 2013 - Seeding
+        li
+          a(data-action="toggleCover",data-cover="viewNote") 02 Jun 2013 - Scouting Notes
+    {{/if}}
+
     {{#if currentContextIs 'profile'}}
     .section
       .title John Carpenter
@@ -1023,7 +1060,8 @@ template(name="rightSidebar")
     {{/if}}
 
 template(name="dashboard")
-  .content(data-subheaderState="{{getSession 'subHeaderState'}}",data-leftSidebarState="{{getSession 'leftSidebarState'}}",data-rightSidebarState="{{getSession 'rightSidebarState'}}")
+  .content(data-subheaderState="{{getSession 'subHeaderState'}}",data-leftSidebarState="{{getSession 'leftSidebarState'}}",data-rightSidebarState="{{getSession 'rightSidebarState'}}",data-borderState="{{borderState}}")
+    {{>spinner}}
     {{>map}}
     a.stubImage(href="/fields/field-info",style="background-image:url('/stubImages/overview.png');")
     .tiles
@@ -1053,8 +1091,9 @@ template(name="dashboard")
             span.subtitle Yesterday
 
 template(name="fields")
-  .content(data-subheaderState="{{getSession 'subHeaderState'}}",data-leftSidebarState="{{getSession 'leftSidebarState'}}",data-rightSidebarState="{{getSession 'rightSidebarState'}}")
+  .content(data-subheaderState="{{getSession 'subHeaderState'}}",data-leftSidebarState="{{getSession 'leftSidebarState'}}",data-rightSidebarState="{{getSession 'rightSidebarState'}}",data-borderState="{{borderState}}")
     {{#if currentParamIs 'section' 'field-info'}}
+    {{>spinner}}
     {{>map}}
     {{!Stub Screenshots for Demo}}
     {{#if currentParamIs 'assetsInfo' undefined}}
@@ -1062,20 +1101,16 @@ template(name="fields")
     {{else}}
     a.stubImage(href="/fields/field-info/370",style="background-image:url('/stubImages/fieldInfo.png');")
     {{/if}}
-    {{!>notice}}
+    {{>notice}}
     {{/if}}
 
     {{#if currentParamIs 'section' 'soil-testing'}}
     .title E 24 28 26 W4 - Field One
+    .subtitle Crop Type: Barley
+    .subtitle Acres: 235
+    .subtitle Projected Yield: 52 bu/ac
     .iconWrapper.size-16.right
       {{icon 'print'}}
-    ul.inline-list
-      li
-        .subtitle Crop Type: Barley
-      li
-        .subtitle Acres: 235
-      li
-        .subtitle Projected Yield: 52 bu/ac
     .section
       table.table.uniform
         thead
@@ -1255,6 +1290,7 @@ template(name="fields")
               .cell N/A
             td
               .cell N/A
+        tfoot
           tr
             td
               .cell Total
@@ -1280,7 +1316,7 @@ template(name="fields")
               .cell 66
             td
               .cell 51
-      table.table.uniform
+      //-table.table.uniform
         thead
           tr
             td
@@ -1346,6 +1382,7 @@ template(name="fields")
     {{/if}}
 
     {{#if currentParamIs 'section' 'fertility-map'}}
+    {{>spinner}}
     {{>map}}
     a.stubImage(href="/fields/soil-testing/370",style="background-image:url('/stubImages/soilTesting.png');")
     {{/if}}
@@ -1354,11 +1391,10 @@ template(name="fields")
     .title E 24 28 26 W4 - Field One
     .iconWrapper.size-16.right
       {{icon 'print'}}
-    ul.inline-list
-      li
-        .subtitle Crop Type: Barley
-      li
-        .subtitle Version: Draft for Review
+    .subtitle Crop Type: Barley
+    .subtitle Version:
+    select.select.inline
+      option(value="Draft for Review") Draft for Review
     .section
       table.table.uniform
         thead
@@ -1482,6 +1518,7 @@ template(name="fields")
               .cell
             td
               .cell
+        tfoot
           tr
             td
               .cell Total
@@ -1502,7 +1539,16 @@ template(name="fields")
     {{/if}}
 
     {{#if currentParamIs 'section' 'rx-files'}}
-    {{>notImplemented}}
+    //-If Field is in work order show files, if not, show sales page
+    .title RX Files
+    a.tile.download(href="#")
+      .title RX Equipment Test: JD 1910
+      .iconWrapper.size-24.left
+        {{icon 'download'}}
+    a.tile.download(href="#")
+      .title RX Files: Optimize RX 2014
+      .iconWrapper.size-24.left
+        {{icon 'download'}}
     {{/if}}
 
     {{#if currentParamIs 'section' 'yield-report'}}
@@ -1510,98 +1556,105 @@ template(name="fields")
     {{/if}}
 
 template(name="equipment")
-  .content(data-subheaderState="{{getSession 'subHeaderState'}}",data-leftSidebarState="{{getSession 'leftSidebarState'}}",data-rightSidebarState="{{getSession 'rightSidebarState'}}")
+  .content(data-subheaderState="{{getSession 'subHeaderState'}}",data-leftSidebarState="{{getSession 'leftSidebarState'}}",data-rightSidebarState="{{getSession 'rightSidebarState'}}",data-borderState="{{borderState}}")
     {{#if currentParamIs 'section' 'equipment-info'}}
       {{#if currentParamIs 'assetsInfo' undefined}}
       .title New Equipment
       .iconWrapper.size-16.right
         {{icon 'print'}}
       form
-        input(type="text",placeholder="Unit Name")
-        ul.inline-list
-          li
-            a
-              select
-                option(value="Seeding System") Seeding System
-                option(value="Floater") Floater
-                option(value="Sprayer") Sprayer
-                option(value="NH3 Cultivator") NH3 Cultivator
-                option(value="Combine") Combine
-                option(value="Swather") Swather
-                option(value="Tractor") Tractor
-                option(value="Truck") Truck
-                option(value="Fleet") Fleet
-          li
-            a
-              select
-                option(value="Cart Make") Cart Make
-          li
-            a
-              select
-                option(value="Cart Model") Cart Model
-        ul.inline-list.columns-5
-          li.column
-            .title Tank 1
-            input(type="text",placeholder="Capacity (bu)",value="200 Bushels")
-            input(type="text",placeholder="Select Product",value="Select Product")
-          li.column
-            .title Tank 2
-            input(type="text",placeholder="Capacity (bu)",value="150 Bushels")
-            input(type="text",placeholder="Select Product",value="Select Product")
-          li.column
-            .title Tank 3
-            input(type="text",placeholder="Capacity (bu)",value="200 Bushels")
-            input(type="text",placeholder="Select Product",value="Select Product")
-          li.column
-            .title Tank 4
-            input(type="text",placeholder="Capacity (bu)")
-            input(type="text",placeholder="Select Product")
-          li.column
-            .title Tank 5
-            input(type="text",placeholder="Capacity (bu)")
-            input(type="text",placeholder="Select Product")
-        ul.inline-list
-          li
-            select
+        select.select(data-action="setEquipmentType")
+          option(value="Seeding System") Seeding System
+          option(value="Floater") Floater
+          option(value="Sprayer") Sprayer
+          option(value="NH3 Cultivator") NH3 Cultivator
+          option(value="Combine") Combine
+          //-option(value="Swather") Swather
+          //-option(value="Tractor") Tractor
+          option(value="Truck") Truck
+          //-option(value="Fleet") Fleet
+        {{#if equalsSession 'equipmentType' 'Seeding System'}}
+        ul.list
+          li.item.collapse
+            label Unit Name
+            input(type="text",placeholder="Unit Name")
+          li.item.collapse
+            label Cart Make
+            select.select
+              option(value="Cart Make") Cart Make
+          li.item.collapse
+            label Cart Model
+            select.select
+              option(value="Cart Model") Cart Model
+            ul.list
+              li.item.collapse
+                label Tank 1
+                input(type="text",placeholder="Capacity (bu)",value="200 Bushels")
+                input(type="text",placeholder="Select Product",value="Select Product")
+              li.item.collapse
+                label Tank 2
+                input(type="text",placeholder="Capacity (bu)",value="150 Bushels")
+                input(type="text",placeholder="Select Product",value="Select Product")
+              li.item.collapse
+                label Tank 3
+                input(type="text",placeholder="Capacity (bu)",value="200 Bushels")
+                input(type="text",placeholder="Select Product",value="Select Product")
+              li.item.collapse
+                label Tank 4
+                input(type="text",placeholder="Capacity (bu)")
+                input(type="text",placeholder="Select Product")
+              li.item.collapse
+                label Tank 5
+                input(type="text",placeholder="Capacity (bu)")
+                input(type="text",placeholder="Select Product")
+        ul.list
+          li.item.collapse
+            label Drill Make
+            select.select
               option(value="Drill Make") Drill Make
-          li
-            label.inline Drill Width
-            input.inline(type="text",placeholder="0",style="width: 80px;")
-            select.inline
+          li.item.collapse
+            label Drill Width
+            input(type="text",placeholder="0",style="width: 80px;")
+            select.select
               option(value="Ft") Ft
-          li
-            select
+          li.item.collapse
+            label Fertilizer Type
+            select.select
               option(value="Fertilizer Type") Fertilizer Type
               option(value="Dry") Dry
-        ul.inline-list
-          li
-            label.inline Dry Rate Maximum
-            input.inline(type="text",placeholder="0 lbs/acre")
-        ul.inline-list
-          li
-            label.inline Opener Width
-            input.inline(type="text",placeholder="0 inches")
-        ul.inline-list
-          li
-            label.inline Shank Spacing
-            input.inline(type="text",placeholder="0 inches")
-        ul.inline-list
-          li
-            .toggle.gray.large(data-action="toggle",data-toggle="shootType",data-state="no")
-              input(type="hidden")
-              .toggleOptions
-                .toggleOptionsTrack
-                  .toggleOption Single-Shoot
-                  .toggleOption Double-Shoot
-              .toggleLabel Shoot Type?
-            select.inline
+            ul.list
+              li.item.collapse
+                label Dry Rate Maximum
+                input(type="text",placeholder="0")
+                span lbs/acre
+              li.item.collapse
+                label Opener Width
+                input(type="text",placeholder="0")
+                span inches
+              li.item.collapse
+                label Shank Spacing
+                input(type="text",placeholder="0")
+                span inches
+              li.item.collapse
+                .toggle.gray.large(data-action="toggle",data-toggle="shootType",data-state="no")
+                  input(type="hidden")
+                  .toggleOptions
+                    .toggleOptionsTrack
+                      .toggleOption Single-Shoot
+                      .toggleOption Double-Shoot
+                  .toggleLabel Shoot Type?
+        ul.list
+          li.item.collapse
+            label Receiver Make
+            select.select
               option(value="Receiver Make") Receiver Make
               option(value="John Deere") John Deere
-            select.inline
+          li.item.collapse
+            label Model
+            select.select
               option(value="Model") Model
               option(value="1910") 1910
-        ul.inline-list
-          li
+          li.item.collapse
             .toggle.gray(data-action="toggle",data-toggle="controllerConnection",data-state="no")
               input(type="hidden")
               .toggleOptions
@@ -1609,13 +1662,291 @@ template(name="equipment")
                   .toggleOption Yes
                   .toggleOption No
               .toggleLabel Connected to Controller?
-            select.inline
+          li.item.collapse
+            label Controller Make
+            select.select
               option(value="Controller Make") Controller Make
               option(value="John Deere") John Deere
-            select.inline
+          li.item.collapse
+            label Model
+            select.select
               option(value="Model") Model
               option(value="1910") 1910
-        textarea.expanding(type="text",placeholder="Write Notes Here..")
+        {{/if}}
+
+        {{#if equalsSession 'equipmentType' 'Floater'}}
+        ul.list
+          li.item.collapse
+            label Unit Name
+            input(type="text",placeholder="Unit Name")
+          li.item.collapse
+            label Make
+            select.select
+              option(value="Make") Make
+            ul.list
+              li.item.collapse
+                label Tank 1
+                input(type="text",placeholder="Capacity (bu)",value="200 Bushels")
+                input(type="text",placeholder="Select Product",value="Select Product")
+              li.item.collapse
+                label Tank 2
+                input(type="text",placeholder="Capacity (bu)",value="150 Bushels")
+                input(type="text",placeholder="Select Product",value="Select Product")
+              li.item.collapse
+                label Tank 3
+                input(type="text",placeholder="Capacity (bu)",value="200 Bushels")
+                input(type="text",placeholder="Select Product",value="Select Product")
+              li.item.collapse
+                label Tank 4
+                input(type="text",placeholder="Capacity (bu)")
+                input(type="text",placeholder="Select Product")
+              li.item.collapse
+                label Tank 5
+                input(type="text",placeholder="Capacity (bu)")
+                input(type="text",placeholder="Select Product")
+        ul.list
+          li.item.collapse
+            label Fertilizer Type
+            select.select
+              option(value="Fertilizer Type") Fertilizer Type
+              option(value="Dry") Dry
+            ul.list
+              li.item.collapse
+                label Dry Rate Maximum
+                input(type="text",placeholder="0")
+                span lbs/acre
+              li.item.collapse
+                label Opener Width
+                input(type="text",placeholder="0")
+                span inches
+              li.item.collapse
+                label Shank Spacing
+                input(type="text",placeholder="0")
+                span inches
+              li.item.collapse
+                .toggle.gray.large(data-action="toggle",data-toggle="shootType",data-state="no")
+                  input(type="hidden")
+                  .toggleOptions
+                    .toggleOptionsTrack
+                      .toggleOption Single-Shoot
+                      .toggleOption Double-Shoot
+                  .toggleLabel Shoot Type?
+        ul.list
+          li.item.collapse
+            label Receiver Make
+            select.select
+              option(value="Receiver Make") Receiver Make
+              option(value="John Deere") John Deere
+          li.item.collapse
+            label Model
+            select.select
+              option(value="Model") Model
+              option(value="1910") 1910
+          li.item.collapse
+            .toggle.gray(data-action="toggle",data-toggle="controllerConnection",data-state="no")
+              input(type="hidden")
+              .toggleOptions
+                .toggleOptionsTrack
+                  .toggleOption Yes
+                  .toggleOption No
+              .toggleLabel Connected to Controller?
+          li.item.collapse
+            label Controller Make
+            select.select
+              option(value="Controller Make") Controller Make
+              option(value="John Deere") John Deere
+          li.item.collapse
+            label Model
+            select.select
+              option(value="Model") Model
+              option(value="1910") 1910
+        {{/if}}
+
+        {{#if equalsSession 'equipmentType' 'Sprayer'}}
+        ul.list
+          li.item.collapse
+            label Unit Name
+            input(type="text",placeholder="Unit Name")
+          li.item.collapse
+            label Make
+            select.select
+              option(value="Make") Make
+            ul.list
+              li.item.collapse
+                label Tank 1
+                input(type="text",placeholder="Capacity (bu)",value="200 Bushels")
+                input(type="text",placeholder="Select Product",value="Select Product")
+              li.item.collapse
+                label Tank 2
+                input(type="text",placeholder="Capacity (bu)",value="150 Bushels")
+                input(type="text",placeholder="Select Product",value="Select Product")
+              li.item.collapse
+                label Tank 3
+                input(type="text",placeholder="Capacity (bu)",value="200 Bushels")
+                input(type="text",placeholder="Select Product",value="Select Product")
+              li.item.collapse
+                label Tank 4
+                input(type="text",placeholder="Capacity (bu)")
+                input(type="text",placeholder="Select Product")
+              li.item.collapse
+                label Tank 5
+                input(type="text",placeholder="Capacity (bu)")
+                input(type="text",placeholder="Select Product")
+        ul.list
+          li.item.collapse
+            label Fertilizer Type
+            select.select
+              option(value="Fertilizer Type") Fertilizer Type
+              option(value="Dry") Liquid
+            ul.list
+              li.item.collapse
+                label Liquid Rates for Nozzles
+                input(type="text",placeholder="min")
+                span -
+                input(type="text",placeholder="max")
+                span gal/acre
+              li.item.collapse
+                .toggle.gray.large(data-action="toggle",data-toggle="shootType",data-state="no")
+                  input(type="hidden")
+                  .toggleOptions
+                    .toggleOptionsTrack
+                      .toggleOption U.S. Gallons
+                      .toggleOption Imp. Gallons
+                  .toggleLabel Gallons
+              li.item.collapse
+                .button-bar.columns-3
+                  a.button(data-active="true") Mid-Row Bander
+                  a.button(data-active="true") Paired Row
+                  a.button(data-active="true") Side Band
+        ul.list
+          li.item.collapse
+            label Receiver Make
+            select.select
+              option(value="Receiver Make") Receiver Make
+              option(value="John Deere") John Deere
+          li.item.collapse
+            label Model
+            select.select
+              option(value="Model") Model
+              option(value="1910") 1910
+          li.item.collapse
+            .toggle.gray(data-action="toggle",data-toggle="controllerConnection",data-state="no")
+              input(type="hidden")
+              .toggleOptions
+                .toggleOptionsTrack
+                  .toggleOption Yes
+                  .toggleOption No
+              .toggleLabel Connected to Controller?
+          li.item.collapse
+            label Controller Make
+            select.select
+              option(value="Controller Make") Controller Make
+              option(value="John Deere") John Deere
+          li.item.collapse
+            label Model
+            select.select
+              option(value="Model") Model
+              option(value="1910") 1910
+        {{/if}}
+
+        {{#if equalsSession 'equipmentType' 'NH3 Cultivator'}}
+        ul.list
+          li.item.collapse
+            label Unit Name
+            input(type="text",placeholder="Unit Name")
+          li.item.collapse
+            label Make
+            select.select
+              option(value="Make") Make
+          li.item.collapse
+            label NH3 Rates
+            input(type="text",placeholder="min")
+            span -
+            input(type="text",placeholder="max")
+            span lbs actual/acre
+        ul.list
+          li.item.collapse
+            label Receiver Make
+            select.select
+              option(value="Receiver Make") Receiver Make
+              option(value="John Deere") John Deere
+          li.item.collapse
+            label Model
+            select.select
+              option(value="Model") Model
+              option(value="1910") 1910
+          li.item.collapse
+            .toggle.gray(data-action="toggle",data-toggle="controllerConnection",data-state="no")
+              input(type="hidden")
+              .toggleOptions
+                .toggleOptionsTrack
+                  .toggleOption Yes
+                  .toggleOption No
+              .toggleLabel Connected to Controller?
+          li.item.collapse
+            label Controller Make
+            select.select
+              option(value="Controller Make") Controller Make
+              option(value="John Deere") John Deere
+          li.item.collapse
+            label Model
+            select.select
+              option(value="Model") Model
+              option(value="1910") 1910
+        {{/if}}
+
+        {{#if equalsSession 'equipmentType' 'Combine'}}
+        ul.list
+          li.item.collapse
+            label Unit Name or #
+            input(type="text",placeholder="Unit Name")
+          li.item.collapse
+            label Make
+            select.select
+              option(value="Make") Make
+          li.item.collapse
+            label Model
+            input(type="text",placeholder="Model")
+          li.item.collapse
+            label Year
+            input(type="text",placeholder="Year")
+        .title Yield Monitor
+        ul.list
+          li.item.collapse
+            label Make
+            input(type="text",placeholder="Make")
+          li.item.collapse
+            label Model
+            input(type="text",placeholder="Model")
+          li.item.collapse
+            .toggle.gray(data-action="toggle",data-toggle="controllerConnection",data-state="no")
+              input(type="hidden")
+              .toggleOptions
+                .toggleOptionsTrack
+                  .toggleOption Yes
+                  .toggleOption No
+              .toggleLabel Is Monitor Setup and Running?
+          li.item.collapse
+            label Data Card Type
+            input(type="text",placeholder="Data Card Type")
+        {{/if}}
+
+        {{#if equalsSession 'equipmentType' 'Truck'}}
+        ul.list
+          li.item.collapse
+            label Unit Name or #
+            input(type="text",placeholder="Unit Name")
+          li.item.collapse
+            label Make
+            select.select
+              option(value="Make") Make
+          li.item.collapse
+            label Model
+            input(type="text",placeholder="Model")
+          li.item.collapse
+            label Year
+            input(type="text",placeholder="Year")
+        {{/if}}
         button.button.rounded(type="submit") Save
       {{else}}
       .title Big Red
@@ -1726,11 +2057,11 @@ template(name="equipment")
     {{/if}}
 
 template(name="market")
-  .content(data-subheaderState="{{getSession 'subHeaderState'}}",data-leftSidebarState="{{getSession 'leftSidebarState'}}",data-rightSidebarState="{{getSession 'rightSidebarState'}}")
+  .content(data-subheaderState="{{getSession 'subHeaderState'}}",data-leftSidebarState="{{getSession 'leftSidebarState'}}",data-rightSidebarState="{{getSession 'rightSidebarState'}}",data-borderState="{{borderState}}")
     {{#if currentParamIs 'section' 'profit'}}
       {{#if currentParamIs 'assetsInfo' undefined}}
       .title Market Summary 2013
-      .iconWrapper.size-16.right(style="right: 34px;")
+      //-.iconWrapper.size-16.right(style="right: 34px;")
         {{icon 'new'}}
       .iconWrapper.size-16.right
         {{icon 'print'}}
@@ -2149,7 +2480,7 @@ template(name="market")
       table.table.uniform
         thead
           tr
-            td
+            //-td
               .cell Commodity
             td
               .cell Trade Type
@@ -2165,11 +2496,11 @@ template(name="market")
               .cell Price
             td
               .cell MTM Value
-            td
+            //-td
               .cell Notes
         tbody
-          tr
-            td
+          tr(data-action="toggleCover",data-cover="addOrEditPosition")
+            //-td
               .cell Canola
             td
               .cell OTC Fwd
@@ -2185,14 +2516,14 @@ template(name="market")
               .cell $580,000
             td
               .cell
-            td
+            //-td
               .cell
                 .iconWrapper.size-16.right
                   {{icon 'note'}}
                 .iconWrapper.size-16.right
                   {{icon 'remove'}}
-          tr
-            td
+          tr(data-action="toggleCover",data-cover="addOrEditPosition")
+            //-td
               .cell Canola
             td
               .cell OTC Fwd
@@ -2208,14 +2539,14 @@ template(name="market")
               .cell $580,000
             td
               .cell
-            td
+            //-td
               .cell
                 .iconWrapper.size-16.right
                   {{icon 'note'}}
                 .iconWrapper.size-16.right
                   {{icon 'remove'}}
-          tr
-            td
+          tr(data-action="toggleCover",data-cover="addOrEditPosition")
+            //-td
               .cell Canola
             td
               .cell OTC Fwd
@@ -2231,14 +2562,14 @@ template(name="market")
               .cell $550,000
             td
               .cell
-            td
+            //-td
               .cell
                 .iconWrapper.size-16.right
                   {{icon 'note'}}
                 .iconWrapper.size-16.right
                   {{icon 'remove'}}
-          tr
-            td
+          tr(data-action="toggleCover",data-cover="addOrEditPosition")
+            //-td
               .cell Canola
             td
               .cell OTC Fwd
@@ -2254,14 +2585,14 @@ template(name="market")
               .cell $550,000
             td
               .cell
-            td
+            //-td
               .cell
                 .iconWrapper.size-16.right
                   {{icon 'note'}}
                 .iconWrapper.size-16.right
                   {{icon 'remove'}}
-          tr
-            td
+          tr(data-action="toggleCover",data-cover="addOrEditPosition")
+            //-td
               .cell Carrots
             td
               .cell Basis
@@ -2277,14 +2608,14 @@ template(name="market")
               .cell $5,000
             td
               .cell
-            td
+            //-td
               .cell
                 .iconWrapper.size-16.right
                   {{icon 'note'}}
                 .iconWrapper.size-16.right
                   {{icon 'remove'}}
-          tr
-            td
+          tr(data-action="toggleCover",data-cover="addOrEditPosition")
+            //-td
               .cell Carrots
             td
               .cell Basis
@@ -2300,13 +2631,13 @@ template(name="market")
               .cell $5,000
             td
               .cell
-            td
+            //-td
               .cell
                 .iconWrapper.size-16.right
                   {{icon 'note'}}
                 .iconWrapper.size-16.right
                   {{icon 'remove'}}
-    .section
+    //-.section
       table.table.uniform
         thead
           tr
@@ -2521,7 +2852,7 @@ template(name="market")
     {{/if}}
 
 template(name="farm-planner")
-  .content(data-subheaderState="{{getSession 'subHeaderState'}}",data-leftSidebarState="{{getSession 'leftSidebarState'}}",data-rightSidebarState="{{getSession 'rightSidebarState'}}")
+  .content(data-subheaderState="{{getSession 'subHeaderState'}}",data-leftSidebarState="{{getSession 'leftSidebarState'}}",data-rightSidebarState="{{getSession 'rightSidebarState'}}",data-borderState="{{borderState}}")
     {{#if currentParamIs 'section' 'crop-plans'}}
     {{>map}}
     a.stubImage(href="/farm-planner/crop-plans/370",style="background-image:url('/stubImages/fieldInfo.png');")
@@ -3268,7 +3599,7 @@ template(name="farm-planner")
     {{/if}}
 
 template(name="profile")
-  .content(data-subheaderState="{{getSession 'subHeaderState'}}",data-leftSidebarState="{{getSession 'leftSidebarState'}}",data-rightSidebarState="{{getSession 'rightSidebarState'}}")
+  .content(data-subheaderState="{{getSession 'subHeaderState'}}",data-leftSidebarState="{{getSession 'leftSidebarState'}}",data-rightSidebarState="{{getSession 'rightSidebarState'}}",data-borderState="{{borderState}}")
     .title Users
     .section
       form
@@ -3869,40 +4200,90 @@ template(name="map")
     {{/constant}}
 
 template(name="notice")
-  .notice
-    {{#if currentContextIs 'fields'}}
-    .title Please confirm field boundary
-    a(href="#") more info
+  .notice(data-hidden="{{getSession 'noticeHidden'}}")
+    {{#if equalsSession 'notice' 'field-boundary'}}
+    .title Click on the map to draw a field boundary
     ul.inline-list
       li
         a
           .iconWrapper.left.size-16
-            {{icon 'edit'}}
-          | edit
+            {{icon 'undo'}}
+          | undo
+      li
+        a
+          .iconWrapper.left.size-16
+            {{icon 'redo'}}
+          | redo
+      li
+        a
+          .iconWrapper.left.size-16
+            {{icon 'remove'}}
+          | clear
+      li
+        a(data-action="toggleNotice")
+          .iconWrapper.left.size-16
+            {{icon 'approve'}}
+          | save
+    {{/if}}
+
+    {{#if equalsSession 'notice' 'confirm-boundary'}}
+    .title Please confirm field boundary
+    a(href="#") more info
+    ul.inline-list
+      li
+        a(data-action="setNotice",data-notice="review-complete")
+          .iconWrapper.left.size-16
+            {{icon 'approve'}}
+          | approve
+      li
+        a(data-action="setNotice",data-notice="correct-boundary")
+          .iconWrapper.left.size-16
+            {{icon 'remove'}}
+          | request changes
+    {{/if}}
+
+    {{#if equalsSession 'notice' 'correct-boundary'}}
+    .title Click on the map to draw corrections
+    ul.inline-list
       li
         a
           .iconWrapper.left.size-16
             {{icon 'comment'}}
           | comment
       li
-        a
+        a(data-action="setNotice",data-notice="confirm-boundary")
+          .iconWrapper.left.size-16
+            {{icon 'remove'}}
+          | cancel
+      li
+        a(data-action="toggleNotice")
           .iconWrapper.left.size-16
             {{icon 'approve'}}
-          | approved
+          | save
     {{/if}}
 
-    {{#if currentContextIs 'farm-planner'}}
-    .iconWrapper.right.size-16
+    {{#if equalsSession 'notice' 'review-complete'}}
+    .title Review Complete!
+    .iconWrapper.right.size-16(data-action="toggleNotice")
       {{icon 'remove'}}
-    .title
-      | Click on the map to add/edit field boundary
+    .message Any boundaries with requested changes will be updated shortly, thanks.
     {{/if}}
+
+    {{#if equalsSession 'notice' 'verification-in-progress'}}
+    .title Vertification of Boundary in Progress..
+    .iconWrapper.right.size-16(data-action="toggleNotice")
+      {{icon 'remove'}}
+    .message Decisive Farming is preparing a detailed boundary for this field. We will notify you when it is ready for your review.
+    {{/if}}
+
 
 template(name="cover")
   .cover(data-action="toggleCover",data-cover="{{getSession 'cover'}}",data-hidden="{{getSession 'coverHidden'}}")
     .coverContent
       {{#if coverIs 'notes'}}
       .title Add Note
+        .iconWrapper.right.size-16(data-action="toggleCover")
+          {{icon 'remove'}}
       form
         input(type="text",placeholder="Note Title")
         textarea.expanding(type="text",placeholder="Note Content")
@@ -3912,6 +4293,8 @@ template(name="cover")
 
       {{#if coverIs 'addOrEditPosition'}}
       .title Add/Edit Position
+        .iconWrapper.right.size-16(data-action="toggleCover")
+          {{icon 'remove'}}
       form
         ul.inline-list
           li
@@ -3999,6 +4382,8 @@ template(name="cover")
 
       {{#if coverIs 'viewNote'}}
       .title View Note
+        .iconWrapper.right.size-16(data-action="toggleCover")
+          {{icon 'remove'}}
       form
         input(type="text",placeholder="Title",value="Harvest")
         textarea.expanding(type="text",placeholder="Content") Harvest Note Content

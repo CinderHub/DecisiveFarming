@@ -507,7 +507,7 @@ borderRadius = 4px
     .title
       border-bottom 1px solid gray()
       padding 0 10px 0 10px
-      line-height 30px
+      line-height 40px
     .content
       position(static)
       padding 10px
@@ -706,6 +706,11 @@ table.table
         border-bottom 1px solid gray()
   tbody
     tr
+      &[data-action="toggleCover"]
+        &:hover
+          background orange(0.15)
+          td
+            background transparent
       td
         border-right 1px solid gray()
         border-bottom 1px solid gray()
@@ -879,6 +884,8 @@ table.table
         .iconWrapper > *
             fill orange(0.75)
             stroke orange(0.75)
+            & line
+              stroke orange(0.75)
     label + input
       border-right 1px solid gray()
     .toggle
@@ -1089,12 +1096,47 @@ table.table
         padding-left 40px
         &[data-active="true"]
         &:hover
-          background orange(0.75)
-          color white()
+          //background orange(0.75)
+          color orange(0.75)
           .iconWrapper
             &>*
-              fill white()
-              stroke white()
+              fill orange(0.75)
+              stroke orange(0.75)
+        &[data-progress]
+          padding-right 40px
+        &[data-progress="inactive"]
+          color offGray()
+          background gray(0.5)
+          &:hover
+            color offerGray()
+            .iconWrapper
+              &>*
+                fill offerGray()
+                stroke offerGray()
+          .iconWrapper
+            &>*
+              fill offGray()
+              stroke offGray()
+          .badge
+            background offGray()
+        &[data-progress="incomplete"]
+          .badge
+            background red()
+        &[data-progress="inProgress"]
+          .badge
+            background orange(0.65)
+        &[data-progress="complete"]
+          .badge
+            background green()
+        .badge
+          position absolute
+          top 10px
+          right 10px
+          size(20,20)
+          border-radius 40px
+          text-align center
+          line-height 20px
+          color white()
 
 //Sidebar Toggle
 .sidebarToggle
@@ -1102,7 +1144,7 @@ table.table
   z-index 100
   height subHeaderHeight
   width sidebarWidth
-  background white()
+  //background white()
   border-bottom 1px solid gray()
   //transition all 0.25s ease-in-out
   &[data-state="open"]
@@ -1135,7 +1177,7 @@ table.table
       margin-left -12px
   .has-dropdown
     margin 0 0 0 40px
-    &:hover
+    &[data-state="open"]
       .iconWrapper > *
         fill orange(0.75)
         stroke orange(0.75)
@@ -1208,7 +1250,7 @@ table.table
     .list
       li
         &:first-of-type
-          a
+          a[data-action]
             background offWhite()
             &:hover
               background orange(0.75)
@@ -1238,6 +1280,9 @@ table.table
       font-size 14px
       color midnight()
       .iconWrapper
+        &:hover
+          & > *
+            fill orange(0.75)
         & > *
           fill offerGray()
   .button
@@ -1308,6 +1353,10 @@ table.table
     right sidebarWidth
   &[data-leftsidebarstate="open"]
     left sidebarWidth
+  &[data-borderState="collapsed"]
+    margin 0
+    border-radius 0
+    border none
   .iconWrapper
     top 10px
     margin-top 0
@@ -1369,13 +1418,30 @@ table.table
     .subtitle
       margin 0
       padding 0
+  &.download
+    border-radius 0
+    border none
+    border-bottom 1px solid gray()
+    min-height 44px
+    line-height 44px
+    padding 0 10px 0 44px
+    display block
+    &:hover
+      .title
+        color orange(0.75)
+      .iconWrapper
+        & > *
+          fill orange(0.75)
   &.profit
-    width 50%
+    //width 50%
     float left
     border-radius 0
     border none
-    border-right 1px solid gray()
+    //border-right 1px solid gray()
     border-bottom 1px solid gray()
+    .section
+      border-bottom none
+      margin 0
     &.full
       width 100%
     &:nth-of-type(odd)
@@ -1434,11 +1500,17 @@ table.table
   position(absolute,10,auto,auto,10)
   padding 10px 40px 10px 10px
   z-index 1
+  max-width 320px
+  &[data-hidden="true"]
+    display none
   .title
     font-size 16px
     line-height 20px
     padding 0
     border-bottom none
+  .message
+    font-size 12px
+    color offerGray()
   a
     margin 5px 0 5px 0
     font-size 10px
@@ -1704,3 +1776,7 @@ body
   background-size cover
   background-position 50% 50%
   background-repeat no-repeat
+
+//Spinner Styles
+#spinner
+  height 100%

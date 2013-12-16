@@ -4,6 +4,7 @@
     "iron-router-progress": {},
     "jade-handlebars-refactored": {},
     "bootstrap-datepicker2": {},
-    "underscore-string-latest": {}
+    "underscore-string-latest": {},
+    "spin": {}
   }
 }
