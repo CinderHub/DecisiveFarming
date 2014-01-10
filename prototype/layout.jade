@@ -65,31 +65,26 @@ template(name="subHeader")
       {{#if currentContextIs 'fields'}}
         li
           a(href="/{{currentContext}}/field-info/370",data-active="{{equalsSession 'activeSubheaderPath' 'field-info'}}",data-progress="complete")
-            .badge 1
             .iconWrapper.left.size-24
               {{icon 'summary'}}
             | Field Info
         li
           a(href="/{{currentContext}}/soil-testing/370",data-active="{{equalsSession 'activeSubheaderPath' 'soil-testing'}}",data-progress="inProgress")
-            .badge 2
             .iconWrapper.left.size-24
               {{icon 'soilTesting'}}
             | Soil Testing
         li
           a(href="/{{currentContext}}/fertility-map/370",data-active="{{equalsSession 'activeSubheaderPath' 'fertility-map'}}",data-progress="incomplete")
-            .badge 3
             .iconWrapper.left.size-24
               {{icon 'fertilityMap'}}
             | Fertility Map
         li
-          a(href="/{{currentContext}}/rx-rates/370",data-active="{{equalsSession 'activeSubheaderPath' 'rx-rates'}}",data-progress="inactive")
-            .badge 4
+          a(href="/{{currentContext}}/rx-rates/370",data-active="{{equalsSession 'activeSubheaderPath' 'rx-rates'}}",data-progress="{{#if currentParamIs 'assetsInfo' '370'}}inactive{{else}}incomplete{{/if}}")
             .iconWrapper.left.size-24
               {{icon 'rxRates'}}
             | RX Rates
         li
-          a(href="/{{currentContext}}/rx-files/370",data-active="{{equalsSession 'activeSubheaderPath' 'rx-files'}}",data-progress="inactive")
-            .badge 5
+          a(href="/{{currentContext}}/rx-files/370",data-active="{{equalsSession 'activeSubheaderPath' 'rx-files'}}",data-progress="{{#if currentParamIs 'assetsInfo' '370'}}inactive{{else}}incomplete{{/if}}")
             .iconWrapper.left.size-24
               {{icon 'rxFiles'}}
             | RX Files
@@ -131,7 +126,6 @@ template(name="subHeader")
       {{#if currentContextIs 'farm-planner'}}
         li
           a(href="/{{currentContext}}/crop-plans",data-active="{{equalsSession 'activeSubheaderPath' 'crop-plans'}}",data-progress="complete")
-            .badge 1
             .iconWrapper.left.size-24
               {{icon 'cropPlans'}}
             | Crop Plans
@@ -142,19 +136,16 @@ template(name="subHeader")
             | Equipment
         li
           a(href="/{{currentContext}}/revenue-and-expenses",data-active="{{equalsSession 'activeSubheaderPath' 'revenue-and-expenses'}}",data-progress="inProgress")
-            .badge 2
             .iconWrapper.left.size-24
               {{icon 'revenueAndExpenses'}}
             | Revenue And Expenses
         li
           a(href="/{{currentContext}}/market-plan/1221",data-active="{{equalsSession 'activeSubheaderPath' 'market-plan'}}",data-progress="incomplete")
-            .badge 3
             .iconWrapper.left.size-24
               {{icon 'marketPlan'}}
             | Market Plan
         li
-          a(href="/{{currentContext}}/work-orders",data-active="{{equalsSession 'activeSubheaderPath' 'work-orders'}}",data-progress="inactive")
-            .badge 4
+          a(href="/{{currentContext}}/work-orders",data-active="{{equalsSession 'activeSubheaderPath' 'work-orders'}}",data-progress="incomplete")
             .iconWrapper.left.size-24
               {{icon 'workOrders'}}
             | Work Orders
@@ -350,7 +341,7 @@ template(name="leftSidebar")
 
       {{#if currentContextIs 'equipment'}}
       li
-        a(data-action="addEquipment")
+        a(href="/{{currentContext}}/{{currentParam 'section'}}",data-equipment-id="1337",data-action="addEquipment")
           span.title Add New Equipment
           .iconWrapper.right.size-16
             {{icon 'new'}}
@@ -570,12 +561,15 @@ template(name="rightSidebar")
   .sidebar.right.fixed(data-state="{{getSession 'rightSidebarState'}}",data-sidebarToggleState="{{getSession 'rightSidebarToggleState'}}")
     {{#if currentParamIs 'section' 'field-info'}}
     .section
-      .title Field Details
+      .title Field ID
       form
         ul.list
+          {{#if equalsSession 'fieldEditMode' 'edit'}}
           li.item.collapse
             label(style="width:70px;") Field Name
-            input(type="text",placeholder="Field Name")
+            input(style="width:120px;",type="text",placeholder="Field Name")
+            .iconWrapper.right.size-24
+              {{icon 'remove'}}
           li.item.collapse
             label(style="width:70px;") Division
             select.select
@@ -592,13 +586,13 @@ template(name="rightSidebar")
               option(value="Tenth") Tenth
           li.item.collapse
             label(style="width:70px;") Section
-            input(type="text",placeholder="Section")
+            input(style="width:70px;",type="text",placeholder="Section")
           li.item.collapse
             label(style="width:70px;") Township
-            input(type="text",placeholder="Township")
+            input(style="width:70px;",type="text",placeholder="Township")
           li.item.collapse
             label(style="width:70px;") Range
-            input(type="text",placeholder="Range")
+            input(style="width:70px;",type="text",placeholder="Range")
           li.item.collapse
             label(style="width:70px;") Meridian
             select.select
@@ -607,9 +601,27 @@ template(name="rightSidebar")
             label(style="width:70px;") Subdivision
             select.select
               option(value="Subdivision") Subdivision
+          {{else}}
           li.item.collapse
-            .button.rounded(data-action="toggleNotice",data-notice="field-boundary")
+            h3 Canola (Invigor)
+            h3 175.2 acres
+            h3 Projected Yield: 72 bu/acre
+          {{/if}}
+          li.item.collapse
+            {{#if equalsSession 'fieldEditMode' 'edit'}}
+            .button.rounded(style="margin-bottom:10px;",data-action="toggleNotice",data-notice="field-boundary")
               | Edit Field Boundary
+            {{/if}}
+            .button.rounded(data-action="toggleFieldDetails")
+              {{#if equalsSession 'fieldEditMode' 'edit'}}
+              | Save Field Details
+              {{else}}
+              | Edit Field Details
+              {{/if}}
+    .section
+      .title Crop Plan
+      form
+        ul.list
           li.item.collapse
             label(style="width:70px;") Acres
             input(type="text",placeholder="Acres",style="width:60px;float:left;")
@@ -617,7 +629,7 @@ template(name="rightSidebar")
               option(value="Crop Type") Crop Type
           li.item.collapse
             label(style="width:70px;") Variety
-            input(type="text",placeholder="Variety")
+            input(style="width:150px;",type="text",placeholder="Variety")
           li.item.collapse
             label(style="width:70px;") Yield
             input(type="text",placeholder="Yield",style="width:90px;float:left;")
@@ -651,58 +663,61 @@ template(name="rightSidebar")
         li
           a(data-action="toggleCover",data-cover="viewNote") 02 Jun 2013 - Scouting Notes
     .section
+      .title Crop Rotation
       form
-        table.table.uniform
-          thead
-            tr
-              td(colspan="3")
-                .cell Crop Rotation
-          tbody
-            tr
-              td
-                .cell
-                  input(placeholder="Year",value="2013")
-              td
-                .cell
-                  select
-                    option(value="Select") Select
-                    option(value="Canola") Canola
-              td
-                .cell
-                  input(placeholder="Yield",value="")
-                  //-select
-                    option(value="bu/ac") bu/ac
-                    option(value="obs/ac") obs/ac
-            tr
-              td
-                .cell
-                  input(placeholder="Year",value="2014")
-              td
-                .cell
-                  select
-                    option(value="Select") Select
-                    option(value="Canola") Canola
-              td
-                .cell
-                  input(placeholder="Yield",value="")
-                  //-select
-                    option(value="bu/ac") bu/ac
-                    option(value="obs/ac") obs/ac
-            tr
-              td
-                .cell
-                  input(placeholder="Year",value="2015")
-              td
-                .cell
-                  select
-                    option(value="Select") Select
-                    option(value="Canola") Canola
-              td
-                .cell
-                  input(placeholder="Yield",value="")
-                  //-select
-                    option(value="bu/ac") bu/ac
-                    option(value="obs/ac") obs/ac
+        ul.list
+          li.item.collapse
+            label.sublabel 2015
+            .subItem
+              label.right Crop Type
+              select.right(style="width:95px;")
+                option(value="Select") Select
+                option(value="Canola") Canola
+            .subItem
+              label.right Yield
+              input.left(style="width:60px;",type="text",placeholder="0")
+              select.right
+                option(value="bu/ac") bu/ac
+                option(value="obs/ac") obs/ac
+          li.item.collapse
+            label.sublabel 2013
+            .subItem
+              label.right Crop Type
+              select.right(style="width:95px;")
+                option(value="Select") Select
+                option(value="Canola") Canola
+            .subItem
+              label.right Yield
+              input.left(style="width:60px;",type="text",placeholder="0")
+              select.right
+                option(value="bu/ac") bu/ac
+                option(value="obs/ac") obs/ac
+          li.item.collapse
+            label.sublabel 2012
+            .subItem
+              label.right Crop Type
+              select.right(style="width:95px;")
+                option(value="Select") Select
+                option(value="Canola") Canola
+            .subItem
+              label.right Yield
+              input.left(style="width:60px;",type="text",placeholder="0")
+              select.right
+                option(value="bu/ac") bu/ac
+                option(value="obs/ac") obs/ac
+          li.item.collapse
+            label.sublabel 2011
+            .subItem
+              label.right Crop Type
+              select.right(style="width:95px;")
+                option(value="Select") Select
+                option(value="Canola") Canola
+            .subItem
+              label.right Yield
+              input.left(style="width:60px;",type="text",placeholder="0")
+              select.right
+                option(value="bu/ac") bu/ac
+                option(value="obs/ac") obs/ac
     .section
       a.button.rounded Cancel
       a.button.rounded Save Field Details
@@ -785,6 +800,36 @@ template(name="rightSidebar")
               .cell Total Acres
             td
               .cell 217.9
+    {{/if}}
+
+    {{#if currentParamIs 'section' 'rx-rates'}}
+    //-.title Agronomist Notes
+    //-| Blend = 7.3-34-20-0
+    .section
+      .title Agronomist Notes
+        a.iconWrapper.right.size-16(data-action="toggleCover",data-cover="notes")
+          {{icon 'new'}}
+      ul.list
+        li
+          a(data-action="toggleCover",data-cover="viewNote") Blend = 7.3-34-20-0
+    .section
+      .title JD 1910 - Tank Configuration
+      form
+        ul.list
+          li.item.collapse
+            label Tank 1
+            input.right(style="width:150px;",type="text",placeholder="200 bushels",value="200 bushels")
+            input.right(style="width:150px;",type="text",placeholder="Seed",value="Seed")
+          li.item.collapse
+            label Tank 2
+            input.right(style="width:150px;",type="text",placeholder="150 bushels",value="150 bushels")
+            input.right(style="width:150px;",type="text",placeholder="Blend",value="Blend")
+          li.item.collapse
+            label Tank 3
+            input.right(style="width:150px;",type="text",placeholder="200 bushels",value="200 bushels")
+            input.right(style="width:150px;",type="text",placeholder="Urea",value="Urea")
+    .section
+      a.button.rounded(href="") View a summary of all fields
     {{/if}}
 
     {{#if currentParamIs 'section' 'hedge-plan'}}
@@ -870,16 +915,22 @@ template(name="rightSidebar")
                     .toggleOption Yes
                     .toggleOption No
                 .toggleLabel When contracts due
+    .section
+      .button.rounded(data-action="updateHedge")
+        | Save
     {{/if}}
 
     {{#if currentParamIs 'section' 'crop-plans'}}
     .section
-      .title Field Details
+      .title Field ID
       form
         ul.list
+          {{#if equalsSession 'fieldEditMode' 'edit'}}
           li.item.collapse
             label(style="width:70px;") Field Name
-            input(type="text",placeholder="Field Name")
+            input(style="width:120px;",type="text",placeholder="Field Name")
+            .iconWrapper.right.size-24
+              {{icon 'remove'}}
           li.item.collapse
             label(style="width:70px;") Division
             select.select
@@ -896,13 +947,13 @@ template(name="rightSidebar")
               option(value="Tenth") Tenth
           li.item.collapse
             label(style="width:70px;") Section
-            input(type="text",placeholder="Section")
+            input(style="width:70px;",type="text",placeholder="Section")
           li.item.collapse
             label(style="width:70px;") Township
-            input(type="text",placeholder="Township")
+            input(style="width:70px;",type="text",placeholder="Township")
           li.item.collapse
             label(style="width:70px;") Range
-            input(type="text",placeholder="Range")
+            input(style="width:70px;",type="text",placeholder="Range")
           li.item.collapse
             label(style="width:70px;") Meridian
             select.select
@@ -911,9 +962,27 @@ template(name="rightSidebar")
             label(style="width:70px;") Subdivision
             select.select
               option(value="Subdivision") Subdivision
+          {{else}}
           li.item.collapse
-            .button.rounded(data-action="toggleNotice",data-notice="field-boundary")
+            h3 Canola (Invigor)
+            h3 175.2 acres
+            h3 Projected Yield: 72 bu/acre
+          {{/if}}
+          li.item.collapse
+            {{#if equalsSession 'fieldEditMode' 'edit'}}
+            .button.rounded(style="margin-bottom:10px;",data-action="toggleNotice",data-notice="field-boundary")
               | Edit Field Boundary
+            {{/if}}
+            .button.rounded(data-action="toggleFieldDetails")
+              {{#if equalsSession 'fieldEditMode' 'edit'}}
+              | Save Field Details
+              {{else}}
+              | Edit Field Details
+              {{/if}}
+    .section
+      .title Crop Plan
+      form
+        ul.list
           li.item.collapse
             label(style="width:70px;") Acres
             input(type="text",placeholder="Acres",style="width:60px;float:left;")
@@ -921,7 +990,7 @@ template(name="rightSidebar")
               option(value="Crop Type") Crop Type
           li.item.collapse
             label(style="width:70px;") Variety
-            input(type="text",placeholder="Variety")
+            input(style="width:150px;",type="text",placeholder="Variety")
           li.item.collapse
             label(style="width:70px;") Yield
             input(type="text",placeholder="Yield",style="width:90px;float:left;")
@@ -955,58 +1024,61 @@ template(name="rightSidebar")
         li
           a(data-action="toggleCover",data-cover="viewNote") 02 Jun 2013 - Scouting Notes
     .section
+      .title Crop Rotation
       form
-        table.table.uniform
-          thead
-            tr
-              td(colspan="3")
-                .cell Crop Rotation
-          tbody
-            tr
-              td
-                .cell
-                  input(placeholder="Year",value="2013")
-              td
-                .cell
-                  select
-                    option(value="Select") Select
-                    option(value="Canola") Canola
-              td
-                .cell
-                  input(placeholder="Yield",value="")
-                  //-select
-                    option(value="bu/ac") bu/ac
-                    option(value="obs/ac") obs/ac
-            tr
-              td
-                .cell
-                  input(placeholder="Year",value="2014")
-              td
-                .cell
-                  select
-                    option(value="Select") Select
-                    option(value="Canola") Canola
-              td
-                .cell
-                  input(placeholder="Yield",value="")
-                  //-select
-                    option(value="bu/ac") bu/ac
-                    option(value="obs/ac") obs/ac
-            tr
-              td
-                .cell
-                  input(placeholder="Year",value="2015")
-              td
-                .cell
-                  select
-                    option(value="Select") Select
-                    option(value="Canola") Canola
-              td
-                .cell
-                  input(placeholder="Yield",value="")
-                  //-select
-                    option(value="bu/ac") bu/ac
-                    option(value="obs/ac") obs/ac
+        ul.list
+          li.item.collapse
+            label.sublabel 2015
+            .subItem
+              label.right Crop Type
+              select.right(style="width:95px;")
+                option(value="Select") Select
+                option(value="Canola") Canola
+            .subItem
+              label.right Yield
+              input.left(style="width:60px;",type="text",placeholder="0")
+              select.right
+                option(value="bu/ac") bu/ac
+                option(value="obs/ac") obs/ac
+          li.item.collapse
+            label.sublabel 2013
+            .subItem
+              label.right Crop Type
+              select.right(style="width:95px;")
+                option(value="Select") Select
+                option(value="Canola") Canola
+            .subItem
+              label.right Yield
+              input.left(style="width:60px;",type="text",placeholder="0")
+              select.right
+                option(value="bu/ac") bu/ac
+                option(value="obs/ac") obs/ac
+          li.item.collapse
+            label.sublabel 2012
+            .subItem
+              label.right Crop Type
+              select.right(style="width:95px;")
+                option(value="Select") Select
+                option(value="Canola") Canola
+            .subItem
+              label.right Yield
+              input.left(style="width:60px;",type="text",placeholder="0")
+              select.right
+                option(value="bu/ac") bu/ac
+                option(value="obs/ac") obs/ac
+          li.item.collapse
+            label.sublabel 2011
+            .subItem
+              label.right Crop Type
+              select.right(style="width:95px;")
+                option(value="Select") Select
+                option(value="Canola") Canola
+            .subItem
+              label.right Yield
+              input.left(style="width:60px;",type="text",placeholder="0")
+              select.right
+                option(value="bu/ac") bu/ac
+                option(value="obs/ac") obs/ac
     .section
       a.button.rounded Cancel
       a.button.rounded Save Field Details
@@ -1033,34 +1105,34 @@ template(name="rightSidebar")
         ul.list
           li.item.collapse
             label Farm Name
-            input(type="text", placeholder="Farm Name")
+            input(style="width:151px;",type="text", placeholder="Farm Name")
           li.item.collapse
             label Farm Location
-            input(type="text", placeholder="Farm Location")
+            input(style="width:138px;",type="text", placeholder="Farm Location")
           li.item.collapse
             label Main Contact
-            input(type="text", placeholder="Main Contact")
+            input(style="width:142px;",type="text", placeholder="Main Contact")
           li.item.collapse
             label Position
-            input(type="text", placeholder="Job Position")
+            input(style="width:170px;",type="text", placeholder="Job Position")
           li.item.collapse
             label Telephone
-            input(type="text", placeholder="Telephone")
+            input(style="width:157px;",type="text", placeholder="Telephone")
           li.item.collapse
             label ????
-            input(type="text", placeholder="????")
+            input(style="width:184px;",type="text", placeholder="????")
           li.item.collapse
-            label Email (Username)
-            input(type="text", placeholder="Contact Email")
+            label Email
+            input(style="width:182px;",type="text", placeholder="Contact Email")
           li.item.collapse
             label Current Password
-            input(type="password", placeholder="Current Password")
+            input(style="width:120px;",type="password", placeholder="Current Password")
           li.item.collapse
             label New Password
-            input(type="password", placeholder="New Password")
+            input(style="width:133px;",type="password", placeholder="New Password")
           li.item.collapse
-            label Confirm New Password
-            input(type="password", placeholder="Confirm New Password")
+            label Confirm Password
+            input(style="width:118px;",type="password", placeholder="Confirm Password")
         .subtitle Fuel Unit Settings
         .button-bar.columns-3
           a.button(data-active="true") Litres
@@ -1405,171 +1477,464 @@ template(name="fields")
     {{/if}}
 
     {{#if currentParamIs 'section' 'rx-rates'}}
-    .title E 24 28 26 W4 - Field One
-    .iconWrapper.size-16.right
-      {{icon 'print'}}
-    .section
-      form
-        ul.list
-          li.item.collapse
-            label(style="border-right:1px solid #dfdfdf;margin-right:10px;") Crop Type: Barley
-            label Version:
-            select.select
-              option(value="Draft for Review") Draft for Review
-    .section
-      table.table.uniform
-        thead
-          tr
-            td
-              .cell  Zone
-            td
-              .cell  Yield Goal
-            td
-              .cell Acres
-            td
-              .cell N
-            td
-              .cell P
-            td
-              .cell K
-            td
-              .cell S
-            td
-              .cell Seed
-        tbody
-          tr
-            td
-              .cell 1
-            td
-              .cell 80
-            td
-              .cell 7.0
-            td
-              .cell 54
-            td
-              .cell 0
-            td
-              .cell 0
-            td
-              .cell
-            td
-              .cell
-          tr
-            td
-              .cell 2
-            td
-              .cell 98
-            td
-              .cell 25.9
-            td
-              .cell 65
-            td
-              .cell 23
-            td
-              .cell 14
-            td
-              .cell
-            td
-              .cell
-          tr
-            td
-              .cell 3
-            td
-              .cell 106
-            td
-              .cell 45.9
-            td
-              .cell 70
-            td
-              .cell 30
-            td
-              .cell 18
-            td
-              .cell
-            td
-              .cell
-          tr
-            td
-              .cell 4
-            td
-              .cell 110
-            td
-              .cell 50.7
-            td
-              .cell 68
-            td
-              .cell 41
-            td
-              .cell 24
-            td
-              .cell
-            td
-              .cell
-          tr
-            td
-              .cell 5
-            td
-              .cell 115
-            td
-              .cell 44.4
-            td
-              .cell 72
-            td
-              .cell 32
-            td
-              .cell 19
-            td
-              .cell
-            td
-              .cell
-          tr
-            td
-              .cell 6
-            td
-              .cell 12.2
-            td
-              .cell 29.7
-            td
-              .cell 68
-            td
-              .cell 30
-            td
-              .cell 18
-            td
-              .cell
-            td
-              .cell
-        tfoot
-          tr
-            td
-              .cell Total
-            td
-              .cell 109
-            td
-              .cell 203.6
-            td
-              .cell 68.5
-            td
-              .cell 31.3
-            td
-              .cell 18.6
-            td
-              .cell
-            td
-              .cell
+      {{#if currentParamIs 'assetsInfo' '370'}}
+      {{>upgradeRequired}}
+      {{else}}
+      .title E 24 28 26 W4 - Field One - Barley - 2014
+        form
+          ul.list
+            li.item.collapse
+              label.red Draft for Review
+              label Version:
+              select.select
+                option(value="1") 1
+                option(value="2") 2
+                option(value="3") 3
+      .iconWrapper.size-16.right
+        {{icon 'print'}}
+      .section.padded
+        .title Nutrient Requirements
+        table.table.uniform
+          thead
+            tr
+              td
+                .cell  Zone
+              td
+                .cell  Yield Goal
+              td
+                .cell Acres
+              td
+                .cell N
+              td
+                .cell P
+              td
+                .cell K
+              td
+                .cell S
+              td
+                .cell Seed
+          tbody
+            tr
+              td
+                .cell 1
+              td
+                .cell 80
+              td
+                .cell 7.0
+              td
+                .cell 54
+              td
+                .cell 0
+              td
+                .cell 0
+              td
+                .cell
+              td
+                .cell
+            tr
+              td
+                .cell 2
+              td
+                .cell 98
+              td
+                .cell 25.9
+              td
+                .cell 65
+              td
+                .cell 23
+              td
+                .cell 14
+              td
+                .cell
+              td
+                .cell
+            tr
+              td
+                .cell 3
+              td
+                .cell 106
+              td
+                .cell 45.9
+              td
+                .cell 70
+              td
+                .cell 30
+              td
+                .cell 18
+              td
+                .cell
+              td
+                .cell
+            tr
+              td
+                .cell 4
+              td
+                .cell 110
+              td
+                .cell 50.7
+              td
+                .cell 68
+              td
+                .cell 41
+              td
+                .cell 24
+              td
+                .cell
+              td
+                .cell
+            tr
+              td
+                .cell 5
+              td
+                .cell 115
+              td
+                .cell 44.4
+              td
+                .cell 72
+              td
+                .cell 32
+              td
+                .cell 19
+              td
+                .cell
+              td
+                .cell
+            tr
+              td
+                .cell 6
+              td
+                .cell 12.2
+              td
+                .cell 29.7
+              td
+                .cell 68
+              td
+                .cell 30
+              td
+                .cell 18
+              td
+                .cell
+              td
+                .cell
+          tfoot
+            tr
+              td
+                .cell Total
+              td
+                .cell 109
+              td
+                .cell 203.6
+              td
+                .cell 68.5
+              td
+                .cell 31.3
+              td
+                .cell 18.6
+              td
+                .cell
+              td
+                .cell
+        .title RX Map Rates (Dry)
+        table.table.uniform
+          thead
+            tr
+              td
+                .cell  Zone
+              td
+                .cell  N (lbs/ac)
+              td
+                .cell P (lbs/ac)
+              td
+                .cell K (lbs/ac)
+              td
+                .cell S (lbs/ac)
+              td
+                .cell Blend (lbs/ac)
+              td
+                .cell Seed (lbs/ac)
+          tbody
+            tr
+              td
+                .cell 1
+              td
+                .cell 100
+              td
+                .cell 0
+              td
+                .cell 0
+              td
+                .cell 0
+              td
+                .cell
+              td
+                .cell
+            tr
+              td
+                .cell 2
+              td
+                .cell 124
+              td
+                .cell 0
+              td
+                .cell 0
+              td
+                .cell 0
+              td
+                .cell
+              td
+                .cell
+            tr
+              td
+                .cell 3
+              td
+                .cell 139
+              td
+                .cell 0
+              td
+                .cell 0
+              td
+                .cell 0
+              td
+                .cell
+              td
+                .cell
+            tr
+              td
+                .cell 4
+              td
+                .cell 93
+              td
+                .cell 0
+              td
+                .cell 0
+              td
+                .cell 0
+              td
+                .cell 108
+              td
+                .cell
+            tr
+              td
+                .cell 5
+              td
+                .cell 148
+              td
+                .cell 0
+              td
+                .cell 0
+              td
+                .cell 0
+              td
+                .cell 70
+              td
+                .cell
+            tr
+              td
+                .cell 6
+              td
+                .cell 161
+              td
+                .cell 0
+              td
+                .cell 0
+              td
+                .cell 0
+              td
+                .cell
+              td
+                .cell
+          tfoot
+            tr
+              td
+                .cell Total
+              td
+                .cell
+                  | 63982 lbs
+                  br
+                  | 29.022 MT
+              td
+                .cell
+              td
+                .cell
+              td
+                .cell
+              td
+                .cell
+                  | 20023 lbs
+                  br
+                  | 9.082 MT
+              td
+                .cell
+        .title Product Requirements
+        table.table.uniform
+          thead
+            tr
+              td
+                .cell  Zone
+              td
+                .cell  Yield Goal
+              td
+                .cell Acres
+              td
+                .cell 46-0-0
+              td
+                .cell 11-52-0
+              td
+                .cell 0-0-60
+              td
+                .cell 21-0-0-24
+              td
+                .cell Seed
+          tbody
+            tr
+              td
+                .cell 1
+              td
+                .cell 80
+              td
+                .cell 7.0
+              td
+                .cell 4360
+              td
+                .cell 0
+              td
+                .cell 0
+              td
+                .cell
+              td
+                .cell
+            tr
+              td
+                .cell 2
+              td
+                .cell 98
+              td
+                .cell 25.9
+              td
+                .cell 7137
+              td
+                .cell 0
+              td
+                .cell 0
+              td
+                .cell
+              td
+                .cell
+            tr
+              td
+                .cell 3
+              td
+                .cell 106
+              td
+                .cell 45.9
+              td
+                .cell 13510
+              td
+                .cell 0
+              td
+                .cell 0
+              td
+                .cell
+              td
+                .cell
+            tr
+              td
+                .cell 4
+              td
+                .cell 110
+              td
+                .cell 50.7
+              td
+                .cell 10890
+              td
+                .cell 8289
+              td
+                .cell 4272
+              td
+                .cell
+              td
+                .cell
+            tr
+              td
+                .cell 5
+              td
+                .cell 115
+              td
+                .cell 44.4
+              td
+                .cell 15714
+              td
+                .cell 4906
+              td
+                .cell 2480
+              td
+                .cell
+              td
+                .cell
+            tr
+              td
+                .cell 6
+              td
+                .cell 122
+              td
+                .cell 29.7
+              td
+                .cell 12371
+              td
+                .cell 0
+              td
+                .cell 0
+              td
+                .cell
+              td
+                .cell
+          tfoot
+            tr
+              td
+                .cell Total
+              td
+                .cell
+                  | 109
+              td
+                .cell
+                  | 203.6
+              td
+                .cell
+                  | 63982 lbs
+                  br
+                  | 29.022 MT
+              td
+                .cell
+                  | 13196 lbs
+                  br
+                  | 5.985 MT
+              td
+                .cell
+                  | 6752 lbs
+                  br
+                  | 3.603 MT
+              td
+                .cell
+              td
+                .cell
+        {{/if}}
     {{/if}}
 
     {{#if currentParamIs 'section' 'rx-files'}}
-    //-If Field is in work order show files, if not, show sales page
-    .title RX Files
-    a.tile.download(href="#")
-      .title RX Equipment Test: JD 1910
-      .iconWrapper.size-24.left
-        {{icon 'download'}}
-    a.tile.download(href="#")
-      .title RX Files: Optimize RX 2014
-      .iconWrapper.size-24.left
-        {{icon 'download'}}
+      //-If Field is in work order show files, if not, show sales page
+      {{#if currentParamIs 'assetsInfo' '370'}}
+        {{>upgradeRequired}}
+      {{else}}
+      .title RX Files
+      a.tile.download(href="#")
+        .title RX Equipment Test: JD 1910
+        .iconWrapper.size-24.left
+          {{icon 'download'}}
+      a.tile.download(href="#")
+        .title RX Files: Optimize RX 2014
+        .iconWrapper.size-24.left
+          {{icon 'download'}}
+      {{/if}}
     {{/if}}
 
     {{#if currentParamIs 'section' 'yield-report'}}
@@ -1580,803 +1945,822 @@ template(name="equipment")
   .content(data-subheaderState="{{getSession 'subHeaderState'}}",data-leftSidebarState="{{getSession 'leftSidebarState'}}",data-rightSidebarState="{{getSession 'rightSidebarState'}}",data-borderState="{{borderState}}")
     {{#if currentParamIs 'section' 'equipment-info'}}
       {{#if currentParamIs 'assetsInfo' undefined}}
-      .title New Equipment
+        .title New Equipment
+          form
+            ul.list
+              li.item.collapse
+                select.select(data-action="setEquipmentType")
+                  option(value="Select Equipment Type") Select Equipment Type
+                  option(value="Seeding System") Seeding System
+                  option(value="Floater") Floater
+                  option(value="Sprayer") Sprayer
+                  option(value="NH3 Cultivator") NH3 Cultivator
+                  option(value="Combine") Combine
+                  //-option(value="Swather") Swather
+                  //-option(value="Tractor") Tractor
+                  option(value="Truck") Truck
+                  //-option(value="Fleet") Fleet
+        .iconWrapper.size-16.right
+          {{icon 'print'}}
+        {{#if equalsSession 'equipmentType' 'Select Equipment Type'}}
+        .title Please select an equipment type.
+        {{else}}
         form
-          ul.list
-            li.item.collapse
-              select.select(data-action="setEquipmentType")
-                option(value="Seeding System") Seeding System
-                option(value="Floater") Floater
-                option(value="Sprayer") Sprayer
-                option(value="NH3 Cultivator") NH3 Cultivator
-                option(value="Combine") Combine
-                //-option(value="Swather") Swather
-                //-option(value="Tractor") Tractor
-                option(value="Truck") Truck
-                //-option(value="Fleet") Fleet
-      .iconWrapper.size-16.right
-        {{icon 'print'}}
-      form
-        {{#if equalsSession 'equipmentType' 'Seeding System'}}
-        .section
-          ul.list
-            li.item.collapse
-              label(style="width:100px;") Unit Name
-              input(type="text",placeholder="Unit Name")
-            li.item.collapse
-              label(style="width:100px;") Cart Make
-              select.select
-                option(value="Cart Make") Cart Make
-            li.item.collapse
-              label(style="width:100px;") Cart Model
-              select.select
-                option(value="Cart Model") Cart Model
-              ul.list(style="left:100px;")
-                li.item.collapse
-                  label Tank 1
-                  input(type="text",placeholder="Capacity (bu)",value="200 Bushels")
-                  input(type="text",placeholder="Select Product",value="Select Product")
-                li.item.collapse
-                  label Tank 2
-                  input(type="text",placeholder="Capacity (bu)",value="150 Bushels")
-                  input(type="text",placeholder="Select Product",value="Select Product")
-                li.item.collapse
-                  label Tank 3
-                  input(type="text",placeholder="Capacity (bu)",value="200 Bushels")
-                  input(type="text",placeholder="Select Product",value="Select Product")
-                li.item.collapse
-                  label Tank 4
-                  input(type="text",placeholder="Capacity (bu)")
-                  input(type="text",placeholder="Select Product")
-                li.item.collapse
-                  label Tank 5
-                  input(type="text",placeholder="Capacity (bu)")
-                  input(type="text",placeholder="Select Product")
-          ul.list
-            li.item.collapse
-              label(style="width:100px;") Drill Make
-              select.select
-                option(value="Drill Make") Drill Make
-            li.item.collapse
-              label(style="width:100px;") Drill Width
-              input.left(type="text",placeholder="0",style="width: 80px;")
-              select.select
-                option(value="Ft") Ft
-            li.item.collapse
-              label(style="width:100px;") Fertilizer Type
-              select.select
-                option(value="Fertilizer Type") Fertilizer Type
-                option(value="Dry") Dry
-              ul.list(style="left:100px;")
-                li.item.collapse
-                  label Dry Rate Maximum
-                  input(type="text",placeholder="0")
-                  span lbs/acre
-                li.item.collapse
-                  label Opener Width
-                  input(type="text",placeholder="0")
-                  span inches
-                li.item.collapse
-                  label Shank Spacing
-                  input(type="text",placeholder="0")
-                  span inches
-                li.item.collapse
-                  .toggle.gray.large(data-action="toggle",data-toggle="shootType",data-state="no")
-                    input(type="hidden")
-                    .toggleOptions
-                      .toggleOptionsTrack
-                        .toggleOption Single-Shoot
-                        .toggleOption Double-Shoot
-                    .toggleLabel Shoot Type?
-          ul.list
-            li.item.collapse
-              label(style="width:100px;") Receiver Make
-              select.select
-                option(value="Receiver Make") Receiver Make
-                option(value="John Deere") John Deere
-            li.item.collapse
-              label(style="width:100px;") Model
-              select.select
-                option(value="Model") Model
-                option(value="1910") 1910
-            li.item.collapse
-              .toggle.gray(data-action="toggle",data-toggle="controllerConnection",data-state="no")
-                input(type="hidden")
-                .toggleOptions
-                  .toggleOptionsTrack
-                    .toggleOption Yes
-                    .toggleOption No
-                .toggleLabel Connected to Controller?
-            li.item.collapse
-              label(style="width:100px;") Controller Make
-              select.select
-                option(value="Controller Make") Controller Make
-                option(value="John Deere") John Deere
-            li.item.collapse
-              label(style="width:100px;") Model
-              select.select
-                option(value="Model") Model
-                option(value="1910") 1910
-        {{/if}}
+          {{#if equalsSession 'equipmentType' 'Seeding System'}}
+          .section(style="padding-bottom:10px;")
+            ul.list
+              li.item.collapse.borderless
+                label(style="width:100px;") Unit Name
+                input(type="text",placeholder="Unit Name")
+              li.item.collapse.borderless
+                label(style="width:100px;") Cart Make
+                select.select
+                  option(value="Cart Make") Cart Make
+              li.item.collapse
+                label(style="width:100px;") Cart Model
+                select.select
+                  option(value="Cart Model") Cart Model
+                ul.list(style="left:100px;")
+                  li.item.collapse
+                    label Tank 1
+                    input(type="text",placeholder="Capacity (bu)",value="200 Bushels")
+                    input(type="text",placeholder="Select Product",value="Select Product")
+                  li.item.collapse
+                    label Tank 2
+                    input(type="text",placeholder="Capacity (bu)",value="150 Bushels")
+                    input(type="text",placeholder="Select Product",value="Select Product")
+                  li.item.collapse
+                    label Tank 3
+                    input(type="text",placeholder="Capacity (bu)",value="200 Bushels")
+                    input(type="text",placeholder="Select Product",value="Select Product")
+                  li.item.collapse
+                    label Tank 4
+                    input(type="text",placeholder="Capacity (bu)")
+                    input(type="text",placeholder="Select Product")
+                  li.item.collapse
+                    label Tank 5
+                    input(type="text",placeholder="Capacity (bu)")
+                    input(type="text",placeholder="Select Product")
+            ul.list
+              li.item.collapse.borderless
+                label(style="width:100px;") Drill Make
+                select.select
+                  option(value="Drill Make") Drill Make
+              li.item.collapse
+                label(style="width:100px;") Drill Width
+                input.left(type="text",placeholder="0",style="width: 80px;")
+                select.select
+                  option(value="Ft") Ft
+              li.item.collapse
+                label(style="width:100px;") Fertilizer Type
+                select.select
+                  option(value="Fertilizer Type") Fertilizer Type
+                  option(value="Dry") Dry
+                ul.list(style="left:100px;")
+                  li.item.collapse
+                    label Dry Rate Maximum
+                    input(type="text",placeholder="0")
+                    span lbs/acre
+                  li.item.collapse
+                    label Opener Width
+                    input(type="text",placeholder="0")
+                    span inches
+                  li.item.collapse
+                    label Shank Spacing
+                    input(type="text",placeholder="0")
+                    span inches
+                  li.item.collapse
+                    .toggle.gray.large(data-action="toggle",data-toggle="shootType",data-state="no")
+                      input(type="hidden")
+                      .toggleOptions
+                        .toggleOptionsTrack
+                          .toggleOption Single-Shoot
+                          .toggleOption Double-Shoot
+                      .toggleLabel Shoot Type?
+          .section(style="padding-bottom:10px;")
+            ul.list
+              li.item.collapse.borderless
+                label(style="width:100px;") Receiver Make
+                select.select
+                  option(value="Receiver Make") Receiver Make
+                  option(value="John Deere") John Deere
+              li.item.collapse.borderless
+                label(style="width:100px;") Model
+                select.select
+                  option(value="Model") Model
+                  option(value="1910") 1910
+              li.item.collapse
+                .toggle.gray(data-action="toggle",data-toggle="controllerConnection",data-state="no")
+                  input(type="hidden")
+                  .toggleOptions
+                    .toggleOptionsTrack
+                      .toggleOption Yes
+                      .toggleOption No
+                  .toggleLabel Connected to Controller?
+              li.item.collapse.borderless
+                label(style="width:100px;") Controller Make
+                select.select
+                  option(value="Controller Make") Controller Make
+                  option(value="John Deere") John Deere
+              li.item.collapse
+                label(style="width:100px;") Model
+                select.select
+                  option(value="Model") Model
+                  option(value="1910") 1910
+          {{/if}}
 
-        {{#if equalsSession 'equipmentType' 'Floater'}}
-        .section
-          ul.list
-            li.item.collapse
-              label(style="width:100px;") Unit Name
-              input(type="text",placeholder="Unit Name")
-            li.item.collapse
-              label(style="width:100px;") Make
-              select.select
-                option(value="Make") Make
-              ul.list(style="left:100px;")
-                li.item.collapse
-                  label Tank 1
-                  input(type="text",placeholder="Capacity (bu)",value="200 Bushels")
-                  input(type="text",placeholder="Select Product",value="Select Product")
-                li.item.collapse
-                  label Tank 2
-                  input(type="text",placeholder="Capacity (bu)",value="150 Bushels")
-                  input(type="text",placeholder="Select Product",value="Select Product")
-                li.item.collapse
-                  label Tank 3
-                  input(type="text",placeholder="Capacity (bu)",value="200 Bushels")
-                  input(type="text",placeholder="Select Product",value="Select Product")
-                li.item.collapse
-                  label Tank 4
-                  input(type="text",placeholder="Capacity (bu)")
-                  input(type="text",placeholder="Select Product")
-                li.item.collapse
-                  label Tank 5
-                  input(type="text",placeholder="Capacity (bu)")
-                  input(type="text",placeholder="Select Product")
-          ul.list
-            li.item.collapse
-              label(style="width:100px;") Fertilizer Type
-              select.select
-                option(value="Fertilizer Type") Fertilizer Type
-                option(value="Dry") Dry
-              ul.list(style="left:100px;")
-                li.item.collapse
-                  label Dry Rate Maximum
-                  input(type="text",placeholder="0")
-                  span lbs/acre
-                li.item.collapse
-                  label Opener Width
-                  input(type="text",placeholder="0")
-                  span inches
-                li.item.collapse
-                  label Shank Spacing
-                  input(type="text",placeholder="0")
-                  span inches
-                li.item.collapse
-                  .toggle.gray.large(data-action="toggle",data-toggle="shootType",data-state="no")
-                    input(type="hidden")
-                    .toggleOptions
-                      .toggleOptionsTrack
-                        .toggleOption Single-Shoot
-                        .toggleOption Double-Shoot
-                    .toggleLabel Shoot Type?
-          ul.list
-            li.item.collapse
-              label(style="width:100px;") Receiver Make
-              select.select
-                option(value="Receiver Make") Receiver Make
-                option(value="John Deere") John Deere
-            li.item.collapse
-              label(style="width:100px;") Model
-              select.select
-                option(value="Model") Model
-                option(value="1910") 1910
-            li.item.collapse
-              .toggle.gray(data-action="toggle",data-toggle="controllerConnection",data-state="no")
-                input(type="hidden")
-                .toggleOptions
-                  .toggleOptionsTrack
-                    .toggleOption Yes
-                    .toggleOption No
-                .toggleLabel Connected to Controller?
-            li.item.collapse
-              label(style="width:100px;") Controller Make
-              select.select
-                option(value="Controller Make") Controller Make
-                option(value="John Deere") John Deere
-            li.item.collapse
-              label(style="width:100px;") Model
-              select.select
-                option(value="Model") Model
-                option(value="1910") 1910
-        {{/if}}
+          {{#if equalsSession 'equipmentType' 'Floater'}}
+          .section(style="padding-bottom:10px;")
+            ul.list
+              li.item.collapse.borderless
+                label(style="width:100px;") Unit Name
+                input(type="text",placeholder="Unit Name")
+              li.item.collapse
+                label(style="width:100px;") Make
+                select.select
+                  option(value="Make") Make
+                ul.list(style="left:100px;")
+                  li.item.collapse
+                    label Tank 1
+                    input(type="text",placeholder="Capacity (bu)",value="200 Bushels")
+                    input(type="text",placeholder="Select Product",value="Select Product")
+                  li.item.collapse
+                    label Tank 2
+                    input(type="text",placeholder="Capacity (bu)",value="150 Bushels")
+                    input(type="text",placeholder="Select Product",value="Select Product")
+                  li.item.collapse
+                    label Tank 3
+                    input(type="text",placeholder="Capacity (bu)",value="200 Bushels")
+                    input(type="text",placeholder="Select Product",value="Select Product")
+                  li.item.collapse
+                    label Tank 4
+                    input(type="text",placeholder="Capacity (bu)")
+                    input(type="text",placeholder="Select Product")
+                  li.item.collapse
+                    label Tank 5
+                    input(type="text",placeholder="Capacity (bu)")
+                    input(type="text",placeholder="Select Product")
+          .section(style="padding-bottom:10px;")
+            ul.list
+              li.item.collapse
+                label(style="width:100px;") Fertilizer Type
+                select.select
+                  option(value="Fertilizer Type") Fertilizer Type
+                  option(value="Dry") Dry
+                ul.list(style="left:100px;")
+                  li.item.collapse
+                    label Dry Rate Maximum
+                    input(type="text",placeholder="0")
+                    span lbs/acre
+                  li.item.collapse
+                    label Opener Width
+                    input(type="text",placeholder="0")
+                    span inches
+                  li.item.collapse
+                    label Shank Spacing
+                    input(type="text",placeholder="0")
+                    span inches
+                  li.item.collapse
+                    .toggle.gray.large(data-action="toggle",data-toggle="shootType",data-state="no")
+                      input(type="hidden")
+                      .toggleOptions
+                        .toggleOptionsTrack
+                          .toggleOption Single-Shoot
+                          .toggleOption Double-Shoot
+                      .toggleLabel Shoot Type?
+          .section(style="padding-bottom:10px;")
+            ul.list
+              li.item.collapse.borderless
+                label(style="width:100px;") Receiver Make
+                select.select
+                  option(value="Receiver Make") Receiver Make
+                  option(value="John Deere") John Deere
+              li.item.collapse.borderless
+                label(style="width:100px;") Model
+                select.select
+                  option(value="Model") Model
+                  option(value="1910") 1910
+              li.item.collapse
+                .toggle.gray(data-action="toggle",data-toggle="controllerConnection",data-state="no")
+                  input(type="hidden")
+                  .toggleOptions
+                    .toggleOptionsTrack
+                      .toggleOption Yes
+                      .toggleOption No
+                  .toggleLabel Connected to Controller?
+              li.item.collapse.borderless
+                label(style="width:100px;") Controller Make
+                select.select
+                  option(value="Controller Make") Controller Make
+                  option(value="John Deere") John Deere
+              li.item.collapse
+                label(style="width:100px;") Model
+                select.select
+                  option(value="Model") Model
+                  option(value="1910") 1910
+          {{/if}}
 
-        {{#if equalsSession 'equipmentType' 'Sprayer'}}
-        .section
-          ul.list
-            li.item.collapse
-              label(style="width:100px;") Unit Name
-              input(type="text",placeholder="Unit Name")
-            li.item.collapse
-              label(style="width:100px;") Make
-              select.select
-                option(value="Make") Make
-              ul.list(style="left:100px;")
-                li.item.collapse
-                  label Tank 1
-                  input(type="text",placeholder="Capacity (bu)",value="200 Bushels")
-                  input(type="text",placeholder="Select Product",value="Select Product")
-                li.item.collapse
-                  label Tank 2
-                  input(type="text",placeholder="Capacity (bu)",value="150 Bushels")
-                  input(type="text",placeholder="Select Product",value="Select Product")
-                li.item.collapse
-                  label Tank 3
-                  input(type="text",placeholder="Capacity (bu)",value="200 Bushels")
-                  input(type="text",placeholder="Select Product",value="Select Product")
-                li.item.collapse
-                  label Tank 4
-                  input(type="text",placeholder="Capacity (bu)")
-                  input(type="text",placeholder="Select Product")
-                li.item.collapse
-                  label Tank 5
-                  input(type="text",placeholder="Capacity (bu)")
-                  input(type="text",placeholder="Select Product")
-          ul.list
-            li.item.collapse
-              label(style="width:100px;") Fertilizer Type
-              select.select
-                option(value="Fertilizer Type") Fertilizer Type
-                option(value="Dry") Liquid
-              ul.list(style="left:100px;")
-                li.item.collapse
-                  label(style="width:100px;") Liquid Rates for Nozzles
-                  input(type="text",placeholder="min")
-                  span -
-                  input(type="text",placeholder="max")
-                  span gal/acre
-                li.item.collapse
-                  .toggle.gray.large(data-action="toggle",data-toggle="shootType",data-state="no")
-                    input(type="hidden")
-                    .toggleOptions
-                      .toggleOptionsTrack
-                        .toggleOption U.S. Gallons
-                        .toggleOption Imp. Gallons
-                    .toggleLabel Gallons
-                li.item.collapse
-                  .button-bar.columns-3
-                    a.button(data-active="true") Mid-Row Bander
-                    a.button(data-active="false") Paired Row
-                    a.button(data-active="false") Side Band
-          ul.list
-            li.item.collapse
-              label(style="width:100px;") Receiver Make
-              select.select
-                option(value="Receiver Make") Receiver Make
-                option(value="John Deere") John Deere
-            li.item.collapse
-              label(style="width:100px;") Model
-              select.select
-                option(value="Model") Model
-                option(value="1910") 1910
-            li.item.collapse
-              .toggle.gray(data-action="toggle",data-toggle="controllerConnection",data-state="no")
-                input(type="hidden")
-                .toggleOptions
-                  .toggleOptionsTrack
-                    .toggleOption Yes
-                    .toggleOption No
-                .toggleLabel Connected to Controller?
-            li.item.collapse
-              label(style="width:100px;") Controller Make
-              select.select
-                option(value="Controller Make") Controller Make
-                option(value="John Deere") John Deere
-            li.item.collapse
-              label(style="width:100px;") Model
-              select.select
-                option(value="Model") Model
-                option(value="1910") 1910
-        {{/if}}
+          {{#if equalsSession 'equipmentType' 'Sprayer'}}
+          .section(style="padding-bottom:10px;")
+            ul.list
+              li.item.collapse.borderless
+                label(style="width:100px;") Unit Name
+                input(type="text",placeholder="Unit Name")
+              li.item.collapse
+                label(style="width:100px;") Make
+                select.select
+                  option(value="Make") Make
+                ul.list(style="left:100px;")
+                  li.item.collapse
+                    label Tank 1
+                    input(type="text",placeholder="Capacity (bu)",value="200 Bushels")
+                    input(type="text",placeholder="Select Product",value="Select Product")
+                  li.item.collapse
+                    label Tank 2
+                    input(type="text",placeholder="Capacity (bu)",value="150 Bushels")
+                    input(type="text",placeholder="Select Product",value="Select Product")
+                  li.item.collapse
+                    label Tank 3
+                    input(type="text",placeholder="Capacity (bu)",value="200 Bushels")
+                    input(type="text",placeholder="Select Product",value="Select Product")
+                  li.item.collapse
+                    label Tank 4
+                    input(type="text",placeholder="Capacity (bu)")
+                    input(type="text",placeholder="Select Product")
+                  li.item.collapse
+                    label Tank 5
+                    input(type="text",placeholder="Capacity (bu)")
+                    input(type="text",placeholder="Select Product")
+          .section(style="padding-bottom:10px;")
+            ul.list
+              li.item.collapse
+                label(style="width:100px;") Fertilizer Type
+                select.select
+                  option(value="Fertilizer Type") Fertilizer Type
+                  option(value="Dry") Liquid
+                ul.list(style="left:100px;")
+                  li.item.collapse
+                    label(style="width:100px;") Liquid Rates for Nozzles
+                    input(type="text",placeholder="min")
+                    span -
+                    input(type="text",placeholder="max")
+                    span gal/acre
+                  li.item.collapse
+                    .toggle.gray.large(data-action="toggle",data-toggle="shootType",data-state="no")
+                      input(type="hidden")
+                      .toggleOptions
+                        .toggleOptionsTrack
+                          .toggleOption U.S. Gallons
+                          .toggleOption Imp. Gallons
+                      .toggleLabel Gallons
+                  li.item.collapse
+                    .button-bar.columns-3
+                      a.button(data-active="true") Mid-Row Bander
+                      a.button(data-active="false") Paired Row
+                      a.button(data-active="false") Side Band
+          .section(style="padding-bottom:10px;")
+            ul.list
+              li.item.collapse.borderless
+                label(style="width:100px;") Receiver Make
+                select.select
+                  option(value="Receiver Make") Receiver Make
+                  option(value="John Deere") John Deere
+              li.item.collapse.borderless
+                label(style="width:100px;") Model
+                select.select
+                  option(value="Model") Model
+                  option(value="1910") 1910
+              li.item.collapse
+                .toggle.gray(data-action="toggle",data-toggle="controllerConnection",data-state="no")
+                  input(type="hidden")
+                  .toggleOptions
+                    .toggleOptionsTrack
+                      .toggleOption Yes
+                      .toggleOption No
+                  .toggleLabel Connected to Controller?
+              li.item.collapse.borderless
+                label(style="width:100px;") Controller Make
+                select.select
+                  option(value="Controller Make") Controller Make
+                  option(value="John Deere") John Deere
+              li.item.collapse
+                label(style="width:100px;") Model
+                select.select
+                  option(value="Model") Model
+                  option(value="1910") 1910
+          {{/if}}
 
-        {{#if equalsSession 'equipmentType' 'NH3 Cultivator'}}
-        .section
-          ul.list
-            li.item.collapse
-              label(style="width:100px;") Unit Name
-              input(type="text",placeholder="Unit Name")
-            li.item.collapse
-              label(style="width:100px;") Make
-              select.select
-                option(value="Make") Make
-            li.item.collapse
-              label(style="width:100px;") NH3 Rates
-              input(type="text",placeholder="min")
-              span -
-              input(type="text",placeholder="max")
-              span lbs actual/acre
-            li.item.collapse
-              label(style="width:100px;") Receiver Make
-              select.select
-                option(value="Receiver Make") Receiver Make
-                option(value="John Deere") John Deere
-            li.item.collapse
-              label(style="width:100px;") Model
-              select.select
-                option(value="Model") Model
-                option(value="1910") 1910
-            li.item.collapse
-              .toggle.gray(data-action="toggle",data-toggle="controllerConnection",data-state="no")
-                input(type="hidden")
-                .toggleOptions
-                  .toggleOptionsTrack
-                    .toggleOption Yes
-                    .toggleOption No
-                .toggleLabel Connected to Controller?
-            li.item.collapse
-              label(style="width:100px;") Controller Make
-              select.select
-                option(value="Controller Make") Controller Make
-                option(value="John Deere") John Deere
-            li.item.collapse
-              label(style="width:100px;") Model
-              select.select
-                option(value="Model") Model
-                option(value="1910") 1910
-        {{/if}}
+          {{#if equalsSession 'equipmentType' 'NH3 Cultivator'}}
+          .section(style="padding-bottom:10px;")
+            ul.list
+              li.item.collapse.borderless
+                label(style="width:100px;") Unit Name
+                input(type="text",placeholder="Unit Name")
+              li.item.collapse.borderless
+                label(style="width:100px;") Make
+                select.select
+                  option(value="Make") Make
+              li.item.collapse.borderless
+                label(style="width:100px;") NH3 Rates
+                input(type="text",placeholder="min")
+                span -
+                input(type="text",placeholder="max")
+                span lbs actual/acre
+          .section(style="padding-bottom:10px;")
+            ul.list
+              li.item.collapse.borderless
+                label(style="width:100px;") Receiver Make
+                select.select
+                  option(value="Receiver Make") Receiver Make
+                  option(value="John Deere") John Deere
+              li.item.collapse.borderless
+                label(style="width:100px;") Model
+                select.select
+                  option(value="Model") Model
+                  option(value="1910") 1910
+              li.item.collapse.borderless
+                .toggle.gray(data-action="toggle",data-toggle="controllerConnection",data-state="no")
+                  input(type="hidden")
+                  .toggleOptions
+                    .toggleOptionsTrack
+                      .toggleOption Yes
+                      .toggleOption No
+                  .toggleLabel Connected to Controller?
+          .section
+            ul.list
+              li.item.collapse.borderless
+                label(style="width:100px;") Controller Make
+                select.select
+                  option(value="Controller Make") Controller Make
+                  option(value="John Deere") John Deere
+              li.item.collapse
+                label(style="width:100px;") Model
+                select.select
+                  option(value="Model") Model
+                  option(value="1910") 1910
+          {{/if}}
 
-        {{#if equalsSession 'equipmentType' 'Combine'}}
-        .section
-          ul.list
-            li.item.collapse
-              label(style="width:100px;") Unit Name or #
-              input(type="text",placeholder="Unit Name")
-            li.item.collapse
-              label(style="width:100px;") Make
-              select.select
-                option(value="Make") Make
-            li.item.collapse
-              label(style="width:100px;") Model
-              input(type="text",placeholder="Model")
-            li.item.collapse
-              label(style="width:100px;") Year
-              input(type="text",placeholder="Year")
-        .section
-          .title Yield Monitor
-          ul.list
-            li.item.collapse
-              label(style="width:100px;") Make
-              input(type="text",placeholder="Make")
-            li.item.collapse
-              label(style="width:100px;") Model
-              input(type="text",placeholder="Model")
-            li.item.collapse
-              .toggle.gray(data-action="toggle",data-toggle="controllerConnection",data-state="no")
-                input(type="hidden")
-                .toggleOptions
-                  .toggleOptionsTrack
-                    .toggleOption Yes
-                    .toggleOption No
-                .toggleLabel Is Monitor Setup and Running?
-            li.item.collapse
-              label(style="width:100px;") Data Card Type
-              input(type="text",placeholder="Data Card Type")
-        {{/if}}
+          {{#if equalsSession 'equipmentType' 'Combine'}}
+          .section
+            ul.list
+              li.item.collapse.borderless
+                label(style="width:100px;") Unit Name or #
+                input(type="text",placeholder="Unit Name")
+              li.item.collapse.borderless
+                label(style="width:100px;") Make
+                select.select
+                  option(value="Make") Make
+              li.item.collapse.borderless
+                label(style="width:100px;") Model
+                input(type="text",placeholder="Model")
+              li.item.collapse
+                label(style="width:100px;") Year
+                input(type="text",placeholder="Year")
+          .section
+            .title Yield Monitor
+            ul.list
+              li.item.collapse.borderless
+                label(style="width:100px;") Make
+                input(type="text",placeholder="Make")
+              li.item.collapse.borderless
+                label(style="width:100px;") Model
+                input(type="text",placeholder="Model")
+              li.item.collapse.borderless
+                .toggle.gray(data-action="toggle",data-toggle="controllerConnection",data-state="no")
+                  input(type="hidden")
+                  .toggleOptions
+                    .toggleOptionsTrack
+                      .toggleOption Yes
+                      .toggleOption No
+                  .toggleLabel Is Monitor Setup and Running?
+              li.item.collapse
+                label(style="width:100px;") Data Card Type
+                input(type="text",placeholder="Data Card Type")
+          {{/if}}
 
-        {{#if equalsSession 'equipmentType' 'Truck'}}
-        .section
-          ul.list
-            li.item.collapse
-              label(style="width:100px;") Unit Name or #
-              input(type="text",placeholder="Unit Name")
-            li.item.collapse
-              label(style="width:100px;") Make
-              select.select
-                option(value="Make") Make
-            li.item.collapse
-              label(style="width:100px;") Model
-              input(type="text",placeholder="Model")
-            li.item.collapse
-              label(style="width:100px;") Year
-              input(type="text",placeholder="Year")
+          {{#if equalsSession 'equipmentType' 'Truck'}}
+          .section
+            ul.list
+              li.item.collapse.borderless
+                label(style="width:100px;") Unit Name or #
+                input(type="text",placeholder="Unit Name")
+              li.item.collapse.borderless
+                label(style="width:100px;") Make
+                select.select
+                  option(value="Make") Make
+              li.item.collapse.borderless
+                label(style="width:100px;") Model
+                input(type="text",placeholder="Model")
+              li.item.collapse
+                label(style="width:100px;") Year
+                input(type="text",placeholder="Year")
+          {{/if}}
+          button.button.rounded(type="submit") Save
         {{/if}}
-        button.button.rounded(type="submit") Save
-      {{else}}
-      .title Big Red
+        {{else}}
+        .title Big Red
+          form
+            ul.list
+              li.item.collapse
+                select.select(data-action="setEquipmentType")
+                  option(value="Select Equipment Type") Select Equipment Type
+                  option(value="Seeding System") Seeding System
+                  option(value="Floater") Floater
+                  option(value="Sprayer") Sprayer
+                  option(value="NH3 Cultivator") NH3 Cultivator
+                  option(value="Combine") Combine
+                  //-option(value="Swather") Swather
+                  //-option(value="Tractor") Tractor
+                  option(value="Truck") Truck
+                  //-option(value="Fleet") Fleet
+        .iconWrapper.size-16.right
+          {{icon 'print'}}
+        {{#if equalsSession 'equipmentType' 'Select Equipment Type'}}
+        .title Please select an equipment type.
+        {{else}}
         form
-          ul.list
-            li.item.collapse
-              select.select(data-action="setEquipmentType")
-                option(value="Seeding System") Seeding System
-                option(value="Floater") Floater
-                option(value="Sprayer") Sprayer
-                option(value="NH3 Cultivator") NH3 Cultivator
-                option(value="Combine") Combine
-                //-option(value="Swather") Swather
-                //-option(value="Tractor") Tractor
-                option(value="Truck") Truck
-                //-option(value="Fleet") Fleet
-      .iconWrapper.size-16.right
-        {{icon 'print'}}
-      form
-        {{#if equalsSession 'equipmentType' 'Seeding System'}}
-        .section
-          ul.list
-            li.item.collapse
-              label(style="width:100px;") Unit Name
-              input(type="text",placeholder="Unit Name")
-            li.item.collapse
-              label(style="width:100px;") Cart Make
-              select.select
-                option(value="Cart Make") Cart Make
-            li.item.collapse
-              label(style="width:100px;") Cart Model
-              select.select
-                option(value="Cart Model") Cart Model
-              ul.list(style="left:100px;")
-                li.item.collapse
-                  label Tank 1
-                  input(type="text",placeholder="Capacity (bu)",value="200 Bushels")
-                  input(type="text",placeholder="Select Product",value="Select Product")
-                li.item.collapse
-                  label Tank 2
-                  input(type="text",placeholder="Capacity (bu)",value="150 Bushels")
-                  input(type="text",placeholder="Select Product",value="Select Product")
-                li.item.collapse
-                  label Tank 3
-                  input(type="text",placeholder="Capacity (bu)",value="200 Bushels")
-                  input(type="text",placeholder="Select Product",value="Select Product")
-                li.item.collapse
-                  label Tank 4
-                  input(type="text",placeholder="Capacity (bu)")
-                  input(type="text",placeholder="Select Product")
-                li.item.collapse
-                  label Tank 5
-                  input(type="text",placeholder="Capacity (bu)")
-                  input(type="text",placeholder="Select Product")
-          ul.list
-            li.item.collapse
-              label(style="width:100px;") Drill Make
-              select.select
-                option(value="Drill Make") Drill Make
-            li.item.collapse
-              label(style="width:100px;") Drill Width
-              input.left(type="text",placeholder="0",style="width: 80px;")
-              select.select
-                option(value="Ft") Ft
-            li.item.collapse
-              label(style="width:100px;") Fertilizer Type
-              select.select
-                option(value="Fertilizer Type") Fertilizer Type
-                option(value="Dry") Dry
-              ul.list(style="left:100px;")
-                li.item.collapse
-                  label Dry Rate Maximum
-                  input(type="text",placeholder="0")
-                  span lbs/acre
-                li.item.collapse
-                  label Opener Width
-                  input(type="text",placeholder="0")
-                  span inches
-                li.item.collapse
-                  label Shank Spacing
-                  input(type="text",placeholder="0")
-                  span inches
-                li.item.collapse
-                  .toggle.gray.large(data-action="toggle",data-toggle="shootType",data-state="no")
-                    input(type="hidden")
-                    .toggleOptions
-                      .toggleOptionsTrack
-                        .toggleOption Single-Shoot
-                        .toggleOption Double-Shoot
-                    .toggleLabel Shoot Type?
-          ul.list
-            li.item.collapse
-              label(style="width:100px;") Receiver Make
-              select.select
-                option(value="Receiver Make") Receiver Make
-                option(value="John Deere") John Deere
-            li.item.collapse
-              label(style="width:100px;") Model
-              select.select
-                option(value="Model") Model
-                option(value="1910") 1910
-            li.item.collapse
-              .toggle.gray(data-action="toggle",data-toggle="controllerConnection",data-state="no")
-                input(type="hidden")
-                .toggleOptions
-                  .toggleOptionsTrack
-                    .toggleOption Yes
-                    .toggleOption No
-                .toggleLabel Connected to Controller?
-            li.item.collapse
-              label(style="width:100px;") Controller Make
-              select.select
-                option(value="Controller Make") Controller Make
-                option(value="John Deere") John Deere
-            li.item.collapse
-              label(style="width:100px;") Model
-              select.select
-                option(value="Model") Model
-                option(value="1910") 1910
-        {{/if}}
+          {{#if equalsSession 'equipmentType' 'Seeding System'}}
+          .section
+            ul.list
+              li.item.collapse
+                label(style="width:100px;") Unit Name
+                input(type="text",placeholder="Unit Name")
+              li.item.collapse
+                label(style="width:100px;") Cart Make
+                select.select
+                  option(value="Cart Make") Cart Make
+              li.item.collapse
+                label(style="width:100px;") Cart Model
+                select.select
+                  option(value="Cart Model") Cart Model
+                ul.list(style="left:100px;")
+                  li.item.collapse
+                    label Tank 1
+                    input(type="text",placeholder="Capacity (bu)",value="200 Bushels")
+                    input(type="text",placeholder="Select Product",value="Select Product")
+                  li.item.collapse
+                    label Tank 2
+                    input(type="text",placeholder="Capacity (bu)",value="150 Bushels")
+                    input(type="text",placeholder="Select Product",value="Select Product")
+                  li.item.collapse
+                    label Tank 3
+                    input(type="text",placeholder="Capacity (bu)",value="200 Bushels")
+                    input(type="text",placeholder="Select Product",value="Select Product")
+                  li.item.collapse
+                    label Tank 4
+                    input(type="text",placeholder="Capacity (bu)")
+                    input(type="text",placeholder="Select Product")
+                  li.item.collapse
+                    label Tank 5
+                    input(type="text",placeholder="Capacity (bu)")
+                    input(type="text",placeholder="Select Product")
+            ul.list
+              li.item.collapse
+                label(style="width:100px;") Drill Make
+                select.select
+                  option(value="Drill Make") Drill Make
+              li.item.collapse
+                label(style="width:100px;") Drill Width
+                input.left(type="text",placeholder="0",style="width: 80px;")
+                select.select
+                  option(value="Ft") Ft
+              li.item.collapse
+                label(style="width:100px;") Fertilizer Type
+                select.select
+                  option(value="Fertilizer Type") Fertilizer Type
+                  option(value="Dry") Dry
+                ul.list(style="left:100px;")
+                  li.item.collapse
+                    label Dry Rate Maximum
+                    input(type="text",placeholder="0")
+                    span lbs/acre
+                  li.item.collapse
+                    label Opener Width
+                    input(type="text",placeholder="0")
+                    span inches
+                  li.item.collapse
+                    label Shank Spacing
+                    input(type="text",placeholder="0")
+                    span inches
+                  li.item.collapse
+                    .toggle.gray.large(data-action="toggle",data-toggle="shootType",data-state="no")
+                      input(type="hidden")
+                      .toggleOptions
+                        .toggleOptionsTrack
+                          .toggleOption Single-Shoot
+                          .toggleOption Double-Shoot
+                      .toggleLabel Shoot Type?
+            ul.list
+              li.item.collapse
+                label(style="width:100px;") Receiver Make
+                select.select
+                  option(value="Receiver Make") Receiver Make
+                  option(value="John Deere") John Deere
+              li.item.collapse
+                label(style="width:100px;") Model
+                select.select
+                  option(value="Model") Model
+                  option(value="1910") 1910
+              li.item.collapse
+                .toggle.gray(data-action="toggle",data-toggle="controllerConnection",data-state="no")
+                  input(type="hidden")
+                  .toggleOptions
+                    .toggleOptionsTrack
+                      .toggleOption Yes
+                      .toggleOption No
+                  .toggleLabel Connected to Controller?
+              li.item.collapse
+                label(style="width:100px;") Controller Make
+                select.select
+                  option(value="Controller Make") Controller Make
+                  option(value="John Deere") John Deere
+              li.item.collapse
+                label(style="width:100px;") Model
+                select.select
+                  option(value="Model") Model
+                  option(value="1910") 1910
+          {{/if}}
 
-        {{#if equalsSession 'equipmentType' 'Floater'}}
-        .section
-          ul.list
-            li.item.collapse
-              label(style="width:100px;") Unit Name
-              input(type="text",placeholder="Unit Name")
-            li.item.collapse
-              label(style="width:100px;") Make
-              select.select
-                option(value="Make") Make
-              ul.list(style="left:100px;")
-                li.item.collapse
-                  label Tank 1
-                  input(type="text",placeholder="Capacity (bu)",value="200 Bushels")
-                  input(type="text",placeholder="Select Product",value="Select Product")
-                li.item.collapse
-                  label Tank 2
-                  input(type="text",placeholder="Capacity (bu)",value="150 Bushels")
-                  input(type="text",placeholder="Select Product",value="Select Product")
-                li.item.collapse
-                  label Tank 3
-                  input(type="text",placeholder="Capacity (bu)",value="200 Bushels")
-                  input(type="text",placeholder="Select Product",value="Select Product")
-                li.item.collapse
-                  label Tank 4
-                  input(type="text",placeholder="Capacity (bu)")
-                  input(type="text",placeholder="Select Product")
-                li.item.collapse
-                  label Tank 5
-                  input(type="text",placeholder="Capacity (bu)")
-                  input(type="text",placeholder="Select Product")
-          ul.list
-            li.item.collapse
-              label(style="width:100px;") Fertilizer Type
-              select.select
-                option(value="Fertilizer Type") Fertilizer Type
-                option(value="Dry") Dry
-              ul.list(style="left:100px;")
-                li.item.collapse
-                  label Dry Rate Maximum
-                  input(type="text",placeholder="0")
-                  span lbs/acre
-                li.item.collapse
-                  label Opener Width
-                  input(type="text",placeholder="0")
-                  span inches
-                li.item.collapse
-                  label Shank Spacing
-                  input(type="text",placeholder="0")
-                  span inches
-                li.item.collapse
-                  .toggle.gray.large(data-action="toggle",data-toggle="shootType",data-state="no")
-                    input(type="hidden")
-                    .toggleOptions
-                      .toggleOptionsTrack
-                        .toggleOption Single-Shoot
-                        .toggleOption Double-Shoot
-                    .toggleLabel Shoot Type?
-          ul.list
-            li.item.collapse
-              label(style="width:100px;") Receiver Make
-              select.select
-                option(value="Receiver Make") Receiver Make
-                option(value="John Deere") John Deere
-            li.item.collapse
-              label(style="width:100px;") Model
-              select.select
-                option(value="Model") Model
-                option(value="1910") 1910
-            li.item.collapse
-              .toggle.gray(data-action="toggle",data-toggle="controllerConnection",data-state="no")
-                input(type="hidden")
-                .toggleOptions
-                  .toggleOptionsTrack
-                    .toggleOption Yes
-                    .toggleOption No
-                .toggleLabel Connected to Controller?
-            li.item.collapse
-              label(style="width:100px;") Controller Make
-              select.select
-                option(value="Controller Make") Controller Make
-                option(value="John Deere") John Deere
-            li.item.collapse
-              label(style="width:100px;") Model
-              select.select
-                option(value="Model") Model
-                option(value="1910") 1910
-        {{/if}}
+          {{#if equalsSession 'equipmentType' 'Floater'}}
+          .section
+            ul.list
+              li.item.collapse
+                label(style="width:100px;") Unit Name
+                input(type="text",placeholder="Unit Name")
+              li.item.collapse
+                label(style="width:100px;") Make
+                select.select
+                  option(value="Make") Make
+                ul.list(style="left:100px;")
+                  li.item.collapse
+                    label Tank 1
+                    input(type="text",placeholder="Capacity (bu)",value="200 Bushels")
+                    input(type="text",placeholder="Select Product",value="Select Product")
+                  li.item.collapse
+                    label Tank 2
+                    input(type="text",placeholder="Capacity (bu)",value="150 Bushels")
+                    input(type="text",placeholder="Select Product",value="Select Product")
+                  li.item.collapse
+                    label Tank 3
+                    input(type="text",placeholder="Capacity (bu)",value="200 Bushels")
+                    input(type="text",placeholder="Select Product",value="Select Product")
+                  li.item.collapse
+                    label Tank 4
+                    input(type="text",placeholder="Capacity (bu)")
+                    input(type="text",placeholder="Select Product")
+                  li.item.collapse
+                    label Tank 5
+                    input(type="text",placeholder="Capacity (bu)")
+                    input(type="text",placeholder="Select Product")
+            ul.list
+              li.item.collapse
+                label(style="width:100px;") Fertilizer Type
+                select.select
+                  option(value="Fertilizer Type") Fertilizer Type
+                  option(value="Dry") Dry
+                ul.list(style="left:100px;")
+                  li.item.collapse
+                    label Dry Rate Maximum
+                    input(type="text",placeholder="0")
+                    span lbs/acre
+                  li.item.collapse
+                    label Opener Width
+                    input(type="text",placeholder="0")
+                    span inches
+                  li.item.collapse
+                    label Shank Spacing
+                    input(type="text",placeholder="0")
+                    span inches
+                  li.item.collapse
+                    .toggle.gray.large(data-action="toggle",data-toggle="shootType",data-state="no")
+                      input(type="hidden")
+                      .toggleOptions
+                        .toggleOptionsTrack
+                          .toggleOption Single-Shoot
+                          .toggleOption Double-Shoot
+                      .toggleLabel Shoot Type?
+            ul.list
+              li.item.collapse
+                label(style="width:100px;") Receiver Make
+                select.select
+                  option(value="Receiver Make") Receiver Make
+                  option(value="John Deere") John Deere
+              li.item.collapse
+                label(style="width:100px;") Model
+                select.select
+                  option(value="Model") Model
+                  option(value="1910") 1910
+              li.item.collapse
+                .toggle.gray(data-action="toggle",data-toggle="controllerConnection",data-state="no")
+                  input(type="hidden")
+                  .toggleOptions
+                    .toggleOptionsTrack
+                      .toggleOption Yes
+                      .toggleOption No
+                  .toggleLabel Connected to Controller?
+              li.item.collapse
+                label(style="width:100px;") Controller Make
+                select.select
+                  option(value="Controller Make") Controller Make
+                  option(value="John Deere") John Deere
+              li.item.collapse
+                label(style="width:100px;") Model
+                select.select
+                  option(value="Model") Model
+                  option(value="1910") 1910
+          {{/if}}
 
-        {{#if equalsSession 'equipmentType' 'Sprayer'}}
-        .section
-          ul.list
-            li.item.collapse
-              label(style="width:100px;") Unit Name
-              input(type="text",placeholder="Unit Name")
-            li.item.collapse
-              label(style="width:100px;") Make
-              select.select
-                option(value="Make") Make
-              ul.list(style="left:100px;")
-                li.item.collapse
-                  label Tank 1
-                  input(type="text",placeholder="Capacity (bu)",value="200 Bushels")
-                  input(type="text",placeholder="Select Product",value="Select Product")
-                li.item.collapse
-                  label Tank 2
-                  input(type="text",placeholder="Capacity (bu)",value="150 Bushels")
-                  input(type="text",placeholder="Select Product",value="Select Product")
-                li.item.collapse
-                  label Tank 3
-                  input(type="text",placeholder="Capacity (bu)",value="200 Bushels")
-                  input(type="text",placeholder="Select Product",value="Select Product")
-                li.item.collapse
-                  label Tank 4
-                  input(type="text",placeholder="Capacity (bu)")
-                  input(type="text",placeholder="Select Product")
-                li.item.collapse
-                  label Tank 5
-                  input(type="text",placeholder="Capacity (bu)")
-                  input(type="text",placeholder="Select Product")
-          ul.list
-            li.item.collapse
-              label(style="width:100px;") Fertilizer Type
-              select.select
-                option(value="Fertilizer Type") Fertilizer Type
-                option(value="Dry") Liquid
-              ul.list(style="left:100px;")
-                li.item.collapse
-                  label(style="width:100px;") Liquid Rates for Nozzles
-                  input(type="text",placeholder="min")
-                  span -
-                  input(type="text",placeholder="max")
-                  span gal/acre
-                li.item.collapse
-                  .toggle.gray.large(data-action="toggle",data-toggle="shootType",data-state="no")
-                    input(type="hidden")
-                    .toggleOptions
-                      .toggleOptionsTrack
-                        .toggleOption U.S. Gallons
-                        .toggleOption Imp. Gallons
-                    .toggleLabel Gallons
-                li.item.collapse
-                  .button-bar.columns-3
-                    a.button(data-active="true") Mid-Row Bander
-                    a.button(data-active="false") Paired Row
-                    a.button(data-active="false") Side Band
-          ul.list
-            li.item.collapse
-              label(style="width:100px;") Receiver Make
-              select.select
-                option(value="Receiver Make") Receiver Make
-                option(value="John Deere") John Deere
-            li.item.collapse
-              label(style="width:100px;") Model
-              select.select
-                option(value="Model") Model
-                option(value="1910") 1910
-            li.item.collapse
-              .toggle.gray(data-action="toggle",data-toggle="controllerConnection",data-state="no")
-                input(type="hidden")
-                .toggleOptions
-                  .toggleOptionsTrack
-                    .toggleOption Yes
-                    .toggleOption No
-                .toggleLabel Connected to Controller?
-            li.item.collapse
-              label(style="width:100px;") Controller Make
-              select.select
-                option(value="Controller Make") Controller Make
-                option(value="John Deere") John Deere
-            li.item.collapse
-              label(style="width:100px;") Model
-              select.select
-                option(value="Model") Model
-                option(value="1910") 1910
-        {{/if}}
+          {{#if equalsSession 'equipmentType' 'Sprayer'}}
+          .section
+            ul.list
+              li.item.collapse
+                label(style="width:100px;") Unit Name
+                input(type="text",placeholder="Unit Name")
+              li.item.collapse
+                label(style="width:100px;") Make
+                select.select
+                  option(value="Make") Make
+                ul.list(style="left:100px;")
+                  li.item.collapse
+                    label Tank 1
+                    input(type="text",placeholder="Capacity (bu)",value="200 Bushels")
+                    input(type="text",placeholder="Select Product",value="Select Product")
+                  li.item.collapse
+                    label Tank 2
+                    input(type="text",placeholder="Capacity (bu)",value="150 Bushels")
+                    input(type="text",placeholder="Select Product",value="Select Product")
+                  li.item.collapse
+                    label Tank 3
+                    input(type="text",placeholder="Capacity (bu)",value="200 Bushels")
+                    input(type="text",placeholder="Select Product",value="Select Product")
+                  li.item.collapse
+                    label Tank 4
+                    input(type="text",placeholder="Capacity (bu)")
+                    input(type="text",placeholder="Select Product")
+                  li.item.collapse
+                    label Tank 5
+                    input(type="text",placeholder="Capacity (bu)")
+                    input(type="text",placeholder="Select Product")
+            ul.list
+              li.item.collapse
+                label(style="width:100px;") Fertilizer Type
+                select.select
+                  option(value="Fertilizer Type") Fertilizer Type
+                  option(value="Dry") Liquid
+                ul.list(style="left:100px;")
+                  li.item.collapse
+                    label(style="width:100px;") Liquid Rates for Nozzles
+                    input(type="text",placeholder="min")
+                    span -
+                    input(type="text",placeholder="max")
+                    span gal/acre
+                  li.item.collapse
+                    .toggle.gray.large(data-action="toggle",data-toggle="shootType",data-state="no")
+                      input(type="hidden")
+                      .toggleOptions
+                        .toggleOptionsTrack
+                          .toggleOption U.S. Gallons
+                          .toggleOption Imp. Gallons
+                      .toggleLabel Gallons
+                  li.item.collapse
+                    .button-bar.columns-3
+                      a.button(data-active="true") Mid-Row Bander
+                      a.button(data-active="false") Paired Row
+                      a.button(data-active="false") Side Band
+            ul.list
+              li.item.collapse
+                label(style="width:100px;") Receiver Make
+                select.select
+                  option(value="Receiver Make") Receiver Make
+                  option(value="John Deere") John Deere
+              li.item.collapse
+                label(style="width:100px;") Model
+                select.select
+                  option(value="Model") Model
+                  option(value="1910") 1910
+              li.item.collapse
+                .toggle.gray(data-action="toggle",data-toggle="controllerConnection",data-state="no")
+                  input(type="hidden")
+                  .toggleOptions
+                    .toggleOptionsTrack
+                      .toggleOption Yes
+                      .toggleOption No
+                  .toggleLabel Connected to Controller?
+              li.item.collapse
+                label(style="width:100px;") Controller Make
+                select.select
+                  option(value="Controller Make") Controller Make
+                  option(value="John Deere") John Deere
+              li.item.collapse
+                label(style="width:100px;") Model
+                select.select
+                  option(value="Model") Model
+                  option(value="1910") 1910
+          {{/if}}
 
-        {{#if equalsSession 'equipmentType' 'NH3 Cultivator'}}
-        .section
-          ul.list
-            li.item.collapse
-              label(style="width:100px;") Unit Name
-              input(type="text",placeholder="Unit Name")
-            li.item.collapse
-              label(style="width:100px;") Make
-              select.select
-                option(value="Make") Make
-            li.item.collapse
-              label(style="width:100px;") NH3 Rates
-              input(type="text",placeholder="min")
-              span -
-              input(type="text",placeholder="max")
-              span lbs actual/acre
-            li.item.collapse
-              label(style="width:100px;") Receiver Make
-              select.select
-                option(value="Receiver Make") Receiver Make
-                option(value="John Deere") John Deere
-            li.item.collapse
-              label(style="width:100px;") Model
-              select.select
-                option(value="Model") Model
-                option(value="1910") 1910
-            li.item.collapse
-              .toggle.gray(data-action="toggle",data-toggle="controllerConnection",data-state="no")
-                input(type="hidden")
-                .toggleOptions
-                  .toggleOptionsTrack
-                    .toggleOption Yes
-                    .toggleOption No
-                .toggleLabel Connected to Controller?
-            li.item.collapse
-              label(style="width:100px;") Controller Make
-              select.select
-                option(value="Controller Make") Controller Make
-                option(value="John Deere") John Deere
-            li.item.collapse
-              label(style="width:100px;") Model
-              select.select
-                option(value="Model") Model
-                option(value="1910") 1910
-        {{/if}}
+          {{#if equalsSession 'equipmentType' 'NH3 Cultivator'}}
+          .section
+            ul.list
+              li.item.collapse
+                label(style="width:100px;") Unit Name
+                input(type="text",placeholder="Unit Name")
+              li.item.collapse
+                label(style="width:100px;") Make
+                select.select
+                  option(value="Make") Make
+              li.item.collapse
+                label(style="width:100px;") NH3 Rates
+                input(type="text",placeholder="min")
+                span -
+                input(type="text",placeholder="max")
+                span lbs actual/acre
+              li.item.collapse
+                label(style="width:100px;") Receiver Make
+                select.select
+                  option(value="Receiver Make") Receiver Make
+                  option(value="John Deere") John Deere
+              li.item.collapse
+                label(style="width:100px;") Model
+                select.select
+                  option(value="Model") Model
+                  option(value="1910") 1910
+              li.item.collapse
+                .toggle.gray(data-action="toggle",data-toggle="controllerConnection",data-state="no")
+                  input(type="hidden")
+                  .toggleOptions
+                    .toggleOptionsTrack
+                      .toggleOption Yes
+                      .toggleOption No
+                  .toggleLabel Connected to Controller?
+              li.item.collapse
+                label(style="width:100px;") Controller Make
+                select.select
+                  option(value="Controller Make") Controller Make
+                  option(value="John Deere") John Deere
+              li.item.collapse
+                label(style="width:100px;") Model
+                select.select
+                  option(value="Model") Model
+                  option(value="1910") 1910
+          {{/if}}
 
-        {{#if equalsSession 'equipmentType' 'Combine'}}
-        .section
-          ul.list
-            li.item.collapse
-              label(style="width:100px;") Unit Name or #
-              input(type="text",placeholder="Unit Name")
-            li.item.collapse
-              label(style="width:100px;") Make
-              select.select
-                option(value="Make") Make
-            li.item.collapse
-              label(style="width:100px;") Model
-              input(type="text",placeholder="Model")
-            li.item.collapse
-              label(style="width:100px;") Year
-              input(type="text",placeholder="Year")
-        .section
-          .title Yield Monitor
-          ul.list
-            li.item.collapse
-              label(style="width:100px;") Make
-              input(type="text",placeholder="Make")
-            li.item.collapse
-              label(style="width:100px;") Model
-              input(type="text",placeholder="Model")
-            li.item.collapse
-              .toggle.gray(data-action="toggle",data-toggle="controllerConnection",data-state="no")
-                input(type="hidden")
-                .toggleOptions
-                  .toggleOptionsTrack
-                    .toggleOption Yes
-                    .toggleOption No
-                .toggleLabel Is Monitor Setup and Running?
-            li.item.collapse
-              label(style="width:100px;") Data Card Type
-              input(type="text",placeholder="Data Card Type")
-        {{/if}}
+          {{#if equalsSession 'equipmentType' 'Combine'}}
+          .section
+            ul.list
+              li.item.collapse
+                label(style="width:100px;") Unit Name or #
+                input(type="text",placeholder="Unit Name")
+              li.item.collapse
+                label(style="width:100px;") Make
+                select.select
+                  option(value="Make") Make
+              li.item.collapse
+                label(style="width:100px;") Model
+                input(type="text",placeholder="Model")
+              li.item.collapse
+                label(style="width:100px;") Year
+                input(type="text",placeholder="Year")
+          .section
+            .title Yield Monitor
+            ul.list
+              li.item.collapse
+                label(style="width:100px;") Make
+                input(type="text",placeholder="Make")
+              li.item.collapse
+                label(style="width:100px;") Model
+                input(type="text",placeholder="Model")
+              li.item.collapse
+                .toggle.gray(data-action="toggle",data-toggle="controllerConnection",data-state="no")
+                  input(type="hidden")
+                  .toggleOptions
+                    .toggleOptionsTrack
+                      .toggleOption Yes
+                      .toggleOption No
+                  .toggleLabel Is Monitor Setup and Running?
+              li.item.collapse
+                label(style="width:100px;") Data Card Type
+                input(type="text",placeholder="Data Card Type")
+          {{/if}}
 
-        {{#if equalsSession 'equipmentType' 'Truck'}}
-        .section
-          ul.list
-            li.item.collapse
-              label(style="width:100px;") Unit Name or #
-              input(type="text",placeholder="Unit Name")
-            li.item.collapse
-              label(style="width:100px;") Make
-              select.select
-                option(value="Make") Make
-            li.item.collapse
-              label(style="width:100px;") Model
-              input(type="text",placeholder="Model")
-            li.item.collapse
-              label(style="width:100px;") Year
-              input(type="text",placeholder="Year")
+          {{#if equalsSession 'equipmentType' 'Truck'}}
+          .section
+            ul.list
+              li.item.collapse
+                label(style="width:100px;") Unit Name or #
+                input(type="text",placeholder="Unit Name")
+              li.item.collapse
+                label(style="width:100px;") Make
+                select.select
+                  option(value="Make") Make
+              li.item.collapse
+                label(style="width:100px;") Model
+                input(type="text",placeholder="Model")
+              li.item.collapse
+                label(style="width:100px;") Year
+                input(type="text",placeholder="Year")
+          {{/if}}
+          button.button.rounded(type="submit") Save
         {{/if}}
-        button.button.rounded(type="submit") Save
       {{/if}}
     {{/if}}
 
@@ -3919,7 +4303,192 @@ template(name="farm-planner")
     {{/if}}
 
     {{#if currentParamIs 'section' 'work-orders'}}
-    {{>notImplemented}}
+    .section
+      .title Optimize RX Work Order - 2014
+      .subtitle(style="margin:10px 0 0 0;") Please review your work order and update any sections as required. Once all the info is complete and accurate, check the confirmation at the end and we'll get started.
+      form
+        ul.list
+          li.item.collapse
+            label.left Estimated Start Date
+            input.left.datepicker(type="text",placeholder="DD/MM/YYYY")
+    .section
+      .title Fields
+        form
+          ul.list
+            li.item.collapse
+              select.select
+                option(value="Add an Existing Field") Add an Existing Field
+        .iconWrapper.size-24.right(style="margin-top:-2px;")
+          {{icon 'new'}}
+      form
+        table.table.uniform
+          thead
+            tr
+              td
+                .cell Land Location
+              td
+                .cell Crop Type
+              td
+                .cell Acres
+              td
+                .cell Yield Goal
+              td
+                .cell RX-F
+              td
+                .cell RX-S
+              td
+                .cell Seed Rate
+          tbody
+            tr
+              td
+                .cell.double
+                  | NW 25 5 2 W4
+                  br
+                  | Home Quarter
+              td
+                .cell
+                  select.select
+                    option(value="Canola") Canola
+                    option(value="HR Spring Wheat") HR Spring Wheat
+                    option(value="Barley") Barley
+              td
+                .cell
+                  input(placeholder="0",value="0")
+              td
+                .cell
+                  input(style="padding-right:75px;",placeholder="RX-F",value="123456")
+                  select.select.subtext(style="width:60px;")
+                    option(value="bu/ac") bu/ac
+              td
+                .cell
+                  .toggle.gray.inline(data-action="toggle",data-toggle="rxF",data-state="no")
+                    input(type="hidden")
+                    .toggleOptions
+                      .toggleOptionsTrack
+                        .toggleOption Yes
+                        .toggleOption No
+              td
+                .cell
+                  .toggle.gray.inline(data-action="toggle",data-toggle="rxS",data-state="no")
+                    input(type="hidden")
+                    .toggleOptions
+                      .toggleOptionsTrack
+                        .toggleOption Yes
+                        .toggleOption No
+              td
+                .cell
+                  input.left(style="padding-right:85px;",placeholder="0")
+                  .subtext(style="right:45px;") lbs/ac
+                  .iconWrapper.right.size-16
+                    {{icon 'remove'}}
+            tr
+              td
+                .cell.double
+                  | SC NW 6 & SW 7 11 W4
+                  br
+                  | Northhill
+              td
+                .cell
+                  select.select
+                    option(value="Canola") Canola
+                    option(value="HR Spring Wheat") HR Spring Wheat
+                    option(value="Barley") Barley
+              td
+                .cell
+                  input(placeholder="0",value="0")
+              td
+                .cell
+                  input(style="padding-right:75px;",placeholder="RX-F",value="123456")
+                  select.select.subtext(style="width:60px;")
+                    option(value="bu/ac") bu/ac
+              td
+                .cell
+                  .toggle.gray.inline(data-action="toggle",data-toggle="rxF",data-state="no")
+                    input(type="hidden")
+                    .toggleOptions
+                      .toggleOptionsTrack
+                        .toggleOption Yes
+                        .toggleOption No
+              td
+                .cell
+                  .toggle.gray.inline(data-action="toggle",data-toggle="rxS",data-state="no")
+                    input(type="hidden")
+                    .toggleOptions
+                      .toggleOptionsTrack
+                        .toggleOption Yes
+                        .toggleOption No
+              td
+                .cell
+                  input.left(style="padding-right:85px;",placeholder="0")
+                  .subtext(style="right:45px;") lbs/ac
+                  .iconWrapper.right.size-16
+                    {{icon 'remove'}}
+            tr
+              td
+                .cell.double
+                  | NE 5 5 5 W4
+                  br
+                  | Eagle Field
+              td
+                .cell
+                  select.select
+                    option(value="Canola") Canola
+                    option(value="HR Spring Wheat") HR Spring Wheat
+                    option(value="Barley") Barley
+              td
+                .cell
+                  input(placeholder="0",value="0")
+              td
+                .cell
+                  input(style="padding-right:75px;",placeholder="RX-F",value="123456")
+                  select.select.subtext(style="width:60px;")
+                    option(value="bu/ac") bu/ac
+              td
+                .cell
+                  .toggle.gray.inline(data-action="toggle",data-toggle="rxF",data-state="no")
+                    input(type="hidden")
+                    .toggleOptions
+                      .toggleOptionsTrack
+                        .toggleOption Yes
+                        .toggleOption No
+              td
+                .cell
+                  .toggle.gray.inline(data-action="toggle",data-toggle="rxS",data-state="no")
+                    input(type="hidden")
+                    .toggleOptions
+                      .toggleOptionsTrack
+                        .toggleOption Yes
+                        .toggleOption No
+              td
+                .cell
+                  input.left(style="padding-right:85px;",placeholder="0")
+                  .subtext(style="right:45px;") lbs/ac
+                  .iconWrapper.right.size-16
+                    {{icon 'remove'}}
+          tfoot
+            tr
+              td
+                .cell
+                  | Total Acres: 725
+              td
+                .cell
+              td
+                .cell
+              td
+                .cell
+              td
+                .cell
+              td
+                .cell
+              td
+                .cell
+    .toggle.gray.large(style="margin-bottom:10px;",data-action="toggle",data-toggle="shootType",data-state="no")
+      input(type="hidden")
+      .toggleOptions
+        .toggleOptionsTrack
+          .toggleOption Zero
+          .toggleOption Maintenance
+      .toggleLabel For zones with zero fertilizer required, do you want to put zero or put a maintenance level of fertilizer?
     {{/if}}
 
 template(name="profile")
@@ -4526,7 +5095,8 @@ template(name="map")
 template(name="notice")
   .notice(data-hidden="{{getSession 'noticeHidden'}}")
     {{#if equalsSession 'notice' 'field-boundary'}}
-    .title Click on the map to draw a field boundary
+    .title
+      | Click on the map to draw a basic field boundary
     ul.inline-list
       li
         a
@@ -4547,7 +5117,7 @@ template(name="notice")
         a(data-action="toggleNotice")
           .iconWrapper.left.size-16
             {{icon 'approve'}}
-          | save
+          | done
     {{/if}}
 
     {{#if equalsSession 'notice' 'confirm-boundary'}}
@@ -4612,7 +5182,10 @@ template(name="cover")
         input(type="text",placeholder="Note Title")
         textarea.expanding(type="text",placeholder="Note Content")
         //-a.button Upload File
-        button.button(type="submit",data-action="toggleCover") Save
+        .button-bar
+          a.button.left(data-action="uploadFile") Upload File
+          input(style="display:none;",type="file")
+          a.button.right(type="submit",data-action="toggleCover") Save
       {{/if}}
 
       {{#if coverIs 'addOrEditPosition'}}
@@ -4709,10 +5282,13 @@ template(name="cover")
         .iconWrapper.right.size-16(data-action="toggleCover")
           {{icon 'remove'}}
       form
-        input(type="text",placeholder="Title",value="Harvest")
-        textarea.expanding(type="text",placeholder="Content") Harvest Note Content
+        input(type="text",placeholder="Title",value="Note Title")
+        textarea.expanding(type="text",placeholder="Content") Note Content
         //-a.button Upload File
-        button.button(type="submit",data-action="toggleCover") Update
+        .button-bar
+          a.button.left(data-action="uploadFile") Upload File
+          input(style="display:none;",type="file")
+          a.button.right(type="submit",data-action="toggleCover") Update
       {{/if}}
 
 template(name="groupedBarChart")
@@ -4720,6 +5296,10 @@ template(name="groupedBarChart")
 
 template(name="stackedAreaChart")
   .stackedAreaChart
+
+template(name="upgradeRequired")
+  .upgradeRequired
+    .upgradeRequiredText Upgrade required to access this feature.
 
 template(name="notImplemented")
   .notImplemented

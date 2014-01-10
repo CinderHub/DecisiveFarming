@@ -97,8 +97,8 @@ Router.map ->
       if @params.section is "rx-rates"
         Session.set "leftSidebarState","open"
         Session.set "leftSidebarToggleState","open"
-        Session.set "rightSidebarState","closed"
-        Session.set "rightSidebarToggleState","closed"
+        Session.set "rightSidebarState","open"
+        Session.set "rightSidebarToggleState","open"
 
       #RX Files
       if @params.section is "rx-files"
@@ -460,10 +460,11 @@ if Meteor.isClient
     Session.setDefault "marketFilter","All Commodities"
     Session.setDefault "farm-plannerFilter","Farm Planner 2013"
     Session.setDefault "positionType","Future"
-    Session.setDefault "equipmentType","Seeding System"
+    Session.setDefault "equipmentType","Select Equipment Type"
     Session.setDefault "positionCommodity","Canola"
     Session.setDefault "activeTile","compareYield"
     Session.setDefault "dropdownState","closed"
+    Session.setDefault "fieldEditMode","view"
 
     Template.layout.rendered = ->
       datepickers = this.findAll(".datepicker")
@@ -499,6 +500,9 @@ if Meteor.isClient
       #Disable dropdown when the user clicks outside the region
       "click .header, click .subHeader, click .sidebar, click .content":(e,t)->
         Session.set "dropdownState","closed"
+      "click [data-action='uploadFile']":(e,t)->
+        #console.log "uploadFile called!"
+        $("input[type=file]").trigger("click");
       "click [data-action='toggleDropdown']":(e,t)->
         if Session.equals "dropdownState","open"
           Session.set "dropdownState","closed"
@@ -613,6 +617,11 @@ if Meteor.isClient
         Session.set "#{context}Filter",filter
 
     Template.rightSidebar.events
+      "click [data-action='toggleFieldDetails']":(e,t)->
+        if Session.equals "fieldEditMode","edit"
+          Session.set "fieldEditMode","view"
+        else
+          Session.set "fieldEditMode","edit"
       "click .sidebarNotch":(e,t)->
         if Session.equals "rightSidebarState","open"
           Session.set "rightSidebarState","closed"

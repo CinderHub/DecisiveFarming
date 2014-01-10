@@ -178,6 +178,7 @@ h1,h2,h3,h4,h5,h6
   padding 0
   margin 0
   font-weight normal
+  color midnight()
 a
   text-decoration none
   text-transform capitalize
@@ -186,6 +187,9 @@ a
   cursor pointer
 p
   margin 0
+  color midnight()
+label
+  color midnight()
 a:hover,a:active,a[data-active="true"]
   text-decoration none
 
@@ -222,6 +226,14 @@ borderRadius = 4px
 .right
   float right
   clear none
+.bold
+  font-weight bold
+  color offerGray()
+//Color Classes
+.red
+  color red()
+.orange
+  color orange()
 
 //Layout - Icon
 .iconWrapper
@@ -310,6 +322,7 @@ borderRadius = 4px
   width 100%
   padding 0
   font-size 12px
+  overflow-x hidden
   .active
     & > a:first-child
       font-weight 300
@@ -318,6 +331,10 @@ borderRadius = 4px
     font-size inherit
     width 100%
     position relative
+    .sublabel
+      font-weight bold
+      color offerGray()
+      font-size 14px
     &.collapse
       border-bottom 1px solid gray()
       input
@@ -340,6 +357,11 @@ borderRadius = 4px
         float left
         line-height 30px
         margin 0 0 0 10px
+      .subItem
+        float right
+        margin 0 0 10px 0
+        &:last-of-type
+          margin 0
     a:not(.inline)
       padding 10px
       display inline-block
@@ -373,6 +395,9 @@ borderRadius = 4px
         padding 10px
         float left
         clear left
+        &.borderless
+          border none
+          padding-bottom 0
         .list
           position relative
           top 10px
@@ -391,6 +416,8 @@ borderRadius = 4px
           max-width 320px
           float left
           clear none
+          &.right
+            float right
           .selectize-input
             border 1px solid gray()
             border-radius borderRadius
@@ -444,7 +471,7 @@ borderRadius = 4px
   form
     position(absolute,-6,30,auto,auto)
     .selectize-control
-      min-width 120px
+      min-width 140px
 
 //Layout - Clear
 .clear
@@ -718,7 +745,7 @@ form
     background offWhite()
     border 1px solid gray()
     border-radius 0 0 borderRadius borderRadius
-    //border-top none
+    border-top none
     color midnight()
     [data-selectable]
       padding 10px
@@ -802,9 +829,42 @@ table.table
           position relative
           height 40px
           line-height 40px
+          &.double
+            padding 7px 10px 10px 10px
+            text-indent 0
+            line-height 1.2
           //padding 5px
           &:hover
             //background orange(0.15)
+        .subtext
+          position absolute
+          top 0
+          right 0
+          line-height 42px
+          &.selectize-control
+            max-width 320px
+            height 30px
+            float left
+            clear none
+            background offWhite()
+            margin-top 5px
+            margin-right 5px
+            &.right
+              float right
+            .selectize-input
+              border 1px solid gray()
+              border-radius borderRadius
+              line-height 30px
+              &.dropdown-active
+                background offWhite()
+                border-radius borderRadius borderRadius 0 0
+            .selectize-dropdown
+              margin-top -1px
+              right 0!important
+              border-left 1px solid gray()
+              border-right 1px solid gray()
+              left 0!important
+              line-height 1
         .button
           margin 5px
           text-indent 0
@@ -848,11 +908,14 @@ table.table
           //XXX: Kinda hacky, Only for use with inline dropdowns in tables
           //margin 5px 0 0 0
           //margin-top -1px
-          right -1px!important
+          //border-left 1px solid gray()
+          //border-right 1px solid gray()
+          right -2px!important
+          left -2px!important
           width auto
           text-indent 0
-          border-right none
-          border-left none
+          //border-right none
+          //border-left none
           //left -11px!important
           //width auto!important
         &:last-of-type
@@ -866,6 +929,7 @@ table.table
         padding 10px
         border-top 1px solid gray()
         background offerWhite()
+        font-weight bold
   .toggle
     margin 5px
   .iconWrapper
@@ -1167,8 +1231,6 @@ table.table
             &>*
               fill orange(0.75)
               stroke orange(0.75)
-        &[data-progress]
-          padding-right 40px
         &[data-progress="inactive"]
           color offGray()
           background gray(0.5)
@@ -1193,15 +1255,6 @@ table.table
         &[data-progress="complete"]
           .badge
             background green()
-        .badge
-          position absolute
-          top 10px
-          right 10px
-          size(20,20)
-          border-radius 40px
-          text-align center
-          line-height 20px
-          color white()
 
 //Sidebar Toggle
 .sidebarToggle
@@ -1288,6 +1341,27 @@ table.table
   width 100%
   clear both
   border-bottom 1px solid gray()
+  &.padded
+    padding 0 20px 20px 20px
+    &:last-of-type
+      border-bottom none
+      margin 0
+    form
+      margin 5px 0 5px 0
+      .list
+        .item
+          &.collapse
+            padding 5px 0 5px 0
+            border none
+    .title
+      padding 10px 0 10px 0
+    .table
+      border-left 1px solid gray()
+      border-right 1px solid gray()
+      margin 0 0 20px 0
+      &:last-of-type
+        border-bottom 1px solid gray()
+        //margin 0
   &:last-of-type
     margin 0 0 20px 0
 
@@ -1389,6 +1463,13 @@ table.table
       &:last-of-type
         border-right none
   form
+    .list
+      .item
+        &.collapse
+          .right
+            margin-bottom 10px
+            &:last-of-type
+              margin-bottom 0
     .inline-list
       li
         width 100%
@@ -1563,16 +1644,17 @@ table.table
   border-radius borderRadius
   border 1px solid gray()
   position(absolute,10,auto,auto,10)
-  padding 10px 40px 10px 10px
+  padding 10px 35px 10px 10px
   z-index 1
   max-width 320px
   &[data-hidden="true"]
     display none
   .title
-    font-size 16px
+    font-size 13px
     line-height 20px
-    padding 0
-    border-bottom none
+    padding 0 0 8px 0
+    margin 0 0 5px 0
+    border-bottom 1px solid gray()
   .message
     font-size 12px
     color offerGray()
@@ -1752,6 +1834,7 @@ table.table
       margin-top 0
       margin-left 1px
 
+
 //Not Implemented Debug Text
 .notImplemented
   position(absolute,0,0,0,0)
@@ -1762,6 +1845,24 @@ table.table
   background offerGray()
   color offWhite()
   .notImplementedText
+    size(200,44)
+    position absolute
+    top 50%
+    right 0
+    bottom 0
+    left 50%
+    margin -22px 0 0 -100px
+
+//Upgrade Required
+.upgradeRequired
+  position(absolute,0,0,0,0)
+  width 100%
+  height 100%
+  text-align center
+  font-size 18px
+  background offGray()
+  color gray()
+  .upgradeRequiredText
     size(200,44)
     position absolute
     top 50%
