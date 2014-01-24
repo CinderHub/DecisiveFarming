@@ -567,7 +567,7 @@ template(name="rightSidebar")
           {{#if equalsSession 'fieldEditMode' 'edit'}}
           li.item.collapse
             label(style="width:70px;") Field Name
-            input(style="width:120px;",type="text",placeholder="Field Name")
+            input(style="width:110px;",type="text",placeholder="Field Name")
             .iconWrapper.right.size-24
               {{icon 'remove'}}
           li.item.collapse
@@ -623,34 +623,24 @@ template(name="rightSidebar")
       form
         ul.list
           li.item.collapse
-            label(style="width:70px;") Acres
+            label(style="width:50px;") Acres
             input(type="text",placeholder="Acres",style="width:60px;float:left;")
             select.select
               option(value="Crop Type") Crop Type
           li.item.collapse
-            label(style="width:70px;") Variety
+            label(style="width:50px;") Variety
             input(style="width:150px;",type="text",placeholder="Variety")
           li.item.collapse
-            label(style="width:70px;") Yield
+            label(style="width:50px;") Yield
             input(type="text",placeholder="Yield",style="width:90px;float:left;")
             select.select
               option(value="bu/ac") bu/ac
           li.item.collapse
-            .toggle.gray(data-action="toggle",data-toggle="sureCheck",data-state="no")
-              input(type="hidden")
-              .toggleOptions
-                .toggleOptionsTrack
-                  .toggleOption Yes
-                  .toggleOption No
-              .toggleLabel Sure-Check Soil Testing
+            label Sure-Check Soil Testing
+            input(type="checkbox",name="sureCheck",value="no")
           li.item.collapse
-            .toggle.gray(data-action="toggle",data-toggle="optimizeRX",data-state="no")
-              input(type="hidden")
-              .toggleOptions
-                .toggleOptionsTrack
-                  .toggleOption Yes
-                  .toggleOption No
-              .toggleLabel Optimize RX
+            label Optimize RX
+            input(type="checkbox",name="optimizeRX",value="no")
     .section
       .title Notes
         a.iconWrapper.right.size-16(data-action="toggleCover",data-cover="notes")
@@ -897,24 +887,13 @@ template(name="rightSidebar")
     .section
       .title Notifications
       form
-        ul.inline-list
-          li
-            .toggle.gray(data-action="toggle",data-toggle="sureCheck",data-state="no")
-                input(type="hidden")
-                .toggleOptions
-                  .toggleOptionsTrack
-                    .toggleOption Yes
-                    .toggleOption No
-                .toggleLabel When triggers reached
-        ul.inline-list
-          li
-            .toggle.gray(data-action="toggle",data-toggle="sureCheck",data-state="no")
-                input(type="hidden")
-                .toggleOptions
-                  .toggleOptionsTrack
-                    .toggleOption Yes
-                    .toggleOption No
-                .toggleLabel When contracts due
+        ul.list
+          li.item.collapse
+            label When triggers reached
+            input(type="checkbox",name="triggers",value="no")
+          li.item.collapse
+            label When contracts due
+            input(type="checkbox",name="contracts",value="no")
     .section
       .button.rounded(data-action="updateHedge")
         | Save
@@ -928,7 +907,7 @@ template(name="rightSidebar")
           {{#if equalsSession 'fieldEditMode' 'edit'}}
           li.item.collapse
             label(style="width:70px;") Field Name
-            input(style="width:120px;",type="text",placeholder="Field Name")
+            input(style="width:110px;",type="text",placeholder="Field Name")
             .iconWrapper.right.size-24
               {{icon 'remove'}}
           li.item.collapse
@@ -984,34 +963,24 @@ template(name="rightSidebar")
       form
         ul.list
           li.item.collapse
-            label(style="width:70px;") Acres
+            label(style="width:50px;") Acres
             input(type="text",placeholder="Acres",style="width:60px;float:left;")
             select.select
               option(value="Crop Type") Crop Type
           li.item.collapse
-            label(style="width:70px;") Variety
+            label(style="width:50px;") Variety
             input(style="width:150px;",type="text",placeholder="Variety")
           li.item.collapse
-            label(style="width:70px;") Yield
+            label(style="width:50px;") Yield
             input(type="text",placeholder="Yield",style="width:90px;float:left;")
             select.select
               option(value="bu/ac") bu/ac
           li.item.collapse
-            .toggle.gray(data-action="toggle",data-toggle="sureCheck",data-state="no")
-              input(type="hidden")
-              .toggleOptions
-                .toggleOptionsTrack
-                  .toggleOption Yes
-                  .toggleOption No
-              .toggleLabel Sure-Check Soil Testing
+            label Sure-Check Soil Testing
+            input(type="checkbox",name="sureCheck",value="no")
           li.item.collapse
-            .toggle.gray(data-action="toggle",data-toggle="optimizeRX",data-state="no")
-              input(type="hidden")
-              .toggleOptions
-                .toggleOptionsTrack
-                  .toggleOption Yes
-                  .toggleOption No
-              .toggleLabel Optimize RX
+            label Optimize RX
+            input(type="checkbox",name="optimizeRX",value="no")
     .section
       .title Notes
         a.iconWrapper.right.size-16(data-action="toggleCover",data-cover="notes")
@@ -1946,29 +1915,30 @@ template(name="equipment")
     {{#if currentParamIs 'section' 'equipment-info'}}
       {{#if currentParamIs 'assetsInfo' undefined}}
         .title New Equipment
-          form
-            ul.list
-              li.item.collapse
-                select.select(data-action="setEquipmentType")
-                  option(value="Select Equipment Type") Select Equipment Type
-                  option(value="Seeding System") Seeding System
-                  option(value="Floater") Floater
-                  option(value="Sprayer") Sprayer
-                  option(value="NH3 Cultivator") NH3 Cultivator
-                  option(value="Combine") Combine
-                  //-option(value="Swather") Swather
-                  //-option(value="Tractor") Tractor
-                  option(value="Truck") Truck
-                  //-option(value="Fleet") Fleet
         .iconWrapper.size-16.right
           {{icon 'print'}}
+      .section
+        form
+          ul.list
+            li.item.collapse(style="width:175px;")
+              select.select(data-action="setEquipmentType")
+                option(value="Select Equipment Type") Select Equipment Type
+                option(value="Seeding System") Seeding System
+                option(value="Floater") Floater
+                option(value="Sprayer") Sprayer
+                option(value="NH3 Cultivator") NH3 Cultivator
+                option(value="Combine") Combine
+                //-option(value="Swather") Swather
+                //-option(value="Tractor") Tractor
+                option(value="Truck") Truck
+                //-option(value="Fleet") Fleet
         {{#if equalsSession 'equipmentType' 'Select Equipment Type'}}
-        .title Please select an equipment type.
+        label(style="line-height:50px;font-style:italic;font-size:14px;") Please select an equipment type.
         {{else}}
         form
           {{#if equalsSession 'equipmentType' 'Seeding System'}}
           .section(style="padding-bottom:10px;")
-            ul.list
+            ul.list.horizontalLimit
               li.item.collapse.borderless
                 label(style="width:100px;") Unit Name
                 input(type="text",placeholder="Unit Name")
@@ -2001,7 +1971,7 @@ template(name="equipment")
                     label Tank 5
                     input(type="text",placeholder="Capacity (bu)")
                     input(type="text",placeholder="Select Product")
-            ul.list
+            ul.list.horizontalLimit
               li.item.collapse.borderless
                 label(style="width:100px;") Drill Make
                 select.select
@@ -2030,13 +2000,8 @@ template(name="equipment")
                     input(type="text",placeholder="0")
                     span inches
                   li.item.collapse
-                    .toggle.gray.large(data-action="toggle",data-toggle="shootType",data-state="no")
-                      input(type="hidden")
-                      .toggleOptions
-                        .toggleOptionsTrack
-                          .toggleOption Single-Shoot
-                          .toggleOption Double-Shoot
-                      .toggleLabel Shoot Type?
+                    label Shoot Type?
+                    input(type="checkbox",name="shootType",value="no")
           .section(style="padding-bottom:10px;")
             ul.list
               li.item.collapse.borderless
@@ -2050,13 +2015,8 @@ template(name="equipment")
                   option(value="Model") Model
                   option(value="1910") 1910
               li.item.collapse
-                .toggle.gray(data-action="toggle",data-toggle="controllerConnection",data-state="no")
-                  input(type="hidden")
-                  .toggleOptions
-                    .toggleOptionsTrack
-                      .toggleOption Yes
-                      .toggleOption No
-                  .toggleLabel Connected to Controller?
+                label Connected to Controller?
+                input(type="checkbox",name="controllerConnected",value="no")
               li.item.collapse.borderless
                 label(style="width:100px;") Controller Make
                 select.select
@@ -2071,7 +2031,7 @@ template(name="equipment")
 
           {{#if equalsSession 'equipmentType' 'Floater'}}
           .section(style="padding-bottom:10px;")
-            ul.list
+            ul.list.horizontalLimit
               li.item.collapse.borderless
                 label(style="width:100px;") Unit Name
                 input(type="text",placeholder="Unit Name")
@@ -2101,7 +2061,7 @@ template(name="equipment")
                     input(type="text",placeholder="Capacity (bu)")
                     input(type="text",placeholder="Select Product")
           .section(style="padding-bottom:10px;")
-            ul.list
+            ul.list.horizontalLimit
               li.item.collapse
                 label(style="width:100px;") Fertilizer Type
                 select.select
@@ -2121,13 +2081,8 @@ template(name="equipment")
                     input(type="text",placeholder="0")
                     span inches
                   li.item.collapse
-                    .toggle.gray.large(data-action="toggle",data-toggle="shootType",data-state="no")
-                      input(type="hidden")
-                      .toggleOptions
-                        .toggleOptionsTrack
-                          .toggleOption Single-Shoot
-                          .toggleOption Double-Shoot
-                      .toggleLabel Shoot Type?
+                    label Shoot Type?
+                    input(type="checkbox",name="shootType",value="no")
           .section(style="padding-bottom:10px;")
             ul.list
               li.item.collapse.borderless
@@ -2141,13 +2096,8 @@ template(name="equipment")
                   option(value="Model") Model
                   option(value="1910") 1910
               li.item.collapse
-                .toggle.gray(data-action="toggle",data-toggle="controllerConnection",data-state="no")
-                  input(type="hidden")
-                  .toggleOptions
-                    .toggleOptionsTrack
-                      .toggleOption Yes
-                      .toggleOption No
-                  .toggleLabel Connected to Controller?
+                label Connected to Controller?
+                input(type="checkbox",name="controllerConnected",value="no")
               li.item.collapse.borderless
                 label(style="width:100px;") Controller Make
                 select.select
@@ -2162,7 +2112,7 @@ template(name="equipment")
 
           {{#if equalsSession 'equipmentType' 'Sprayer'}}
           .section(style="padding-bottom:10px;")
-            ul.list
+            ul.list.horizontalLimit
               li.item.collapse.borderless
                 label(style="width:100px;") Unit Name
                 input(type="text",placeholder="Unit Name")
@@ -2192,7 +2142,7 @@ template(name="equipment")
                     input(type="text",placeholder="Capacity (bu)")
                     input(type="text",placeholder="Select Product")
           .section(style="padding-bottom:10px;")
-            ul.list
+            ul.list.horizontalLimit
               li.item.collapse
                 label(style="width:100px;") Fertilizer Type
                 select.select
@@ -2206,13 +2156,8 @@ template(name="equipment")
                     input(type="text",placeholder="max")
                     span gal/acre
                   li.item.collapse
-                    .toggle.gray.large(data-action="toggle",data-toggle="shootType",data-state="no")
-                      input(type="hidden")
-                      .toggleOptions
-                        .toggleOptionsTrack
-                          .toggleOption U.S. Gallons
-                          .toggleOption Imp. Gallons
-                      .toggleLabel Gallons
+                    label Gallons
+                    input(type="checkbox",name="gallons",value="no")
                   li.item.collapse
                     .button-bar.columns-3
                       a.button(data-active="true") Mid-Row Bander
@@ -2231,13 +2176,8 @@ template(name="equipment")
                   option(value="Model") Model
                   option(value="1910") 1910
               li.item.collapse
-                .toggle.gray(data-action="toggle",data-toggle="controllerConnection",data-state="no")
-                  input(type="hidden")
-                  .toggleOptions
-                    .toggleOptionsTrack
-                      .toggleOption Yes
-                      .toggleOption No
-                  .toggleLabel Connected to Controller?
+                label Connected to Controller?
+                input(type="checkbox",name="controllerConnected",value="no")
               li.item.collapse.borderless
                 label(style="width:100px;") Controller Make
                 select.select
@@ -2279,13 +2219,8 @@ template(name="equipment")
                   option(value="Model") Model
                   option(value="1910") 1910
               li.item.collapse.borderless
-                .toggle.gray(data-action="toggle",data-toggle="controllerConnection",data-state="no")
-                  input(type="hidden")
-                  .toggleOptions
-                    .toggleOptionsTrack
-                      .toggleOption Yes
-                      .toggleOption No
-                  .toggleLabel Connected to Controller?
+                label Connected to Controller?
+                input(type="checkbox",name="controllerConnected",value="no")
           .section
             ul.list
               li.item.collapse.borderless
@@ -2326,13 +2261,8 @@ template(name="equipment")
                 label(style="width:100px;") Model
                 input(type="text",placeholder="Model")
               li.item.collapse.borderless
-                .toggle.gray(data-action="toggle",data-toggle="controllerConnection",data-state="no")
-                  input(type="hidden")
-                  .toggleOptions
-                    .toggleOptionsTrack
-                      .toggleOption Yes
-                      .toggleOption No
-                  .toggleLabel Is Monitor Setup and Running?
+                label Is Monitor Setup and Running?
+                input(type="checkbox",name="monitorSetup",value="no")
               li.item.collapse
                 label(style="width:100px;") Data Card Type
                 input(type="text",placeholder="Data Card Type")
@@ -2359,33 +2289,34 @@ template(name="equipment")
         {{/if}}
         {{else}}
         .title Big Red
-          form
-            ul.list
-              li.item.collapse
-                select.select(data-action="setEquipmentType")
-                  option(value="Select Equipment Type") Select Equipment Type
-                  option(value="Seeding System") Seeding System
-                  option(value="Floater") Floater
-                  option(value="Sprayer") Sprayer
-                  option(value="NH3 Cultivator") NH3 Cultivator
-                  option(value="Combine") Combine
-                  //-option(value="Swather") Swather
-                  //-option(value="Tractor") Tractor
-                  option(value="Truck") Truck
-                  //-option(value="Fleet") Fleet
         .iconWrapper.size-16.right
           {{icon 'print'}}
+      .section
+        form
+          ul.list
+            li.item.collapse
+              select.select(data-action="setEquipmentType")
+                option(value="Select Equipment Type") Select Equipment Type
+                option(value="Seeding System") Seeding System
+                option(value="Floater") Floater
+                option(value="Sprayer") Sprayer
+                option(value="NH3 Cultivator") NH3 Cultivator
+                option(value="Combine") Combine
+                //-option(value="Swather") Swather
+                //-option(value="Tractor") Tractor
+                option(value="Truck") Truck
+                //-option(value="Fleet") Fleet
         {{#if equalsSession 'equipmentType' 'Select Equipment Type'}}
-        .title Please select an equipment type.
+        label(style="line-height:50px;font-style:italic;font-size:14px;") Please select an equipment type.
         {{else}}
         form
           {{#if equalsSession 'equipmentType' 'Seeding System'}}
-          .section
-            ul.list
-              li.item.collapse
+          .section(style="padding-bottom:10px;")
+            ul.list.horizontalLimit
+              li.item.collapse.borderless
                 label(style="width:100px;") Unit Name
                 input(type="text",placeholder="Unit Name")
-              li.item.collapse
+              li.item.collapse.borderless
                 label(style="width:100px;") Cart Make
                 select.select
                   option(value="Cart Make") Cart Make
@@ -2414,8 +2345,8 @@ template(name="equipment")
                     label Tank 5
                     input(type="text",placeholder="Capacity (bu)")
                     input(type="text",placeholder="Select Product")
-            ul.list
-              li.item.collapse
+            ul.list.horizontalLimit
+              li.item.collapse.borderless
                 label(style="width:100px;") Drill Make
                 select.select
                   option(value="Drill Make") Drill Make
@@ -2443,33 +2374,24 @@ template(name="equipment")
                     input(type="text",placeholder="0")
                     span inches
                   li.item.collapse
-                    .toggle.gray.large(data-action="toggle",data-toggle="shootType",data-state="no")
-                      input(type="hidden")
-                      .toggleOptions
-                        .toggleOptionsTrack
-                          .toggleOption Single-Shoot
-                          .toggleOption Double-Shoot
-                      .toggleLabel Shoot Type?
+                    label Shoot Type?
+                    input(type="checkbox",name="shootType",value="no")
+          .section(style="padding-bottom:10px;")
             ul.list
-              li.item.collapse
+              li.item.collapse.borderless
                 label(style="width:100px;") Receiver Make
                 select.select
                   option(value="Receiver Make") Receiver Make
                   option(value="John Deere") John Deere
-              li.item.collapse
+              li.item.collapse.borderless
                 label(style="width:100px;") Model
                 select.select
                   option(value="Model") Model
                   option(value="1910") 1910
               li.item.collapse
-                .toggle.gray(data-action="toggle",data-toggle="controllerConnection",data-state="no")
-                  input(type="hidden")
-                  .toggleOptions
-                    .toggleOptionsTrack
-                      .toggleOption Yes
-                      .toggleOption No
-                  .toggleLabel Connected to Controller?
-              li.item.collapse
+                label Connected to Controller?
+                input(type="checkbox",name="controllerConnected",value="no")
+              li.item.collapse.borderless
                 label(style="width:100px;") Controller Make
                 select.select
                   option(value="Controller Make") Controller Make
@@ -2482,9 +2404,9 @@ template(name="equipment")
           {{/if}}
 
           {{#if equalsSession 'equipmentType' 'Floater'}}
-          .section
-            ul.list
-              li.item.collapse
+          .section(style="padding-bottom:10px;")
+            ul.list.horizontalLimit
+              li.item.collapse.borderless
                 label(style="width:100px;") Unit Name
                 input(type="text",placeholder="Unit Name")
               li.item.collapse
@@ -2512,7 +2434,8 @@ template(name="equipment")
                     label Tank 5
                     input(type="text",placeholder="Capacity (bu)")
                     input(type="text",placeholder="Select Product")
-            ul.list
+          .section(style="padding-bottom:10px;")
+            ul.list.horizontalLimit
               li.item.collapse
                 label(style="width:100px;") Fertilizer Type
                 select.select
@@ -2532,33 +2455,24 @@ template(name="equipment")
                     input(type="text",placeholder="0")
                     span inches
                   li.item.collapse
-                    .toggle.gray.large(data-action="toggle",data-toggle="shootType",data-state="no")
-                      input(type="hidden")
-                      .toggleOptions
-                        .toggleOptionsTrack
-                          .toggleOption Single-Shoot
-                          .toggleOption Double-Shoot
-                      .toggleLabel Shoot Type?
+                    label Shoot Type?
+                    input(type="checkbox",name="shootType",value="no")
+          .section(style="padding-bottom:10px;")
             ul.list
-              li.item.collapse
+              li.item.collapse.borderless
                 label(style="width:100px;") Receiver Make
                 select.select
                   option(value="Receiver Make") Receiver Make
                   option(value="John Deere") John Deere
-              li.item.collapse
+              li.item.collapse.borderless
                 label(style="width:100px;") Model
                 select.select
                   option(value="Model") Model
                   option(value="1910") 1910
               li.item.collapse
-                .toggle.gray(data-action="toggle",data-toggle="controllerConnection",data-state="no")
-                  input(type="hidden")
-                  .toggleOptions
-                    .toggleOptionsTrack
-                      .toggleOption Yes
-                      .toggleOption No
-                  .toggleLabel Connected to Controller?
-              li.item.collapse
+                label Connected to Controller?
+                input(type="checkbox",name="controllerConnected",value="no")
+              li.item.collapse.borderless
                 label(style="width:100px;") Controller Make
                 select.select
                   option(value="Controller Make") Controller Make
@@ -2571,9 +2485,9 @@ template(name="equipment")
           {{/if}}
 
           {{#if equalsSession 'equipmentType' 'Sprayer'}}
-          .section
-            ul.list
-              li.item.collapse
+          .section(style="padding-bottom:10px;")
+            ul.list.horizontalLimit
+              li.item.collapse.borderless
                 label(style="width:100px;") Unit Name
                 input(type="text",placeholder="Unit Name")
               li.item.collapse
@@ -2601,7 +2515,8 @@ template(name="equipment")
                     label Tank 5
                     input(type="text",placeholder="Capacity (bu)")
                     input(type="text",placeholder="Select Product")
-            ul.list
+          .section(style="padding-bottom:10px;")
+            ul.list.horizontalLimit
               li.item.collapse
                 label(style="width:100px;") Fertilizer Type
                 select.select
@@ -2615,38 +2530,29 @@ template(name="equipment")
                     input(type="text",placeholder="max")
                     span gal/acre
                   li.item.collapse
-                    .toggle.gray.large(data-action="toggle",data-toggle="shootType",data-state="no")
-                      input(type="hidden")
-                      .toggleOptions
-                        .toggleOptionsTrack
-                          .toggleOption U.S. Gallons
-                          .toggleOption Imp. Gallons
-                      .toggleLabel Gallons
+                    label Gallons
+                    input(type="checkbox",name="gallons",value="no")
                   li.item.collapse
                     .button-bar.columns-3
                       a.button(data-active="true") Mid-Row Bander
                       a.button(data-active="false") Paired Row
                       a.button(data-active="false") Side Band
+          .section(style="padding-bottom:10px;")
             ul.list
-              li.item.collapse
+              li.item.collapse.borderless
                 label(style="width:100px;") Receiver Make
                 select.select
                   option(value="Receiver Make") Receiver Make
                   option(value="John Deere") John Deere
-              li.item.collapse
+              li.item.collapse.borderless
                 label(style="width:100px;") Model
                 select.select
                   option(value="Model") Model
                   option(value="1910") 1910
               li.item.collapse
-                .toggle.gray(data-action="toggle",data-toggle="controllerConnection",data-state="no")
-                  input(type="hidden")
-                  .toggleOptions
-                    .toggleOptionsTrack
-                      .toggleOption Yes
-                      .toggleOption No
-                  .toggleLabel Connected to Controller?
-              li.item.collapse
+                label Connected to Controller?
+                input(type="checkbox",name="controllerConnected",value="no")
+              li.item.collapse.borderless
                 label(style="width:100px;") Controller Make
                 select.select
                   option(value="Controller Make") Controller Make
@@ -2659,40 +2565,39 @@ template(name="equipment")
           {{/if}}
 
           {{#if equalsSession 'equipmentType' 'NH3 Cultivator'}}
-          .section
+          .section(style="padding-bottom:10px;")
             ul.list
-              li.item.collapse
+              li.item.collapse.borderless
                 label(style="width:100px;") Unit Name
                 input(type="text",placeholder="Unit Name")
-              li.item.collapse
+              li.item.collapse.borderless
                 label(style="width:100px;") Make
                 select.select
                   option(value="Make") Make
-              li.item.collapse
+              li.item.collapse.borderless
                 label(style="width:100px;") NH3 Rates
                 input(type="text",placeholder="min")
                 span -
                 input(type="text",placeholder="max")
                 span lbs actual/acre
-              li.item.collapse
+          .section(style="padding-bottom:10px;")
+            ul.list
+              li.item.collapse.borderless
                 label(style="width:100px;") Receiver Make
                 select.select
                   option(value="Receiver Make") Receiver Make
                   option(value="John Deere") John Deere
-              li.item.collapse
+              li.item.collapse.borderless
                 label(style="width:100px;") Model
                 select.select
                   option(value="Model") Model
                   option(value="1910") 1910
-              li.item.collapse
-                .toggle.gray(data-action="toggle",data-toggle="controllerConnection",data-state="no")
-                  input(type="hidden")
-                  .toggleOptions
-                    .toggleOptionsTrack
-                      .toggleOption Yes
-                      .toggleOption No
-                  .toggleLabel Connected to Controller?
-              li.item.collapse
+              li.item.collapse.borderless
+                label Connected to Controller?
+                input(type="checkbox",name="controllerConnected",value="no")
+          .section
+            ul.list
+              li.item.collapse.borderless
                 label(style="width:100px;") Controller Make
                 select.select
                   option(value="Controller Make") Controller Make
@@ -2707,14 +2612,14 @@ template(name="equipment")
           {{#if equalsSession 'equipmentType' 'Combine'}}
           .section
             ul.list
-              li.item.collapse
+              li.item.collapse.borderless
                 label(style="width:100px;") Unit Name or #
                 input(type="text",placeholder="Unit Name")
-              li.item.collapse
+              li.item.collapse.borderless
                 label(style="width:100px;") Make
                 select.select
                   option(value="Make") Make
-              li.item.collapse
+              li.item.collapse.borderless
                 label(style="width:100px;") Model
                 input(type="text",placeholder="Model")
               li.item.collapse
@@ -2723,20 +2628,15 @@ template(name="equipment")
           .section
             .title Yield Monitor
             ul.list
-              li.item.collapse
+              li.item.collapse.borderless
                 label(style="width:100px;") Make
                 input(type="text",placeholder="Make")
-              li.item.collapse
+              li.item.collapse.borderless
                 label(style="width:100px;") Model
                 input(type="text",placeholder="Model")
-              li.item.collapse
-                .toggle.gray(data-action="toggle",data-toggle="controllerConnection",data-state="no")
-                  input(type="hidden")
-                  .toggleOptions
-                    .toggleOptionsTrack
-                      .toggleOption Yes
-                      .toggleOption No
-                  .toggleLabel Is Monitor Setup and Running?
+              li.item.collapse.borderless
+                label Is Monitor Setup and Running?
+                input(type="checkbox",name="monitorSetup",value="no")
               li.item.collapse
                 label(style="width:100px;") Data Card Type
                 input(type="text",placeholder="Data Card Type")
@@ -2745,14 +2645,14 @@ template(name="equipment")
           {{#if equalsSession 'equipmentType' 'Truck'}}
           .section
             ul.list
-              li.item.collapse
+              li.item.collapse.borderless
                 label(style="width:100px;") Unit Name or #
                 input(type="text",placeholder="Unit Name")
-              li.item.collapse
+              li.item.collapse.borderless
                 label(style="width:100px;") Make
                 select.select
                   option(value="Make") Make
-              li.item.collapse
+              li.item.collapse.borderless
                 label(style="width:100px;") Model
                 input(type="text",placeholder="Model")
               li.item.collapse
@@ -3001,12 +2901,7 @@ template(name="market")
                     input(type="text",placeholder="$0",value="$2,270.00")
                 td
                   .cell
-                    .toggle.gray(data-action="toggle",data-toggle="sureCheck",data-state="no")
-                      input(type="hidden")
-                      .toggleOptions
-                        .toggleOptionsTrack
-                          .toggleOption Yes
-                          .toggleOption No
+                    input(type="checkbox",name="state",value="no")
                     .iconWrapper.size-16.right
                       {{icon 'remove'}}
               tr
@@ -3039,12 +2934,7 @@ template(name="market")
                     input(type="text",placeholder="$0",value="$1,380.00")
                 td
                   .cell
-                    .toggle.gray(data-action="toggle",data-toggle="sureCheck",data-state="no")
-                      input(type="hidden")
-                      .toggleOptions
-                        .toggleOptionsTrack
-                          .toggleOption Yes
-                          .toggleOption No
+                    input(type="checkbox",name="state",value="no")
                     .iconWrapper.size-16.right
                       {{icon 'remove'}}
               tr
@@ -3077,12 +2967,7 @@ template(name="market")
                     input(type="text",placeholder="$0")
                 td
                   .cell
-                    .toggle.gray(data-action="toggle",data-toggle="sureCheck",data-state="no")
-                      input(type="hidden")
-                      .toggleOptions
-                        .toggleOptionsTrack
-                          .toggleOption Yes
-                          .toggleOption No
+                    input(type="checkbox",name="state",value="no")
       {{/if}}
     {{/if}}
 
@@ -3485,15 +3370,10 @@ template(name="market")
                   {{icon 'remove'}}
     .section
       form
-        ul.inline-list
-          li
-            .toggle.gray(data-action="toggle",data-toggle="sureCheck",data-state="no")
-              input(type="hidden")
-              .toggleOptions
-                .toggleOptionsTrack
-                  .toggleOption Yes
-                  .toggleOption No
-              .toggleLabel Notify me when contracts are due
+        ul.list
+          li.item.collapse.borderless
+            label Notify me when contracts are due
+            input(type="checkbox",name="contract",value="no")
     {{/if}}
 
     {{#if currentParamIs 'section' 'research'}}
@@ -4121,68 +4001,59 @@ template(name="farm-planner")
                 .cell -$5,000
               td
                 .cell
-      .section
-        form
-          .title Time Triggers
-          ul.inline-list
-            li
-              input.inline.percentage(type="text",placeholder="0%",value="10%")
-              label.inline to hedge by
-              input.inline.datepicker(type="text",placeholder="DD/MM/YYYY",value="27/07/2014")
-              .subtitle.inline 72.3 MT required
-          ul.inline-list
-            li
-              input.inline.percentage(type="text",placeholder="0%",value="50%")
-              label.inline to hedge by
-              input.inline.datepicker(type="text",placeholder="DD/MM/YYYY",value="12/04/2014")
-              .subtitle.inline 362 MT required
-          ul.inline-list
-            li
-              input.inline.percentage(type="text",placeholder="0%")
-              label.inline to hedge by
-              input.inline.datepicker(type="text",placeholder="DD/MM/YYYY")
-          .title Margin Triggers
-          ul.inline-list
-            li
-              input.inline.percentage(type="text",placeholder="0",value="75%")
-              label.inline to hedge when margin reaches
-              input.inline(type="text",placeholder="0",value="$250/acre")
-              .subtitle.inline 544.13 MT required
-          ul.inline-list
-            li
-              input.inline.percentage(type="text",placeholder="0",value="90%")
-              label.inline to hedge when margin reaches
-              input.inline(type="text",placeholder="0",value="$270/acre")
-              .subtitle.inline 652.73 MT required
-          ul.inline-list
-            li
-              input.inline.percentage(type="text",placeholder="0",value="100%")
-              label.inline to hedge when margin reaches
-              input.inline(type="text",placeholder="0",value="$280/acre")
-              .subtitle.inline 725.25 MT required
-          ul.inline-list
-            li
-              input.inline.percentage(type="text",placeholder="0")
-              label.inline to hedge when margin reaches
-              input.inline(type="text",placeholder="0")
-          ul.inline-list
-            li
-              .toggle.gray(data-action="toggle",data-toggle="sureCheck",data-state="no")
-                input(type="hidden")
-                .toggleOptions
-                  .toggleOptionsTrack
-                    .toggleOption Yes
-                    .toggleOption No
-                .toggleLabel Notify me when triggers are reached
-          ul.inline-list
-            li
-              .toggle.gray(data-action="toggle",data-toggle="sureCheck",data-state="no")
-                input(type="hidden")
-                .toggleOptions
-                  .toggleOptionsTrack
-                    .toggleOption Yes
-                    .toggleOption No
-                .toggleLabel Notify me when contracts are due
+
+      form
+        .section.borderless
+          .title.borderless Time Triggers
+          ul.list
+            li.item.collapse.borderless
+              input.percentage.left(type="text",placeholder="0%",value="10%")
+              label.left to hedge by
+              input.datepicker.left(type="text",placeholder="DD/MM/YYYY",value="27/07/2014")
+              .subtitle.left 72.3 MT required
+          ul.list
+            li.item.collapse.borderless
+              input.percentage.left(type="text",placeholder="0%",value="50%")
+              label.left to hedge by
+              input.datepicker.left(type="text",placeholder="DD/MM/YYYY",value="12/04/2014")
+              .subtitle.left 362 MT required
+          ul.list
+            li.item.collapse.borderless
+              input.percentage.left(type="text",placeholder="0%")
+              label.left to hedge by
+              input.datepicker.left(type="text",placeholder="DD/MM/YYYY")
+        .section.borderless.push
+          .title.borderless Margin Triggers
+          ul.list
+            li.item.collapse.borderless
+              input.percentage.left(type="text",placeholder="0",value="75%")
+              label.left to hedge when margin reaches
+              input.left(type="text",placeholder="0",value="$250/acre")
+              .subtitle.left 544.13 MT required
+          ul.list
+            li.item.collapse.borderless
+              input.percentage.left(type="text",placeholder="0",value="90%")
+              label.left to hedge when margin reaches
+              input.left(type="text",placeholder="0",value="$270/acre")
+              .subtitle.left 652.73 MT required
+          ul.list
+            li.item.collapse.borderless
+              input.percentage.left(type="text",placeholder="0",value="100%")
+              label.left to hedge when margin reaches
+              input.left(type="text",placeholder="0",value="$280/acre")
+              .subtitle.left 725.25 MT required
+          ul.list
+            li.item.collapse.borderless
+              input.percentage.left(type="text",placeholder="0")
+              label.left to hedge when margin reaches
+              input.left(type="text",placeholder="0")
+          ul.list
+            li.item.collapse.borderless
+              label Notify me when triggers are reached
+              input(type="checkbox",name="triggersReached",value="no")
+            li.item.collapse.borderless
+              label Notify me when contracts are due
+              input(type="checkbox",name="contractsDue",value="no")
       {{/if}}
 
       {{!Fuel}}
@@ -4232,15 +4103,10 @@ template(name="farm-planner")
                 td
                   .cell $4,610.50
         .section
-          ul.inline-list
-            li
-              .toggle.gray(data-action="toggle",data-toggle="sureCheck",data-state="no")
-                input(type="hidden")
-                .toggleOptions
-                  .toggleOptionsTrack
-                    .toggleOption Yes
-                    .toggleOption No
-                .toggleLabel Notify me when contracts are due
+          ul.list
+            li.item.collapse
+              label Notify me when contracts are due
+              input(type="checkbox",name="contractsDue",value="no")
       {{/if}}
 
       {{!46-0-0}}
@@ -4290,15 +4156,10 @@ template(name="farm-planner")
                 td
                   .cell $52,500
         .section
-          ul.inline-list
-            li
-              .toggle.gray(data-action="toggle",data-toggle="sureCheck",data-state="no")
-                input(type="hidden")
-                .toggleOptions
-                  .toggleOptionsTrack
-                    .toggleOption Yes
-                    .toggleOption No
-                .toggleLabel Notify me when contracts are due
+          ul.list
+            li.item.collapse.borderless
+              label Notify me when contracts are due
+              input(type="checkbox",name="contractsDue",value="no")
       {{/if}}
     {{/if}}
 
@@ -4361,20 +4222,10 @@ template(name="farm-planner")
                     option(value="bu/ac") bu/ac
               td
                 .cell
-                  .toggle.gray.inline(data-action="toggle",data-toggle="rxF",data-state="no")
-                    input(type="hidden")
-                    .toggleOptions
-                      .toggleOptionsTrack
-                        .toggleOption Yes
-                        .toggleOption No
+                  input(type="checkbox",name="rxF",value="no")
               td
                 .cell
-                  .toggle.gray.inline(data-action="toggle",data-toggle="rxS",data-state="no")
-                    input(type="hidden")
-                    .toggleOptions
-                      .toggleOptionsTrack
-                        .toggleOption Yes
-                        .toggleOption No
+                  input(type="checkbox",name="rxS",value="no")
               td
                 .cell
                   input.left(style="padding-right:85px;",placeholder="0")
@@ -4403,20 +4254,10 @@ template(name="farm-planner")
                     option(value="bu/ac") bu/ac
               td
                 .cell
-                  .toggle.gray.inline(data-action="toggle",data-toggle="rxF",data-state="no")
-                    input(type="hidden")
-                    .toggleOptions
-                      .toggleOptionsTrack
-                        .toggleOption Yes
-                        .toggleOption No
+                  input(type="checkbox",name="rxF",value="no")
               td
                 .cell
-                  .toggle.gray.inline(data-action="toggle",data-toggle="rxS",data-state="no")
-                    input(type="hidden")
-                    .toggleOptions
-                      .toggleOptionsTrack
-                        .toggleOption Yes
-                        .toggleOption No
+                  input(type="checkbox",name="rxS",value="no")
               td
                 .cell
                   input.left(style="padding-right:85px;",placeholder="0")
@@ -4445,20 +4286,10 @@ template(name="farm-planner")
                     option(value="bu/ac") bu/ac
               td
                 .cell
-                  .toggle.gray.inline(data-action="toggle",data-toggle="rxF",data-state="no")
-                    input(type="hidden")
-                    .toggleOptions
-                      .toggleOptionsTrack
-                        .toggleOption Yes
-                        .toggleOption No
+                  input(type="checkbox",name="rxF",value="no")
               td
                 .cell
-                  .toggle.gray.inline(data-action="toggle",data-toggle="rxS",data-state="no")
-                    input(type="hidden")
-                    .toggleOptions
-                      .toggleOptionsTrack
-                        .toggleOption Yes
-                        .toggleOption No
+                  input(type="checkbox",name="rxS",value="no")
               td
                 .cell
                   input.left(style="padding-right:85px;",placeholder="0")
@@ -4482,13 +4313,215 @@ template(name="farm-planner")
                 .cell
               td
                 .cell
-    .toggle.gray.large(style="margin-bottom:10px;",data-action="toggle",data-toggle="shootType",data-state="no")
-      input(type="hidden")
-      .toggleOptions
-        .toggleOptionsTrack
-          .toggleOption Zero
-          .toggleOption Maintenance
-      .toggleLabel For zones with zero fertilizer required, do you want to put zero or put a maintenance level of fertilizer?
+    .section
+      form
+        ul.list
+          li.item.collapse
+            label.left For zones with zero fertilizer required, do you want to put zero or put a maintenance level of fertilizer?
+            input.left(type="radio",name="maintenanceLevel",value="Zero")
+            label.left Zero
+            input.left(type="radio",name="maintenanceLevel",value="Maintenance")
+            label.left Maintenance
+    .section
+      .title Application Units
+        form
+          ul.list
+            li.item.collapse
+              select.select
+                option(value="Add an Existing Field") Add an Existing Application Unit
+        .iconWrapper.size-24.right(style="margin-top:-2px;")
+          {{icon 'new'}}
+      form
+        table.table.uniform
+          thead
+            tr
+              td
+                .cell Unit Name / #
+              td
+                .cell Make
+              td
+                .cell Model
+              td
+                .cell Drill Width
+              td
+                .cell Fertilizer Type
+          tbody
+            tr
+              td
+                .cell
+                  input(type="text",placeholder="Unit Name")
+              td
+                .cell
+                  select.select
+                    option(value="John Deere") John Deere
+              td
+                .cell
+                  select.select
+                    option(value="1910") 1910
+              td
+                .cell
+                  input(type="text",placeholder="Drill Width")
+              td
+                .cell
+                  select.select
+                    option(value="Dry") Dry
+                  .iconWrapper.size.right
+                    {{icon 'remove'}}
+    .section
+      form
+        ul.list.left(style="width:300px;")
+          li.item.collapse.borderless
+            label(style="width:110px;") Dry Rate Maximum
+            input(type="text",placeholder="Dry Rate Maximum") lbs/acre
+          li.item.collapse.borderless
+            label(style="width:110px;") Opener Width
+            select.select
+              option(value="3") 3
+            label.postfix inches
+          li.item.collapse.borderless
+            label(style="width:110px;") Shank Spacing
+            select.select
+              option(value="3") 3
+            label.postfix inches
+        ul.list.left(style="width:350px;")
+          li.item.collapse.borderless
+            label Tank 1
+            input(type="text",placeholder="Bushels",value="200 Bushels")
+            input(type="text",placeholder="Select Product")
+          li.item.collapse.borderless
+            label Tank 2
+            input(type="text",placeholder="Bushels",value="150 Bushels")
+            input(type="text",placeholder="Select Product")
+          li.item.collapse.borderless
+            label Tank 3
+            input(type="text",placeholder="Bushels",value="200 Bushels")
+            input(type="text",placeholder="Select Product")
+          li.item.collapse.borderless
+            label.left Shoot Type
+            input.left(type="radio",name="shootType",value="Single-Shoot")
+            label.left Single-Shoot
+            input.left(type="radio",name="shootType",value="Double-Shoot")
+            label.left Double-Shoot
+    .section
+      form
+        ul.list.left(style="width:300px;")
+          li.item.collapse.borderless
+            label(style="width:120px;") GPS Receiver Make
+            select.select
+              option(value="John Deere") John Deere
+          li.item.collapse.borderless
+            label(style="width:120px;") Controller Make
+            select.select
+              option(value="John Deere") John Deere
+          li.item.collapse.borderless
+            label Connected to Controller?
+            input(type="checkbox",name="controllerConnected",value="no")
+        ul.list.left(style="width:350px;")
+          li.item.collapse.borderless
+            label Model
+            select.select
+              option(value="1910") 1910
+          li.item.collapse.borderless
+            label Model
+            select.select
+              option(value="1910") 1910
+    .section(style="padding-bottom:10px;")
+      ul.list
+        li.item.collapse.borderless
+          label RX Equipment Test?
+          input(type="checkbox",name="rxEquipmentTest",value="no")
+    .section
+      .title Test Site Location
+      form
+        ul.list
+          li.item.collapse
+            input(style="width:100%;",type="text",placeholder="Example: NW 32 16 16 W3.. Be as specific as possible!")
+          li.item.collapse
+            .tile(style="height:640px;background-image:url('/stubImages/overview.png');")
+              .notice
+                .title Draw field map with test location indicated
+                ul.inline-list
+                  li
+                    a
+                      .iconWrapper.size-16.left
+                        {{icon 'remove'}}
+                      | clear
+                  li
+                    a
+                      .iconWrapper.size-16.left
+                        {{icon 'approve'}}
+                      | save
+    .section(style="padding:10px 0 10px 0;")
+      ul.list
+        li.item.collapse.borderless
+          label Return on Investment Trials
+          input(type="checkbox",name="returnOnInvestmentTrials",value="no")
+      .iconWrapper.size-24.right(style="margin-top:-12px;top:50%;")
+        {{icon 'new'}}
+    .section(style="padding:0 0 10px 0;")
+      ul.list
+        li.item.collapse.borderless
+          label I am able to accurately measure & record yield with a calibrated yield monitor
+          input(type="checkbox",name="calibratedYieldMonitor",value="no")
+    .section
+      ul.list
+        li.item.collapse
+          form
+            ul.inline-list
+              li
+                a.inline(style="margin-right:10px;")
+                  select.select
+                    option(value="ROI Check Strip") ROI Check Strip
+              li
+                a.inline(style="margin-right:10px;")
+                  select.select
+                    option(value="Select Field") Select Field
+              li
+                a.inline(style="margin-right:10px;")
+                  select.select
+                    option(value="Select Application Unit") Select Application Unit
+              li
+                a.inline
+                  select.select
+                    option(value="Select Seeding Direction") Select Seeding Direction
+            input(style="margin-top:10px;width:100%;",type="text",placeholder="Plot Layout (e.g. Optimize RX vs. Constant Rate)")
+          .iconWrapper.size-16.right
+            {{icon 'remove'}}
+        li.item.collapse
+          form
+            ul.inline-list
+              li
+                a.inline(style="margin-right:10px;")
+                  select.select
+                    option(value="ROI Check Strip") ROI Check Strip
+              li
+                a.inline(style="margin-right:10px;")
+                  select.select
+                    option(value="Select Field") Select Field
+              li
+                a.inline(style="margin-right:10px;")
+                  select.select
+                    option(value="Select Application Unit") Select Application Unit
+              li
+                a.inline
+                  select.select
+                    option(value="Select Seeding Direction") Select Seeding Direction
+            input(style="margin-top:10px;width:100%;",type="text",placeholder="Plot Layout (e.g. Optimize RX vs. Constant Rate)")
+          .iconWrapper.size-16.right
+            {{icon 'remove'}}
+    .section(style="padding:0 0 10px 0;")
+      ul.list
+        li.item.collapse.borderless
+          label I have read and accepted the Optimize RX ROI comparison terms & conditions
+          input(type="checkbox",name="termsAndConditionsAccepted",value="no")
+    .section(style="padding:10px;")
+      textarea.expanding(type="text",placeholder="Type any additional notes/comments for this work order here")
+    .section
+      .alert
+        .iconWrapper.size-48.left
+          {{icon 'alert'}}
+        .title Your confirmation of work order details is required to proceed.
+        .subtitle Approved, let's get started!
     {{/if}}
 
 template(name="profile")
@@ -4531,12 +4564,7 @@ template(name="profile")
                 .cell 11/26/2013
               td
                 .cell
-                  .toggle.gray.inline(data-action="toggle",data-toggle="sureCheck",data-state="no")
-                    input(type="hidden")
-                    .toggleOptions
-                      .toggleOptionsTrack
-                        .toggleOption Yes
-                        .toggleOption No
+                  input(type="checkbox",name="carbon",value="no")
               td
                 .cell
                   a.button.split.rounded All
@@ -4612,12 +4640,7 @@ template(name="profile")
                 .cell 11/26/2013
               td
                 .cell
-                  .toggle.gray.inline(data-action="toggle",data-toggle="sureCheck",data-state="no")
-                    input(type="hidden")
-                    .toggleOptions
-                      .toggleOptionsTrack
-                        .toggleOption Yes
-                        .toggleOption No
+                  input(type="checkbox",name="carbon",value="no")
               td
                 .cell
                   a.button.split.rounded All
@@ -4693,12 +4716,7 @@ template(name="profile")
                 .cell 11/26/2013
               td
                 .cell
-                  .toggle.gray.inline(data-action="toggle",data-toggle="sureCheck",data-state="no")
-                    input(type="hidden")
-                    .toggleOptions
-                      .toggleOptionsTrack
-                        .toggleOption Yes
-                        .toggleOption No
+                  input(type="checkbox",name="carbon",value="no")
               td
                 .cell
                   a.button.split.rounded All
@@ -4774,12 +4792,7 @@ template(name="profile")
                 .cell 11/26/2013
               td
                 .cell
-                  .toggle.gray.inline(data-action="toggle",data-toggle="sureCheck",data-state="no")
-                    input(type="hidden")
-                    .toggleOptions
-                      .toggleOptionsTrack
-                        .toggleOption Yes
-                        .toggleOption No
+                  input(type="checkbox",name="carbon",value="no")
               td
                 .cell
                   a.button.split.rounded All
@@ -4855,12 +4868,7 @@ template(name="profile")
                 .cell 11/26/2013
               td
                 .cell
-                  .toggle.gray.inline(data-action="toggle",data-toggle="sureCheck",data-state="no")
-                    input(type="hidden")
-                    .toggleOptions
-                      .toggleOptionsTrack
-                        .toggleOption Yes
-                        .toggleOption No
+                  input(type="checkbox",name="carbon",value="no")
               td
                 .cell
                   a.button.split.rounded All
@@ -4936,12 +4944,7 @@ template(name="profile")
                 .cell 11/26/2013
               td
                 .cell
-                  .toggle.gray.inline(data-action="toggle",data-toggle="sureCheck",data-state="no")
-                    input(type="hidden")
-                    .toggleOptions
-                      .toggleOptionsTrack
-                        .toggleOption Yes
-                        .toggleOption No
+                  input(type="checkbox",name="carbon",value="no")
               td
                 .cell
                   a.button.split.rounded All
@@ -5017,12 +5020,7 @@ template(name="profile")
                 .cell Never
               td
                 .cell
-                  .toggle.gray.inline(data-action="toggle",data-toggle="sureCheck",data-state="no")
-                    input(type="hidden")
-                    .toggleOptions
-                      .toggleOptionsTrack
-                        .toggleOption Yes
-                        .toggleOption No
+                  input(type="checkbox",name="carbon",value="no")
               td
                 .cell
                   a.button.split.rounded All
@@ -5193,85 +5191,86 @@ template(name="cover")
         .iconWrapper.right.size-16(data-action="toggleCover")
           {{icon 'remove'}}
       form
-        ul.inline-list
-          li
-            label.inline New Position For
-            select.inline(data-action="setPositionCommodity")
+        ul.list
+          li.item.collapse.borderless
+            label(style="width:100px;") New Position For
+            select.select(data-action="setPositionCommodity",style="width:100px;")
               option(value="Canola") Canola
               option(value="46-0-0") 46-0-0
               option(value="Fuel") Fuel
-        ul.inline-list
-          li
-            label.inline Crop Year
-            select.inline
+        ul.list
+          li.item.collapse.borderless
+            label(style="width:100px;") Crop Year
+            select.select
               option(value="2013") 2013
         {{#if equalsSession 'positionCommodity' 'Canola'}}
-        ul.inline-list
-          li
-            label.inline Position Type
-            select.inline(data-action="setPositionType")
+        ul.list
+          li.item.collapse.borderless
+            label(style="width:100px;") Position Type
+            select.select(data-action="setPositionType",style="width:100px;")
               option(value="Future") Future
               option(value="Basis") Basis
               option(value="Option") Option
               option(value="Future Cross-Hedge") Future Cross-Hedge
+              option(value="OTC Forward") OTC Forward
         {{/if}}
         {{#if equalsSession 'positionType' 'Future Cross-Hedge'}}
-        ul.inline-list
-          li
-            label.inline Cross-hedge
-            select.inline
+        ul.list
+          li.item.collapse.borderless
+            label(style="width:100px;") Cross-hedge
+            select.select.marginRight
               option(value="Select Commodity") Select Commodity
-            select.inline
+            //-select.select
               option(value="Select Market") Select Market
         {{/if}}
-        ul.inline-list
-          li
-            label.inline Contract With
-            input.inline(type="text",placeholder="Name")
-          li
-            label.inline Trade Date
-            input.inline.datepicker(type="text",placeholder="DD/MM/YYYY")
-        ul.inline-list
-          li
-            label.inline Side
-            select.inline
+        ul.list
+          li.item.collapse.borderless
+            label(style="width:100px;") Contract With
+            input.left(type="text",placeholder="Name")
+          li.item.collapse.borderless
+            label(style="width:100px;") Trade Date
+            input.datepicker.left(type="text",placeholder="DD/MM/YYYY")
+        ul.list
+          li.item.collapse.borderless
+            label(style="width:100px;") Side
+            select.select
               option(value="Buy") Buy
               option(value="Sell") Sell
-        ul.inline-list
-          li
-            label.inline Contract Month
-            input.inline.datepicker(type="text",placeholder="DD/MM/YYYY")
+        ul.list
+          li.item.collapse.borderless
+            label(style="width:100px;") Contract Month
+            input.datepicker.left(type="text",placeholder="DD/MM/YYYY")
         {{#if equalsSession 'positionType' 'Option'}}
-        ul.inline-list
-          li
-            label.inline Option Type
-            select.inline
+        ul.list
+          li.item.collapse.borderless
+            label(style="width:100px;") Option Type
+            select.select
               option(value="Put") Put
-          li
-            label.inline Option Strike
-            input.inline(type="text",placeholder="Strike Name")
+          li.item.collapse.borderless
+            label(style="width:100px;") Option Strike
+            input(type="text",placeholder="Strike Name")
         {{/if}}
-        ul.inline-list
-          li
-            label.inline Volume
-            input.inline(type="text",placeholder="0")
-            select.inline
+        ul.list
+          li.item.collapse.borderless
+            label.left(style="width:100px;") Volume
+            input.left(type="text",placeholder="0")
+            select.select.left
               option(value="Tonnes") Tonnes
               option(value="MT") MT
               option(value="Litres") Litres
-        ul.inline-list
-          li
-            label.inline Price
-            input.inline(type="text",placeholder="$0")
+        ul.list
+          li.item.collapse.borderless
+            label.left(style="width:100px;") Price
+            input.left(type="text",placeholder="$0")
         {{#if equalsSession 'positionCommodity' 'Canola'}}
-          {{#if notEqualsSession 'positionType' 'Basis'}}
-        ul.inline-list
-          li
-            label.inline Basis Price
-            input.inline(type="text",placeholder="$0")
+          {{#if equalsSession 'positionType' 'OTC Forward'}}
+        ul.list
+          li.item.collapse.borderless
+            label.left(style="width:100px;") Basis Price
+            input.left(type="text",placeholder="$0")
           {{/if}}
         {{/if}}
-        textarea.expanding(type="text",placeholder="Notes")
+        textarea.expanding(type="text",placeholder="Notes",style="margin-left:100px;")
         .button-bar
           a.button(data-action="addPosition",data-action="toggleCover") Save
           a.button(data-action="addPosition") Save & New

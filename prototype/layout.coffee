@@ -138,11 +138,13 @@ Router.map ->
           #assetsInfo: "1337"
       else
         Session.set "activeSubheaderPath",@params.section
+        Session.set "equipmentType","Select Equipment Type"
 
       if !@params.assetsInfo
         Session.set "activeSidebarPath",undefined
       else
         Session.set "activeSidebarPath",@params.assetsInfo
+        Session.set "equipmentType","Seeding System"
 
   @route "market",
     path: "/market/:section?/:assetsInfo?"

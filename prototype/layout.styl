@@ -134,7 +134,7 @@ input,button,textarea
   margin 0
   border none
   border-radius 0
-  appearance none
+  //appearance none
   user-select text
   resize none
   display block
@@ -148,7 +148,7 @@ textarea:focus,
 button:focus,
 [contenteditable="true"]:focus
   outline none
-  -webkit-appearance none
+  //-webkit-appearance none
 input:focus,
 textarea:focus
   background white
@@ -270,6 +270,9 @@ borderRadius = 4px
   &.size-24
     size(24,24)
     margin-top -12px
+  &.size-48
+    size(48,48)
+    margin-top -24px
   .icon
     position absolute
     top 0
@@ -322,7 +325,8 @@ borderRadius = 4px
   width 100%
   padding 0
   font-size 12px
-  overflow-x hidden
+  &.horizontalLimit
+    overflow-x hidden
   .active
     & > a:first-child
       font-weight 300
@@ -432,6 +436,8 @@ borderRadius = 4px
           padding 0 10px 0 0
           float left
           text-align right
+          &.postfix
+            padding-left 10px
         input
           width auto
           &:last-of-type
@@ -604,7 +610,13 @@ borderRadius = 4px
       position(static)
       padding 10px
     .expandingText
-      margin 0 0 10px 0
+      padding 10px
+      margin-bottom 20px
+    .expanding
+      border 1px solid gray()
+      border-radius borderRadius
+      background offWhite()
+      max-width 60%
     .button-bar
       width 100%
       float left
@@ -644,6 +656,8 @@ form
       border-left none
     &.inline
       float left
+    &.postfix
+      padding-left 10px
   input
     //background offWhite()
     //border 1px solid gray()
@@ -697,6 +711,8 @@ form
     //display block
     //margin 0 0 10px 0
     //margin 0
+    &.marginRight
+      margin-right 10px
     &.inline
       float left
       clear none
@@ -982,6 +998,7 @@ table.table
   li
     float left
     height inherit
+    width auto
     &:last-of-type
       margin 0
     &.column
@@ -1225,12 +1242,12 @@ table.table
         padding-left 40px
         &[data-active="true"]
         &:hover
-          //background orange(0.75)
-          color orange(0.75)
+          background orange(0.75)
+          color white()
           .iconWrapper
             &>*
-              fill orange(0.75)
-              stroke orange(0.75)
+              fill white()
+              stroke white()
         &[data-progress="inactive"]
           color offGray()
           background gray(0.5)
@@ -1341,6 +1358,10 @@ table.table
   width 100%
   clear both
   border-bottom 1px solid gray()
+  &.borderless
+    border none
+  &.push
+    margin-top 20px
   &.padded
     padding 0 20px 20px 20px
     &:last-of-type
@@ -1363,7 +1384,7 @@ table.table
         border-bottom 1px solid gray()
         //margin 0
   &:last-of-type
-    margin 0 0 20px 0
+    margin-bottom 20px
 
 //Sidebar
 .sidebar
@@ -1512,6 +1533,8 @@ table.table
     clear both
     padding 10px 10px 10px 10px
     border-bottom 1px solid gray()
+    &.borderless
+      border none
     .progress
       margin-top 10px
   .subtitle
@@ -1529,6 +1552,37 @@ table.table
     .subtitle
       margin 0
       font-weight bold
+  .alert
+    background red()
+    padding 10px 10px 10px 68px
+    cursor pointer
+    transition background 300ms ease-in-out
+    &:hover
+      background green()
+      .subtitle
+        opacity 1
+    .iconWrapper
+      &>*
+        fill white()
+        stroke white()
+    .title
+      font-weight bold
+      color white()
+      border-bottom none
+      padding 0
+    .subtitle
+      padding 0
+      color white()
+      font-size 14px
+      opacity 0
+      transition opacity 300ms ease-in-out
+  textarea
+    padding 10px
+    width 100%
+    min-height 30px
+    border-radius borderRadius
+    background offWhite()
+    border 1px solid gray()
 
 //Tiles
 .tiles
@@ -1637,6 +1691,15 @@ table.table
       color midnight()
       &:hover
         color orange(0.75)
+  .notice
+    .inline-list
+      li
+        width auto
+        a
+          padding 0 10px 0 30px
+          &:hover
+            background transparent
+            color orange(0.75)
 
 //Layout - Notice
 .notice
@@ -1651,6 +1714,7 @@ table.table
     display none
   .title
     font-size 13px
+    font-weight normal
     line-height 20px
     padding 0 0 8px 0
     margin 0 0 5px 0
