@@ -44,6 +44,9 @@ green(opacity=1)
 orange(opacity=1)
   rgba(237,128,29,opacity)
 
+offOrange(opacity=1)
+  rgba(242,160,76,opacity)
+
 //Sizings
 minSize(min-width=initial,min-height=initial)
   if min-width is a 'unit'
@@ -395,6 +398,8 @@ borderRadius = 4px
     &.item
       padding 10px
       border-bottom 1px solid gray()
+      &.textRight
+        text-align right
       &.collapse
         padding 10px
         float left
@@ -575,7 +580,7 @@ borderRadius = 4px
   text-align center
   overflow(hidden,auto)
   padding 50px 10px 50px 10px
-  display none
+  //display none
   &:after
     content ""
     height 100%
@@ -800,6 +805,8 @@ table.table
     text-align center
   &.rounded
     border-radius borderRadius
+  &.bordered
+    border-top 1px solid gray()
   &.uniform
     table-layout fixed
     width 100%
@@ -1358,10 +1365,20 @@ table.table
   width 100%
   clear both
   border-bottom 1px solid gray()
+  &.fixed
+    position fixed
+    z-index 1
+    &.bottom
+      bottom 0
   &.borderless
     border none
   &.push
     margin-top 20px
+  &.separate
+    background white()
+    border 1px solid gray()
+    border-radius borderRadius
+    margin-bottom 20px
   &.padded
     padding 0 20px 20px 20px
     &:last-of-type
@@ -1514,6 +1531,8 @@ table.table
   //padding 10px
   //transition all 0.25s ease-in-out
   overflow(auto)
+  &.noOverflow
+    overflow(hidden)
   &[data-subheaderState="open"]
     top headerHeight + subHeaderHeight
   &[data-rightsidebarstate="open"]
@@ -1524,6 +1543,14 @@ table.table
     margin 0
     border-radius 0
     border none
+  &[data-backgroundState="transparent"]
+    background transparent
+    padding 20px
+  .scroller
+    overflow(auto)
+    position absolute
+    top 0
+    bottom 100px
   .iconWrapper
     top 10px
     margin-top 0
@@ -1552,30 +1579,6 @@ table.table
     .subtitle
       margin 0
       font-weight bold
-  .alert
-    background red()
-    padding 10px 10px 10px 68px
-    cursor pointer
-    transition background 300ms ease-in-out
-    &:hover
-      background green()
-      .subtitle
-        opacity 1
-    .iconWrapper
-      &>*
-        fill white()
-        stroke white()
-    .title
-      font-weight bold
-      color white()
-      border-bottom none
-      padding 0
-    .subtitle
-      padding 0
-      color white()
-      font-size 14px
-      opacity 0
-      transition opacity 300ms ease-in-out
   textarea
     padding 10px
     width 100%
@@ -1583,6 +1586,62 @@ table.table
     border-radius borderRadius
     background offWhite()
     border 1px solid gray()
+
+//Toolbar
+.toolbar
+  padding 25px 20px 20px 95px
+  cursor pointer
+  transition background 300ms ease-in-out
+  position absolute
+  bottom 0
+  right 0
+  left 0
+  height 100px
+  &[data-toolbarstate="alert"]
+    background red()
+    &:hover
+      background green()
+      .subtitle
+        opacity 1
+  &[data-toolbarstate="pending"]
+    background offOrange()
+    padding 15px 20px 15px 95px
+  &[data-toolbarstate="waiting"]
+    background offOrange()
+    padding 15px 20px 15px 95px
+  &[data-toolbarstate="complete"]
+    background green()
+    padding 15px 20px 15px 95px
+  .iconWrapper
+    top 25px
+    left 30px
+    &>*
+      fill white()
+      stroke white()
+  .title
+    font-weight bold
+    color white()
+    border-bottom none
+    padding 0
+  .subtitle
+    padding 0
+    color white()
+    font-size 14px
+    opacity 0
+    transition opacity 300ms ease-in-out
+  .list
+    .item.collapse.borderless
+      padding 0
+      a
+        border none
+        color white()
+        text-align right
+        line-height 25px
+  input
+    height 25px
+  label
+    color white()
+    line-height 25px
 
 //Tiles
 .tiles

@@ -3440,11 +3440,81 @@ template(name="market")
     {{/if}}
 
 template(name="farm-planner")
-  .content(data-subheaderState="{{getSession 'subHeaderState'}}",data-leftSidebarState="{{getSession 'leftSidebarState'}}",data-rightSidebarState="{{getSession 'rightSidebarState'}}",data-borderState="{{borderState}}")
+  .content(data-subheaderState="{{getSession 'subHeaderState'}}",data-leftSidebarState="{{getSession 'leftSidebarState'}}",data-rightSidebarState="{{getSession 'rightSidebarState'}}",data-borderState="{{borderState}}",data-backgroundState="{{backgroundState}}")
     {{#if currentParamIs 'section' 'crop-plans'}}
     {{>map}}
     a.stubImage(href="/farm-planner/crop-plans/370",style="background-image:url('/stubImages/fieldInfo.png');")
     {{>notice}}
+    {{#if equalsSession 'toolbarState' 'alert'}}
+    .toolbar(data-toolbarState="{{getSession 'toolbarState'}}",data-action="setToolbar",data-toolbar="pending")
+      .iconWrapper.size-48.left
+        {{icon 'alertSettings'}}
+      .title Your confirmation of work order details is required to proceed.
+      .subtitle Approved, let's get started!
+    {{/if}}
+
+    {{#if equalsSession 'toolbarState' 'pending'}}
+    .toolbar(data-toolbarState="{{getSession 'toolbarState'}}")
+      .iconWrapper.size-48.left
+        {{icon 'clock'}}
+      .title Pending Activation..
+      form.left
+        ul.list
+          li.item.collapse.borderless
+            input.left(type="checkbox",name="confirmationRequest",value="no",data-action="setToolbar",data-toolbar="waiting")
+            label.left Send confirmation request to the Grower
+          li.item.collapse.borderless
+            input.left(type="checkbox",name="growerConfirmation",value="no",data-action="setToolbar",data-toolbar="waiting")
+            label.left Grower Confirmation
+      .right
+        ul.list
+          li.item.collapse.borderless.textRight
+            a.inline(href="") Resend Confirmation Request
+          li.item.collapse.borderless.textRight
+            a.inline(href="") Email This Grower
+    {{/if}}
+
+    {{#if equalsSession 'toolbarState' 'waiting'}}
+    .toolbar(data-toolbarState="{{getSession 'toolbarState'}}")
+      .iconWrapper.size-48.left
+        {{icon 'clock'}}
+      .title Waiting Confirmation..
+      form.left
+        ul.list
+          li.item.collapse.borderless
+            input.left(type="checkbox",name="confirmationRequest",value="yes",checked="checked",data-action="setToolbar",data-toolbar="pending")
+            label.left Send confirmation request to the Grower (Jan 25 2014)
+          li.item.collapse.borderless
+            input.left(type="checkbox",name="growerConfirmation",value="no",data-action="setToolbar",data-toolbar="complete")
+            label.left Grower Confirmation
+      .right
+        ul.list
+          li.item.collapse.borderless.textRight
+            a.inline(href="") Resend Confirmation Request
+          li.item.collapse.borderless.textRight
+            a.inline(href="") Email This Grower
+    {{/if}}
+
+    {{#if equalsSession 'toolbarState' 'complete'}}
+    .toolbar(data-toolbarState="{{getSession 'toolbarState'}}")
+      .iconWrapper.size-48.left
+        {{icon 'approve'}}
+      .title Complete
+      form.left
+        ul.list
+          li.item.collapse.borderless
+            input.left(type="checkbox",name="confirmationRequest",value="yes",checked="checked",data-action="setToolbar",data-toolbar="waiting")
+            label.left Send confirmation request to the Grower (Jan 25 2014)
+          li.item.collapse.borderless
+            input.left(type="checkbox",name="growerConfirmation",value="yes",checked="checked",data-action="setToolbar",data-toolbar="waiting")
+            label.left Grower Confirmation (Jan 25 2014)
+      .right
+        ul.list
+          li.item.collapse.borderless.textRight
+            a.inline(href="") Resend Confirmation Request
+          li.item.collapse.borderless.textRight
+            a.inline(href="") Email This Grower
+    {{/if}}
     {{/if}}
 
     {{#if currentParamIs 'section' 'equipment'}}
@@ -3453,14 +3523,170 @@ template(name="farm-planner")
 
     {{#if currentParamIs 'section' 'revenue-and-expenses'}}
       {{#if currentParamIs 'assetsInfo' undefined}}
-      .title Fixed Expenses for 2013
-      .section
-        form
+      .scroller
+        .title Fixed Expenses for 2013
+        .section.separate
+          form
+            table.table.uniform
+              thead
+                tr
+                  td
+                    .cell Item
+                  td
+                    .cell Total
+                  td
+                    .cell $/Acre
+              tbody
+                tr
+                  td
+                    .cell
+                      input(type="text",placeholder="Expense Item",value="Machinery Repairs")
+                  td
+                    .cell
+                      input(type="text",placeholder="$0.00",value="$10.00")
+                  td
+                    .cell
+                      input(type="text",placeholder="$0.00",value="$5.00")
+                      .iconWrapper.right.size-16
+                        {{icon 'remove'}}
+                tr
+                  td
+                    .cell
+                      input(type="text",placeholder="Expense Item",value="Machinery Rental")
+                  td
+                    .cell
+                      input(type="text",placeholder="$0.00",value="$10.00")
+                  td
+                    .cell
+                      input(type="text",placeholder="$0.00",value="$5.00")
+                      .iconWrapper.right.size-16
+                        {{icon 'remove'}}
+                tr
+                  td
+                    .cell
+                      input(type="text",placeholder="Expense Item",value="Machinery Insurance")
+                  td
+                    .cell
+                      input(type="text",placeholder="$0.00",value="$10.00")
+                  td
+                    .cell
+                      input(type="text",placeholder="$0.00",value="$5.00")
+                      .iconWrapper.right.size-16
+                        {{icon 'remove'}}
+                tr
+                  td
+                    .cell
+                      input(type="text",placeholder="Expense Item",value="Machinery Replacement")
+                  td
+                    .cell
+                      input(type="text",placeholder="$0.00",value="$10.00")
+                  td
+                    .cell
+                      input(type="text",placeholder="$0.00",value="$5.00")
+                      .iconWrapper.right.size-16
+                        {{icon 'remove'}}
+                tr
+                  td
+                    .cell
+                      input(type="text",placeholder="Expense Item",value="Farm Insurance")
+                  td
+                    .cell
+                      input(type="text",placeholder="$0.00",value="$10.00")
+                  td
+                    .cell
+                      input(type="text",placeholder="$0.00",value="$5.00")
+                      .iconWrapper.right.size-16
+                        {{icon 'remove'}}
+                tr
+                  td
+                    .cell
+                      input(type="text",placeholder="Expense Item",value="Building Repairs")
+                  td
+                    .cell
+                      input(type="text",placeholder="$0.00",value="$10.00")
+                  td
+                    .cell
+                      input(type="text",placeholder="$0.00",value="$5.00")
+                      .iconWrapper.right.size-16
+                        {{icon 'remove'}}
+                tr
+                  td
+                    .cell
+                      input(type="text",placeholder="Expense Item",value="Freight")
+                  td
+                    .cell
+                      input(type="text",placeholder="$0.00",value="$10.00")
+                  td
+                    .cell
+                      input(type="text",placeholder="$0.00",value="$5.00")
+                      .iconWrapper.right.size-16
+                        {{icon 'remove'}}
+                tr
+                  td
+                    .cell
+                      input(type="text",placeholder="Expense Item")
+                  td
+                    .cell
+                      input(type="text",placeholder="Expense Total")
+                  td
+                    .cell
+                      input(type="text",placeholder="Expense Per Acre")
+        //-a.button.right(href="/{{currentContext}}/{{currentParam 'section'}}/1221") Next
+        {{else}}
+        .section.separate
+          .title Revenue for Canola 2013
+          form
+            ul.list
+              li.item.collapse.borderless
+                input.left(type="radio",name="market",value="basis")
+                label.left Use Daily Market Price (Trading on CBOT)
+                label.left Basis:
+                select.left
+                  option(value="Select Basis") Select Basis
+              li.item.collapse.borderless(style="margin-bottom:20px")
+                input.left(type="radio",name="market",value="price")
+                label.left Use a Fixed Price: $
+                input.left(type="text",placeholder="0")
+                select.left
+                  option(value="/MT") /MT
+          table.table.uniform.bordered
+            thead
+              tr
+                td
+                  .cell Price (/MT)
+                td
+                  .cell Acres
+                td
+                  .cell Yield Avg (bu/ac)
+                td
+                  .cell Total Yield (MT)
+                td
+                  .cell Total Revenue
+                td
+                  .cell $/Acre
+                    //-select
+                      option(value="Per Acre") Per Acre
+            tbody
+              tr
+                td
+                  .cell $560.45
+                td
+                  .cell 800
+                td
+                  .cell 40
+                td
+                  .cell 725.76
+                td
+                  .cell $402,286.99
+                td
+                  .cell $502.86
+        .section.separate
+          .title Variable Expenses for Canola 2013
           table.table.uniform
             thead
               tr
                 td
-                  .cell Item
+                  .cell Expense Item
                 td
                   .cell Total
                 td
@@ -3469,7 +3695,7 @@ template(name="farm-planner")
               tr
                 td
                   .cell
-                    input(type="text",placeholder="Expense Item",value="Machinery Repairs")
+                    input(type="text",placeholder="Expense Item",value="Fertilizer")
                 td
                   .cell
                     input(type="text",placeholder="$0.00",value="$10.00")
@@ -3481,7 +3707,7 @@ template(name="farm-planner")
               tr
                 td
                   .cell
-                    input(type="text",placeholder="Expense Item",value="Machinery Rental")
+                    input(type="text",placeholder="Expense Item",value="General")
                 td
                   .cell
                     input(type="text",placeholder="$0.00",value="$10.00")
@@ -3491,21 +3717,13 @@ template(name="farm-planner")
                     .iconWrapper.right.size-16
                       {{icon 'remove'}}
               tr
-                td
+                td.collapse
                   .cell
-                    input(type="text",placeholder="Expense Item",value="Machinery Insurance")
-                td
-                  .cell
-                    input(type="text",placeholder="$0.00",value="$10.00")
-                td
-                  .cell
-                    input(type="text",placeholder="$0.00",value="$5.00")
-                    .iconWrapper.right.size-16
-                      {{icon 'remove'}}
-              tr
-                td
-                  .cell
-                    input(type="text",placeholder="Expense Item",value="Machinery Replacement")
+                    input.left(type="text",placeholder="Expense Item",value="Nitrogen 82-0-0")
+                    input.right(type="text",placeholder="Amount",value="100 MT")
+                    //-select.right
+                      option(value="MT") MT
+                      option(value="L") L
                 td
                   .cell
                     input(type="text",placeholder="$0.00",value="$10.00")
@@ -3515,21 +3733,13 @@ template(name="farm-planner")
                     .iconWrapper.right.size-16
                       {{icon 'remove'}}
               tr
-                td
+                td.collapse
                   .cell
-                    input(type="text",placeholder="Expense Item",value="Farm Insurance")
-                td
-                  .cell
-                    input(type="text",placeholder="$0.00",value="$10.00")
-                td
-                  .cell
-                    input(type="text",placeholder="$0.00",value="$5.00")
-                    .iconWrapper.right.size-16
-                      {{icon 'remove'}}
-              tr
-                td
-                  .cell
-                    input(type="text",placeholder="Expense Item",value="Building Repairs")
+                    input.left(type="text",placeholder="Expense Item",value="Nitrogen 46-0-0")
+                    input.right(type="text",placeholder="Amount",value="100 MT")
+                    //-select.right
+                      option(value="MT") MT
+                      option(value="L") L
                 td
                   .cell
                     input(type="text",placeholder="$0.00",value="$10.00")
@@ -3539,9 +3749,149 @@ template(name="farm-planner")
                     .iconWrapper.right.size-16
                       {{icon 'remove'}}
               tr
+                td.collapse
+                  .cell
+                    input.left(type="text",placeholder="Expense Item",value="Nitrogen 28-0-0")
+                    input.right(type="text",placeholder="Amount",value="100 MT")
+                    //-select.right
+                      option(value="MT") MT
+                      option(value="L") L
                 td
                   .cell
-                    input(type="text",placeholder="Expense Item",value="Freight")
+                    input(type="text",placeholder="$0.00",value="$10.00")
+                td
+                  .cell
+                    input(type="text",placeholder="$0.00",value="$5.00")
+                    .iconWrapper.right.size-16
+                      {{icon 'remove'}}
+              tr
+                td.collapse
+                  .cell
+                    input.left(type="text",placeholder="Expense Item",value="Phosphate 11-52-0-0")
+                    input.right(type="text",placeholder="Amount",value="100 MT")
+                    //-select.right
+                      option(value="MT") MT
+                      option(value="L") L
+                td
+                  .cell
+                    input(type="text",placeholder="$0.00",value="$10.00")
+                td
+                  .cell
+                    input(type="text",placeholder="$0.00",value="$5.00")
+                    .iconWrapper.right.size-16
+                      {{icon 'remove'}}
+              tr
+                td.collapse
+                  .cell
+                    input.left(type="text",placeholder="Expense Item",value="Potash 0-0-60")
+                    input.right(type="text",placeholder="Amount",value="100 MT")
+                    //-select.right
+                      option(value="MT") MT
+                      option(value="L") L
+                td
+                  .cell
+                    input(type="text",placeholder="$0.00",value="$10.00")
+                td
+                  .cell
+                    input(type="text",placeholder="$0.00",value="$5.00")
+                    .iconWrapper.right.size-16
+                      {{icon 'remove'}}
+              tr
+                td.collapse
+                  .cell
+                    input.left(type="text",placeholder="Expense Item",value="Sulphur 21-0-0-24")
+                    input.right(type="text",placeholder="Amount",value="100 MT")
+                    //-select.right
+                      option(value="MT") MT
+                      option(value="L") L
+                td
+                  .cell
+                    input(type="text",placeholder="$0.00",value="$10.00")
+                td
+                  .cell
+                    input(type="text",placeholder="$0.00",value="$5.00")
+                    .iconWrapper.right.size-16
+                      {{icon 'remove'}}
+              tr
+                td.collapse
+                  .cell
+                    input.left(type="text",placeholder="Expense Item")
+                    input.right(type="text",placeholder="Amount")
+                    //-select.right
+                      option(value="MT") MT
+                      option(value="L") L
+                td
+                  .cell
+                    input(type="text",placeholder="$0.00")
+                td
+                  .cell
+                    input(type="text",placeholder="$0.00")
+                    .iconWrapper.right.size-16
+                      {{icon 'remove'}}
+              tr
+                td
+                  .cell
+                    input(type="text",placeholder="Expense Item",value="Seed")
+                td
+                  .cell
+                    input(type="text",placeholder="$0.00",value="$10.00")
+                td
+                  .cell
+                    input(type="text",placeholder="$0.00",value="$5.00")
+                    .iconWrapper.right.size-16
+                      {{icon 'remove'}}
+              tr
+                td.collapse
+                  .cell
+                    input.left(type="text",placeholder="Expense Item",value="General")
+                    input.right(type="text",placeholder="Amount",value="100 MT")
+                    //-select.right
+                      option(value="MT") MT
+                      option(value="L") L
+                td
+                  .cell
+                    input(type="text",placeholder="$0.00")
+                td
+                  .cell
+                    input(type="text",placeholder="$0.00")
+                    .iconWrapper.right.size-16
+                      {{icon 'remove'}}
+              tr
+                td
+                  .cell
+                    input(type="text",placeholder="Expense Item",value="Chemical")
+                td
+                  .cell
+                    input(type="text",placeholder="$0.00",value="$10.00")
+                td
+                  .cell
+                    input(type="text",placeholder="$0.00",value="$5.00")
+                    .iconWrapper.right.size-16
+                      {{icon 'remove'}}
+              tr
+                td.collapse
+                  .cell
+                    input.left(type="text",placeholder="Expense Item",value="General")
+                    input.right(type="text",placeholder="Amount",value="100 MT")
+                    //-select.right
+                      option(value="MT") MT
+                      option(value="L") L
+                td
+                  .cell
+                    input(type="text",placeholder="$0.00")
+                td
+                  .cell
+                    input(type="text",placeholder="$0.00")
+                    .iconWrapper.right.size-16
+                      {{icon 'remove'}}
+              tr
+                td.collapse
+                  .cell
+                    input.left(type="text",placeholder="Expense Item",value="Fuel")
+                    input.right(type="text",placeholder="Amount",value="100 MT")
+                    //-select.right
+                      option(value="MT") MT
+                      option(value="L") L
                 td
                   .cell
                     input(type="text",placeholder="$0.00",value="$10.00")
@@ -3560,324 +3910,41 @@ template(name="farm-planner")
                 td
                   .cell
                     input(type="text",placeholder="Expense Per Acre")
-      //-a.button.right(href="/{{currentContext}}/{{currentParam 'section'}}/1221") Next
-      {{else}}
-      .section
-        .title Revenue for Canola 2013
-        form
-          ul.inline-list
-            li
-              label.inline Market Price
-              select.inline
-                option(value="Select Market") Select Market
-            li
-              label.inline Premium Discount
-              input.inline(type="text",placeholder="0")
-              select.inline
-                option(value="/MT") /MT
-          ul.inline-list
-            li
-              label.inline Fixed Price
-              input.inline(type="text",placeholder="572")
-              select.inline
-                option(value="/MT") /MT
-      .section
-        table.table.uniform
-          thead
-            tr
-              td
-                .cell Price (/MT)
-              td
-                .cell Acres
-              td
-                .cell Yield Avg (bu/ac)
-              td
-                .cell Total Yield (MT)
-              td
-                .cell Total Revenue
-              td
-                .cell $/Acre
-                  //-select
-                    option(value="Per Acre") Per Acre
-          tbody
-            tr
-              td
-                .cell $560.45
-              td
-                .cell 800
-              td
-                .cell 40
-              td
-                .cell 725.76
-              td
-                .cell $402,286.99
-              td
-                .cell $502.86
-      .section
-        .title Variable Expenses for Canola 2013
-        table.table.uniform
-          thead
-            tr
-              td
-                .cell Expense Item
-              td
-                .cell Total
-              td
-                .cell $/Acre
-          tbody
-            tr
-              td
-                .cell
-                  input(type="text",placeholder="Expense Item",value="Fertilizer")
-              td
-                .cell
-                  input(type="text",placeholder="$0.00",value="$10.00")
-              td
-                .cell
-                  input(type="text",placeholder="$0.00",value="$5.00")
-                  .iconWrapper.right.size-16
-                    {{icon 'remove'}}
-            tr
-              td
-                .cell
-                  input(type="text",placeholder="Expense Item",value="General")
-              td
-                .cell
-                  input(type="text",placeholder="$0.00",value="$10.00")
-              td
-                .cell
-                  input(type="text",placeholder="$0.00",value="$5.00")
-                  .iconWrapper.right.size-16
-                    {{icon 'remove'}}
-            tr
-              td.collapse
-                .cell
-                  input.left(type="text",placeholder="Expense Item",value="Nitrogen 82-0-0")
-                  input.right(type="text",placeholder="Amount",value="100 MT")
-                  //-select.right
-                    option(value="MT") MT
-                    option(value="L") L
-              td
-                .cell
-                  input(type="text",placeholder="$0.00",value="$10.00")
-              td
-                .cell
-                  input(type="text",placeholder="$0.00",value="$5.00")
-                  .iconWrapper.right.size-16
-                    {{icon 'remove'}}
-            tr
-              td.collapse
-                .cell
-                  input.left(type="text",placeholder="Expense Item",value="Nitrogen 46-0-0")
-                  input.right(type="text",placeholder="Amount",value="100 MT")
-                  //-select.right
-                    option(value="MT") MT
-                    option(value="L") L
-              td
-                .cell
-                  input(type="text",placeholder="$0.00",value="$10.00")
-              td
-                .cell
-                  input(type="text",placeholder="$0.00",value="$5.00")
-                  .iconWrapper.right.size-16
-                    {{icon 'remove'}}
-            tr
-              td.collapse
-                .cell
-                  input.left(type="text",placeholder="Expense Item",value="Nitrogen 28-0-0")
-                  input.right(type="text",placeholder="Amount",value="100 MT")
-                  //-select.right
-                    option(value="MT") MT
-                    option(value="L") L
-              td
-                .cell
-                  input(type="text",placeholder="$0.00",value="$10.00")
-              td
-                .cell
-                  input(type="text",placeholder="$0.00",value="$5.00")
-                  .iconWrapper.right.size-16
-                    {{icon 'remove'}}
-            tr
-              td.collapse
-                .cell
-                  input.left(type="text",placeholder="Expense Item",value="Phosphate 11-52-0-0")
-                  input.right(type="text",placeholder="Amount",value="100 MT")
-                  //-select.right
-                    option(value="MT") MT
-                    option(value="L") L
-              td
-                .cell
-                  input(type="text",placeholder="$0.00",value="$10.00")
-              td
-                .cell
-                  input(type="text",placeholder="$0.00",value="$5.00")
-                  .iconWrapper.right.size-16
-                    {{icon 'remove'}}
-            tr
-              td.collapse
-                .cell
-                  input.left(type="text",placeholder="Expense Item",value="Potash 0-0-60")
-                  input.right(type="text",placeholder="Amount",value="100 MT")
-                  //-select.right
-                    option(value="MT") MT
-                    option(value="L") L
-              td
-                .cell
-                  input(type="text",placeholder="$0.00",value="$10.00")
-              td
-                .cell
-                  input(type="text",placeholder="$0.00",value="$5.00")
-                  .iconWrapper.right.size-16
-                    {{icon 'remove'}}
-            tr
-              td.collapse
-                .cell
-                  input.left(type="text",placeholder="Expense Item",value="Sulphur 21-0-0-24")
-                  input.right(type="text",placeholder="Amount",value="100 MT")
-                  //-select.right
-                    option(value="MT") MT
-                    option(value="L") L
-              td
-                .cell
-                  input(type="text",placeholder="$0.00",value="$10.00")
-              td
-                .cell
-                  input(type="text",placeholder="$0.00",value="$5.00")
-                  .iconWrapper.right.size-16
-                    {{icon 'remove'}}
-            tr
-              td.collapse
-                .cell
-                  input.left(type="text",placeholder="Expense Item")
-                  input.right(type="text",placeholder="Amount")
-                  //-select.right
-                    option(value="MT") MT
-                    option(value="L") L
-              td
-                .cell
-                  input(type="text",placeholder="$0.00")
-              td
-                .cell
-                  input(type="text",placeholder="$0.00")
-                  .iconWrapper.right.size-16
-                    {{icon 'remove'}}
-            tr
-              td
-                .cell
-                  input(type="text",placeholder="Expense Item",value="Seed")
-              td
-                .cell
-                  input(type="text",placeholder="$0.00",value="$10.00")
-              td
-                .cell
-                  input(type="text",placeholder="$0.00",value="$5.00")
-                  .iconWrapper.right.size-16
-                    {{icon 'remove'}}
-            tr
-              td.collapse
-                .cell
-                  input.left(type="text",placeholder="Expense Item",value="General")
-                  input.right(type="text",placeholder="Amount",value="100 MT")
-                  //-select.right
-                    option(value="MT") MT
-                    option(value="L") L
-              td
-                .cell
-                  input(type="text",placeholder="$0.00")
-              td
-                .cell
-                  input(type="text",placeholder="$0.00")
-                  .iconWrapper.right.size-16
-                    {{icon 'remove'}}
-            tr
-              td
-                .cell
-                  input(type="text",placeholder="Expense Item",value="Chemical")
-              td
-                .cell
-                  input(type="text",placeholder="$0.00",value="$10.00")
-              td
-                .cell
-                  input(type="text",placeholder="$0.00",value="$5.00")
-                  .iconWrapper.right.size-16
-                    {{icon 'remove'}}
-            tr
-              td.collapse
-                .cell
-                  input.left(type="text",placeholder="Expense Item",value="General")
-                  input.right(type="text",placeholder="Amount",value="100 MT")
-                  //-select.right
-                    option(value="MT") MT
-                    option(value="L") L
-              td
-                .cell
-                  input(type="text",placeholder="$0.00")
-              td
-                .cell
-                  input(type="text",placeholder="$0.00")
-                  .iconWrapper.right.size-16
-                    {{icon 'remove'}}
-            tr
-              td.collapse
-                .cell
-                  input.left(type="text",placeholder="Expense Item",value="Fuel")
-                  input.right(type="text",placeholder="Amount",value="100 MT")
-                  //-select.right
-                    option(value="MT") MT
-                    option(value="L") L
-              td
-                .cell
-                  input(type="text",placeholder="$0.00",value="$10.00")
-              td
-                .cell
-                  input(type="text",placeholder="$0.00",value="$5.00")
-                  .iconWrapper.right.size-16
-                    {{icon 'remove'}}
-            tr
-              td
-                .cell
-                  input(type="text",placeholder="Expense Item")
-              td
-                .cell
-                  input(type="text",placeholder="Expense Total")
-              td
-                .cell
-                  input(type="text",placeholder="Expense Per Acre")
-          tfoot
-            tr
-              td
-                .cell Total Variable Expenses for Canola 2013
-              td
-                .cell $100
-              td
-                .cell $50
-      .section
-        .title Fixed Expenses for Canola 2013
-        table.table.uniform
-          thead
-            tr
-              td
-                .cell Expense Item
-              td
-                .cell Total
-              td
-                .cell $/Acre
-          tbody
-            tr
-              td
-                .cell Fixed Expenses (Assigned to Canola based on acres)
-              td
-                .cell $131,870.86
-              td
-                .cell $117.34
-          tfoot
-            tr
-              td
-                .cell Total Margin
-              td
-                .cell $152,287.02
-              td
-                .cell $190.36
+            tfoot
+              tr
+                td
+                  .cell Total Variable Expenses for Canola 2013
+                td
+                  .cell $100
+                td
+                  .cell $50
+        .section.separate
+          .title Fixed Expenses for Canola 2013
+          table.table.uniform
+            thead
+              tr
+                td
+                  .cell Expense Item
+                td
+                  .cell Total
+                td
+                  .cell $/Acre
+            tbody
+              tr
+                td
+                  .cell Fixed Expenses (Assigned to Canola based on acres)
+                td
+                  .cell $131,870.86
+                td
+                  .cell $117.34
+            tfoot
+              tr
+                td
+                  .cell Total Margin
+                td
+                  .cell $152,287.02
+                td
+                  .cell $190.36
 
 
       {{/if}}
@@ -4164,366 +4231,430 @@ template(name="farm-planner")
     {{/if}}
 
     {{#if currentParamIs 'section' 'work-orders'}}
-    .section
-      .title Optimize RX Work Order - 2014
-      .subtitle(style="margin:10px 0 0 0;") Please review your work order and update any sections as required. Once all the info is complete and accurate, check the confirmation at the end and we'll get started.
-      form
-        ul.list
-          li.item.collapse
-            label.left Estimated Start Date
-            input.left.datepicker(type="text",placeholder="DD/MM/YYYY")
-    .section
-      .title Fields
+    .scroller
+      .section
+        .title Optimize RX Work Order - 2014
+        .subtitle(style="margin:10px 0 0 0;") Please review your work order and update any sections as required. Once all the info is complete and accurate, check the confirmation at the end and we'll get started.
         form
           ul.list
             li.item.collapse
-              select.select
-                option(value="Add an Existing Field") Add an Existing Field
-        .iconWrapper.size-24.right(style="margin-top:-2px;")
-          {{icon 'new'}}
-      form
-        table.table.uniform
-          thead
-            tr
-              td
-                .cell Land Location
-              td
-                .cell Crop Type
-              td
-                .cell Acres
-              td
-                .cell Yield Goal
-              td
-                .cell RX-F
-              td
-                .cell RX-S
-              td
-                .cell Seed Rate
-          tbody
-            tr
-              td
-                .cell.double
-                  | NW 25 5 2 W4
-                  br
-                  | Home Quarter
-              td
-                .cell
-                  select.select
-                    option(value="Canola") Canola
-                    option(value="HR Spring Wheat") HR Spring Wheat
-                    option(value="Barley") Barley
-              td
-                .cell
-                  input(placeholder="0",value="0")
-              td
-                .cell
-                  input(style="padding-right:75px;",placeholder="RX-F",value="123456")
-                  select.select.subtext(style="width:60px;")
-                    option(value="bu/ac") bu/ac
-              td
-                .cell
-                  input(type="checkbox",name="rxF",value="no")
-              td
-                .cell
-                  input(type="checkbox",name="rxS",value="no")
-              td
-                .cell
-                  input.left(style="padding-right:85px;",placeholder="0")
-                  .subtext(style="right:45px;") lbs/ac
-                  .iconWrapper.right.size-16
-                    {{icon 'remove'}}
-            tr
-              td
-                .cell.double
-                  | SC NW 6 & SW 7 11 W4
-                  br
-                  | Northhill
-              td
-                .cell
-                  select.select
-                    option(value="Canola") Canola
-                    option(value="HR Spring Wheat") HR Spring Wheat
-                    option(value="Barley") Barley
-              td
-                .cell
-                  input(placeholder="0",value="0")
-              td
-                .cell
-                  input(style="padding-right:75px;",placeholder="RX-F",value="123456")
-                  select.select.subtext(style="width:60px;")
-                    option(value="bu/ac") bu/ac
-              td
-                .cell
-                  input(type="checkbox",name="rxF",value="no")
-              td
-                .cell
-                  input(type="checkbox",name="rxS",value="no")
-              td
-                .cell
-                  input.left(style="padding-right:85px;",placeholder="0")
-                  .subtext(style="right:45px;") lbs/ac
-                  .iconWrapper.right.size-16
-                    {{icon 'remove'}}
-            tr
-              td
-                .cell.double
-                  | NE 5 5 5 W4
-                  br
-                  | Eagle Field
-              td
-                .cell
-                  select.select
-                    option(value="Canola") Canola
-                    option(value="HR Spring Wheat") HR Spring Wheat
-                    option(value="Barley") Barley
-              td
-                .cell
-                  input(placeholder="0",value="0")
-              td
-                .cell
-                  input(style="padding-right:75px;",placeholder="RX-F",value="123456")
-                  select.select.subtext(style="width:60px;")
-                    option(value="bu/ac") bu/ac
-              td
-                .cell
-                  input(type="checkbox",name="rxF",value="no")
-              td
-                .cell
-                  input(type="checkbox",name="rxS",value="no")
-              td
-                .cell
-                  input.left(style="padding-right:85px;",placeholder="0")
-                  .subtext(style="right:45px;") lbs/ac
-                  .iconWrapper.right.size-16
-                    {{icon 'remove'}}
-          tfoot
-            tr
-              td
-                .cell
-                  | Total Acres: 725
-              td
-                .cell
-              td
-                .cell
-              td
-                .cell
-              td
-                .cell
-              td
-                .cell
-              td
-                .cell
-    .section
-      form
-        ul.list
-          li.item.collapse
-            label.left For zones with zero fertilizer required, do you want to put zero or put a maintenance level of fertilizer?
-            input.left(type="radio",name="maintenanceLevel",value="Zero")
-            label.left Zero
-            input.left(type="radio",name="maintenanceLevel",value="Maintenance")
-            label.left Maintenance
-    .section
-      .title Application Units
+              label.left Estimated Start Date
+              input.left.datepicker(type="text",placeholder="DD/MM/YYYY")
+      .section
+        .title Fields
+          form
+            ul.list
+              li.item.collapse
+                select.select
+                  option(value="Add an Existing Field") Add an Existing Field
+          .iconWrapper.size-24.right(style="margin-top:-2px;")
+            {{icon 'new'}}
+        form
+          table.table.uniform
+            thead
+              tr
+                td
+                  .cell Land Location
+                td
+                  .cell Crop Type
+                td
+                  .cell Acres
+                td
+                  .cell Yield Goal
+                td
+                  .cell RX-F
+                td
+                  .cell RX-S
+                td
+                  .cell Seed Rate
+            tbody
+              tr
+                td
+                  .cell.double
+                    | NW 25 5 2 W4
+                    br
+                    | Home Quarter
+                td
+                  .cell
+                    select.select
+                      option(value="Canola") Canola
+                      option(value="HR Spring Wheat") HR Spring Wheat
+                      option(value="Barley") Barley
+                td
+                  .cell
+                    input(placeholder="0",value="0")
+                td
+                  .cell
+                    input(style="padding-right:75px;",placeholder="RX-F",value="123456")
+                    select.select.subtext(style="width:60px;")
+                      option(value="bu/ac") bu/ac
+                td
+                  .cell
+                    input(type="checkbox",name="rxF",value="no")
+                td
+                  .cell
+                    input(type="checkbox",name="rxS",value="no")
+                td
+                  .cell
+                    input.left(style="padding-right:85px;",placeholder="0")
+                    .subtext(style="right:45px;") lbs/ac
+                    .iconWrapper.right.size-16
+                      {{icon 'remove'}}
+              tr
+                td
+                  .cell.double
+                    | SC NW 6 & SW 7 11 W4
+                    br
+                    | Northhill
+                td
+                  .cell
+                    select.select
+                      option(value="Canola") Canola
+                      option(value="HR Spring Wheat") HR Spring Wheat
+                      option(value="Barley") Barley
+                td
+                  .cell
+                    input(placeholder="0",value="0")
+                td
+                  .cell
+                    input(style="padding-right:75px;",placeholder="RX-F",value="123456")
+                    select.select.subtext(style="width:60px;")
+                      option(value="bu/ac") bu/ac
+                td
+                  .cell
+                    input(type="checkbox",name="rxF",value="no")
+                td
+                  .cell
+                    input(type="checkbox",name="rxS",value="no")
+                td
+                  .cell
+                    input.left(style="padding-right:85px;",placeholder="0")
+                    .subtext(style="right:45px;") lbs/ac
+                    .iconWrapper.right.size-16
+                      {{icon 'remove'}}
+              tr
+                td
+                  .cell.double
+                    | NE 5 5 5 W4
+                    br
+                    | Eagle Field
+                td
+                  .cell
+                    select.select
+                      option(value="Canola") Canola
+                      option(value="HR Spring Wheat") HR Spring Wheat
+                      option(value="Barley") Barley
+                td
+                  .cell
+                    input(placeholder="0",value="0")
+                td
+                  .cell
+                    input(style="padding-right:75px;",placeholder="RX-F",value="123456")
+                    select.select.subtext(style="width:60px;")
+                      option(value="bu/ac") bu/ac
+                td
+                  .cell
+                    input(type="checkbox",name="rxF",value="no")
+                td
+                  .cell
+                    input(type="checkbox",name="rxS",value="no")
+                td
+                  .cell
+                    input.left(style="padding-right:85px;",placeholder="0")
+                    .subtext(style="right:45px;") lbs/ac
+                    .iconWrapper.right.size-16
+                      {{icon 'remove'}}
+            tfoot
+              tr
+                td
+                  .cell
+                    | Total Acres: 725
+                td
+                  .cell
+                td
+                  .cell
+                td
+                  .cell
+                td
+                  .cell
+                td
+                  .cell
+                td
+                  .cell
+      .section
         form
           ul.list
             li.item.collapse
+              label.left For zones with zero fertilizer required, do you want to put zero or put a maintenance level of fertilizer?
+              input.left(type="radio",name="maintenanceLevel",value="Zero")
+              label.left Zero
+              input.left(type="radio",name="maintenanceLevel",value="Maintenance")
+              label.left Maintenance
+      .section
+        .title Application Units
+          form
+            ul.list
+              li.item.collapse
+                select.select
+                  option(value="Add an Existing Field") Add an Existing Application Unit
+          .iconWrapper.size-24.right(style="margin-top:-2px;")
+            {{icon 'new'}}
+        form
+          table.table.uniform
+            thead
+              tr
+                td
+                  .cell Unit Name / #
+                td
+                  .cell Make
+                td
+                  .cell Model
+                td
+                  .cell Drill Width
+                td
+                  .cell Fertilizer Type
+            tbody
+              tr
+                td
+                  .cell
+                    input(type="text",placeholder="Unit Name")
+                td
+                  .cell
+                    select.select
+                      option(value="John Deere") John Deere
+                td
+                  .cell
+                    select.select
+                      option(value="1910") 1910
+                td
+                  .cell
+                    input(type="text",placeholder="Drill Width")
+                td
+                  .cell
+                    select.select
+                      option(value="Dry") Dry
+                    .iconWrapper.size.right
+                      {{icon 'remove'}}
+      .section
+        form
+          ul.list.left(style="width:300px;")
+            li.item.collapse.borderless
+              label(style="width:110px;") Dry Rate Maximum
+              input(type="text",placeholder="Dry Rate Maximum") lbs/acre
+            li.item.collapse.borderless
+              label(style="width:110px;") Opener Width
               select.select
-                option(value="Add an Existing Field") Add an Existing Application Unit
-        .iconWrapper.size-24.right(style="margin-top:-2px;")
+                option(value="3") 3
+              label.postfix inches
+            li.item.collapse.borderless
+              label(style="width:110px;") Shank Spacing
+              select.select
+                option(value="3") 3
+              label.postfix inches
+          ul.list.left(style="width:350px;")
+            li.item.collapse.borderless
+              label Tank 1
+              input(type="text",placeholder="Bushels",value="200 Bushels")
+              input(type="text",placeholder="Select Product")
+            li.item.collapse.borderless
+              label Tank 2
+              input(type="text",placeholder="Bushels",value="150 Bushels")
+              input(type="text",placeholder="Select Product")
+            li.item.collapse.borderless
+              label Tank 3
+              input(type="text",placeholder="Bushels",value="200 Bushels")
+              input(type="text",placeholder="Select Product")
+            li.item.collapse.borderless
+              label.left Shoot Type
+              input.left(type="radio",name="shootType",value="Single-Shoot")
+              label.left Single-Shoot
+              input.left(type="radio",name="shootType",value="Double-Shoot")
+              label.left Double-Shoot
+      .section
+        form
+          ul.list.left(style="width:300px;")
+            li.item.collapse.borderless
+              label(style="width:120px;") GPS Receiver Make
+              select.select
+                option(value="John Deere") John Deere
+            li.item.collapse.borderless
+              label(style="width:120px;") Controller Make
+              select.select
+                option(value="John Deere") John Deere
+            li.item.collapse.borderless
+              label Connected to Controller?
+              input(type="checkbox",name="controllerConnected",value="no")
+          ul.list.left(style="width:350px;")
+            li.item.collapse.borderless
+              label Model
+              select.select
+                option(value="1910") 1910
+            li.item.collapse.borderless
+              label Model
+              select.select
+                option(value="1910") 1910
+      .section(style="padding-bottom:10px;")
+        ul.list
+          li.item.collapse.borderless
+            label RX Equipment Test?
+            input(type="checkbox",name="rxEquipmentTest",value="no")
+      .section
+        .title Test Site Location
+        form
+          ul.list
+            li.item.collapse
+              input(style="width:100%;",type="text",placeholder="Example: NW 32 16 16 W3.. Be as specific as possible!")
+            li.item.collapse
+              .tile(style="height:640px;background-image:url('/stubImages/overview.png');")
+                .notice
+                  .title Draw field map with test location indicated
+                  ul.inline-list
+                    li
+                      a
+                        .iconWrapper.size-16.left
+                          {{icon 'remove'}}
+                        | clear
+                    li
+                      a
+                        .iconWrapper.size-16.left
+                          {{icon 'approve'}}
+                        | save
+      .section(style="padding:10px 0 10px 0;")
+        ul.list
+          li.item.collapse.borderless
+            label Return on Investment Trials
+            input(type="checkbox",name="returnOnInvestmentTrials",value="no")
+        .iconWrapper.size-24.right(style="margin-top:-12px;top:50%;")
           {{icon 'new'}}
-      form
-        table.table.uniform
-          thead
-            tr
-              td
-                .cell Unit Name / #
-              td
-                .cell Make
-              td
-                .cell Model
-              td
-                .cell Drill Width
-              td
-                .cell Fertilizer Type
-          tbody
-            tr
-              td
-                .cell
-                  input(type="text",placeholder="Unit Name")
-              td
-                .cell
-                  select.select
-                    option(value="John Deere") John Deere
-              td
-                .cell
-                  select.select
-                    option(value="1910") 1910
-              td
-                .cell
-                  input(type="text",placeholder="Drill Width")
-              td
-                .cell
-                  select.select
-                    option(value="Dry") Dry
-                  .iconWrapper.size.right
-                    {{icon 'remove'}}
-    .section
-      form
-        ul.list.left(style="width:300px;")
+      .section(style="padding:0 0 10px 0;")
+        ul.list
           li.item.collapse.borderless
-            label(style="width:110px;") Dry Rate Maximum
-            input(type="text",placeholder="Dry Rate Maximum") lbs/acre
-          li.item.collapse.borderless
-            label(style="width:110px;") Opener Width
-            select.select
-              option(value="3") 3
-            label.postfix inches
-          li.item.collapse.borderless
-            label(style="width:110px;") Shank Spacing
-            select.select
-              option(value="3") 3
-            label.postfix inches
-        ul.list.left(style="width:350px;")
-          li.item.collapse.borderless
-            label Tank 1
-            input(type="text",placeholder="Bushels",value="200 Bushels")
-            input(type="text",placeholder="Select Product")
-          li.item.collapse.borderless
-            label Tank 2
-            input(type="text",placeholder="Bushels",value="150 Bushels")
-            input(type="text",placeholder="Select Product")
-          li.item.collapse.borderless
-            label Tank 3
-            input(type="text",placeholder="Bushels",value="200 Bushels")
-            input(type="text",placeholder="Select Product")
-          li.item.collapse.borderless
-            label.left Shoot Type
-            input.left(type="radio",name="shootType",value="Single-Shoot")
-            label.left Single-Shoot
-            input.left(type="radio",name="shootType",value="Double-Shoot")
-            label.left Double-Shoot
-    .section
-      form
-        ul.list.left(style="width:300px;")
-          li.item.collapse.borderless
-            label(style="width:120px;") GPS Receiver Make
-            select.select
-              option(value="John Deere") John Deere
-          li.item.collapse.borderless
-            label(style="width:120px;") Controller Make
-            select.select
-              option(value="John Deere") John Deere
-          li.item.collapse.borderless
-            label Connected to Controller?
-            input(type="checkbox",name="controllerConnected",value="no")
-        ul.list.left(style="width:350px;")
-          li.item.collapse.borderless
-            label Model
-            select.select
-              option(value="1910") 1910
-          li.item.collapse.borderless
-            label Model
-            select.select
-              option(value="1910") 1910
-    .section(style="padding-bottom:10px;")
-      ul.list
-        li.item.collapse.borderless
-          label RX Equipment Test?
-          input(type="checkbox",name="rxEquipmentTest",value="no")
-    .section
-      .title Test Site Location
-      form
+            label I am able to accurately measure & record yield with a calibrated yield monitor
+            input(type="checkbox",name="calibratedYieldMonitor",value="no")
+      .section
         ul.list
           li.item.collapse
-            input(style="width:100%;",type="text",placeholder="Example: NW 32 16 16 W3.. Be as specific as possible!")
+            form
+              ul.inline-list
+                li
+                  a.inline(style="margin-right:10px;")
+                    select.select
+                      option(value="ROI Check Strip") ROI Check Strip
+                li
+                  a.inline(style="margin-right:10px;")
+                    select.select
+                      option(value="Select Field") Select Field
+                li
+                  a.inline(style="margin-right:10px;")
+                    select.select
+                      option(value="Select Application Unit") Select Application Unit
+                li
+                  a.inline
+                    select.select
+                      option(value="Select Seeding Direction") Select Seeding Direction
+              input(style="margin-top:10px;width:100%;",type="text",placeholder="Plot Layout (e.g. Optimize RX vs. Constant Rate)")
+            .iconWrapper.size-16.right
+              {{icon 'remove'}}
           li.item.collapse
-            .tile(style="height:640px;background-image:url('/stubImages/overview.png');")
-              .notice
-                .title Draw field map with test location indicated
-                ul.inline-list
-                  li
-                    a
-                      .iconWrapper.size-16.left
-                        {{icon 'remove'}}
-                      | clear
-                  li
-                    a
-                      .iconWrapper.size-16.left
-                        {{icon 'approve'}}
-                      | save
-    .section(style="padding:10px 0 10px 0;")
-      ul.list
-        li.item.collapse.borderless
-          label Return on Investment Trials
-          input(type="checkbox",name="returnOnInvestmentTrials",value="no")
-      .iconWrapper.size-24.right(style="margin-top:-12px;top:50%;")
-        {{icon 'new'}}
-    .section(style="padding:0 0 10px 0;")
-      ul.list
-        li.item.collapse.borderless
-          label I am able to accurately measure & record yield with a calibrated yield monitor
-          input(type="checkbox",name="calibratedYieldMonitor",value="no")
-    .section
-      ul.list
-        li.item.collapse
-          form
-            ul.inline-list
-              li
-                a.inline(style="margin-right:10px;")
-                  select.select
-                    option(value="ROI Check Strip") ROI Check Strip
-              li
-                a.inline(style="margin-right:10px;")
-                  select.select
-                    option(value="Select Field") Select Field
-              li
-                a.inline(style="margin-right:10px;")
-                  select.select
-                    option(value="Select Application Unit") Select Application Unit
-              li
-                a.inline
-                  select.select
-                    option(value="Select Seeding Direction") Select Seeding Direction
-            input(style="margin-top:10px;width:100%;",type="text",placeholder="Plot Layout (e.g. Optimize RX vs. Constant Rate)")
-          .iconWrapper.size-16.right
-            {{icon 'remove'}}
-        li.item.collapse
-          form
-            ul.inline-list
-              li
-                a.inline(style="margin-right:10px;")
-                  select.select
-                    option(value="ROI Check Strip") ROI Check Strip
-              li
-                a.inline(style="margin-right:10px;")
-                  select.select
-                    option(value="Select Field") Select Field
-              li
-                a.inline(style="margin-right:10px;")
-                  select.select
-                    option(value="Select Application Unit") Select Application Unit
-              li
-                a.inline
-                  select.select
-                    option(value="Select Seeding Direction") Select Seeding Direction
-            input(style="margin-top:10px;width:100%;",type="text",placeholder="Plot Layout (e.g. Optimize RX vs. Constant Rate)")
-          .iconWrapper.size-16.right
-            {{icon 'remove'}}
-    .section(style="padding:0 0 10px 0;")
-      ul.list
-        li.item.collapse.borderless
-          label I have read and accepted the Optimize RX ROI comparison terms & conditions
-          input(type="checkbox",name="termsAndConditionsAccepted",value="no")
-    .section(style="padding:10px;")
-      textarea.expanding(type="text",placeholder="Type any additional notes/comments for this work order here")
-    .section
-      .alert
-        .iconWrapper.size-48.left
-          {{icon 'alert'}}
-        .title Your confirmation of work order details is required to proceed.
-        .subtitle Approved, let's get started!
+            form
+              ul.inline-list
+                li
+                  a.inline(style="margin-right:10px;")
+                    select.select
+                      option(value="ROI Check Strip") ROI Check Strip
+                li
+                  a.inline(style="margin-right:10px;")
+                    select.select
+                      option(value="Select Field") Select Field
+                li
+                  a.inline(style="margin-right:10px;")
+                    select.select
+                      option(value="Select Application Unit") Select Application Unit
+                li
+                  a.inline
+                    select.select
+                      option(value="Select Seeding Direction") Select Seeding Direction
+              input(style="margin-top:10px;width:100%;",type="text",placeholder="Plot Layout (e.g. Optimize RX vs. Constant Rate)")
+            .iconWrapper.size-16.right
+              {{icon 'remove'}}
+      .section(style="padding:0 0 10px 0;")
+        ul.list
+          li.item.collapse.borderless
+            label I have read and accepted the Optimize RX ROI comparison terms & conditions
+            input(type="checkbox",name="termsAndConditionsAccepted",value="no")
+      .section(style="padding:10px;")
+        textarea.expanding(type="text",placeholder="Type any additional notes/comments for this work order here")
+    {{#if equalsSession 'toolbarState' 'alert'}}
+    .toolbar(data-toolbarState="{{getSession 'toolbarState'}}",data-action="setToolbar",data-toolbar="pending")
+      .iconWrapper.size-48.left
+        {{icon 'alertSettings'}}
+      .title Your confirmation of work order details is required to proceed.
+      .subtitle Approved, let's get started!
     {{/if}}
 
+    {{#if equalsSession 'toolbarState' 'pending'}}
+    .toolbar(data-toolbarState="{{getSession 'toolbarState'}}")
+      .iconWrapper.size-48.left
+        {{icon 'clock'}}
+      .title Pending Activation..
+      form.left
+        ul.list
+          li.item.collapse.borderless
+            input.left(type="checkbox",name="confirmationRequest",value="no",data-action="setToolbar",data-toolbar="waiting")
+            label.left Send confirmation request to the Grower
+          li.item.collapse.borderless
+            input.left(type="checkbox",name="growerConfirmation",value="no",data-action="setToolbar",data-toolbar="waiting")
+            label.left Grower Confirmation
+      .right
+        ul.list
+          li.item.collapse.borderless.textRight
+            a.inline(href="") Resend Confirmation Request
+          li.item.collapse.borderless.textRight
+            a.inline(href="") Email This Grower
+    {{/if}}
+
+    {{#if equalsSession 'toolbarState' 'waiting'}}
+    .toolbar(data-toolbarState="{{getSession 'toolbarState'}}")
+      .iconWrapper.size-48.left
+        {{icon 'clock'}}
+      .title Waiting Confirmation..
+      form.left
+        ul.list
+          li.item.collapse.borderless
+            input.left(type="checkbox",name="confirmationRequest",value="yes",checked="checked",data-action="setToolbar",data-toolbar="pending")
+            label.left Send confirmation request to the Grower (Jan 25 2014)
+          li.item.collapse.borderless
+            input.left(type="checkbox",name="growerConfirmation",value="no",data-action="setToolbar",data-toolbar="complete")
+            label.left Grower Confirmation
+      .right
+        ul.list
+          li.item.collapse.borderless.textRight
+            a.inline(href="") Resend Confirmation Request
+          li.item.collapse.borderless.textRight
+            a.inline(href="") Email This Grower
+    {{/if}}
+
+    {{#if equalsSession 'toolbarState' 'complete'}}
+    .toolbar(data-toolbarState="{{getSession 'toolbarState'}}")
+      .iconWrapper.size-48.left
+        {{icon 'approve'}}
+      .title Complete
+      form.left
+        ul.list
+          li.item.collapse.borderless
+            input.left(type="checkbox",name="confirmationRequest",value="yes",checked="checked",data-action="setToolbar",data-toolbar="waiting")
+            label.left Send confirmation request to the Grower (Jan 25 2014)
+          li.item.collapse.borderless
+            input.left(type="checkbox",name="growerConfirmation",value="yes",checked="checked",data-action="setToolbar",data-toolbar="waiting")
+            label.left Grower Confirmation (Jan 25 2014)
+      .right
+        ul.list
+          li.item.collapse.borderless.textRight
+            a.inline(href="") Resend Confirmation Request
+          li.item.collapse.borderless.textRight
+            a.inline(href="") Email This Grower
+    {{/if}}
+    {{/if}}
 template(name="profile")
   .content(data-subheaderState="{{getSession 'subHeaderState'}}",data-leftSidebarState="{{getSession 'leftSidebarState'}}",data-rightSidebarState="{{getSession 'rightSidebarState'}}",data-borderState="{{borderState}}")
     .title Users

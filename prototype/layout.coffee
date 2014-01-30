@@ -467,6 +467,7 @@ if Meteor.isClient
     Session.setDefault "activeTile","compareYield"
     Session.setDefault "dropdownState","closed"
     Session.setDefault "fieldEditMode","view"
+    Session.setDefault "toolbarState","alert"
 
     Template.layout.rendered = ->
       datepickers = this.findAll(".datepicker")
@@ -547,6 +548,13 @@ if Meteor.isClient
         console.log("tile",tile)
         console.log("this:",this)
         Session.set "activeTile",tile
+      "click [data-action='setToolbar']":(e,t)->
+        console.log "setToolbar"
+        currentTarget = $(e.currentTarget)
+        console.log currentTarget
+        toolbar = currentTarget.attr("data-toolbar")
+        console.log "TOOLBAR!",toolbar
+        Session.set "toolbarState",toolbar
 
     Template.spinner.rendered = ->
       opts =
