@@ -625,9 +625,18 @@ borderRadius = 4px
     .button-bar
       width 100%
       float left
+      background offWhite()
+      padding-top 10px
+      border-top 1px solid gray()
       .button
         float left
         clear none
+        background orange(0.75)
+        border 1px solid orange(0.75)
+        color white()
+        &:hover
+          background transparent
+          color orange(0.75)
     .button
       border-radius borderRadius
       margin 0 0 10px 10px
