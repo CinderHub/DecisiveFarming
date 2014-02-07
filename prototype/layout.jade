@@ -1157,6 +1157,76 @@ template(name="fields")
     a.stubImage(href="/fields/field-info/370",style="background-image:url('/stubImages/fieldInfo.png');")
     {{/if}}
     {{>notice}}
+    {{#if equalsSession 'toolbarState' 'alert'}}
+    .toolbar(data-toolbarState="{{getSession 'toolbarState'}}",data-action="setToolbar",data-toolbar="pending")
+      .iconWrapper.size-48.left
+        {{icon 'alertSettings'}}
+      .title Your confirmation of work order details is required to proceed.
+      .subtitle Approved, let's get started!
+    {{/if}}
+
+    {{#if equalsSession 'toolbarState' 'pending'}}
+    .toolbar(data-toolbarState="{{getSession 'toolbarState'}}")
+      .iconWrapper.size-48.left
+        {{icon 'clock'}}
+      .title Pending Activation..
+      form.left
+        ul.list
+          li.item.collapse.borderless
+            input.left(type="checkbox",name="confirmationRequest",value="no",data-action="setToolbar",data-toolbar="waiting")
+            label.left Send confirmation request to the Grower
+          li.item.collapse.borderless
+            input.left(type="checkbox",name="growerConfirmation",value="no",data-action="setToolbar",data-toolbar="waiting")
+            label.left Grower Confirmation
+      .right
+        ul.list
+          li.item.collapse.borderless.textRight
+            a.inline(href="") Resend Confirmation Request
+          li.item.collapse.borderless.textRight
+            a.inline(href="") Email This Grower
+    {{/if}}
+
+    {{#if equalsSession 'toolbarState' 'waiting'}}
+    .toolbar(data-toolbarState="{{getSession 'toolbarState'}}")
+      .iconWrapper.size-48.left
+        {{icon 'clock'}}
+      .title Waiting Confirmation..
+      form.left
+        ul.list
+          li.item.collapse.borderless
+            input.left(type="checkbox",name="confirmationRequest",value="yes",checked="checked",data-action="setToolbar",data-toolbar="pending")
+            label.left Send confirmation request to the Grower (Jan 25 2014)
+          li.item.collapse.borderless
+            input.left(type="checkbox",name="growerConfirmation",value="no",data-action="setToolbar",data-toolbar="complete")
+            label.left Grower Confirmation
+      .right
+        ul.list
+          li.item.collapse.borderless.textRight
+            a.inline(href="") Resend Confirmation Request
+          li.item.collapse.borderless.textRight
+            a.inline(href="") Email This Grower
+    {{/if}}
+
+    {{#if equalsSession 'toolbarState' 'complete'}}
+    .toolbar(data-toolbarState="{{getSession 'toolbarState'}}")
+      .iconWrapper.size-48.left
+        {{icon 'approve'}}
+      .title Complete
+      form.left
+        ul.list
+          li.item.collapse.borderless
+            input.left(type="checkbox",name="confirmationRequest",value="yes",checked="checked",data-action="setToolbar",data-toolbar="waiting")
+            label.left Send confirmation request to the Grower (Jan 25 2014)
+          li.item.collapse.borderless
+            input.left(type="checkbox",name="growerConfirmation",value="yes",checked="checked",data-action="setToolbar",data-toolbar="waiting")
+            label.left Grower Confirmation (Jan 25 2014)
+      .right
+        ul.list
+          li.item.collapse.borderless.textRight
+            a.inline(href="") Resend Confirmation Request
+          li.item.collapse.borderless.textRight
+            a.inline(href="") Email This Grower
+    {{/if}}
     {{/if}}
 
     {{#if currentParamIs 'section' 'soil-testing'}}
