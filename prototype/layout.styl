@@ -628,6 +628,7 @@ borderRadius = 4px
       background offWhite()
       padding-top 10px
       border-top 1px solid gray()
+      border-radius 0 0 borderRadius borderRadius
       .button
         float left
         clear none
@@ -2080,3 +2081,52 @@ body
 //Spinner Styles
 #spinner
   height 100%
+
+//iPhone Support
+//@media (max-device-width: 640px)
+@media (max-device-width: 640px)
+  html,body
+    position absolute
+    top 0
+    right 0
+    bottom 0
+    left 0
+    overflow hidden
+  .header
+    li
+      width 30px
+      overflow hidden
+  .subHeader
+    .inline-list
+      left 40px
+      li
+        width 40px
+        a
+          width 40px
+          padding-right 0!important
+          overflow hidden
+          .iconWrapper
+            left 8px
+  .sidebarToggle
+    width 40px
+    overflow hidden
+  .notice
+    max-width 300px
+    .title
+      font-size 12px
+    .inline-list
+      li
+        a
+          padding-right 0
+  .cover
+    .coverContent
+      min-width 300px
+      max-width 300px
+
+  .content
+    overflow scroll
+    &[data-leftSidebarState="open"]
+      right -250px
+    .section
+      width 200%
+      overflow scroll
