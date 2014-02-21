@@ -470,6 +470,13 @@ if Meteor.isClient
     Session.setDefault "toolbarState","alert"
 
     Template.layout.rendered = ->
+      #Change the status bar to show properly on ios7
+      if window.navigator.standalone
+        $("meta[name='apple-mobile-web-app-status-bar-style']").remove()
+        $("#in_web_clips").show()
+      else
+        $("#in_safari").show()
+
       datepickers = this.findAll(".datepicker")
       $(datepickers).datepicker()
       selectize = $("select").selectize()
@@ -503,6 +510,8 @@ if Meteor.isClient
       #Disable dropdown when the user clicks outside the region
       "click .header, click .subHeader, click .sidebar, click .content":(e,t)->
         Session.set "dropdownState","closed"
+      "touchmove .header, touchmove .subHeader":(e,t)->
+        e.preventDefault()
       "click [data-action='uploadFile']":(e,t)->
         #console.log "uploadFile called!"
         $("input[type=file]").trigger("click");
@@ -603,6 +612,7 @@ if Meteor.isClient
 
     Template.leftSidebar.events
       "click .sidebarNotch":(e,t)->
+        e.stopImmediatePropagation()
         if Session.equals "leftSidebarState","open"
           Session.set "leftSidebarState","closed"
         else
@@ -633,6 +643,7 @@ if Meteor.isClient
         else
           Session.set "fieldEditMode","edit"
       "click .sidebarNotch":(e,t)->
+        e.stopImmediatePropagation()
         if Session.equals "rightSidebarState","open"
           Session.set "rightSidebarState","closed"
         else

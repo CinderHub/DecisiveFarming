@@ -1,15 +1,15 @@
 head
   title Decisive Farming
   meta(name="apple-mobile-web-app-capable",content="yes")
-  meta(name="viewport",content="width=device-width",initial-scale="1",maximum-scale="1",user-scalable="no")
+  meta(name="apple-mobile-web-app-status-bar-style",content="black-translucent")
+  meta(name="viewport",content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no")
+
 
 //- Main Yield Context for Iron Router
 body
 
 //-Main Layout Template
 template(name="layout")
-  {{yield}}
-
   {{yield "header"}}
 
   {{yield "subHeader"}}
@@ -17,12 +17,16 @@ template(name="layout")
   {{yield "leftSidebar"}}
 
   {{yield "rightSidebar"}}
+  .firstPane
+    .secondPane
+      .thirdPane
+        {{yield}}
 
   {{>cover}}
 
 //-Header Template
 template(name="header")
-  .header.fixed.spanWidth
+  .header.fixed.spanWidth.nav
     ul.inline-list.left
       li
         a(href="/dashboard",data-active="{{equalsSession 'activeHeaderPath' 'dashboard'}}")
@@ -1120,7 +1124,7 @@ template(name="dashboard")
   .content(data-subheaderState="{{getSession 'subHeaderState'}}",data-leftSidebarState="{{getSession 'leftSidebarState'}}",data-rightSidebarState="{{getSession 'rightSidebarState'}}",data-borderState="{{borderState}}")
     {{>spinner}}
     {{>map}}
-    a.stubImage(href="/fields/field-info",style="background-image:url('/stubImages/overview.png');")
+    .stubImage(href="/fields/field-info",style="background-image:url('/stubImages/overview.png');")
     .tiles
       .notifications.tile
         .header Notifications
@@ -1154,9 +1158,9 @@ template(name="fields")
     {{>map}}
     {{!Stub Screenshots for Demo}}
     {{#if currentParamIs 'assetsInfo' undefined}}
-    a.stubImage(href="/fields/field-info/370",style="background-image:url('/stubImages/overview.png');")
+    .stubImage(href="/fields/field-info/370",style="background-image:url('/stubImages/overview.png');")
     {{else}}
-    a.stubImage(href="/fields/field-info/370",style="background-image:url('/stubImages/fieldInfo.png');")
+    .stubImage(href="/fields/field-info/370",style="background-image:url('/stubImages/fieldInfo.png');")
     {{/if}}
     {{>notice}}
     {{#if equalsSession 'toolbarState' 'alert'}}
@@ -1514,7 +1518,7 @@ template(name="fields")
     {{#if currentParamIs 'section' 'fertility-map'}}
     {{>spinner}}
     {{>map}}
-    a.stubImage(href="/fields/soil-testing/370",style="background-image:url('/stubImages/soilTesting.png');")
+    .stubImage(href="/fields/soil-testing/370",style="background-image:url('/stubImages/soilTesting.png');")
     {{/if}}
 
     {{#if currentParamIs 'section' 'rx-rates'}}
@@ -3515,7 +3519,7 @@ template(name="farm-planner")
   .content(data-subheaderState="{{getSession 'subHeaderState'}}",data-leftSidebarState="{{getSession 'leftSidebarState'}}",data-rightSidebarState="{{getSession 'rightSidebarState'}}",data-borderState="{{borderState}}",data-backgroundState="{{backgroundState}}")
     {{#if currentParamIs 'section' 'crop-plans'}}
     {{>map}}
-    a.stubImage(href="/farm-planner/crop-plans/370",style="background-image:url('/stubImages/fieldInfo.png');")
+    .stubImage(href="/farm-planner/crop-plans/370",style="background-image:url('/stubImages/fieldInfo.png');")
     {{>notice}}
     {{#if equalsSession 'toolbarState' 'alert'}}
     .toolbar(data-toolbarState="{{getSession 'toolbarState'}}",data-action="setToolbar",data-toolbar="pending")

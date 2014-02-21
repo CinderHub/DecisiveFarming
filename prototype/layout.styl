@@ -111,7 +111,7 @@ overflow(x=false,y=x)
     overflow-x x
   if y
     overflow-y y
-  -webkit-overflow-scrolling touch
+  //-webkit-overflow-scroll touch
 
 ellipsis()
   text-overflow ellipsis
@@ -142,6 +142,9 @@ input,button,textarea
   resize none
   display block
   color midnight()
+  &[type="text"]
+  &[type="password"]
+    appearance none
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button
   -webkit-appearance none
@@ -1238,6 +1241,7 @@ table.table
   background white()
   border-bottom 1px solid gray()
   height headerHeight
+  user-select none
   li
     a
       line-height headerHeight
@@ -1248,6 +1252,8 @@ table.table
   height subHeaderHeight
   border-bottom 1px solid gray()
   //transition all 0.25s ease-in-out
+  & > *
+    user-select none
   &[data-state="closed"]
     transform translate3d(0,-100%,0)
     opacity 0
@@ -1326,6 +1332,7 @@ table.table
   .sidebarNotch
     size(40,40)
     position(absolute,0,auto,auto,auto)
+    user-select none
     .iconWrapper
       left 50%
       margin-left -12px
@@ -2085,18 +2092,48 @@ body
 //iPhone Support
 //@media (max-device-width: 640px)
 @media (max-device-width: 640px)
-  html,body
-    position absolute
-    top 0
-    right 0
-    bottom 0
-    left 0
+  html, body
+    margin 0
+    padding 0
+    height 100%
+    //width 100%
     overflow hidden
+  body
+    display -webkit-box
+    -webkit-box-orient vertical
+    -webkit-box-align stretch
+    -webkit-box-flex 1
+    border-top 20px solid white
+  .firstPane
+    display -webkit-box
+    -webkit-box-orient vertical
+    -webkit-box-align stretch
+    -webkit-box-flex 1
+    -webkit-overflow-scrolling touch
+    overflow auto
+  .secondPane
+    display -webkit-box
+    -webkit-box-orient vertical
+    -webkit-box-align stretch
+    -webkit-box-flex 1
+    -webkit-overflow-scrolling touch
+    overflow auto
+  .thirdPane
+    display -webkit-box
+    -webkit-box-orient vertical
+    -webkit-box-align stretch
+    -webkit-box-flex 1
+    margin-bottom -1px
+    position relative
   .header
+    position static
     li
       width 30px
       overflow hidden
   .subHeader
+    position static
+    &[data-state="closed"]
+      display none
     .inline-list
       left 40px
       li
@@ -2108,8 +2145,13 @@ body
           .iconWrapper
             left 8px
   .sidebarToggle
+    top 50px
     width 40px
     overflow hidden
+  .sidebar
+    z-index 99
+    top 90px
+    -webkit-overflow-scrolling touch
   .notice
     max-width 300px
     .title
@@ -2124,9 +2166,11 @@ body
       max-width 300px
 
   .content
-    overflow scroll
+    top 0
+    &[data-subheaderState="open"]
+      top 0
     &[data-leftSidebarState="open"]
       right -250px
     .section
-      width 200%
+      width 100%
       overflow scroll
