@@ -196,7 +196,7 @@ p
   color midnight()
 label
   color midnight()
-a:hover,a:active,a[data-active="true"]
+.no-touch a:hover,a:active,a[data-active="true"]
   text-decoration none
 
 //Dimensions
@@ -251,10 +251,6 @@ borderRadius = 4px
     line
       stroke-width 6px
       stroke gray()
-  &:hover > *
-    fill orange(0.75)
-    line
-      stroke orange(0.75)
   &.top
     top 10px
     bottom auto
@@ -379,7 +375,6 @@ borderRadius = 4px
       color midnight()
       border-bottom 1px solid gray()
       &[data-active="true"]
-      &:hover
         border-color orange(0.45)
         background orange(0.75)
         color white()
@@ -465,7 +460,6 @@ borderRadius = 4px
             background transparent
             border-bottom 1px solid offGray()
             &[data-active="true"]
-            &:hover
               color orange(0.75)
               border-bottom 1px solid orange(0.75)
             &:first-of-type
@@ -505,10 +499,6 @@ borderRadius = 4px
   clear both
   position relative
   cursor pointer
-  &:hover
-    border 1px solid orange(0.75)
-    background transparent
-    color orange(0.75)
   &.rounded
     border-radius borderRadius
   &.split
@@ -518,16 +508,6 @@ borderRadius = 4px
     background offWhite()
     border 1px solid gray()
     color midnight()
-    &:hover
-      border-radius borderRadius borderRadius 0 0
-      border-bottom none
-      background white()
-      color orange(0.75)
-      .dropdown
-        border-radius 0 borderRadius 0 0
-        background white()
-      .list
-        display block
     .dropdown
       position(absolute,-1,-1,auto,auto)
       size(20,30)
@@ -638,9 +618,6 @@ borderRadius = 4px
         background orange(0.75)
         border 1px solid orange(0.75)
         color white()
-        &:hover
-          background transparent
-          color orange(0.75)
     .button
       border-radius borderRadius
       margin 0 0 10px 10px
@@ -821,26 +798,21 @@ table.table
   &.bordered
     border-top 1px solid gray()
   &.uniform
-    table-layout fixed
-    width 100%
+    //table-layout fixed
+    //width 100%
     td
-      max-width 0
+      //max-width 0
       position relative
       &.borderless
         border-top none
   thead
     tr
-      background offWhite()
       td
         padding 5px 10px 5px 10px
+        background offWhite()
         border-bottom 1px solid gray()
   tbody
     tr
-      &[data-action="toggleCover"]
-        &:hover
-          background orange(0.15)
-          td
-            background transparent
       td
         border-right 1px solid gray()
         border-bottom 1px solid gray()
@@ -848,8 +820,6 @@ table.table
         //padding 5px 10px 5px 10px
         position relative
         height 40px
-        &:hover
-          background orange(0.15)
         &.collapse
           .left
             width auto
@@ -872,8 +842,6 @@ table.table
             text-indent 0
             line-height 1.2
           //padding 5px
-          &:hover
-            //background orange(0.15)
         .subtext
           position absolute
           top 0
@@ -973,11 +941,6 @@ table.table
   .iconWrapper
     position(absolute,auto,10,auto,auto)
     top 50%
-    &:hover
-      & > *
-      line
-        fill orange(0.75)
-        stroke orange(0.75)
     & > *
     line
       fill offerGray()
@@ -1047,7 +1010,6 @@ table.table
       cursor pointer
       display block
       &[data-active="true"]
-      &:hover
         color orange(0.75)
         .iconWrapper > *
             fill orange(0.75)
@@ -1266,7 +1228,6 @@ table.table
         line-height subHeaderHeight
         padding-left 40px
         &[data-active="true"]
-        &:hover
           background orange(0.75)
           color white()
           .iconWrapper
@@ -1276,18 +1237,17 @@ table.table
         &[data-progress="inactive"]
           color offGray()
           background gray(0.5)
-          &:hover
-            color offerGray()
-            .iconWrapper
-              &>*
-                fill offerGray()
-                stroke offerGray()
           .iconWrapper
             &>*
               fill offGray()
               stroke offGray()
-          .badge
+          &[data-active="true"]
             background offGray()
+            color white()
+            .iconWrapper
+              &>*
+                fill white()
+                stroke white()
         &[data-progress="incomplete"]
           .badge
             background red()
@@ -1316,7 +1276,7 @@ table.table
     right auto
     left 0
     border-right 1px solid gray()
-    &[data-state="closed"]
+    &[data-sidebarState="closed"]
       transform translate3d(- sidebarWidth,0,0)
     .sidebarNotch
       left 0
@@ -1324,7 +1284,7 @@ table.table
   &.right
     right 0
     left auto
-    &[data-state="closed"]
+    &[data-sidebarState="closed"]
       transform translate3d(sidebarWidth,0,0)
     .sidebarNotch
       right 0
@@ -1350,10 +1310,6 @@ table.table
       font-size 12px
       position(relative)
       display block
-      &:hover
-        color orange(0.75)
-        .subtitle
-          color orange(0.75)
       .subtitle
         position(absolute,0,10,auto,auto)
         font-size 10px
@@ -1448,13 +1404,6 @@ table.table
         &:first-of-type
           a[data-action]
             background offWhite()
-            &:hover
-              background orange(0.75)
-              color white()
-              .iconWrapper
-                & > *
-                  fill white()
-                  stroke white()
         .subtitle
           background transparent
           padding 0
@@ -1476,9 +1425,6 @@ table.table
       font-size 14px
       color midnight()
       .iconWrapper
-        &:hover
-          & > *
-            fill orange(0.75)
         & > *
           fill offerGray()
   .button
@@ -1514,7 +1460,6 @@ table.table
       color midnight()
       border-right 1px solid gray()
       &[data-active="true"]
-      &:hover
         background orange(0.75)
         color white()
       &:last-of-type
@@ -1542,14 +1487,14 @@ table.table
 //Content
 .content
   position(absolute,30,0,0,0)
-  background white()
+  //background white()
   margin 20px
   //padding 20px 35px 20px 35px
-  border 1px solid gray()
-  border-radius borderRadius
+  //border 1px solid gray()
+  //border-radius borderRadius
   //padding 10px
   //transition all 0.25s ease-in-out
-  overflow(auto)
+  //overflow(auto)
   &.noOverflow
     overflow(hidden)
   &[data-subheaderState="open"]
@@ -1618,10 +1563,6 @@ table.table
   height 100px
   &[data-toolbarstate="alert"]
     background red()
-    &:hover
-      background green()
-      .subtitle
-        opacity 1
   &[data-toolbarstate="pending"]
     background offOrange()
     padding 15px 20px 15px 95px
@@ -1704,12 +1645,6 @@ table.table
     line-height 44px
     padding 0 10px 0 44px
     display block
-    &:hover
-      .title
-        color orange(0.75)
-      .iconWrapper
-        & > *
-          fill orange(0.75)
   &.profit
     //width 50%
     float left
@@ -1767,17 +1702,12 @@ table.table
     & + a
       font-size 12px
       color midnight()
-      &:hover
-        color orange(0.75)
   .notice
     .inline-list
       li
         width auto
         a
           padding 0 10px 0 30px
-          &:hover
-            background transparent
-            color orange(0.75)
 
 //Layout - Notice
 .notice
@@ -1804,8 +1734,6 @@ table.table
     margin 5px 0 5px 0
     font-size 10px
     color offerGray()
-    &:hover
-      color orange(0.75)
   .inline-list
     left -10px
   .iconWrapper
@@ -1873,8 +1801,6 @@ table.table
   .esriSimpleSliderIncrementButton
   .esriSimpleSliderDecrementButton
     color offerGray()
-    &:hover
-      color orange(0.75)
   .esriSimpleSliderIncrementButton
     border-bottom 1px solid gray()
 .scalebar_bottom-left
@@ -1986,6 +1912,7 @@ table.table
   font-size 18px
   background offerGray()
   color offWhite()
+  border-radius borderRadius
   .notImplementedText
     size(200,44)
     position absolute
@@ -2004,6 +1931,7 @@ table.table
   font-size 18px
   background offGray()
   color gray()
+  border-radius borderRadius
   .upgradeRequiredText
     size(200,44)
     position absolute
@@ -2089,6 +2017,179 @@ body
 #spinner
   height 100%
 
+//Hovers
+.no-touch .iconWrapper
+  &:hover > *
+    fill orange(0.75)
+    line
+      stroke orange(0.75)
+
+.no-touch .list
+  li
+    a:not(.inline)
+      &:hover
+        border-color orange(0.45)
+        background orange(0.75)
+        color white()
+        .title
+        .subtitle
+          color white()
+    &.item
+      &.collapse
+        .button-bar
+          .button
+            &:hover
+              color orange(0.75)
+              border-bottom 1px solid orange(0.75)
+
+.no-touch .button
+  &:hover
+    border 1px solid orange(0.75)
+    background transparent
+    color orange(0.75)
+  &.split
+    &:hover
+      border-radius borderRadius borderRadius 0 0
+      border-bottom none
+      background white()
+      color orange(0.75)
+      .dropdown
+        border-radius 0 borderRadius 0 0
+        background white()
+      .list
+        display block
+
+.no-touch .cover
+  .coverContent
+    .button-bar
+      .button
+        &:hover
+          background transparent
+          color orange(0.75)
+
+.no-touch table.table
+  tbody
+    tr
+      &[data-action="toggleCover"]
+        &:hover
+          background orange(0.15)
+          td
+            background transparent
+      td
+        &:hover
+          background orange(0.15)
+        .cell
+          &:hover
+            //background orange(0.15)
+  .iconWrapper
+    &:hover
+      & > *
+      line
+        fill orange(0.75)
+        stroke orange(0.75)
+
+.no-touch .inline-list
+  li
+    &> a
+      &:hover
+        color orange(0.75)
+        .iconWrapper > *
+            fill orange(0.75)
+            stroke orange(0.75)
+            & line
+              stroke orange(0.75)
+
+.no-touch .subHeader
+  .inline-list
+    li
+      a
+        &:hover
+          background orange(0.75)
+          color white()
+          .iconWrapper
+            &>*
+              fill white()
+              stroke white()
+        &[data-progress="inactive"]
+          &:hover
+            color white()
+            background offGray()
+            .iconWrapper
+              &>*
+                fill white()
+                stroke white()
+
+.no-touch .sidebarToggle
+  .has-dropdown
+    a
+      &:hover
+        color orange(0.75)
+        .subtitle
+          color orange(0.75)
+
+.no-touch .sidebar
+  &.left
+    .list
+      li
+        &:first-of-type
+          a[data-action]
+            &:hover
+              background orange(0.75)
+              color white()
+              .iconWrapper
+                & > *
+                  fill white()
+                  stroke white()
+  .section
+    .title
+      .iconWrapper
+        &:hover
+          & > *
+            fill orange(0.75)
+  .button-bar
+    .button
+      &:hover
+        background orange(0.75)
+        color white()
+
+.no-touch .toolbar
+  &[data-toolbarstate="alert"]
+    &:hover
+      background green()
+      .subtitle
+        opacity 1
+
+.no-touch .tile
+  &.download
+    &:hover
+      .title
+        color orange(0.75)
+      .iconWrapper
+        & > *
+          fill orange(0.75)
+  .subtitle
+    & + a
+      &:hover
+        color orange(0.75)
+  .notice
+    .inline-list
+      li
+        a
+          &:hover
+            background transparent
+            color orange(0.75)
+
+.no-touch .notice
+  a
+    &:hover
+      color orange(0.75)
+
+.no-touch .esriSimpleSliderTL
+  .esriSimpleSliderIncrementButton
+  .esriSimpleSliderDecrementButton
+    &:hover
+      color orange(0.75)
+
 //iPhone Support
 //@media (max-device-width: 640px)
 @media (max-device-width: 640px)
@@ -2152,6 +2253,11 @@ body
     z-index 99
     top 90px
     -webkit-overflow-scrolling touch
+    .secondPane
+      background white()
+      //background red
+    .thirdPane
+      //background white()
   .notice
     max-width 300px
     .title
@@ -2167,10 +2273,73 @@ body
 
   .content
     top 0
+    margin 7px
     &[data-subheaderState="open"]
       top 0
     &[data-leftSidebarState="open"]
       right -250px
+    &[data-rightSidebarState="open"]
+      left -250px
     .section
       width 100%
       overflow scroll
+
+table.table
+  &.uniform
+    td
+      max-width initial
+
+.pane
+  background white()
+  border 1px solid gray()
+  border-radius borderRadius
+  position relative
+  //float left
+  //max-width 280px
+  margin-bottom 10px
+  //overflow hidden
+  &:after
+    content ""
+    position absolute
+    right 0
+    bottom -10px
+    left 0
+    height 10px
+    pointer-events none
+  .paneScroll
+    //left -10px
+    //right -10px
+    //width 100%
+    overflow auto
+    padding-left 10px
+    position relative
+    //margin-bottom 10px
+  .table
+    background gray(0.2)
+    border 1px solid gray()
+    //box-shadow 0 0 1px 0 offerGray(0.2)
+    position relative
+    border-radius borderRadius
+    margin-bottom 10px
+    &:after
+      content ""
+      position absolute
+      background transparent
+      top 0
+      right -10px
+      bottom 0
+      width 10px
+    thead
+      tr
+        td
+          &:first-of-type
+            border-radius borderRadius 0 0 0
+          &:last-of-type
+            border-radius 0 borderRadius 0 0
+    tfoot
+      tr
+        td
+          &:first-of-type
+            border-radius 0 0 0 borderRadius
+          &:last-of-type
+            border-radius 0 0 borderRadius 0

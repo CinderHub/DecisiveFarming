@@ -70,46 +70,46 @@ Router.map ->
 
       #Fields Info
       if @params.section is "field-info"
-        Session.set "leftSidebarState","open"
+        Session.set "leftSidebarState","closed"
         Session.set "leftSidebarToggleState","open"
         if !@params.assetsInfo
           Session.set "rightSidebarState","closed"
-          Session.set "rightSidebarToggleState","closed"
+          Session.set "rightSidebarToggleState","open"
         else
-          Session.set "rightSidebarState","open"
+          Session.set "rightSidebarState","closed"
           Session.set "rightSidebarToggleState","open"
 
       #Soil Testing
       if @params.section is "soil-testing"
-        Session.set "leftSidebarState","open"
+        Session.set "leftSidebarState","closed"
         Session.set "leftSidebarToggleState","open"
         Session.set "rightSidebarState","closed"
         Session.set "rightSidebarToggleState","closed"
 
       #Fertility Map
       if @params.section is "fertility-map"
-        Session.set "leftSidebarState","open"
+        Session.set "leftSidebarState","closed"
         Session.set "leftSidebarToggleState","open"
-        Session.set "rightSidebarState","open"
+        Session.set "rightSidebarState","closed"
         Session.set "rightSidebarToggleState","open"
 
       #RX Rates
       if @params.section is "rx-rates"
-        Session.set "leftSidebarState","open"
+        Session.set "leftSidebarState","closed"
         Session.set "leftSidebarToggleState","open"
-        Session.set "rightSidebarState","open"
+        Session.set "rightSidebarState","closed"
         Session.set "rightSidebarToggleState","open"
 
       #RX Files
       if @params.section is "rx-files"
-        Session.set "leftSidebarState","open"
+        Session.set "leftSidebarState","closed"
         Session.set "leftSidebarToggleState","open"
         Session.set "rightSidebarState","closed"
         Session.set "rightSidebarToggleState","closed"
 
       #Yield Reports
       if @params.section is "yield-report"
-        Session.set "leftSidebarState","open"
+        Session.set "leftSidebarState","closed"
         Session.set "leftSidebarToggleState","open"
         Session.set "rightSidebarState","closed"
         Session.set "rightSidebarToggleState","closed"
@@ -127,9 +127,9 @@ Router.map ->
         to: "rightSidebar"
     data: ->
       Session.set "subHeaderState","open"
-      Session.set "leftSidebarState","open"
+      Session.set "leftSidebarState","closed"
       Session.set "leftSidebarToggleState","open"
-      Session.set "rightSidebarState","open"
+      Session.set "rightSidebarState","closed"
       Session.set "rightSidebarToggleState","open"
       Session.set "activeHeaderPath","equipment"
       if !@params.section
@@ -173,7 +173,7 @@ Router.map ->
 
       #Profit
       if @params.section is "profit"
-        Session.set "leftSidebarState","open"
+        Session.set "leftSidebarState","closed"
         Session.set "leftSidebarToggleState","open"
         Session.set "rightSidebarState","closed"
         Session.set "rightSidebarToggleState","closed"
@@ -182,24 +182,25 @@ Router.map ->
 
       #Revenue & Expenses
       if @params.section is "revenue-and-expenses"
-        Session.set "leftSidebarState","open"
+        Session.set "leftSidebarState","closed"
         Session.set "leftSidebarToggleState","open"
         Session.set "rightSidebarState","closed"
         Session.set "rightSidebarToggleState","closed"
         if !@params.assetsInfo
           Session.set "activeSidebarPath","1221"
+
       #Hedge Plan
       if @params.section is "hedge-plan"
-        Session.set "leftSidebarState","open"
+        Session.set "leftSidebarState","closed"
         Session.set "leftSidebarToggleState","open"
-        Session.set "rightSidebarState","open"
+        Session.set "rightSidebarState","closed"
         Session.set "rightSidebarToggleState","open"
         if !@params.assetsInfo
           Session.set "activeSidebarPath","1221"
 
       #Positions
       if @params.section is "positions"
-        Session.set "leftSidebarState","open"
+        Session.set "leftSidebarState","closed"
         Session.set "leftSidebarToggleState","open"
         Session.set "rightSidebarState","closed"
         Session.set "rightSidebarToggleState","closed"
@@ -208,7 +209,7 @@ Router.map ->
 
       #Research
       if @params.section is "research"
-        Session.set "leftSidebarState","open"
+        Session.set "leftSidebarState","closed"
         Session.set "leftSidebarToggleState","open"
         Session.set "rightSidebarState","closed"
         Session.set "rightSidebarToggleState","closed"
@@ -245,32 +246,32 @@ Router.map ->
 
       #Crop Plans
       if @params.section is "crop-plans"
-        Session.set "leftSidebarState","open"
+        Session.set "leftSidebarState","closed"
         Session.set "leftSidebarToggleState","open"
         if !@params.assetsInfo
           Session.set "rightSidebarState","closed"
           Session.set "rightSidebarToggleState","closed"
         else
-          Session.set "rightSidebarState","open"
+          Session.set "rightSidebarState","closed"
           Session.set "rightSidebarToggleState","open"
 
       #Revenue and Expenses
       if @params.section is "revenue-and-expenses"
-        Session.set "leftSidebarState","open"
+        Session.set "leftSidebarState","closed"
         Session.set "leftSidebarToggleState","open"
         Session.set "rightSidebarState","closed"
         Session.set "rightSidebarToggleState","closed"
 
       #Market Plan
       if @params.section is "market-plan"
-        Session.set "leftSidebarState","open"
+        Session.set "leftSidebarState","closed"
         Session.set "leftSidebarToggleState","open"
         Session.set "rightSidebarState","closed"
         Session.set "rightSidebarToggleState","closed"
 
       #Work Orders
       if @params.section is "work-orders"
-        Session.set "leftSidebarState","open"
+        Session.set "leftSidebarState","closed"
         Session.set "leftSidebarToggleState","open"
         Session.set "rightSidebarState","closed"
         Session.set "rightSidebarToggleState","closed"
@@ -287,11 +288,11 @@ Router.map ->
       rightSidebar:
         to: "rightSidebar"
     data: ->
-      Session.set "subHeaderState","closed"
+      Session.set "subHeaderState","open"
       Session.set "leftSidebarState","closed"
       Session.set "leftSidebarToggleState","closed"
-      Session.set "rightSidebarState","open"
-      Session.set "rightSidebarToggleState","closed"
+      Session.set "rightSidebarState","closed"
+      Session.set "rightSidebarToggleState","open"
       Session.set "activeHeaderPath","profile"
 
   @route "help",
@@ -479,21 +480,21 @@ if Meteor.isClient
 
       datepickers = this.findAll(".datepicker")
       $(datepickers).datepicker()
-      selectize = $("select").selectize()
+      #selectize = $("select").selectize()
       #Set up select change event listener
-      selectize.on("change",()->
-        currentTarget = $(this)
-        action = currentTarget.attr("data-action")
-        if action is "setPositionCommodity"
-          Session.set "positionCommodity",currentTarget.attr("value")
-          Session.set "positionType",undefined
-        if action is "setPositionType"
-          Session.set "positionType",currentTarget.attr("value")
-        if action is "setEquipmentType"
-          console.log "CHANGING!"
-          console.log currentTarget.attr("value")
-          Session.set "equipmentType",currentTarget.attr("value")
-      )
+      #selectize.on("change",()->
+      #  currentTarget = $(this)
+      #  action = currentTarget.attr("data-action")
+      #  if action is "setPositionCommodity"
+      #    Session.set "positionCommodity",currentTarget.attr("value")
+      #    Session.set "positionType",undefined
+      #  if action is "setPositionType"
+      #    Session.set "positionType",currentTarget.attr("value")
+      #  if action is "setEquipmentType"
+      #    console.log "CHANGING!"
+      #    console.log currentTarget.attr("value")
+      #    Session.set "equipmentType",currentTarget.attr("value")
+      #)
       textareas = $(this.findAll(".expanding"))
       if textareas.length isnt 0
         textareas.expandingTextarea()
@@ -508,9 +509,11 @@ if Meteor.isClient
 
     Template.layout.events
       #Disable dropdown when the user clicks outside the region
+      "click [data-action='print']":(e,t)->
+        window.print()
       "click .header, click .subHeader, click .sidebar, click .content":(e,t)->
         Session.set "dropdownState","closed"
-      "touchmove .header, touchmove .subHeader":(e,t)->
+      "touchmove .header, touchmove .subHeader, touchmove .sidebarToggle":(e,t)->
         e.preventDefault()
       "click [data-action='uploadFile']":(e,t)->
         #console.log "uploadFile called!"

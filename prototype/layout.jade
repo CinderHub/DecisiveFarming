@@ -17,6 +17,7 @@ template(name="layout")
   {{yield "leftSidebar"}}
 
   {{yield "rightSidebar"}}
+
   .firstPane
     .secondPane
       .thirdPane
@@ -158,7 +159,7 @@ template(name="subHeader")
       {{/if}}
 
 template(name="leftSidebar")
-  .sidebarToggle.left.fixed(data-state="{{getSession 'leftSidebarToggleState'}}")
+  .sidebarToggle.left.fixed(data-sidebarState="{{getSession 'leftSidebarToggleState'}}",data-state="{{getSession 'leftSidebarState'}}")
     .sidebarNotch
       .iconWrapper.left.size-24
         {{icon 'sidebar'}}
@@ -275,850 +276,854 @@ template(name="leftSidebar")
             a(data-action="changeFilter",data-filter="Farm Planner 2016") Farm Planner 2016
               .subtitle 2
           {{/if}}
-  .sidebar.left.fixed.spanHeight(data-state="{{getSession 'leftSidebarState'}}",data-sidebarToggleState="{{getSession 'leftSidebarToggleState'}}")
-    ul.list
-      {{#if currentContextIs 'fields'}}
-      li
-        a(data-action="addField",href="/farm-planner/crop-plans")
-          span.title Add New Field
-          .iconWrapper.right.size-16
-            {{icon 'new'}}
-      li
-        a(href="/{{currentContext}}/{{currentParam 'section'}}/370",data-action="changeField",data-field-id="370",data-active="{{equalsSession 'activeSidebarPath' '370'}}")
-          span.title Field One
-          span.subtitle E 24 28 26 W4
-      li
-        a(href="/{{currentContext}}/{{currentParam 'section'}}/371",data-action="changeField",data-field-id="371")
-          span.title Field Two
-          span.subtitle NE 21 28 25 W4
-      li
-        a(href="/{{currentContext}}/{{currentParam 'section'}}/96",data-action="changeField",data-field-id="96")
-          span.title Field Three
-          span.subtitle NE 32 27 25 W4
-      li
-        a(href="/{{currentContext}}/{{currentParam 'section'}}/98",data-action="changeField",data-field-id="98")
-          span.title Field Four
-          span.subtitle NE 33 27 25 W4
-      li
-        a(href="/{{currentContext}}/{{currentParam 'section'}}/92",data-action="changeField",data-field-id="92")
-          span.title Field Five
-          span.subtitle NE 5 28 25 W4
-      li
-        a(href="/{{currentContext}}/{{currentParam 'section'}}/670",data-action="changeField",data-field-id="670")
-          span.title Field Six
-          span.subtitle NW 33 27 25 W4 
-      li
-        a(href="/{{currentContext}}/{{currentParam 'section'}}/91",data-action="changeField",data-field-id="91")
-          span.title Field Seven
-          span.subtitle NW 5 28 25 W4
-      li
-        a(href="/{{currentContext}}/{{currentParam 'section'}}/97",data-action="changeField",data-field-id="97")
-          span.title Field Eight
-          span.subtitle S 33 27 25 W4
-      li
-        a(href="/{{currentContext}}/{{currentParam 'section'}}/95",data-action="changeField",data-field-id="95")
-          span.title Field Nine
-          span.subtitle SC 32 27 25 W4
-      li
-        a(href="/{{currentContext}}/{{currentParam 'section'}}/89",data-action="changeField",data-field-id="89")
-          span.title Field Ten
-          span.subtitle SC 6 28 25 W4
-      li
-        a(href="/{{currentContext}}/{{currentParam 'section'}}/90",data-action="changeField",data-field-id="90")
-          span.title Field Eleven
-          span.subtitle SC 6 28 25 W4 E
-      li
-        a(href="/{{currentContext}}/{{currentParam 'section'}}/88",data-action="changeField",data-field-id="88")
-          span.title Field Twelve
-          span.subtitle SC 6 28 25 W4 W
-      li
-        a(href="/{{currentContext}}/{{currentParam 'section'}}/476",data-action="changeField",data-field-id="476")
-          span.title Field Thirteen
-          span.subtitle SE 29 28 25 W4
-      li
-        a(href="/{{currentContext}}/{{currentParam 'section'}}/94",data-action="changeField",data-field-id="94")
-          span.title Field Fourteen
-          span.subtitle SE 5 28 25 W4
-      li
-        a(href="/{{currentContext}}/{{currentParam 'section'}}/93",data-action="changeField",data-field-id="93")
-          span.title Field Fifteen
-          span.subtitle SW 5 28 25 W4
-      {{/if}}
+  .sidebar.firstPane.left.fixed.spanHeight(data-state="{{getSession 'leftSidebarState'}}",data-sidebarToggleState="{{getSession 'leftSidebarToggleState'}}")
+    .secondPane
+      .thirdPane
+        ul.list
+          {{#if currentContextIs 'fields'}}
+          li
+            a(data-action="addField",href="/farm-planner/crop-plans")
+              span.title Add New Field
+              .iconWrapper.right.size-16
+                {{icon 'new'}}
+          li
+            a(href="/{{currentContext}}/{{currentParam 'section'}}/370",data-action="changeField",data-field-id="370",data-active="{{equalsSession 'activeSidebarPath' '370'}}")
+              span.title Field One
+              span.subtitle E 24 28 26 W4
+          li
+            a(href="/{{currentContext}}/{{currentParam 'section'}}/371",data-action="changeField",data-field-id="371",data-active="{{equalsSession 'activeSidebarPath' '371'}}")
+              span.title Field Two
+              span.subtitle NE 21 28 25 W4
+          li
+            a(href="/{{currentContext}}/{{currentParam 'section'}}/96",data-action="changeField",data-field-id="96",data-active="{{equalsSession 'activeSidebarPath' '96'}}")
+              span.title Field Three
+              span.subtitle NE 32 27 25 W4
+          li
+            a(href="/{{currentContext}}/{{currentParam 'section'}}/98",data-action="changeField",data-field-id="98",data-active="{{equalsSession 'activeSidebarPath' '98'}}")
+              span.title Field Four
+              span.subtitle NE 33 27 25 W4
+          li
+            a(href="/{{currentContext}}/{{currentParam 'section'}}/92",data-action="changeField",data-field-id="92",data-active="{{equalsSession 'activeSidebarPath' '92'}}")
+              span.title Field Five
+              span.subtitle NE 5 28 25 W4
+          li
+            a(href="/{{currentContext}}/{{currentParam 'section'}}/670",data-action="changeField",data-field-id="670",data-active="{{equalsSession 'activeSidebarPath' '670'}}")
+              span.title Field Six
+              span.subtitle NW 33 27 25 W4 
+          li
+            a(href="/{{currentContext}}/{{currentParam 'section'}}/91",data-action="changeField",data-field-id="91",data-active="{{equalsSession 'activeSidebarPath' '91'}}")
+              span.title Field Seven
+              span.subtitle NW 5 28 25 W4
+          li
+            a(href="/{{currentContext}}/{{currentParam 'section'}}/97",data-action="changeField",data-field-id="97",data-active="{{equalsSession 'activeSidebarPath' '97'}}")
+              span.title Field Eight
+              span.subtitle S 33 27 25 W4
+          li
+            a(href="/{{currentContext}}/{{currentParam 'section'}}/95",data-action="changeField",data-field-id="95",data-active="{{equalsSession 'activeSidebarPath' '95'}}")
+              span.title Field Nine
+              span.subtitle SC 32 27 25 W4
+          li
+            a(href="/{{currentContext}}/{{currentParam 'section'}}/89",data-action="changeField",data-field-id="89",data-active="{{equalsSession 'activeSidebarPath' '89'}}")
+              span.title Field Ten
+              span.subtitle SC 6 28 25 W4
+          li
+            a(href="/{{currentContext}}/{{currentParam 'section'}}/90",data-action="changeField",data-field-id="90",data-active="{{equalsSession 'activeSidebarPath' '90'}}")
+              span.title Field Eleven
+              span.subtitle SC 6 28 25 W4 E
+          li
+            a(href="/{{currentContext}}/{{currentParam 'section'}}/88",data-action="changeField",data-field-id="88",data-active="{{equalsSession 'activeSidebarPath' '88'}}")
+              span.title Field Twelve
+              span.subtitle SC 6 28 25 W4 W
+          li
+            a(href="/{{currentContext}}/{{currentParam 'section'}}/476",data-action="changeField",data-field-id="476",data-active="{{equalsSession 'activeSidebarPath' '476'}}")
+              span.title Field Thirteen
+              span.subtitle SE 29 28 25 W4
+          li
+            a(href="/{{currentContext}}/{{currentParam 'section'}}/94",data-action="changeField",data-field-id="94",data-active="{{equalsSession 'activeSidebarPath' '94'}}")
+              span.title Field Fourteen
+              span.subtitle SE 5 28 25 W4
+          li
+            a(href="/{{currentContext}}/{{currentParam 'section'}}/93",data-action="changeField",data-field-id="93",data-active="{{equalsSession 'activeSidebarPath' '93'}}")
+              span.title Field Fifteen
+              span.subtitle SW 5 28 25 W4
+          {{/if}}
 
-      {{#if currentContextIs 'equipment'}}
-      li
-        a(href="/{{currentContext}}/{{currentParam 'section'}}",data-equipment-id="1337",data-action="addEquipment")
-          span.title Add New Equipment
-          .iconWrapper.right.size-16
-            {{icon 'new'}}
-      li
-        a(href="/{{currentContext}}/{{currentParam 'section'}}/1337",data-equipment-id="1337",data-active="{{equalsSession 'activeSidebarPath' '1337'}}")
-          span.title Big Red
-          span.subtitle Pattison PLS 3300
-      //-li
-        a(href="/{{currentContext}}/{{currentParam 'section'}}/1234",data-equipment-id="1234")
-          span.title Unit Name 1
-          span.subtitle Pattison PLS 3300-ST400
-      //-li
-        a(href="/{{currentContext}}/{{currentParam 'section'}}/4321",data-equipment-id="4321")
-          span.title New One
-          span.subtitle John Deere 1910-340 Bushels
-      //-li
-        a(href="/{{currentContext}}/{{currentParam 'section'}}/1111",data-equipment-id="1111")
-          span.title My Truck
-          span.subtitle Ford F-450
-      //-li
-        a(href="/{{currentContext}}/{{currentParam 'section'}}/2222",data-equipment-id="2222")
-          span.title My Combine
-          span.subtitle Combine C3
-      //-li
-        a(href="/{{currentContext}}/{{currentParam 'section'}}/3333",data-equipment-id="3333")
-          span.title Fleet X
-          span.subtitle Corvette
-      {{/if}}
+          {{#if currentContextIs 'equipment'}}
+          li
+            a(href="/{{currentContext}}/{{currentParam 'section'}}",data-equipment-id="1337",data-action="addEquipment")
+              span.title Add New Equipment
+              .iconWrapper.right.size-16
+                {{icon 'new'}}
+          li
+            a(href="/{{currentContext}}/{{currentParam 'section'}}/1337",data-equipment-id="1337",data-active="{{equalsSession 'activeSidebarPath' '1337'}}")
+              span.title Big Red
+              span.subtitle Pattison PLS 3300
+          //-li
+            a(href="/{{currentContext}}/{{currentParam 'section'}}/1234",data-equipment-id="1234")
+              span.title Unit Name 1
+              span.subtitle Pattison PLS 3300-ST400
+          //-li
+            a(href="/{{currentContext}}/{{currentParam 'section'}}/4321",data-equipment-id="4321")
+              span.title New One
+              span.subtitle John Deere 1910-340 Bushels
+          //-li
+            a(href="/{{currentContext}}/{{currentParam 'section'}}/1111",data-equipment-id="1111")
+              span.title My Truck
+              span.subtitle Ford F-450
+          //-li
+            a(href="/{{currentContext}}/{{currentParam 'section'}}/2222",data-equipment-id="2222")
+              span.title My Combine
+              span.subtitle Combine C3
+          //-li
+            a(href="/{{currentContext}}/{{currentParam 'section'}}/3333",data-equipment-id="3333")
+              span.title Fleet X
+              span.subtitle Corvette
+          {{/if}}
 
-      {{#if currentContextIs 'market'}}
-      //-li
-        a(data-action="addCommodity")
-          span Add New Commodity
-          .iconWrapper.right.size-16
-            {{icon 'new'}}
-      li
-        a(href="/{{currentContext}}/{{currentParam 'section'}}/1221",data-commodity-id="1221",data-active="{{equalsSession 'activeSidebarPath' '1221'}}")
-          span.title Canola
-          span.subtitle 382.4 Ac
-      li
-        a(href="/{{currentContext}}/{{currentParam 'section'}}/2873",data-commodity-id="2873",data-active="{{equalsSession 'activeSidebarPath' '2873'}}")
-          span.title Carrots
-          span.subtitle 300 Ac
-      {{/if}}
+          {{#if currentContextIs 'market'}}
+          //-li
+            a(data-action="addCommodity")
+              span Add New Commodity
+              .iconWrapper.right.size-16
+                {{icon 'new'}}
+          li
+            a(href="/{{currentContext}}/{{currentParam 'section'}}/1221",data-commodity-id="1221",data-active="{{equalsSession 'activeSidebarPath' '1221'}}")
+              span.title Canola
+              span.subtitle 382.4 Ac
+          li
+            a(href="/{{currentContext}}/{{currentParam 'section'}}/2873",data-commodity-id="2873",data-active="{{equalsSession 'activeSidebarPath' '2873'}}")
+              span.title Carrots
+              span.subtitle 300 Ac
+          {{/if}}
 
-      {{!Farm Planner}}
-      {{#if currentContextIs 'farm-planner'}}
-        {{!Crop Plans}}
-        {{#if currentParamIs 'section' 'crop-plans'}}
-        li
-          a(data-action="addField",href="/farm-planner/crop-plans")
-            span.title Add New Field
-            .iconWrapper.right.size-16
-              {{icon 'new'}}
-        //-li
-          a(href="/{{currentContext}}/{{currentParam 'section'}}/1212",data-plan-id="1212")
-            span.title Farm Plan - 2013
-            span.subtitle Started on..
-        //-li
-          a(href="/{{currentContext}}/{{currentParam 'section'}}/2121",data-plan-id="2121")
-            span.title Farm Plan - 2014
-            span.subtitle Started on..
-        //-li
-          a(href="/{{currentContext}}/{{currentParam 'section'}}/3232",data-plan-id="3232")
-            span.title Farm Plan - 2015
-            span.subtitle Started on..
-        //-li
-          a(href="/{{currentContext}}/{{currentParam 'section'}}/4343",data-plan-id="4343")
-            span.title Farm Plan - 2016
-            span.subtitle Started on..
-        //-li
-          a(href="/{{currentContext}}/{{currentParam 'section'}}/5353",data-plan-id="5353")
-            span.title Farm Plan - 2017
-            span.subtitle Started on..
-        li
-          a(href="/{{currentContext}}/{{currentParam 'section'}}/370",data-action="changeField",data-field-id="370",data-active="{{equalsSession 'activeSidebarPath' '370'}}")
-            span.title Field One
-            span.subtitle E 24 28 26 W4
-        li
-          a(href="/{{currentContext}}/{{currentParam 'section'}}/371",data-action="changeField",data-field-id="371")
-            span.title Field Two
-            span.subtitle NE 21 28 25 W4
-        li
-          a(href="/{{currentContext}}/{{currentParam 'section'}}/96",data-action="changeField",data-field-id="96")
-            span.title Field Three
-            span.subtitle NE 32 27 25 W4
-        li
-          a(href="/{{currentContext}}/{{currentParam 'section'}}/98",data-action="changeField",data-field-id="98")
-            span.title Field Four
-            span.subtitle NE 33 27 25 W4
-        li
-          a(href="/{{currentContext}}/{{currentParam 'section'}}/92",data-action="changeField",data-field-id="92")
-            span.title Field Five
-            span.subtitle NE 5 28 25 W4
-        li
-          a(href="/{{currentContext}}/{{currentParam 'section'}}/670",data-action="changeField",data-field-id="670")
-            span.title Field Six
-            span.subtitle NW 33 27 25 W4 
-        li
-          a(href="/{{currentContext}}/{{currentParam 'section'}}/91",data-action="changeField",data-field-id="91")
-            span.title Field Seven
-            span.subtitle NW 5 28 25 W4
-        li
-          a(href="/{{currentContext}}/{{currentParam 'section'}}/97",data-action="changeField",data-field-id="97")
-            span.title Field Eight
-            span.subtitle S 33 27 25 W4
-        li
-          a(href="/{{currentContext}}/{{currentParam 'section'}}/95",data-action="changeField",data-field-id="95")
-            span.title Field Nine
-            span.subtitle SC 32 27 25 W4
-        li
-          a(href="/{{currentContext}}/{{currentParam 'section'}}/89",data-action="changeField",data-field-id="89")
-            span.title Field Ten
-            span.subtitle SC 6 28 25 W4
-        li
-          a(href="/{{currentContext}}/{{currentParam 'section'}}/90",data-action="changeField",data-field-id="90")
-            span.title Field Eleven
-            span.subtitle SC 6 28 25 W4 E
-        li
-          a(href="/{{currentContext}}/{{currentParam 'section'}}/88",data-action="changeField",data-field-id="88")
-            span.title Field Twelve
-            span.subtitle SC 6 28 25 W4 W
-        li
-          a(href="/{{currentContext}}/{{currentParam 'section'}}/476",data-action="changeField",data-field-id="476")
-            span.title Field Thirteen
-            span.subtitle SE 29 28 25 W4
-        li
-          a(href="/{{currentContext}}/{{currentParam 'section'}}/94",data-action="changeField",data-field-id="94")
-            span.title Field Fourteen
-            span.subtitle SE 5 28 25 W4
-        li
-          a(href="/{{currentContext}}/{{currentParam 'section'}}/93",data-action="changeField",data-field-id="93")
-            span.title Field Fifteen
-            span.subtitle SW 5 28 25 W4
-        {{/if}}
+          {{!Farm Planner}}
+          {{#if currentContextIs 'farm-planner'}}
+            {{!Crop Plans}}
+            {{#if currentParamIs 'section' 'crop-plans'}}
+            li
+              a(data-action="addField",href="/farm-planner/crop-plans")
+                span.title Add New Field
+                .iconWrapper.right.size-16
+                  {{icon 'new'}}
+            //-li
+              a(href="/{{currentContext}}/{{currentParam 'section'}}/1212",data-plan-id="1212")
+                span.title Farm Plan - 2013
+                span.subtitle Started on..
+            //-li
+              a(href="/{{currentContext}}/{{currentParam 'section'}}/2121",data-plan-id="2121")
+                span.title Farm Plan - 2014
+                span.subtitle Started on..
+            //-li
+              a(href="/{{currentContext}}/{{currentParam 'section'}}/3232",data-plan-id="3232")
+                span.title Farm Plan - 2015
+                span.subtitle Started on..
+            //-li
+              a(href="/{{currentContext}}/{{currentParam 'section'}}/4343",data-plan-id="4343")
+                span.title Farm Plan - 2016
+                span.subtitle Started on..
+            //-li
+              a(href="/{{currentContext}}/{{currentParam 'section'}}/5353",data-plan-id="5353")
+                span.title Farm Plan - 2017
+                span.subtitle Started on..
+            li
+              a(href="/{{currentContext}}/{{currentParam 'section'}}/370",data-action="changeField",data-field-id="370",data-active="{{equalsSession 'activeSidebarPath' '370'}}")
+                span.title Field One
+                span.subtitle E 24 28 26 W4
+            li
+              a(href="/{{currentContext}}/{{currentParam 'section'}}/371",data-action="changeField",data-field-id="371",data-active="{{equalsSession 'activeSidebarPath' '371'}}")
+                span.title Field Two
+                span.subtitle NE 21 28 25 W4
+            li
+              a(href="/{{currentContext}}/{{currentParam 'section'}}/96",data-action="changeField",data-field-id="96",data-active="{{equalsSession 'activeSidebarPath' '96'}}")
+                span.title Field Three
+                span.subtitle NE 32 27 25 W4
+            li
+              a(href="/{{currentContext}}/{{currentParam 'section'}}/98",data-action="changeField",data-field-id="98",data-active="{{equalsSession 'activeSidebarPath' '98'}}")
+                span.title Field Four
+                span.subtitle NE 33 27 25 W4
+            li
+              a(href="/{{currentContext}}/{{currentParam 'section'}}/92",data-action="changeField",data-field-id="92",data-active="{{equalsSession 'activeSidebarPath' '92'}}")
+                span.title Field Five
+                span.subtitle NE 5 28 25 W4
+            li
+              a(href="/{{currentContext}}/{{currentParam 'section'}}/670",data-action="changeField",data-field-id="670",data-active="{{equalsSession 'activeSidebarPath' '670'}}")
+                span.title Field Six
+                span.subtitle NW 33 27 25 W4 
+            li
+              a(href="/{{currentContext}}/{{currentParam 'section'}}/91",data-action="changeField",data-field-id="91",data-active="{{equalsSession 'activeSidebarPath' '91'}}")
+                span.title Field Seven
+                span.subtitle NW 5 28 25 W4
+            li
+              a(href="/{{currentContext}}/{{currentParam 'section'}}/97",data-action="changeField",data-field-id="97",data-active="{{equalsSession 'activeSidebarPath' '97'}}")
+                span.title Field Eight
+                span.subtitle S 33 27 25 W4
+            li
+              a(href="/{{currentContext}}/{{currentParam 'section'}}/95",data-action="changeField",data-field-id="95",data-active="{{equalsSession 'activeSidebarPath' '95'}}")
+                span.title Field Nine
+                span.subtitle SC 32 27 25 W4
+            li
+              a(href="/{{currentContext}}/{{currentParam 'section'}}/89",data-action="changeField",data-field-id="89",data-active="{{equalsSession 'activeSidebarPath' '89'}}")
+                span.title Field Ten
+                span.subtitle SC 6 28 25 W4
+            li
+              a(href="/{{currentContext}}/{{currentParam 'section'}}/90",data-action="changeField",data-field-id="90",data-active="{{equalsSession 'activeSidebarPath' '90'}}")
+                span.title Field Eleven
+                span.subtitle SC 6 28 25 W4 E
+            li
+              a(href="/{{currentContext}}/{{currentParam 'section'}}/88",data-action="changeField",data-field-id="88",data-active="{{equalsSession 'activeSidebarPath' '88'}}")
+                span.title Field Twelve
+                span.subtitle SC 6 28 25 W4 W
+            li
+              a(href="/{{currentContext}}/{{currentParam 'section'}}/476",data-action="changeField",data-field-id="476",data-active="{{equalsSession 'activeSidebarPath' '476'}}")
+                span.title Field Thirteen
+                span.subtitle SE 29 28 25 W4
+            li
+              a(href="/{{currentContext}}/{{currentParam 'section'}}/94",data-action="changeField",data-field-id="94",data-active="{{equalsSession 'activeSidebarPath' '94'}}")
+                span.title Field Fourteen
+                span.subtitle SE 5 28 25 W4
+            li
+              a(href="/{{currentContext}}/{{currentParam 'section'}}/93",data-action="changeField",data-field-id="93",data-active="{{equalsSession 'activeSidebarPath' '93'}}")
+                span.title Field Fifteen
+                span.subtitle SW 5 28 25 W4
+            {{/if}}
 
-        {{!Revenue and Expenses}}
-        {{#if currentParamIs 'section' 'revenue-and-expenses'}}
-        li
-          a(data-action="addCommodity")
-            span.title Add New Commodity
-            .iconWrapper.right.size-16
-              {{icon 'new'}}
-        li
-          a(href="/{{currentContext}}/{{currentParam 'section'}}/1221",data-commodity-id="1221",data-active="{{equalsSession 'activeSidebarPath' '1221'}}")
-            span.title Canola
-            span.subtitle 800 Ac
-        li
-          a(href="/{{currentContext}}/{{currentParam 'section'}}/1010",data-commodity-id="1010",data-active="{{equalsSession 'activeSidebarPath' '1010'}}")
-            span.title Carrots
-            span.subtitle 540 Ac
-        //-li
-          a(href="/{{currentContext}}/{{currentParam 'section'}}/1212",data-commodity-id="1212")
-            span.title Barley
-            span.subtitle 750 Ac
-        //-li
-          a(href="/{{currentContext}}/{{currentParam 'section'}}/9191",data-commodity-id="9191")
-            span.title Hard White Wheat
-            span.subtitle 650 Ac
-        //-li
-          a(href="/{{currentContext}}/{{currentParam 'section'}}/8181",data-commodity-id="8181")
-            span.title Faba Beans
-            span.subtitle 320 Ac
-        {{/if}}
+            {{!Revenue and Expenses}}
+            {{#if currentParamIs 'section' 'revenue-and-expenses'}}
+            li
+              a(data-action="addCommodity")
+                span.title Add New Commodity
+                .iconWrapper.right.size-16
+                  {{icon 'new'}}
+            li
+              a(href="/{{currentContext}}/{{currentParam 'section'}}/1221",data-commodity-id="1221",data-active="{{equalsSession 'activeSidebarPath' '1221'}}")
+                span.title Canola
+                span.subtitle 800 Ac
+            li
+              a(href="/{{currentContext}}/{{currentParam 'section'}}/1010",data-commodity-id="1010",data-active="{{equalsSession 'activeSidebarPath' '1010'}}")
+                span.title Carrots
+                span.subtitle 540 Ac
+            //-li
+              a(href="/{{currentContext}}/{{currentParam 'section'}}/1212",data-commodity-id="1212")
+                span.title Barley
+                span.subtitle 750 Ac
+            //-li
+              a(href="/{{currentContext}}/{{currentParam 'section'}}/9191",data-commodity-id="9191")
+                span.title Hard White Wheat
+                span.subtitle 650 Ac
+            //-li
+              a(href="/{{currentContext}}/{{currentParam 'section'}}/8181",data-commodity-id="8181")
+                span.title Faba Beans
+                span.subtitle 320 Ac
+            {{/if}}
 
-        {{!Market Plan}}
-        {{#if currentParamIs 'section' 'market-plan'}}
-        li
-          a(data-action="addCommodity")
-            span.title Add New Commodity
-            .iconWrapper.right.size-16
-              {{icon 'new'}}
-        li
-          a(href="/{{currentContext}}/{{currentParam 'section'}}/1221",data-commodity-id="1221",data-active="{{equalsSession 'activeSidebarPath' '1221'}}")
-            span.title Canola
-            span.subtitle 800 Ac
-        li
-          a(href="/{{currentContext}}/{{currentParam 'section'}}/1010",data-commodity-id="1010",data-active="{{equalsSession 'activeSidebarPath' '1010'}}")
-            span.title Carrots
-            span.subtitle 540 Ac
-        //-li
-          a(href="/{{currentContext}}/{{currentParam 'section'}}/1010",data-commodity-id="1010")
-            span.title HR Spring Wheat
-            span.subtitle 540 Ac
-        //-li
-          a(href="/{{currentContext}}/{{currentParam 'section'}}/1212",data-commodity-id="1212")
-            span.title Barley
-            span.subtitle 750 Ac
-        //-li
-          a(href="/{{currentContext}}/{{currentParam 'section'}}/9191",data-commodity-id="9191")
-            span.title Hard White Wheat
-            span.subtitle 650 Ac
-        //-li
-          a(href="/{{currentContext}}/{{currentParam 'section'}}/8181",data-commodity-id="8181")
-            span.title Faba Beans
-            span.subtitle 320 Ac
-        //-li
-          a(href="/{{currentContext}}/{{currentParam 'section'}}/5342",data-commodity-id="5342")
-            span.title 46-0-0
-            span.subtitle 125 MT
-        //-li
-          a(href="/{{currentContext}}/{{currentParam 'section'}}/8320",data-commodity-id="8320")
-            span.title 11-52-0-0
-            span.subtitle 12 MT
-        //-li
-          a(href="/{{currentContext}}/{{currentParam 'section'}}/7289",data-commodity-id="7289")
-            span.title 21-0-0-24
-            span.subtitle 976 MT
-        {{/if}}
-      {{/if}}
+            {{!Market Plan}}
+            {{#if currentParamIs 'section' 'market-plan'}}
+            li
+              a(data-action="addCommodity")
+                span.title Add New Commodity
+                .iconWrapper.right.size-16
+                  {{icon 'new'}}
+            li
+              a(href="/{{currentContext}}/{{currentParam 'section'}}/1221",data-commodity-id="1221",data-active="{{equalsSession 'activeSidebarPath' '1221'}}")
+                span.title Canola
+                span.subtitle 800 Ac
+            li
+              a(href="/{{currentContext}}/{{currentParam 'section'}}/1010",data-commodity-id="1010",data-active="{{equalsSession 'activeSidebarPath' '1010'}}")
+                span.title Carrots
+                span.subtitle 540 Ac
+            //-li
+              a(href="/{{currentContext}}/{{currentParam 'section'}}/1010",data-commodity-id="1010")
+                span.title HR Spring Wheat
+                span.subtitle 540 Ac
+            //-li
+              a(href="/{{currentContext}}/{{currentParam 'section'}}/1212",data-commodity-id="1212")
+                span.title Barley
+                span.subtitle 750 Ac
+            //-li
+              a(href="/{{currentContext}}/{{currentParam 'section'}}/9191",data-commodity-id="9191")
+                span.title Hard White Wheat
+                span.subtitle 650 Ac
+            //-li
+              a(href="/{{currentContext}}/{{currentParam 'section'}}/8181",data-commodity-id="8181")
+                span.title Faba Beans
+                span.subtitle 320 Ac
+            //-li
+              a(href="/{{currentContext}}/{{currentParam 'section'}}/5342",data-commodity-id="5342")
+                span.title 46-0-0
+                span.subtitle 125 MT
+            //-li
+              a(href="/{{currentContext}}/{{currentParam 'section'}}/8320",data-commodity-id="8320")
+                span.title 11-52-0-0
+                span.subtitle 12 MT
+            //-li
+              a(href="/{{currentContext}}/{{currentParam 'section'}}/7289",data-commodity-id="7289")
+                span.title 21-0-0-24
+                span.subtitle 976 MT
+            {{/if}}
+          {{/if}}
 
 template(name="rightSidebar")
-  .sidebarToggle.right.fixed(data-state="{{getSession 'rightSidebarToggleState'}}")
+  .sidebarToggle.right.fixed(data-sidebarState="{{getSession 'rightSidebarToggleState'}}",data-state="{{getSession 'rightSidebarState'}}")
     .sidebarNotch
       .iconWrapper.right.size-24
         {{icon 'sidebar'}}
-  .sidebar.right.fixed(data-state="{{getSession 'rightSidebarState'}}",data-sidebarToggleState="{{getSession 'rightSidebarToggleState'}}")
-    {{#if currentParamIs 'section' 'field-info'}}
-    .section
-      .title Field ID
-      form
-        ul.list
-          {{#if equalsSession 'fieldEditMode' 'edit'}}
-          li.item.collapse
-            label(style="width:70px;") Field Name
-            input(style="width:110px;",type="text",placeholder="Field Name")
-            .iconWrapper.right.size-24
-              {{icon 'remove'}}
-          li.item.collapse
-            label(style="width:70px;") Division
-            select.select
-              option(value="Division") Division
-              option(value="First") First
-              option(value="Second") Second
-              option(value="Third") Third
-              option(value="Fourth") Fourth
-              option(value="Fifth") Fifth
-              option(value="Sixth") Sixth
-              option(value="Seventh") Seventh
-              option(value="Eighth") Eighth
-              option(value="Ninth") Ninth
-              option(value="Tenth") Tenth
-          li.item.collapse
-            label(style="width:70px;") Section
-            input(style="width:70px;",type="text",placeholder="Section")
-          li.item.collapse
-            label(style="width:70px;") Township
-            input(style="width:70px;",type="text",placeholder="Township")
-          li.item.collapse
-            label(style="width:70px;") Range
-            input(style="width:70px;",type="text",placeholder="Range")
-          li.item.collapse
-            label(style="width:70px;") Meridian
-            select.select
-              option(value="Meridian") Meridian
-          li.item.collapse
-            label(style="width:70px;") Subdivision
-            select.select
-              option(value="Subdivision") Subdivision
-          {{else}}
-          li.item.collapse
-            h3 Canola (Invigor)
-            h3 175.2 acres
-            h3 Projected Yield: 72 bu/acre
-          {{/if}}
-          li.item.collapse
-            {{#if equalsSession 'fieldEditMode' 'edit'}}
-            .button.rounded(style="margin-bottom:10px;",data-action="toggleNotice",data-notice="field-boundary")
-              | Edit Field Boundary
-            {{/if}}
-            .button.rounded(data-action="toggleFieldDetails")
+  .sidebar.firstPane.right.fixed(data-state="{{getSession 'rightSidebarState'}}",data-sidebarToggleState="{{getSession 'rightSidebarToggleState'}}")
+    .secondPane
+      .thirdPane
+        {{#if currentParamIs 'section' 'field-info'}}
+        .section
+          .title Field ID
+          form
+            ul.list
               {{#if equalsSession 'fieldEditMode' 'edit'}}
-              | Save Field Details
+              li.item.collapse
+                label(style="width:70px;") Field Name
+                input(style="width:110px;",type="text",placeholder="Field Name")
+                .iconWrapper.right.size-24
+                  {{icon 'remove'}}
+              li.item.collapse
+                label(style="width:70px;") Division
+                select.select
+                  option(value="Division") Division
+                  option(value="First") First
+                  option(value="Second") Second
+                  option(value="Third") Third
+                  option(value="Fourth") Fourth
+                  option(value="Fifth") Fifth
+                  option(value="Sixth") Sixth
+                  option(value="Seventh") Seventh
+                  option(value="Eighth") Eighth
+                  option(value="Ninth") Ninth
+                  option(value="Tenth") Tenth
+              li.item.collapse
+                label(style="width:70px;") Section
+                input(style="width:70px;",type="text",placeholder="Section")
+              li.item.collapse
+                label(style="width:70px;") Township
+                input(style="width:70px;",type="text",placeholder="Township")
+              li.item.collapse
+                label(style="width:70px;") Range
+                input(style="width:70px;",type="text",placeholder="Range")
+              li.item.collapse
+                label(style="width:70px;") Meridian
+                select.select
+                  option(value="Meridian") Meridian
+              li.item.collapse
+                label(style="width:70px;") Subdivision
+                select.select
+                  option(value="Subdivision") Subdivision
               {{else}}
-              | Edit Field Details
+              li.item.collapse
+                h3 Canola (Invigor)
+                h3 175.2 acres
+                h3 Projected Yield: 72 bu/acre
               {{/if}}
-    .section
-      .title Crop Plan
-      form
-        ul.list
-          li.item.collapse
-            label(style="width:50px;") Acres
-            input(type="text",placeholder="Acres",style="width:60px;float:left;")
-            select.select
-              option(value="Crop Type") Crop Type
-          li.item.collapse
-            label(style="width:50px;") Variety
-            input(style="width:150px;",type="text",placeholder="Variety")
-          li.item.collapse
-            label(style="width:50px;") Yield
-            input(type="text",placeholder="Yield",style="width:90px;float:left;")
-            select.select
-              option(value="bu/ac") bu/ac
-          li.item.collapse
-            label Sure-Check Soil Testing
-            input(type="checkbox",name="sureCheck",value="no")
-          li.item.collapse
-            label Optimize RX
-            input(type="checkbox",name="optimizeRX",value="no")
-    .section
-      .title Notes
-        a.iconWrapper.right.size-16(data-action="toggleCover",data-cover="notes")
-          {{icon 'new'}}
-      ul.list
-        li
-          a(data-action="toggleCover",data-cover="viewNote") 04 Oct 2012 - Harvest
-        li
-          a(data-action="toggleCover",data-cover="viewNote") 15 May 2013 - Seeding
-        li
-          a(data-action="toggleCover",data-cover="viewNote") 02 Jun 2013 - Scouting Notes
-    .section
-      .title Crop Rotation
-      form
-        ul.list
-          li.item.collapse
-            label.sublabel 2015
-            .subItem
-              label.right Crop Type
-              select.right(style="width:95px;")
-                option(value="Select") Select
-                option(value="Canola") Canola
-            .subItem
-              label.right Yield
-              input.left(style="width:60px;",type="text",placeholder="0")
-              select.right
-                option(value="bu/ac") bu/ac
-                option(value="obs/ac") obs/ac
-          li.item.collapse
-            label.sublabel 2013
-            .subItem
-              label.right Crop Type
-              select.right(style="width:95px;")
-                option(value="Select") Select
-                option(value="Canola") Canola
-            .subItem
-              label.right Yield
-              input.left(style="width:60px;",type="text",placeholder="0")
-              select.right
-                option(value="bu/ac") bu/ac
-                option(value="obs/ac") obs/ac
-          li.item.collapse
-            label.sublabel 2012
-            .subItem
-              label.right Crop Type
-              select.right(style="width:95px;")
-                option(value="Select") Select
-                option(value="Canola") Canola
-            .subItem
-              label.right Yield
-              input.left(style="width:60px;",type="text",placeholder="0")
-              select.right
-                option(value="bu/ac") bu/ac
-                option(value="obs/ac") obs/ac
-          li.item.collapse
-            label.sublabel 2011
-            .subItem
-              label.right Crop Type
-              select.right(style="width:95px;")
-                option(value="Select") Select
-                option(value="Canola") Canola
-            .subItem
-              label.right Yield
-              input.left(style="width:60px;",type="text",placeholder="0")
-              select.right
-                option(value="bu/ac") bu/ac
-                option(value="obs/ac") obs/ac
-    .section
-      a.button.rounded Cancel
-      a.button.rounded Save Field Details
-    {{/if}}
+              li.item.collapse
+                {{#if equalsSession 'fieldEditMode' 'edit'}}
+                .button.rounded(style="margin-bottom:10px;",data-action="toggleNotice",data-notice="field-boundary")
+                  | Edit Field Boundary
+                {{/if}}
+                .button.rounded(data-action="toggleFieldDetails")
+                  {{#if equalsSession 'fieldEditMode' 'edit'}}
+                  | Save Field Details
+                  {{else}}
+                  | Edit Field Details
+                  {{/if}}
+        .section
+          .title Crop Plan
+          form
+            ul.list
+              li.item.collapse
+                label(style="width:50px;") Acres
+                input(type="text",placeholder="Acres",style="width:60px;float:left;")
+                select.select
+                  option(value="Crop Type") Crop Type
+              li.item.collapse
+                label(style="width:50px;") Variety
+                input(style="width:150px;",type="text",placeholder="Variety")
+              li.item.collapse
+                label(style="width:50px;") Yield
+                input(type="text",placeholder="Yield",style="width:90px;float:left;")
+                select.select
+                  option(value="bu/ac") bu/ac
+              li.item.collapse
+                label Sure-Check Soil Testing
+                input(type="checkbox",name="sureCheck",value="no")
+              li.item.collapse
+                label Optimize RX
+                input(type="checkbox",name="optimizeRX",value="no")
+        .section
+          .title Notes
+            a.iconWrapper.right.size-16(data-action="toggleCover",data-cover="notes")
+              {{icon 'new'}}
+          ul.list
+            li
+              a(data-action="toggleCover",data-cover="viewNote") 04 Oct 2012 - Harvest
+            li
+              a(data-action="toggleCover",data-cover="viewNote") 15 May 2013 - Seeding
+            li
+              a(data-action="toggleCover",data-cover="viewNote") 02 Jun 2013 - Scouting Notes
+        .section
+          .title Crop Rotation
+          form
+            ul.list
+              li.item.collapse
+                label.sublabel 2015
+                .subItem
+                  label.right Crop Type
+                  select.right(style="width:95px;")
+                    option(value="Select") Select
+                    option(value="Canola") Canola
+                .subItem
+                  label.right Yield
+                  input.left(style="width:60px;",type="text",placeholder="0")
+                  select.right
+                    option(value="bu/ac") bu/ac
+                    option(value="obs/ac") obs/ac
+              li.item.collapse
+                label.sublabel 2013
+                .subItem
+                  label.right Crop Type
+                  select.right(style="width:95px;")
+                    option(value="Select") Select
+                    option(value="Canola") Canola
+                .subItem
+                  label.right Yield
+                  input.left(style="width:60px;",type="text",placeholder="0")
+                  select.right
+                    option(value="bu/ac") bu/ac
+                    option(value="obs/ac") obs/ac
+              li.item.collapse
+                label.sublabel 2012
+                .subItem
+                  label.right Crop Type
+                  select.right(style="width:95px;")
+                    option(value="Select") Select
+                    option(value="Canola") Canola
+                .subItem
+                  label.right Yield
+                  input.left(style="width:60px;",type="text",placeholder="0")
+                  select.right
+                    option(value="bu/ac") bu/ac
+                    option(value="obs/ac") obs/ac
+              li.item.collapse
+                label.sublabel 2011
+                .subItem
+                  label.right Crop Type
+                  select.right(style="width:95px;")
+                    option(value="Select") Select
+                    option(value="Canola") Canola
+                .subItem
+                  label.right Yield
+                  input.left(style="width:60px;",type="text",placeholder="0")
+                  select.right
+                    option(value="bu/ac") bu/ac
+                    option(value="obs/ac") obs/ac
+        .section
+          a.button.rounded Cancel
+          a.button.rounded Save Field Details
+        {{/if}}
 
-    {{#if currentParamIs 'section' 'fertility-map'}}
-    .section
-      .title Field One
-      ul.list
-        li.item
-          span.prefix Crop Plan
-          span.postfix Invigor Canola
-        li.item
-          span.prefix Projected Yield
-          span.postfix 72 bu/ac
-    .section
-      table.table.inline
-        thead
-          tr
-            td
-              .cell Zone
-            td
-              .cell Fertility
-              //- (bu/ac)
-            td
-              .cell Acres
-        tbody
-          tr
-            td
-              .cell(data-zone="1")
-            td
-              .cell 66.411 - 81.332
-            td
-              .cell 6.0
-          tr
-            td
-              .cell(data-zone="2")
-            td
-              .cell 81.332 - 89.579
-            td
-              .cell 12.1
-          tr
-            td
-              .cell(data-zone="3")
-            td
-              .cell 89.597 - 95.151
-            td
-              .cell 17.8
-          tr
-            td
-              .cell(data-zone="4")
-            td
-              .cell 95.151 - 99.442
-            td
-              .cell 30.1
-          tr
-            td
-              .cell(data-zone="5")
-            td
-              .cell 99.442 - 102.756
-            td
-              .cell 48.6
-          tr
-            td
-              .cell(data-zone="6")
-            td
-              .cell 102.756 - 105.618
-            td
-              .cell 73.3
-          tr
-            td
-              .cell(data-zone="7")
-            td
-              .cell 105.618 - 111.979
-            td
-              .cell 30.2
-        tfoot
-          tr
-            td(colspan="2")
-              .cell Total Acres
-            td
-              .cell 217.9
-    {{/if}}
+        {{#if currentParamIs 'section' 'fertility-map'}}
+        .section
+          .title Field One
+          ul.list
+            li.item
+              span.prefix Crop Plan
+              span.postfix Invigor Canola
+            li.item
+              span.prefix Projected Yield
+              span.postfix 72 bu/ac
+        .section
+          table.table.inline
+            thead
+              tr
+                td
+                  .cell Zone
+                td
+                  .cell Fertility
+                  //- (bu/ac)
+                td
+                  .cell Acres
+            tbody
+              tr
+                td
+                  .cell(data-zone="1")
+                td
+                  .cell 66.411 - 81.332
+                td
+                  .cell 6.0
+              tr
+                td
+                  .cell(data-zone="2")
+                td
+                  .cell 81.332 - 89.579
+                td
+                  .cell 12.1
+              tr
+                td
+                  .cell(data-zone="3")
+                td
+                  .cell 89.597 - 95.151
+                td
+                  .cell 17.8
+              tr
+                td
+                  .cell(data-zone="4")
+                td
+                  .cell 95.151 - 99.442
+                td
+                  .cell 30.1
+              tr
+                td
+                  .cell(data-zone="5")
+                td
+                  .cell 99.442 - 102.756
+                td
+                  .cell 48.6
+              tr
+                td
+                  .cell(data-zone="6")
+                td
+                  .cell 102.756 - 105.618
+                td
+                  .cell 73.3
+              tr
+                td
+                  .cell(data-zone="7")
+                td
+                  .cell 105.618 - 111.979
+                td
+                  .cell 30.2
+            tfoot
+              tr
+                td(colspan="2")
+                  .cell Total Acres
+                td
+                  .cell 217.9
+        {{/if}}
 
-    {{#if currentParamIs 'section' 'rx-rates'}}
-    //-.title Agronomist Notes
-    //-| Blend = 7.3-34-20-0
-    .section
-      .title Agronomist Notes
-        a.iconWrapper.right.size-16(data-action="toggleCover",data-cover="notes")
-          {{icon 'new'}}
-      ul.list
-        li
-          a(data-action="toggleCover",data-cover="viewNote") Blend = 7.3-34-20-0
-    .section
-      .title JD 1910 - Tank Configuration
-      form
-        ul.list
-          li.item.collapse
-            label Tank 1
-            input.right(style="width:150px;",type="text",placeholder="200 bushels",value="200 bushels")
-            input.right(style="width:150px;",type="text",placeholder="Seed",value="Seed")
-          li.item.collapse
-            label Tank 2
-            input.right(style="width:150px;",type="text",placeholder="150 bushels",value="150 bushels")
-            input.right(style="width:150px;",type="text",placeholder="Blend",value="Blend")
-          li.item.collapse
-            label Tank 3
-            input.right(style="width:150px;",type="text",placeholder="200 bushels",value="200 bushels")
-            input.right(style="width:150px;",type="text",placeholder="Urea",value="Urea")
-    .section
-      a.button.rounded(href="") View a summary of all fields
-    {{/if}}
+        {{#if currentParamIs 'section' 'rx-rates'}}
+        //-.title Agronomist Notes
+        //-| Blend = 7.3-34-20-0
+        .section
+          .title Agronomist Notes
+            a.iconWrapper.right.size-16(data-action="toggleCover",data-cover="notes")
+              {{icon 'new'}}
+          ul.list
+            li
+              a(data-action="toggleCover",data-cover="viewNote") Blend = 7.3-34-20-0
+        .section
+          .title JD 1910 - Tank Configuration
+          form
+            ul.list
+              li.item.collapse
+                label Tank 1
+                input.right(style="width:150px;",type="text",placeholder="200 bushels",value="200 bushels")
+                input.right(style="width:150px;",type="text",placeholder="Seed",value="Seed")
+              li.item.collapse
+                label Tank 2
+                input.right(style="width:150px;",type="text",placeholder="150 bushels",value="150 bushels")
+                input.right(style="width:150px;",type="text",placeholder="Blend",value="Blend")
+              li.item.collapse
+                label Tank 3
+                input.right(style="width:150px;",type="text",placeholder="200 bushels",value="200 bushels")
+                input.right(style="width:150px;",type="text",placeholder="Urea",value="Urea")
+        .section
+          a.button.rounded(href="") View a summary of all fields
+        {{/if}}
 
-    {{#if currentParamIs 'section' 'hedge-plan'}}
-    .section
-      .title Canola 2014 - Hedge
-      .progress.rounded
-        .meter(style="width: 55%")
-        .subtitle 55% Hedged (398 of 725.25 MT)
-    .section
-      .title Time Triggers
-      form
-        ul.list
-          li.item.collapse
-            input.percentage(type="text",placeholder="0%",value="55%")
-            span on
-            input.datepicker(type="text",placeholder="DD/MM/YYYY",value="Current Date")
-            .iconWrapper.size-16.right
-              {{icon 'remove'}}
-          li.item.collapse
-            input.percentage(type="text",placeholder="0%",value="75%")
-            span on
-            input.datepicker(type="text",placeholder="DD/MM/YYYY",value="01/12/2013")
-            .iconWrapper.size-16.right
-              {{icon 'remove'}}
-          li.item.collapse
-            input.percentage(type="text",placeholder="0%",value="100%")
-            span on
-            input.datepicker(type="text",placeholder="DD/MM/YYYY",value="15/02/2014")
-            .iconWrapper.size-16.right
-              {{icon 'remove'}}
-          li.item.collapse
-            input.percentage(type="text",placeholder="0%")
-            span on
-            input.datepicker(type="text",placeholder="DD/MM/YYYY")
-            .iconWrapper.size-16.right
-              {{icon 'remove'}}
-    .section
-      .title Margin Triggers
-      form
-        ul.list
-          li.item.collapse
-            input.percentage(type="text",placeholder="0%",value="75%")
-            span when
-            input.currency(type="text",placeholder="$0/acre",value="$250/acre")
-            .iconWrapper.size-16.right
-              {{icon 'remove'}}
-          li.item.collapse
-            input.percentage(type="text",placeholder="0%",value="90%")
-            span when
-            input.currency(type="text",placeholder="$0/acre",value="$750/acre")
-            .iconWrapper.size-16.right
-              {{icon 'remove'}}
-          li.item.collapse
-            input.percentage(type="text",placeholder="0%",value="100%")
-            span when
-            input.currency(type="text",placeholder="$0/acre",value="$280/acre")
-            .iconWrapper.size-16.right
-              {{icon 'remove'}}
-          li.item.collapse
-            input.percentage(type="text",placeholder="0%")
-            span when
-            input.currency(type="text",placeholder="$0/acre")
-            .iconWrapper.size-16.right
-              {{icon 'remove'}}
-    .section
-      .title Notifications
-      form
-        ul.list
-          li.item.collapse
-            label When triggers reached
-            input(type="checkbox",name="triggers",value="no")
-          li.item.collapse
-            label When contracts due
-            input(type="checkbox",name="contracts",value="no")
-    .section
-      .button.rounded(data-action="updateHedge")
-        | Save
-    {{/if}}
+        {{#if currentParamIs 'section' 'hedge-plan'}}
+        .section
+          .title Canola 2014 - Hedge
+          .progress.rounded
+            .meter(style="width: 55%")
+            .subtitle 55% Hedged (398 of 725.25 MT)
+        .section
+          .title Time Triggers
+          form
+            ul.list
+              li.item.collapse
+                input.percentage(type="text",placeholder="0%",value="55%")
+                span on
+                input.datepicker(type="text",placeholder="DD/MM/YYYY",value="Current Date")
+                .iconWrapper.size-16.right
+                  {{icon 'remove'}}
+              li.item.collapse
+                input.percentage(type="text",placeholder="0%",value="75%")
+                span on
+                input.datepicker(type="text",placeholder="DD/MM/YYYY",value="01/12/2013")
+                .iconWrapper.size-16.right
+                  {{icon 'remove'}}
+              li.item.collapse
+                input.percentage(type="text",placeholder="0%",value="100%")
+                span on
+                input.datepicker(type="text",placeholder="DD/MM/YYYY",value="15/02/2014")
+                .iconWrapper.size-16.right
+                  {{icon 'remove'}}
+              li.item.collapse
+                input.percentage(type="text",placeholder="0%")
+                span on
+                input.datepicker(type="text",placeholder="DD/MM/YYYY")
+                .iconWrapper.size-16.right
+                  {{icon 'remove'}}
+        .section
+          .title Margin Triggers
+          form
+            ul.list
+              li.item.collapse
+                input.percentage(type="text",placeholder="0%",value="75%")
+                span when
+                input.currency(type="text",placeholder="$0/acre",value="$250/acre")
+                .iconWrapper.size-16.right
+                  {{icon 'remove'}}
+              li.item.collapse
+                input.percentage(type="text",placeholder="0%",value="90%")
+                span when
+                input.currency(type="text",placeholder="$0/acre",value="$750/acre")
+                .iconWrapper.size-16.right
+                  {{icon 'remove'}}
+              li.item.collapse
+                input.percentage(type="text",placeholder="0%",value="100%")
+                span when
+                input.currency(type="text",placeholder="$0/acre",value="$280/acre")
+                .iconWrapper.size-16.right
+                  {{icon 'remove'}}
+              li.item.collapse
+                input.percentage(type="text",placeholder="0%")
+                span when
+                input.currency(type="text",placeholder="$0/acre")
+                .iconWrapper.size-16.right
+                  {{icon 'remove'}}
+        .section
+          .title Notifications
+          form
+            ul.list
+              li.item.collapse
+                label When triggers reached
+                input(type="checkbox",name="triggers",value="no")
+              li.item.collapse
+                label When contracts due
+                input(type="checkbox",name="contracts",value="no")
+        .section
+          .button.rounded(data-action="updateHedge")
+            | Save
+        {{/if}}
 
-    {{#if currentParamIs 'section' 'crop-plans'}}
-    .section
-      .title Field ID
-      form
-        ul.list
-          {{#if equalsSession 'fieldEditMode' 'edit'}}
-          li.item.collapse
-            label(style="width:70px;") Field Name
-            input(style="width:110px;",type="text",placeholder="Field Name")
-            .iconWrapper.right.size-24
-              {{icon 'remove'}}
-          li.item.collapse
-            label(style="width:70px;") Division
-            select.select
-              option(value="Division") Division
-              option(value="First") First
-              option(value="Second") Second
-              option(value="Third") Third
-              option(value="Fourth") Fourth
-              option(value="Fifth") Fifth
-              option(value="Sixth") Sixth
-              option(value="Seventh") Seventh
-              option(value="Eighth") Eighth
-              option(value="Ninth") Ninth
-              option(value="Tenth") Tenth
-          li.item.collapse
-            label(style="width:70px;") Section
-            input(style="width:70px;",type="text",placeholder="Section")
-          li.item.collapse
-            label(style="width:70px;") Township
-            input(style="width:70px;",type="text",placeholder="Township")
-          li.item.collapse
-            label(style="width:70px;") Range
-            input(style="width:70px;",type="text",placeholder="Range")
-          li.item.collapse
-            label(style="width:70px;") Meridian
-            select.select
-              option(value="Meridian") Meridian
-          li.item.collapse
-            label(style="width:70px;") Subdivision
-            select.select
-              option(value="Subdivision") Subdivision
-          {{else}}
-          li.item.collapse
-            h3 Canola (Invigor)
-            h3 175.2 acres
-            h3 Projected Yield: 72 bu/acre
-          {{/if}}
-          li.item.collapse
-            {{#if equalsSession 'fieldEditMode' 'edit'}}
-            .button.rounded(style="margin-bottom:10px;",data-action="toggleNotice",data-notice="field-boundary")
-              | Edit Field Boundary
-            {{/if}}
-            .button.rounded(data-action="toggleFieldDetails")
+        {{#if currentParamIs 'section' 'crop-plans'}}
+        .section
+          .title Field ID
+          form
+            ul.list
               {{#if equalsSession 'fieldEditMode' 'edit'}}
-              | Save Field Details
+              li.item.collapse
+                label(style="width:70px;") Field Name
+                input(style="width:110px;",type="text",placeholder="Field Name")
+                .iconWrapper.right.size-24
+                  {{icon 'remove'}}
+              li.item.collapse
+                label(style="width:70px;") Division
+                select.select
+                  option(value="Division") Division
+                  option(value="First") First
+                  option(value="Second") Second
+                  option(value="Third") Third
+                  option(value="Fourth") Fourth
+                  option(value="Fifth") Fifth
+                  option(value="Sixth") Sixth
+                  option(value="Seventh") Seventh
+                  option(value="Eighth") Eighth
+                  option(value="Ninth") Ninth
+                  option(value="Tenth") Tenth
+              li.item.collapse
+                label(style="width:70px;") Section
+                input(style="width:70px;",type="text",placeholder="Section")
+              li.item.collapse
+                label(style="width:70px;") Township
+                input(style="width:70px;",type="text",placeholder="Township")
+              li.item.collapse
+                label(style="width:70px;") Range
+                input(style="width:70px;",type="text",placeholder="Range")
+              li.item.collapse
+                label(style="width:70px;") Meridian
+                select.select
+                  option(value="Meridian") Meridian
+              li.item.collapse
+                label(style="width:70px;") Subdivision
+                select.select
+                  option(value="Subdivision") Subdivision
               {{else}}
-              | Edit Field Details
+              li.item.collapse
+                h3 Canola (Invigor)
+                h3 175.2 acres
+                h3 Projected Yield: 72 bu/acre
               {{/if}}
-    .section
-      .title Crop Plan
-      form
-        ul.list
-          li.item.collapse
-            label(style="width:50px;") Acres
-            input(type="text",placeholder="Acres",style="width:60px;float:left;")
-            select.select
-              option(value="Crop Type") Crop Type
-          li.item.collapse
-            label(style="width:50px;") Variety
-            input(style="width:150px;",type="text",placeholder="Variety")
-          li.item.collapse
-            label(style="width:50px;") Yield
-            input(type="text",placeholder="Yield",style="width:90px;float:left;")
-            select.select
-              option(value="bu/ac") bu/ac
-          li.item.collapse
-            label Sure-Check Soil Testing
-            input(type="checkbox",name="sureCheck",value="no")
-          li.item.collapse
-            label Optimize RX
-            input(type="checkbox",name="optimizeRX",value="no")
-    .section
-      .title Notes
-        a.iconWrapper.right.size-16(data-action="toggleCover",data-cover="notes")
-          {{icon 'new'}}
-      ul.list
-        li
-          a(data-action="toggleCover",data-cover="viewNote") 04 Oct 2012 - Harvest
-        li
-          a(data-action="toggleCover",data-cover="viewNote") 15 May 2013 - Seeding
-        li
-          a(data-action="toggleCover",data-cover="viewNote") 02 Jun 2013 - Scouting Notes
-    .section
-      .title Crop Rotation
-      form
-        ul.list
-          li.item.collapse
-            label.sublabel 2015
-            .subItem
-              label.right Crop Type
-              select.right(style="width:95px;")
-                option(value="Select") Select
-                option(value="Canola") Canola
-            .subItem
-              label.right Yield
-              input.left(style="width:60px;",type="text",placeholder="0")
-              select.right
-                option(value="bu/ac") bu/ac
-                option(value="obs/ac") obs/ac
-          li.item.collapse
-            label.sublabel 2013
-            .subItem
-              label.right Crop Type
-              select.right(style="width:95px;")
-                option(value="Select") Select
-                option(value="Canola") Canola
-            .subItem
-              label.right Yield
-              input.left(style="width:60px;",type="text",placeholder="0")
-              select.right
-                option(value="bu/ac") bu/ac
-                option(value="obs/ac") obs/ac
-          li.item.collapse
-            label.sublabel 2012
-            .subItem
-              label.right Crop Type
-              select.right(style="width:95px;")
-                option(value="Select") Select
-                option(value="Canola") Canola
-            .subItem
-              label.right Yield
-              input.left(style="width:60px;",type="text",placeholder="0")
-              select.right
-                option(value="bu/ac") bu/ac
-                option(value="obs/ac") obs/ac
-          li.item.collapse
-            label.sublabel 2011
-            .subItem
-              label.right Crop Type
-              select.right(style="width:95px;")
-                option(value="Select") Select
-                option(value="Canola") Canola
-            .subItem
-              label.right Yield
-              input.left(style="width:60px;",type="text",placeholder="0")
-              select.right
-                option(value="bu/ac") bu/ac
-                option(value="obs/ac") obs/ac
-    .section
-      a.button.rounded Cancel
-      a.button.rounded Save Field Details
-    {{/if}}
+              li.item.collapse
+                {{#if equalsSession 'fieldEditMode' 'edit'}}
+                .button.rounded(style="margin-bottom:10px;",data-action="toggleNotice",data-notice="field-boundary")
+                  | Edit Field Boundary
+                {{/if}}
+                .button.rounded(data-action="toggleFieldDetails")
+                  {{#if equalsSession 'fieldEditMode' 'edit'}}
+                  | Save Field Details
+                  {{else}}
+                  | Edit Field Details
+                  {{/if}}
+        .section
+          .title Crop Plan
+          form
+            ul.list
+              li.item.collapse
+                label(style="width:50px;") Acres
+                input(type="text",placeholder="Acres",style="width:60px;float:left;")
+                select.select
+                  option(value="Crop Type") Crop Type
+              li.item.collapse
+                label(style="width:50px;") Variety
+                input(style="width:150px;",type="text",placeholder="Variety")
+              li.item.collapse
+                label(style="width:50px;") Yield
+                input(type="text",placeholder="Yield",style="width:90px;float:left;")
+                select.select
+                  option(value="bu/ac") bu/ac
+              li.item.collapse
+                label Sure-Check Soil Testing
+                input(type="checkbox",name="sureCheck",value="no")
+              li.item.collapse
+                label Optimize RX
+                input(type="checkbox",name="optimizeRX",value="no")
+        .section
+          .title Notes
+            a.iconWrapper.right.size-16(data-action="toggleCover",data-cover="notes")
+              {{icon 'new'}}
+          ul.list
+            li
+              a(data-action="toggleCover",data-cover="viewNote") 04 Oct 2012 - Harvest
+            li
+              a(data-action="toggleCover",data-cover="viewNote") 15 May 2013 - Seeding
+            li
+              a(data-action="toggleCover",data-cover="viewNote") 02 Jun 2013 - Scouting Notes
+        .section
+          .title Crop Rotation
+          form
+            ul.list
+              li.item.collapse
+                label.sublabel 2015
+                .subItem
+                  label.right Crop Type
+                  select.right(style="width:95px;")
+                    option(value="Select") Select
+                    option(value="Canola") Canola
+                .subItem
+                  label.right Yield
+                  input.left(style="width:60px;",type="text",placeholder="0")
+                  select.right
+                    option(value="bu/ac") bu/ac
+                    option(value="obs/ac") obs/ac
+              li.item.collapse
+                label.sublabel 2013
+                .subItem
+                  label.right Crop Type
+                  select.right(style="width:95px;")
+                    option(value="Select") Select
+                    option(value="Canola") Canola
+                .subItem
+                  label.right Yield
+                  input.left(style="width:60px;",type="text",placeholder="0")
+                  select.right
+                    option(value="bu/ac") bu/ac
+                    option(value="obs/ac") obs/ac
+              li.item.collapse
+                label.sublabel 2012
+                .subItem
+                  label.right Crop Type
+                  select.right(style="width:95px;")
+                    option(value="Select") Select
+                    option(value="Canola") Canola
+                .subItem
+                  label.right Yield
+                  input.left(style="width:60px;",type="text",placeholder="0")
+                  select.right
+                    option(value="bu/ac") bu/ac
+                    option(value="obs/ac") obs/ac
+              li.item.collapse
+                label.sublabel 2011
+                .subItem
+                  label.right Crop Type
+                  select.right(style="width:95px;")
+                    option(value="Select") Select
+                    option(value="Canola") Canola
+                .subItem
+                  label.right Yield
+                  input.left(style="width:60px;",type="text",placeholder="0")
+                  select.right
+                    option(value="bu/ac") bu/ac
+                    option(value="obs/ac") obs/ac
+        .section
+          a.button.rounded Cancel
+          a.button.rounded Save Field Details
+        {{/if}}
 
-    {{#if currentParamIs 'section' 'equipment-info'}}
-    .section
-      .title Notes
-        a.iconWrapper.right.size-16(data-action="toggleCover",data-cover="notes")
-          {{icon 'new'}}
-      ul.list
-        li
-          a(data-action="toggleCover",data-cover="viewNote") 04 Oct 2012 - Harvest
-        li
-          a(data-action="toggleCover",data-cover="viewNote") 15 May 2013 - Seeding
-        li
-          a(data-action="toggleCover",data-cover="viewNote") 02 Jun 2013 - Scouting Notes
-    {{/if}}
+        {{#if currentParamIs 'section' 'equipment-info'}}
+        .section
+          .title Notes
+            a.iconWrapper.right.size-16(data-action="toggleCover",data-cover="notes")
+              {{icon 'new'}}
+          ul.list
+            li
+              a(data-action="toggleCover",data-cover="viewNote") 04 Oct 2012 - Harvest
+            li
+              a(data-action="toggleCover",data-cover="viewNote") 15 May 2013 - Seeding
+            li
+              a(data-action="toggleCover",data-cover="viewNote") 02 Jun 2013 - Scouting Notes
+        {{/if}}
 
-    {{#if currentContextIs 'profile'}}
-    .section
-      .title John Carpenter
-      form
-        ul.list
-          li.item.collapse
-            label Farm Name
-            input(style="width:151px;",type="text", placeholder="Farm Name")
-          li.item.collapse
-            label Farm Location
-            input(style="width:138px;",type="text", placeholder="Farm Location")
-          li.item.collapse
-            label Main Contact
-            input(style="width:142px;",type="text", placeholder="Main Contact")
-          li.item.collapse
-            label Position
-            input(style="width:170px;",type="text", placeholder="Job Position")
-          li.item.collapse
-            label Telephone
-            input(style="width:157px;",type="text", placeholder="Telephone")
-          li.item.collapse
-            label ????
-            input(style="width:184px;",type="text", placeholder="????")
-          li.item.collapse
-            label Email
-            input(style="width:182px;",type="text", placeholder="Contact Email")
-          li.item.collapse
-            label Current Password
-            input(style="width:120px;",type="password", placeholder="Current Password")
-          li.item.collapse
-            label New Password
-            input(style="width:133px;",type="password", placeholder="New Password")
-          li.item.collapse
-            label Confirm Password
-            input(style="width:118px;",type="password", placeholder="Confirm Password")
-        .subtitle Fuel Unit Settings
-        .button-bar.columns-3
-          a.button(data-active="true") Litres
-          a.button(data-active="false") US Gal
-          a.button(data-active="false") Imp Gal
-        .subtitle Tonnes/Ton Unit Settings
-        .button-bar.columns-2
-          a.button(data-active="true") MT
-          a.button(data-active="false") T
-      //-button(type="submit") Save
-    {{/if}}
+        {{#if currentContextIs 'profile'}}
+        .section
+          .title John Carpenter
+          form
+            ul.list
+              li.item.collapse
+                label Farm Name
+                input(style="width:151px;",type="text", placeholder="Farm Name")
+              li.item.collapse
+                label Farm Location
+                input(style="width:138px;",type="text", placeholder="Farm Location")
+              li.item.collapse
+                label Main Contact
+                input(style="width:142px;",type="text", placeholder="Main Contact")
+              li.item.collapse
+                label Position
+                input(style="width:170px;",type="text", placeholder="Job Position")
+              li.item.collapse
+                label Telephone
+                input(style="width:157px;",type="text", placeholder="Telephone")
+              li.item.collapse
+                label ????
+                input(style="width:184px;",type="text", placeholder="????")
+              li.item.collapse
+                label Email
+                input(style="width:182px;",type="text", placeholder="Contact Email")
+              li.item.collapse
+                label Current Password
+                input(style="width:120px;",type="password", placeholder="Current Password")
+              li.item.collapse
+                label New Password
+                input(style="width:133px;",type="password", placeholder="New Password")
+              li.item.collapse
+                label Confirm Password
+                input(style="width:118px;",type="password", placeholder="Confirm Password")
+            .subtitle Fuel Unit Settings
+            .button-bar.columns-3
+              a.button(data-active="true") Litres
+              a.button(data-active="false") US Gal
+              a.button(data-active="false") Imp Gal
+            .subtitle Tonnes/Ton Unit Settings
+            .button-bar.columns-2
+              a.button(data-active="true") MT
+              a.button(data-active="false") T
+          //-button(type="submit") Save
+        {{/if}}
 
 template(name="dashboard")
   .content(data-subheaderState="{{getSession 'subHeaderState'}}",data-leftSidebarState="{{getSession 'leftSidebarState'}}",data-rightSidebarState="{{getSession 'rightSidebarState'}}",data-borderState="{{borderState}}")
@@ -1163,6 +1168,7 @@ template(name="fields")
     .stubImage(href="/fields/field-info/370",style="background-image:url('/stubImages/fieldInfo.png');")
     {{/if}}
     {{>notice}}
+
     {{#if equalsSession 'toolbarState' 'alert'}}
     .toolbar(data-toolbarState="{{getSession 'toolbarState'}}",data-action="setToolbar",data-toolbar="pending")
       .iconWrapper.size-48.left
@@ -1236,283 +1242,434 @@ template(name="fields")
     {{/if}}
 
     {{#if currentParamIs 'section' 'soil-testing'}}
-    .title E 24 28 26 W4 - Field One
-    .section
+    .pane
+      .title E 24 28 26 W4 - Field One
       ul.list
         li.item.collapse
           label(style="border-right:1px solid #dfdfdf;margin-right:10px") Crop Type: Barley
           label(style="border-right:1px solid #dfdfdf;margin-right:10px") Acres: 235
           label Projected Yield: 52 bu/ac
-    .iconWrapper.size-16.right
-      {{icon 'print'}}
-    .section
-      table.table.uniform
-        thead
-          tr
-            td
-              .cell Zone
-            td
-              .cell N (lbs)
-            td
-              .cell P (lbs)
-            td
-              .cell K (ppm)
-            td
-              .cell S (lbs)
-            td
-              .cell Mg (lbs)
-            td
-              .cell Ca (ppm)
-            td
-              .cell B (ppm)
-            td
-              .cell CI (ppm)
-            td
-              .cell Cu (ppm)
-            td
-              .cell Fe (ppm)
-            td
-              .cell Mn (ppm)
-        tbody
-          tr
-            td
-              .cell 1A
-            td
-              .cell 5
-            td
-              .cell 30
-            td
-              .cell 231
-            td
-              .cell 41
-            td
-              .cell 225
-            td
-              .cell 2070
-            td
-              .cell 0.7
-            td
-              .cell 14
-            td
-              .cell 1.1
-            td
-              .cell 65
-            td
-              .cell 50
-          tr
-            td
-              .cell 1B
-            td
-              .cell 5
-            td
-              .cell 0
-            td
-              .cell 96
-            td
-              .cell 92
-            td
-              .cell 435
-            td
-              .cell 6570
-            td
-              .cell 0.7
-            td
-              .cell 14
-            td
-              .cell 1.0
-            td
-              .cell 68
-            td
-              .cell 52
-          tr
-            td
-              .cell 2A
-            td
-              .cell N/A
-            td
-              .cell N/A
-            td
-              .cell N/A
-            td
-              .cell N/A
-            td
-              .cell N/A
-            td
-              .cell N/A
-            td
-              .cell N/A
-            td
-              .cell N/A
-            td
-              .cell N/A
-            td
-              .cell N/A
-            td
-              .cell N/A
-          tr
-            td
-              .cell 2B
-            td
-              .cell N/A
-            td
-              .cell N/A
-            td
-              .cell N/A
-            td
-              .cell N/A
-            td
-              .cell N/A
-            td
-              .cell N/A
-            td
-              .cell N/A
-            td
-              .cell N/A
-            td
-              .cell N/A
-            td
-              .cell N/A
-            td
-              .cell N/A
-          tr
-            td
-              .cell 3A
-            td
-              .cell N/A
-            td
-              .cell N/A
-            td
-              .cell N/A
-            td
-              .cell N/A
-            td
-              .cell N/A
-            td
-              .cell N/A
-            td
-              .cell N/A
-            td
-              .cell N/A
-            td
-              .cell N/A
-            td
-              .cell N/A
-            td
-              .cell N/A
-          tr
-            td
-              .cell 3B
-            td
-              .cell N/A
-            td
-              .cell N/A
-            td
-              .cell N/A
-            td
-              .cell N/A
-            td
-              .cell N/A
-            td
-              .cell N/A
-            td
-              .cell N/A
-            td
-              .cell N/A
-            td
-              .cell N/A
-            td
-              .cell N/A
-            td
-              .cell N/A
-        tfoot
-          tr
-            td
-              .cell Total
-            td
-              .cell 10
-            td
-              .cell 30
-            td
-              .cell 163.5
-            td
-              .cell 133
-            td
-              .cell 660
-            td
-              .cell 4320
-            td
-              .cell 0.7
-            td
-              .cell 14
-            td
-              .cell 1.1
-            td
-              .cell 66
-            td
-              .cell 51
-      //-table.table.uniform
-        thead
-          tr
-            td
-              .cell Status
-            td
-              .cell N (lbs)
-            td
-              .cell P (lbs)
-            td
-              .cell K (ppm)
-            td
-              .cell S (lbs)
-            td
-              .cell CI (ppm)
-            td
-              .cell Cu (ppm)
-        tbody
-          tr
-            td
-              .cell Available (avg/ac)
-            td
-              .cell 10
-            td
-              .cell 30
-            td
-              .cell 163.5
-            td
-              .cell 133
-            td
-              .cell 14
-            td
-              .cell 1.1
-          tr
-            td
-              .cell Total Required
-            td
-              .cell 115
-            td
-              .cell 45
-            td
-              .cell 370
-            td
-              .cell 120
-            td
-              .cell 14
-            td
-              .cell 1.5
-          tr
-            td
-              .cell Balance Required
-            td
-              .cell 105
-            td
-              .cell 15
-            td
-              .cell 43
-            td
-              .cell -13
-            td
-              .cell 0
-            td
-              .cell 0.4
+      .iconWrapper.size-16.right(data-action="print")
+        {{icon 'print'}}
+      .paneScroll
+        table.table.uniform
+          thead
+            tr
+              td
+                .cell Zone
+              td
+                .cell N (lbs)
+              td
+                .cell P (lbs)
+              td
+                .cell K (ppm)
+              td
+                .cell S (lbs)
+              td
+                .cell Mg (lbs)
+              td
+                .cell Ca (ppm)
+              td
+                .cell B (ppm)
+              td
+                .cell CI (ppm)
+              td
+                .cell Cu (ppm)
+              td
+                .cell Fe (ppm)
+              td
+                .cell Mn (ppm)
+          tbody
+            tr
+              td
+                .cell 1A
+              td
+                .cell 5
+              td
+                .cell 30
+              td
+                .cell 231
+              td
+                .cell 41
+              td
+                .cell 225
+              td
+                .cell 2070
+              td
+                .cell 0.7
+              td
+                .cell 14
+              td
+                .cell 1.1
+              td
+                .cell 65
+              td
+                .cell 50
+            tr
+              td
+                .cell 1B
+              td
+                .cell 5
+              td
+                .cell 0
+              td
+                .cell 96
+              td
+                .cell 92
+              td
+                .cell 435
+              td
+                .cell 6570
+              td
+                .cell 0.7
+              td
+                .cell 14
+              td
+                .cell 1.0
+              td
+                .cell 68
+              td
+                .cell 52
+            tr
+              td
+                .cell 2A
+              td
+                .cell N/A
+              td
+                .cell N/A
+              td
+                .cell N/A
+              td
+                .cell N/A
+              td
+                .cell N/A
+              td
+                .cell N/A
+              td
+                .cell N/A
+              td
+                .cell N/A
+              td
+                .cell N/A
+              td
+                .cell N/A
+              td
+                .cell N/A
+            tr
+              td
+                .cell 2B
+              td
+                .cell N/A
+              td
+                .cell N/A
+              td
+                .cell N/A
+              td
+                .cell N/A
+              td
+                .cell N/A
+              td
+                .cell N/A
+              td
+                .cell N/A
+              td
+                .cell N/A
+              td
+                .cell N/A
+              td
+                .cell N/A
+              td
+                .cell N/A
+            tr
+              td
+                .cell 3A
+              td
+                .cell N/A
+              td
+                .cell N/A
+              td
+                .cell N/A
+              td
+                .cell N/A
+              td
+                .cell N/A
+              td
+                .cell N/A
+              td
+                .cell N/A
+              td
+                .cell N/A
+              td
+                .cell N/A
+              td
+                .cell N/A
+              td
+                .cell N/A
+            tr
+              td
+                .cell 3B
+              td
+                .cell N/A
+              td
+                .cell N/A
+              td
+                .cell N/A
+              td
+                .cell N/A
+              td
+                .cell N/A
+              td
+                .cell N/A
+              td
+                .cell N/A
+              td
+                .cell N/A
+              td
+                .cell N/A
+              td
+                .cell N/A
+              td
+                .cell N/A
+          tfoot
+            tr
+              td
+                .cell Total
+              td
+                .cell 10
+              td
+                .cell 30
+              td
+                .cell 163.5
+              td
+                .cell 133
+              td
+                .cell 660
+              td
+                .cell 4320
+              td
+                .cell 0.7
+              td
+                .cell 14
+              td
+                .cell 1.1
+              td
+                .cell 66
+              td
+                .cell 51
+    .pane
+      .title E 24 28 26 W4 - Field One
+      ul.list
+        li.item.collapse
+          label(style="border-right:1px solid #dfdfdf;margin-right:10px") Crop Type: Barley
+          label(style="border-right:1px solid #dfdfdf;margin-right:10px") Acres: 235
+          label Projected Yield: 52 bu/ac
+      .iconWrapper.size-16.right
+        {{icon 'print'}}
+      .paneScroll
+        table.table.uniform
+          thead
+            tr
+              td
+                .cell Zone
+              td
+                .cell N (lbs)
+              td
+                .cell P (lbs)
+              td
+                .cell K (ppm)
+              td
+                .cell S (lbs)
+              td
+                .cell Mg (lbs)
+              td
+                .cell Ca (ppm)
+              td
+                .cell B (ppm)
+              td
+                .cell CI (ppm)
+              td
+                .cell Cu (ppm)
+              td
+                .cell Fe (ppm)
+              td
+                .cell Mn (ppm)
+          tbody
+            tr
+              td
+                .cell 1A
+              td
+                .cell 5
+              td
+                .cell 30
+              td
+                .cell 231
+              td
+                .cell 41
+              td
+                .cell 225
+              td
+                .cell 2070
+              td
+                .cell 0.7
+              td
+                .cell 14
+              td
+                .cell 1.1
+              td
+                .cell 65
+              td
+                .cell 50
+            tr
+              td
+                .cell 1B
+              td
+                .cell 5
+              td
+                .cell 0
+              td
+                .cell 96
+              td
+                .cell 92
+              td
+                .cell 435
+              td
+                .cell 6570
+              td
+                .cell 0.7
+              td
+                .cell 14
+              td
+                .cell 1.0
+              td
+                .cell 68
+              td
+                .cell 52
+            tr
+              td
+                .cell 2A
+              td
+                .cell N/A
+              td
+                .cell N/A
+              td
+                .cell N/A
+              td
+                .cell N/A
+              td
+                .cell N/A
+              td
+                .cell N/A
+              td
+                .cell N/A
+              td
+                .cell N/A
+              td
+                .cell N/A
+              td
+                .cell N/A
+              td
+                .cell N/A
+            tr
+              td
+                .cell 2B
+              td
+                .cell N/A
+              td
+                .cell N/A
+              td
+                .cell N/A
+              td
+                .cell N/A
+              td
+                .cell N/A
+              td
+                .cell N/A
+              td
+                .cell N/A
+              td
+                .cell N/A
+              td
+                .cell N/A
+              td
+                .cell N/A
+              td
+                .cell N/A
+            tr
+              td
+                .cell 3A
+              td
+                .cell N/A
+              td
+                .cell N/A
+              td
+                .cell N/A
+              td
+                .cell N/A
+              td
+                .cell N/A
+              td
+                .cell N/A
+              td
+                .cell N/A
+              td
+                .cell N/A
+              td
+                .cell N/A
+              td
+                .cell N/A
+              td
+                .cell N/A
+            tr
+              td
+                .cell 3B
+              td
+                .cell N/A
+              td
+                .cell N/A
+              td
+                .cell N/A
+              td
+                .cell N/A
+              td
+                .cell N/A
+              td
+                .cell N/A
+              td
+                .cell N/A
+              td
+                .cell N/A
+              td
+                .cell N/A
+              td
+                .cell N/A
+              td
+                .cell N/A
+          tfoot
+            tr
+              td
+                .cell Total
+              td
+                .cell 10
+              td
+                .cell 30
+              td
+                .cell 163.5
+              td
+                .cell 133
+              td
+                .cell 660
+              td
+                .cell 4320
+              td
+                .cell 0.7
+              td
+                .cell 14
+              td
+                .cell 1.1
+              td
+                .cell 66
+              td
+                .cell 51
     {{/if}}
 
     {{#if currentParamIs 'section' 'fertility-map'}}
@@ -4733,6 +4890,7 @@ template(name="farm-planner")
             a.inline(href="") Email This Grower
     {{/if}}
     {{/if}}
+
 template(name="profile")
   .content(data-subheaderState="{{getSession 'subHeaderState'}}",data-leftSidebarState="{{getSession 'leftSidebarState'}}",data-rightSidebarState="{{getSession 'rightSidebarState'}}",data-borderState="{{borderState}}")
     .title Users

@@ -6,6 +6,7 @@
     "bootstrap-datepicker2": {},
     "underscore-string-latest": {},
     "spin": {},
-    "fastclick": {}
+    "fastclick": {},
+    "modernizr-meteor": {}
   }
 }
