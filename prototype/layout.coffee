@@ -509,6 +509,23 @@ if Meteor.isClient
 
     Template.layout.events
       #Disable dropdown when the user clicks outside the region
+      "change select":(e,t)->
+        currentTarget = $(e.currentTarget)
+        console.log "currentTarget: ",currentTarget
+        action = currentTarget.attr("data-action")
+        console.log "action: ",action
+        console.log "e: ",e
+        console.log currentTarget.val()
+        if action is "setPositionCommodity"
+          Session.set "positionCommodity",currentTarget.val()
+          Session.set "positionType",undefined
+        if action is "setPositionType"
+          Session.set "positionType",currentTarget.val()
+        if action is "setEquipmentType"
+          console.log "CHANGING!"
+          console.log currentTarget.attr("value")
+          Session.set "equipmentType",currentTarget.val()
+
       "click [data-action='print']":(e,t)->
         window.print()
       "click .header, click .subHeader, click .sidebar, click .content":(e,t)->
@@ -671,8 +688,8 @@ if Meteor.isClient
         bottom: 30
         left: 40
 
-      width = 960 - margin.left - margin.right
-      height = 500 - margin.top - margin.bottom
+      width = 600 - margin.left - margin.right
+      height = 200 - margin.top - margin.bottom
       x0 = d3.scale.ordinal().rangeRoundBands([0, width], .1)
       x1 = d3.scale.ordinal()
       y = d3.scale.linear().range([height, 0])
@@ -729,8 +746,8 @@ if Meteor.isClient
         bottom: 30
         left: 50
 
-      width = 960 - margin.left - margin.right
-      height = 500 - margin.top - margin.bottom
+      width = 600 - margin.left - margin.right
+      height = 300 - margin.top - margin.bottom
       parseDate = d3.time.format("%y-%b-%d").parse
       formatPercent = d3.format(".0%")
       x = d3.time.scale().range([0, width])

@@ -30,8 +30,7 @@ Handlebars.registerHelper "borderState", (context,value) ->
   if Router.current().template is "dashboard" or
     Router.current().params["section"] is "field-info" or
     Router.current().params["section"] is "fertility-map" or
-    Router.current().params["section"] is "crop-plans" or
-    Router.current().params["section"] is "revenue-and-expenses"
+    Router.current().params["section"] is "crop-plans"
       "collapsed"
     else
       "expanded"

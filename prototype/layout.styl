@@ -133,7 +133,7 @@ body
   background offWhite()
 form
   margin 0
-input,button,textarea
+input[type="text"],button,textarea
   margin 0
   border none
   border-radius 0
@@ -294,13 +294,23 @@ borderRadius = 4px
     height 30px
     line-height 30px
     text-align center
+    border-radius borderRadius borderRadius 0 0
     li
       width 50%
       border-right 1px solid gray()
       border-bottom 1px solid gray()
+      &:first-of-type
+        a
+          border-radius borderRadius 0 0 0
       &:last-of-type
         border-right none
+        a
+          border-radius 0 borderRadius 0 0
       a
+        font-size 10px
+        text-align center
+        padding-left 10px
+        padding-right 10px
         &[data-active="true"]
           background white()
           color orange(0.75)
@@ -309,7 +319,7 @@ borderRadius = 4px
     .tile
       border none
       border-radius 0
-      min-height 600px
+      min-height 265px
       display none
       &[data-active="true"]
         display block
@@ -337,43 +347,55 @@ borderRadius = 4px
     font-size inherit
     width 100%
     position relative
+    &:nth-child(odd)
+      background offWhite(0.5)
+      input
+        background white()
+      .iconWrapper
+        &>*
+          fill white()
+          stroke white()
     .sublabel
       font-weight bold
       color offerGray()
       font-size 14px
-    &.collapse
-      border-bottom 1px solid gray()
-      input
-        background offWhite()
-        display inline-block
-        border 1px solid gray()
-        padding 5px
-        border-radius borderRadius
-        margin 0 5px 0 0
-      span
-        margin 0 5px 0 0
-      .inline
-        background transparent
-        border none
-        border-right 1px solid gray()
-        border-radius 0
-      span
-        display inline-block
-      .subtitle
-        float left
-        line-height 30px
-        margin 0 0 0 10px
-      .subItem
-        float right
-        margin 0 0 10px 0
-        &:last-of-type
-          margin 0
+    input
+      background offWhite()
+      display inline-block
+      border 1px solid gray()
+      padding 5px
+      border-radius borderRadius
+      margin 0 5px 10px 0
+      &.noBottom
+        margin-bottom 0
+      &:last-of-type
+        margin-bottom 0
+    span
+      margin 0 5px 0 0
+    select
+      margin-top 7px
+    .inline
+      background transparent
+      border none
+      border-right 1px solid gray()
+      border-radius 0
+    span
+      display inline-block
+    .subtitle
+      float left
+      line-height 30px
+      //margin 0 0 0 10px
+    .subItem
+      float right
+      margin 0 0 10px 0
+      &:last-of-type
+        margin 0
     a:not(.inline)
       padding 10px
       display inline-block
       width 100%
       color midnight()
-      border-bottom 1px solid gray()
+      //border-bottom 1px solid gray()
       &[data-active="true"]
         border-color orange(0.45)
         background orange(0.75)
@@ -390,86 +412,82 @@ borderRadius = 4px
         color offGray()
     a
       font-size inherit
+      &.download
+        border-radius 0
+        border none
+        min-height 44px
+        line-height 44px
+        padding 0 10px 0 44px
+        display block
+        .title
+          font-weight bold
+          padding 0
     &:last-of-type
       a
         border-bottom none
     &.item
       padding 10px
-      border-bottom 1px solid gray()
+      overflow hidden
+      //border-bottom 1px solid gray()
       &.textRight
         text-align right
       &.collapse
-        padding 10px
+        //padding 10px
+        padding 0
         float left
         clear left
         &.borderless
           border none
           padding-bottom 0
-        .list
-          position relative
-          top 10px
-          li
-            background offWhite(0.25)
-            border-left 1px solid gray()
-            input
-              background offWhite(0.5)
-            &:first-of-type
-              border-top 1px solid gray()
-              border-radius borderRadius 0 0 0
-            &:last-of-type
-              border-bottom 1px solid gray()
-              border-radius 0 0 0 borderRadius
-        .selectize-control
-          max-width 320px
-          float left
-          clear none
-          &.right
-            float right
-          .selectize-input
-            border 1px solid gray()
-            border-radius borderRadius
-            &.dropdown-active
-              border-radius borderRadius borderRadius 0 0
-          .selectize-dropdown
-            margin-top -1px
-            left 0!important
-        label
-          display inline-block
-          border none
-          padding 0 10px 0 0
-          float left
-          text-align right
-          &.postfix
-            padding-left 10px
-        input
-          width auto
+      .list
+        position relative
+        top 10px
+        li
+          background offWhite(0.25)
+          border-left 1px solid gray()
+          input
+            background offWhite(0.5)
+          &:first-of-type
+            border-top 1px solid gray()
+            border-radius borderRadius 0 0 0
           &:last-of-type
-            //border-right none
+            border-bottom 1px solid gray()
+            border-radius 0 0 0 borderRadius
+      label
+        display inline-block
+        border none
+        padding 0 10px 0 0
+        float left
+        text-align right
+        &.postfix
+          padding-left 10px
+      input
+        width auto
+        &:last-of-type
+          //border-right none
+      .button
+        margin 0
+      .button-bar
+        width 330px
         .button
           margin 0
-        .button-bar
-          width 330px
-          .button
-            margin 0
-            float left
-            clear none
-            width 110px
-            height 38px
-            line-height 38px
-            padding 0 10px 0 10px
-            background transparent
-            border-bottom 1px solid offGray()
-            &[data-active="true"]
-              color orange(0.75)
-              border-bottom 1px solid orange(0.75)
-            &:first-of-type
-              border-radius borderRadius 0 0 borderRadius
-              border-right none
-            &:last-of-type
-              border-radius 0 borderRadius borderRadius 0
-              border-left none
-        .toggle
-          margin 0
+          float left
+          clear none
+          width 110px
+          height 38px
+          line-height 38px
+          padding 0 10px 0 10px
+          background transparent
+          border-bottom 1px solid offGray()
+          &[data-active="true"]
+            color orange(0.75)
+            border-bottom 1px solid orange(0.75)
+          &:first-of-type
+            border-radius borderRadius 0 0 borderRadius
+            border-right none
+          &:last-of-type
+            border-radius 0 borderRadius borderRadius 0
+            border-left none
       &:last-child
         border-bottom none
 
@@ -478,8 +496,6 @@ borderRadius = 4px
   position relative
   form
     position(absolute,-6,30,auto,auto)
-    .selectize-control
-      min-width 140px
 
 //Layout - Clear
 .clear
@@ -656,29 +672,31 @@ form
   input
     //background offWhite()
     //border 1px solid gray()
-    width 100%
-    height 30px
-    padding 0 10px 0 10px
-    ellipsis()
-    display block
-    //margin 0 0 10px 0
-    //border-radius borderRadius
-    border-bottom 1px solid gray()
-    &.inline
-      width auto
-      float left
-      clear none
-      border-bottom none
-      border-right 1px solid gray()
-    &.percentage
-      width 50px!important
-    &.currency
-      width 95px!important
-      margin 0 0 0 5px
-    &.datepicker
-      width 109px!important
-      margin 0 0 0 5px
-      border-radius 0
+    //width 100%
+    &[type="text"]
+      height 30px
+      padding 0 10px 0 10px
+      ellipsis()
+      display block
+      background transparent
+      //margin 0 0 10px 0
+      //border-radius borderRadius
+      //border-bottom 1px solid gray()
+      &.inline
+        width auto
+        float left
+        clear none
+        border-bottom none
+        border-right 1px solid gray()
+      &.percentage
+        width 50px!important
+      &.currency
+        width 95px!important
+        margin 0 0 0 5px
+      &.datepicker
+        width 109px!important
+        //margin 0 0 0 5px
+        border-radius 0
   textarea
     float left
     clear left
@@ -699,77 +717,6 @@ form
       &:last-of-type
         border-radius 0 0 borderRadius borderRadius*/
 
-  //Select Dropdowns
-  .selectize-control
-    position relative
-    clear left
-    //display block
-    //margin 0 0 10px 0
-    //margin 0
-    &.marginRight
-      margin-right 10px
-    &.inline
-      float left
-      clear none
-    .selectize-input
-      padding 0 20px 0 10px
-      height 30px
-      line-height 30px
-      background offWhite()
-      border-right 1px solid gray()
-      //background offerWhite()
-      //border 1px solid gray()
-      //border-radius borderRadius
-      color midnight()
-      & > *
-        display -moz-inline-stack
-        display inline-block
-        vertical-align baseline
-        zoom 1
-      & > input
-        display none
-      &:after
-        content ""
-        position absolute
-        top 50%
-        right 8px
-        width 0
-        height 0
-        margin-top -2px
-        border-color offGray() transparent transparent transparent
-        border-style solid
-        border-width 3px 3px 0 3px
-      &.dropdown-active
-        background offWhite()
-        //border-radius borderRadius borderRadius 0 0
-        &:after
-          margin-top -2px
-          border-color transparent transparent #808080 transparent
-          border-width 0 3px 3px 3px
-  .selectize-dropdown
-    position absolute
-    margin-top 1px
-    left -1px!important
-    right 0!important
-    width auto!important
-    z-index 10
-    background offWhite()
-    border 1px solid gray()
-    border-radius 0 0 borderRadius borderRadius
-    border-top none
-    color midnight()
-    [data-selectable]
-      padding 10px
-      &:last-of-type
-        &.active
-          border-radius 0 0 borderRadius borderRadius
-    .active
-      color orange(0.75)
-      background white()
-  .selectize-dropdown-content
-    max-height 200px
-    overflow-x hidden
-    overflow-y auto
   .expandingText
     margin 0 0 10px 0
   .button
@@ -788,7 +735,7 @@ table.table
   color midnight()
   width 100%
   &:last-of-type
-    border-bottom none
+    //border-bottom none
   &.inline
     border none
   &.centered
@@ -811,6 +758,9 @@ table.table
         padding 5px 10px 5px 10px
         background offWhite()
         border-bottom 1px solid gray()
+        .cell
+          white-space nowrap
+          padding-right 10px
   tbody
     tr
       td
@@ -837,6 +787,8 @@ table.table
           position relative
           height 40px
           line-height 40px
+          white-space nowrap
+          padding-right 10px
           &.double
             padding 7px 10px 10px 10px
             text-indent 0
@@ -847,83 +799,14 @@ table.table
           top 0
           right 0
           line-height 42px
-          &.selectize-control
-            max-width 320px
-            height 30px
-            float left
-            clear none
-            background offWhite()
-            margin-top 5px
-            margin-right 5px
-            &.right
-              float right
-            .selectize-input
-              border 1px solid gray()
-              border-radius borderRadius
-              line-height 30px
-              &.dropdown-active
-                background offWhite()
-                border-radius borderRadius borderRadius 0 0
-            .selectize-dropdown
-              margin-top -1px
-              right 0!important
-              border-left 1px solid gray()
-              border-right 1px solid gray()
-              left 0!important
-              line-height 1
         .button
           margin 5px
           text-indent 0
-        input
-        .selectize-control
-        .selectize-input
-          margin 0
-          border-radius 0
-          margin 0
-          border none
-          background transparent
-          color midnight()
-          height 100%
-          width 100%
-        .selectize-control
-          &.inline
-            width 60px
-            left auto
-          .selectize-input
-            background transparent
-            border-radius 0
-            border none
-            position relative
-            padding 0
-            //padding 1px 5px 0 8px
-            line-height 40px
-            //margin -5px -10px -5px -10px
-            height 100%
-            &.dropdown-active
-              background white()
-            .item
-              width 100%
-              display block
         input
           //position(absolute,0,0,0,0)
           height 100%
           padding 0 10px 0 10px
           //padding 10px
-        .selectize-dropdown
-          //background white()
-          //XXX: Kinda hacky, Only for use with inline dropdowns in tables
-          //margin 5px 0 0 0
-          //margin-top -1px
-          //border-left 1px solid gray()
-          //border-right 1px solid gray()
-          right -2px!important
-          left -2px!important
-          width auto
-          text-indent 0
-          //border-right none
-          //border-left none
-          //left -11px!important
-          //width auto!important
         &:last-of-type
           border-right none
       &:last-of-type
@@ -936,10 +819,12 @@ table.table
         border-top 1px solid gray()
         background offerWhite()
         font-weight bold
+        .cell
+          white-space nowrap
   .toggle
     margin 5px
   .iconWrapper
-    position(absolute,auto,10,auto,auto)
+    position(absolute,auto,-30,auto,auto)
     top 50%
     & > *
     line
@@ -947,6 +832,13 @@ table.table
       stroke offerGray()
     &.size-16
       margin-top -8px
+    &:after
+      content ""
+      position absolute
+      top 0
+      right -10px
+      bottom 0
+      width 10px
     opacity 1
 
 //Layout - Inline List
@@ -1336,9 +1228,10 @@ table.table
 //Layout - Section
 .section
   position relative
-  float left
+  //float left
   width 100%
   clear both
+  overflow hidden
   border-bottom 1px solid gray()
   &.fixed
     position fixed
@@ -1375,8 +1268,6 @@ table.table
       &:last-of-type
         border-bottom 1px solid gray()
         //margin 0
-  &:last-of-type
-    margin-bottom 20px
 
 //Sidebar
 .sidebar
@@ -1413,6 +1304,9 @@ table.table
       transform translate3d(sidebarWidth,0,0)
   .section
     border-bottom 1px solid gray()
+    &:last-of-type
+      border-bottom none
+      padding-bottom 10px
     .progress
       margin 10px
     .toggle.inline
@@ -1488,7 +1382,9 @@ table.table
 .content
   position(absolute,30,0,0,0)
   //background white()
-  margin 20px
+  //margin 20px
+  padding 20px
+  overflow auto
   //padding 20px 35px 20px 35px
   //border 1px solid gray()
   //border-radius borderRadius
@@ -1509,21 +1405,20 @@ table.table
     border none
   &[data-backgroundState="transparent"]
     background transparent
-    padding 20px
+    //padding 20px
   .scroller
     overflow(auto)
     position absolute
     top 0
     bottom 100px
-  .iconWrapper
-    top 10px
-    margin-top 0
   .title
     color midnight()
     //margin 5px 0 5px 0
     clear both
     padding 10px 10px 10px 10px
-    border-bottom 1px solid gray()
+    //border-bottom 1px solid gray()
+    .iconWrapper
+      top 50%
     &.borderless
       border none
     .progress
@@ -1553,7 +1448,7 @@ table.table
 
 //Toolbar
 .toolbar
-  padding 25px 20px 20px 95px
+  padding 16px 20px 16px 95px
   cursor pointer
   transition background 300ms ease-in-out
   position absolute
@@ -1573,7 +1468,8 @@ table.table
     background green()
     padding 15px 20px 15px 95px
   .iconWrapper
-    top 25px
+    //top 25px
+    top 50%
     left 30px
     &>*
       fill white()
@@ -1610,6 +1506,27 @@ table.table
   padding 10px
   overflow(hidden,auto)
 
+//Subheader
+.subheader
+  background offWhite()
+  border-top 1px solid gray()
+  border-bottom 1px solid gray()
+  padding 10px
+  float left
+  width 100%
+  margin-bottom 10px
+  .label
+    margin-bottom 5px
+    font-size 12px
+    float left
+    clear left
+    font-weight bold
+    &:last-of-type
+      margin-bottom 0
+    .span
+      font-weight normal
+      margin-left 5px
+
 //Layout - Tile
 .tile
   width 100%
@@ -1637,14 +1554,6 @@ table.table
     .subtitle
       margin 0
       padding 0
-  &.download
-    border-radius 0
-    border none
-    border-bottom 1px solid gray()
-    min-height 44px
-    line-height 44px
-    padding 0 10px 0 44px
-    display block
   &.profit
     //width 50%
     float left
@@ -1832,7 +1741,7 @@ table.table
 
 //Grouped Bar Chart Styles
 .groupedBarChart
-  position(relative,60,auto,auto,auto)
+  position(relative,auto,auto,auto,auto)
   .axis path
   .axis line
     fill none
@@ -1858,18 +1767,19 @@ table.table
 
 //Layout - Slider
 .slider
-  position(absolute,20,20,auto,auto)
+  //position(absolute,20,20,auto,auto)
   height 30px
   //background red
   .subtitle
-    margin 0 10px 0 0
+    //margin 0 10px 0 0
+    margin 0
     line-height 30px
   .sliderTrack
     border 1px solid gray()
     border-radius 9999px
-    background offWhite()
+    background offerWhite()
     height 4px
-    min-width 140px
+    min-width 100px
     position relative
     top 12px
     .knob
@@ -1884,30 +1794,23 @@ table.table
     margin 0 0 0 10px
     //background offWhite()
     border 1px solid gray()
-    border-right none
-    border-radius borderRadius 0 0 borderRadius
+    //border-right none
+    border-radius borderRadius
+    background white()
     padding 5px
-  .selectize-control
-    clear none
-    .selectize-input
-      height 26px
-      line-height 26px
-      border 1px solid gray()
-      border-radius 0 borderRadius borderRadius 0
-      position relative
-      top 2px
-      &.dropdown-active
-        border-radius 0 borderRadius 0 0
-    .selectize-dropdown
-      margin-top 0
-      margin-left 1px
 
+#compareMarketPrice .notImplemented
+  border-radius 0
+  top 0
+  right 0
+  bottom 0
+  left 0
 
 //Not Implemented Debug Text
 .notImplemented
-  position(absolute,0,0,0,0)
-  width 100%
-  height 100%
+  position(absolute,20,20,20,20)
+  //width 100%
+  //height 100%
   text-align center
   font-size 18px
   background offerGray()
@@ -1924,9 +1827,9 @@ table.table
 
 //Upgrade Required
 .upgradeRequired
-  position(absolute,0,0,0,0)
-  width 100%
-  height 100%
+  position(absolute,20,20,20,20)
+  //width 100%
+  //height 100%
   text-align center
   font-size 18px
   background offGray()
@@ -2034,6 +1937,10 @@ body
         .title
         .subtitle
           color white()
+        .iconWrapper
+          &>*
+            fill white()
+            stroke white()
     &.item
       &.collapse
         .button-bar
@@ -2190,6 +2097,11 @@ body
     &:hover
       color orange(0.75)
 
+
+//Scrolling Changes
+.thirdPane
+  height 100%
+
 //iPhone Support
 //@media (max-device-width: 640px)
 @media (max-device-width: 640px)
@@ -2226,6 +2138,9 @@ body
     -webkit-box-flex 1
     margin-bottom -1px
     position relative
+  .notImplemented
+  .upgradeRequired
+    position(absolute,0,0,0,0)
   .header
     position static
     li
@@ -2274,6 +2189,8 @@ body
   .content
     top 0
     margin 7px
+    padding 0
+    overflow visible
     &[data-subheaderState="open"]
       top 0
     &[data-leftSidebarState="open"]
@@ -2282,7 +2199,21 @@ body
       left -250px
     .section
       width 100%
-      overflow scroll
+      //overflow scroll
+
+  #compareYield
+    .paneScroll
+      top 0
+
+  input
+    &[type="checkbox"]
+      //position relative
+      //top 7px
+      height auto
+      width auto
+      padding 5px
+      border auto
+      display inline-block
 
 table.table
   &.uniform
@@ -2297,6 +2228,7 @@ table.table
   //float left
   //max-width 280px
   margin-bottom 10px
+  clear both
   //overflow hidden
   &:after
     content ""
@@ -2305,21 +2237,68 @@ table.table
     bottom -10px
     left 0
     height 10px
+    width 100%
     pointer-events none
+    //border-bottom 10px solid red
+  .tile-group
+    .tile
+      min-height 205px
+  .list
+    //display inline-block
+    li
+      &:first-of-type
+        border-radius borderRadius borderRadius 0 0
+      &:last-of-type
+        border-radius 0 0 borderRadius borderRadius
+  //overflow hidden
+  form
+    //margin-top 10px
+    //margin-left 10px
+    //margin-bottom 10px
+  .title
+    .subtitle
+      margin-bottom 0
+      padding 0
+    input
+      //background gray()
+      font-size 16px
+      border-bottom none
+      padding 0
+      height auto
+  .footer
+    border-top 1px solid gray()
+    //border-bottom 1px solid gray()
+    min-height 31px
+    background offWhite()
+    border-radius 0 0 borderRadius borderRadius
+    position relative
+    select
+      margin-top 6px
+    form
+      padding-left 10px
+      label
+        padding-left 0
+        border none
   .paneScroll
     //left -10px
     //right -10px
     //width 100%
     overflow auto
     padding-left 10px
+    padding-right 10px
     position relative
     //margin-bottom 10px
+  .tile
+    background transparent
+    &:last-of-type
+      border-bottom none
   .table
     background gray(0.2)
     border 1px solid gray()
     //box-shadow 0 0 1px 0 offerGray(0.2)
     position relative
     border-radius borderRadius
+    //margin-top 10px
     margin-bottom 10px
     &:after
       content ""
@@ -2343,3 +2322,19 @@ table.table
             border-radius 0 0 0 borderRadius
           &:last-of-type
             border-radius 0 0 borderRadius 0
+
+  .progress
+    margin 0 10px 10px 10px
+    .inline-list
+      width 100%
+      border-top 1px solid gray()
+      .column
+        a
+          padding 0
+          width 100%
+          .title
+          .subtitle
+            font-size 12px
+            text-align center
+            color offerGray()
+            padding 5px
