@@ -991,7 +991,7 @@ template(name="toolbar")
   {{/if}}
 
 template(name="dashboard")
-  .content(data-subheaderState="{{getSession 'subHeaderState'}}",data-leftSidebarState="{{getSession 'leftSidebarState'}}",data-rightSidebarState="{{getSession 'rightSidebarState'}}",data-borderState="{{borderState}}")
+  .content(data-subheaderState="{{getSession 'subHeaderState'}}",data-leftSidebarState="{{getSession 'leftSidebarState'}}",data-rightSidebarState="{{getSession 'rightSidebarState'}}",data-borderState="{{borderState}}",data-toolbarState="{{getSession 'toolbarState'}}")
     {{>spinner}}
     //-{{>map}}
     .pane.notifications
@@ -1011,7 +1011,7 @@ template(name="dashboard")
             .subtitle Yesterday
 
 template(name="fields")
-  .content(data-subheaderState="{{getSession 'subHeaderState'}}",data-leftSidebarState="{{getSession 'leftSidebarState'}}",data-rightSidebarState="{{getSession 'rightSidebarState'}}",data-borderState="{{borderState}}")
+  .content(data-subheaderState="{{getSession 'subHeaderState'}}",data-leftSidebarState="{{getSession 'leftSidebarState'}}",data-rightSidebarState="{{getSession 'rightSidebarState'}}",data-borderState="{{borderState}}",data-toolbarState="{{getSession 'toolbarState'}}")
     {{#if currentParamIs 'section' 'field-info'}}
     //-{{>spinner}}
     //-{{>map}}
@@ -1723,7 +1723,7 @@ template(name="fields")
     {{/if}}
 
 template(name="equipment")
-  .content(data-subheaderState="{{getSession 'subHeaderState'}}",data-leftSidebarState="{{getSession 'leftSidebarState'}}",data-rightSidebarState="{{getSession 'rightSidebarState'}}",data-borderState="{{borderState}}")
+  .content(data-subheaderState="{{getSession 'subHeaderState'}}",data-leftSidebarState="{{getSession 'leftSidebarState'}}",data-rightSidebarState="{{getSession 'rightSidebarState'}}",data-borderState="{{borderState}}",data-toolbarState="{{getSession 'toolbarState'}}")
     {{#if currentParamIs 'section' 'equipment-info'}}
       {{#if currentParamIs 'assetsInfo' undefined}}
       .pane
@@ -2489,7 +2489,7 @@ template(name="equipment")
     {{/if}}
 
 template(name="market")
-  .content(data-subheaderState="{{getSession 'subHeaderState'}}",data-leftSidebarState="{{getSession 'leftSidebarState'}}",data-rightSidebarState="{{getSession 'rightSidebarState'}}",data-borderState="{{borderState}}")
+  .content(data-subheaderState="{{getSession 'subHeaderState'}}",data-leftSidebarState="{{getSession 'leftSidebarState'}}",data-rightSidebarState="{{getSession 'rightSidebarState'}}",data-borderState="{{borderState}}",data-toolbarState="{{getSession 'toolbarState'}}")
     {{#if currentParamIs 'section' 'profit'}}
       {{#if currentParamIs 'assetsInfo' undefined}}
       .pane
@@ -3033,7 +3033,7 @@ template(name="market")
     {{/if}}
 
 template(name="farm-planner")
-  .content(data-subheaderState="{{getSession 'subHeaderState'}}",data-leftSidebarState="{{getSession 'leftSidebarState'}}",data-rightSidebarState="{{getSession 'rightSidebarState'}}",data-borderState="{{borderState}}",data-backgroundState="{{backgroundState}}")
+  .content(data-subheaderState="{{getSession 'subHeaderState'}}",data-leftSidebarState="{{getSession 'leftSidebarState'}}",data-rightSidebarState="{{getSession 'rightSidebarState'}}",data-borderState="{{borderState}}",data-backgroundState="{{backgroundState}}",data-toolbarState="{{getSession 'toolbarState'}}")
     {{#if currentParamIs 'section' 'crop-plans'}}
     //-{{>map}}
     //-.stubImage(href="/farm-planner/crop-plans/370",style="background-image:url('/stubImages/fieldInfo.png');")

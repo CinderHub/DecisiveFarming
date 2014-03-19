@@ -880,14 +880,24 @@ borderRadius = 4px
 
 //Content
 .content
-  position(absolute,0,0,0,0)
+  position(fixed,90,0,0,0)
   padding 10px
   overflow auto
   transition right 300ms linear, left 300ms linear
+  &[data-toolbarstate="alert"]
+    bottom 55px
+  &[data-toolbarstate="pending"]
+    bottom 105px
+  &[data-toolbarstate="waiting"]
+    bottom 105px
+  &[data-toolbarstate="complete"]
+    bottom 105px
   &[data-rightsidebarstate="open"]
     right sidebarWidth
   &[data-leftsidebarstate="open"]
     left sidebarWidth
+  &[data-subheaderState="closed"]
+    top headerHeight + 20
   &[data-borderState="collapsed"]
     border-radius 0
     border none
@@ -924,22 +934,26 @@ borderRadius = 4px
   padding 10px 10px 10px 50px
   font-size 14px
   cursor pointer
-  position relative
+  position fixed
+  z-index 999999
   bottom 0
   right 0
   left 0
   transition background 300ms ease-in-out
   &[data-toolbarstate="alert"]
     background red()
-    height 80px
+    height 55px
   &[data-toolbarstate="pending"]
-    height 134px
+    //height 134px
+    height 105px
     background offOrange()
   &[data-toolbarstate="waiting"]
-    height 150px
+    //height 150px
+    height 105px
     background offOrange()
   &[data-toolbarstate="complete"]
-    height 150px
+    //height 150px
+    height 105px
     background green()
   .iconWrapper
     top 16px
@@ -957,7 +971,7 @@ borderRadius = 4px
     padding 0
     color white()
     font-size 12px
-    margin-top 10px
+    margin-top 0
     opacity 0
     transition opacity 300ms ease-in-out
   .list
@@ -1149,6 +1163,7 @@ borderRadius = 4px
     .navItem
       width 30px
 
+//For Non iPhone Screen Interactions
 @media (max-width: 540px), (max-device-width: 640px)
   .sidebarToggle
     &.left
@@ -1159,19 +1174,34 @@ borderRadius = 4px
     .sidebarToggle.left
       overflow hidden
   .content
-    top 0
-    margin 7px
-    padding 0
-    overflow visible
-    &[data-subheaderState="open"]
-      top 0
+    //top 0
+    //margin 7px
+    //padding 0
+    //overflow visible
     &[data-leftSidebarState="open"]
       right -250px
     &[data-rightSidebarState="open"]
       left -250px
+    &[data-toolbarstate="alert"]
+      bottom 70px
+    &[data-toolbarstate="pending"]
+      bottom 134px
+    &[data-toolbarstate="waiting"]
+      bottom 150px
+    &[data-toolbarstate="complete"]
+      bottom 150px
+  .toolbar
+    &[data-toolbarstate="alert"]
+      height 70px
+    &[data-toolbarstate="pending"]
+      height 134px
+    &[data-toolbarstate="waiting"]
+      height 150px
+    &[data-toolbarstate="complete"]
+      height 150px
 
 //iPhone Support
-@media (max-width: 640px)
+@media only screen and (max-device-width: 480px), only screen and (min-device-width: 560px) and (max-device-width: 1136px) and (-webkit-min-device-pixel-ratio: 2)
   .notImplemented
   .upgradeRequired
     position(absolute,0,0,0,0)
@@ -1183,9 +1213,23 @@ borderRadius = 4px
     .paneScroll
       top 0
 
-.toolbar
-  &[data-toolbarState="alert"]
-    height 60px
+  .content
+    top 0
+    margin 7px
+    padding 0
+    overflow visible
+    position(absolute,0,0,0,0)
+
+  .toolbar
+    position relative
+    &[data-toolbarstate="alert"]
+      height 55px
+    &[data-toolbarstate="pending"]
+      height 134px
+    &[data-toolbarstate="waiting"]
+      height 150px
+    &[data-toolbarstate="complete"]
+      height 150px
 
 .pane
   background white()
