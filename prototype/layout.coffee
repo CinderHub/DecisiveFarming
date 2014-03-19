@@ -6,8 +6,12 @@ Router.map ->
         to: "header"
       subHeader:
         to: "subHeader"
+      leftSidebarToggle:
+        to: "leftSidebarToggle"
       leftSidebar:
         to: "leftSidebar"
+      rightSidebarToggle:
+        to: "rightSidebarToggle"
       rightSidebar:
         to: "rightSidebar"
     data: ->
@@ -44,10 +48,16 @@ Router.map ->
         to: "header"
       subHeader:
         to: "subHeader"
+      leftSidebarToggle:
+        to: "leftSidebarToggle"
       leftSidebar:
         to: "leftSidebar"
+      rightSidebarToggle:
+        to: "rightSidebarToggle"
       rightSidebar:
         to: "rightSidebar"
+      toolbar:
+        to: "toolbar"
     data: ->
       Session.set "subHeaderState","open"
       Session.set "activeHeaderPath","fields"
@@ -74,7 +84,7 @@ Router.map ->
         Session.set "leftSidebarToggleState","open"
         if !@params.assetsInfo
           Session.set "rightSidebarState","closed"
-          Session.set "rightSidebarToggleState","open"
+          Session.set "rightSidebarToggleState","closed"
         else
           Session.set "rightSidebarState","closed"
           Session.set "rightSidebarToggleState","open"
@@ -121,8 +131,12 @@ Router.map ->
         to: "header"
       subHeader:
         to: "subHeader"
+      leftSidebarToggle:
+        to: "leftSidebarToggle"
       leftSidebar:
         to: "leftSidebar"
+      rightSidebarToggle:
+        to: "rightSidebarToggle"
       rightSidebar:
         to: "rightSidebar"
     data: ->
@@ -153,8 +167,12 @@ Router.map ->
         to: "header"
       subHeader:
         to: "subHeader"
+      leftSidebarToggle:
+        to: "leftSidebarToggle"
       leftSidebar:
         to: "leftSidebar"
+      rightSidebarToggle:
+        to: "rightSidebarToggle"
       rightSidebar:
         to: "rightSidebar"
     data: ->
@@ -223,10 +241,16 @@ Router.map ->
         to: "header"
       subHeader:
         to: "subHeader"
+      leftSidebarToggle:
+        to: "leftSidebarToggle"
       leftSidebar:
         to: "leftSidebar"
+      rightSidebarToggle:
+        to: "rightSidebarToggle"
       rightSidebar:
         to: "rightSidebar"
+      toolbar:
+        to: "toolbar"
     data: ->
       Session.set "subHeaderState","open"
       Session.set "activeHeaderPath","farm-planner"
@@ -283,8 +307,12 @@ Router.map ->
         to: "header"
       subHeader:
         to: "subHeader"
+      leftSidebarToggle:
+        to: "leftSidebarToggle"
       leftSidebar:
         to: "leftSidebar"
+      rightSidebarToggle:
+        to: "rightSidebarToggle"
       rightSidebar:
         to: "rightSidebar"
     data: ->
@@ -470,6 +498,12 @@ if Meteor.isClient
     Session.setDefault "fieldEditMode","view"
     Session.setDefault "toolbarState","alert"
 
+    $("body").on("click",()->
+      console.log "Body clicked!"
+      #Close the dropdown because the body has been clicked
+      Session.set "dropdownState","closed"
+    )
+
     Template.layout.rendered = ->
       #Change the status bar to show properly on ios7
       if window.navigator.standalone
@@ -499,16 +533,15 @@ if Meteor.isClient
       if textareas.length isnt 0
         textareas.expandingTextarea()
 
-      $(".stubImage").waitForImages({
+      ###$(".stubImage").waitForImages({
         finished: ->
           loadingSpinner.stop()
         each: ->
           console.log "Each Image"
         waitForAll: true
-      })
+      })###
 
     Template.layout.events
-      #Disable dropdown when the user clicks outside the region
       "change select":(e,t)->
         currentTarget = $(e.currentTarget)
         console.log "currentTarget: ",currentTarget
@@ -525,20 +558,24 @@ if Meteor.isClient
           console.log "CHANGING!"
           console.log currentTarget.attr("value")
           Session.set "equipmentType",currentTarget.val()
-
       "click [data-action='print']":(e,t)->
         window.print()
       "click .header, click .subHeader, click .sidebar, click .content":(e,t)->
+        console.log "Closing right away!"
         Session.set "dropdownState","closed"
-      "touchmove .header, touchmove .subHeader, touchmove .sidebarToggle":(e,t)->
+      "touchmove .header, touchmove .subHeader, touchmove .sidebarToggle, touchmove .toolbar":(e,t)->
         e.preventDefault()
       "click [data-action='uploadFile']":(e,t)->
         #console.log "uploadFile called!"
         $("input[type=file]").trigger("click");
       "click [data-action='toggleDropdown']":(e,t)->
+        console.log "dropdown clicked!"
+        e.stopImmediatePropagation()
         if Session.equals "dropdownState","open"
+          console.log "Closing!"
           Session.set "dropdownState","closed"
         else
+          console.log "Opening!"
           Session.set "dropdownState","open"
       "click [data-action='toggleCover']":(e,t)->
         e.stopImmediatePropagation()
@@ -605,8 +642,8 @@ if Meteor.isClient
         #left: "auto" # Left position relative to parent in px
 
       target = document.getElementById("spinner")
-      window.loadingSpinner = new Spinner(opts)
-      loadingSpinner.spin(target)
+      #window.loadingSpinner = new Spinner(opts)
+      #loadingSpinner.spin(target)
 
     Template.map.rendered = ->
       console.log "Map rendered!"
@@ -630,13 +667,20 @@ if Meteor.isClient
       if textareas.length isnt 0
         textareas.expandingTextarea()
 
-    Template.leftSidebar.events
+    Template.leftSidebarToggle.events
       "click .sidebarNotch":(e,t)->
         e.stopImmediatePropagation()
+        idealContentWidth = 940
+        windowWidth = window.innerWidth
+        #Collapse the dropdown
+        Session.set "dropdownState","closed"
         if Session.equals "leftSidebarState","open"
           Session.set "leftSidebarState","closed"
         else
           Session.set "leftSidebarState","open"
+          #Check to see if there's enough ideal space for both sidebars on the window, and close the rightSidebar if there isn't enough room
+          if windowWidth < idealContentWidth
+            Session.set "rightSidebarState","closed"
       "click [data-action='changeField']":(e,t)->
         #e.preventDefault()
         console.log "changeField clicked"
@@ -656,22 +700,34 @@ if Meteor.isClient
         #Set the context appropriate filter
         Session.set "#{context}Filter",filter
 
-    Template.rightSidebar.events
-      "click [data-action='toggleFieldDetails']":(e,t)->
-        if Session.equals "fieldEditMode","edit"
-          Session.set "fieldEditMode","view"
-        else
-          Session.set "fieldEditMode","edit"
+    Template.rightSidebarToggle.events
       "click .sidebarNotch":(e,t)->
         e.stopImmediatePropagation()
+        idealContentWidth = 940
+        windowWidth = window.innerWidth
+        #Collapse the dropdown
+        Session.set "dropdownState","closed"
         if Session.equals "rightSidebarState","open"
           Session.set "rightSidebarState","closed"
         else
           Session.set "rightSidebarState","open"
+          #Check to see if there's enough ideal space for both sidebars on the window, and close the leftSidebar if there isn't enough room
+          if windowWidth < idealContentWidth
+            Session.set "leftSidebarState","closed"
+
+    Template.rightSidebar.events
+      "click [data-action='toggleFieldDetails']":(e,t)->
+        console.log "ToggleFieldDetails!"
+        if Session.equals "fieldEditMode","edit"
+          Session.set "fieldEditMode","view"
+        else
+          Session.set "fieldEditMode","edit"
+
 
     Template.layout.preserve({
       ".sidebar.left"
       ".sidebar.right"
+      ".list"
       ".sidebarToggle.left"
       ".sidebarToggle.right"
       ".subHeader"

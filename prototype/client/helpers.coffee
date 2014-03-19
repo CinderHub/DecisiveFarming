@@ -32,10 +32,25 @@ Handlebars.registerHelper "borderState", (context,value) ->
     Router.current().params["section"] is "fertility-map" or
     Router.current().params["section"] is "crop-plans"
       "collapsed"
-    else
-      "expanded"
+  else
+    "expanded"
 Handlebars.registerHelper "backgroundState", (context,value) ->
   if Router.current().params["section"] is "revenue-and-expenses"
     "transparent"
   else
     null
+Handlebars.registerHelper "showFieldsOverview", (context,value) ->
+  current = Router.current()
+  if current.template is "dashboard" or
+    current.params["section"] is "field-info" or
+    current.params["section"] is "fertility-map" or
+    current.params["section"] is "crop-plans"
+      true
+    else
+      false
+Handlebars.registerHelper "showFieldsInfo", (context,value) ->
+  if Router.current().params["section"] is "field-info" and
+    Router.current().params["assetsInfo"]
+      true
+    else
+      false
