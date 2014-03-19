@@ -21,6 +21,7 @@ Router.map ->
       Session.set "leftSidebarToggleState","closed"
       Session.set "rightSidebarState","closed"
       Session.set "rightSidebarToggleState","closed"
+      Session.set "toolbarState","disabled"
 
   @route "dashboard",
     path: "/dashboard/:section?/:assetsInfo?"
@@ -40,6 +41,7 @@ Router.map ->
       Session.set "rightSidebarState","closed"
       Session.set "rightSidebarToggleState","closed"
       Session.set "activeHeaderPath","dashboard"
+      Session.set "toolbarState","disabled"
 
   @route "fields",
     path: "/fields/:section?/:assetsInfo?"
@@ -62,6 +64,7 @@ Router.map ->
       Session.set "subHeaderState","open"
       Session.set "activeHeaderPath","fields"
       Session.set "notice","field-boundary"
+      Session.set "toolbarState","alert"
       if !@params.section
         Router.go "fields",
           section: "field-info"
@@ -146,6 +149,7 @@ Router.map ->
       Session.set "rightSidebarState","closed"
       Session.set "rightSidebarToggleState","open"
       Session.set "activeHeaderPath","equipment"
+      Session.set "toolbarState","disabled"
       if !@params.section
         Router.go "equipment",
           section: "equipment-info"
@@ -178,6 +182,7 @@ Router.map ->
     data: ->
       Session.set "subHeaderState","open"
       Session.set "activeHeaderPath","market"
+      Session.set "toolbarState","disabled"
       if !@params.section
         Router.go "market",
           section: "profit"
@@ -256,6 +261,7 @@ Router.map ->
       Session.set "activeHeaderPath","farm-planner"
       Session.set "noticeHidden",false
       Session.set "notice","field-boundary"
+      Session.set "toolbarState","alert"
       if !@params.section
         Session.set "rightSidebarState","closed"
         Router.go "farm-planner",
