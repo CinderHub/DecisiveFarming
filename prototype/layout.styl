@@ -1145,92 +1145,6 @@ borderRadius = 4px
     left 50%
     margin -22px 0 0 -100px
 
-//When Screen is 920px less, shrink subheader
-@media (max-width: 920px)
-  .subHeader
-    .navItem
-      width 40px
-    .navLink
-      width 40px
-      overflow hidden
-      padding-right 0!important
-      .iconWrapper
-        left 8px
-
-//When Screen is 575px less, shrink header
-@media (max-width: 575px)
-  .header
-    .navItem
-      width 30px
-
-//For Non iPhone Screen Interactions
-@media (max-width: 540px), (max-device-width: 640px)
-  .sidebarToggle
-    &.left
-      width 40px
-  .subHeader
-    .nav
-      left 40px
-    .sidebarToggle.left
-      overflow hidden
-  .content
-    //top 0
-    //margin 7px
-    //padding 0
-    //overflow visible
-    &[data-leftSidebarState="open"]
-      right -250px
-    &[data-rightSidebarState="open"]
-      left -250px
-    &[data-toolbarstate="alert"]
-      bottom 70px
-    &[data-toolbarstate="pending"]
-      bottom 134px
-    &[data-toolbarstate="waiting"]
-      bottom 150px
-    &[data-toolbarstate="complete"]
-      bottom 150px
-  .toolbar
-    &[data-toolbarstate="alert"]
-      height 70px
-    &[data-toolbarstate="pending"]
-      height 134px
-    &[data-toolbarstate="waiting"]
-      height 150px
-    &[data-toolbarstate="complete"]
-      height 150px
-
-//iPhone Support
-@media only screen and (max-device-width: 480px), only screen and (min-device-width: 560px) and (max-device-width: 1136px) and (-webkit-min-device-pixel-ratio: 2)
-  .notImplemented
-  .upgradeRequired
-    position(absolute,0,0,0,0)
-  .notice
-    max-width 300px
-    .title
-      font-size 12px
-  #compareYield
-    .paneScroll
-      top 0
-
-  .content
-    top 0
-    margin 7px
-    padding 0
-    overflow visible
-    position(absolute,0,0,0,0)
-
-  .toolbar
-    position relative
-    &[data-toolbarstate="alert"]
-      height 55px
-    &[data-toolbarstate="pending"]
-      height 134px
-    &[data-toolbarstate="waiting"]
-      height 150px
-    &[data-toolbarstate="complete"]
-      height 150px
-
 .pane
   background white()
   border 1px solid gray()
@@ -1392,3 +1306,99 @@ borderRadius = 4px
 
   .progress
     margin 0 10px 10px 10px
+
+
+//When Screen is 920px less, shrink subheader
+@media (max-width: 920px)
+  .subHeader
+    .navItem
+      width 40px
+    .navLink
+      width 40px
+      overflow hidden
+      padding-right 0!important
+      .iconWrapper
+        left 8px
+
+//When Screen is 575px less, shrink header
+@media (max-width: 575px)
+  .header
+    .navItem
+      width 30px
+
+//For Non iPhone Screen Interactions
+@media (max-width: 540px), (max-device-width: 640px)
+  .sidebarToggle
+    &.left
+      width 40px
+  .subHeader
+    .nav
+      left 40px
+    .sidebarToggle.left
+      overflow hidden
+  .content
+    //top 0
+    //margin 7px
+    //padding 0
+    //overflow visible
+    &[data-leftSidebarState="open"]
+      right -250px
+    &[data-rightSidebarState="open"]
+      left -250px
+    &[data-toolbarstate="alert"]
+      bottom 70px
+    &[data-toolbarstate="pending"]
+      bottom 134px
+    &[data-toolbarstate="waiting"]
+      bottom 150px
+    &[data-toolbarstate="complete"]
+      bottom 150px
+  .toolbar
+    &[data-toolbarstate="alert"]
+      height 70px
+    &[data-toolbarstate="pending"]
+      height 134px
+    &[data-toolbarstate="waiting"]
+      height 150px
+    &[data-toolbarstate="complete"]
+      height 150px
+
+//iPhone Support
+@media only screen and (max-device-width: 480px), only screen and (min-device-width: 560px) and (max-device-width: 1136px) and (-webkit-min-device-pixel-ratio: 2)
+  .notImplemented
+  .upgradeRequired
+    position(absolute,0,0,0,0)
+  .notice
+    max-width 300px
+    .title
+      font-size 12px
+  #compareYield
+    .paneScroll
+      top 0
+
+  .content
+    top 0
+    margin 7px
+    padding 0
+    overflow visible
+    position(absolute,0,0,0,0)
+    &[data-subHeaderState="closed"]
+      top 0
+    .notice
+      top 0
+      left 0
+    .tile
+      .notice
+        top 10px
+        left 10px
+
+  .toolbar
+    position relative
+    &[data-toolbarstate="alert"]
+      height 55px
+    &[data-toolbarstate="pending"]
+      height 134px
+    &[data-toolbarstate="waiting"]
+      height 150px
+    &[data-toolbarstate="complete"]
+      height 150px
